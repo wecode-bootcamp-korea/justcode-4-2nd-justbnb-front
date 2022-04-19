@@ -4,10 +4,12 @@ import Main from './pages/Main/Main';
 import Detail from './pages/Detail/Detail';
 import Hosting from './pages/Hosting/Hosting';
 import Footer from './components/Footer';
+import Nav from './components/Nav/Nav';
 
 function App() {
   return (
     <BrowserRouter>
+      <Nav />
       <Routes>
         <Route path="/list/:localName" element={<AccommodationList />} />
         <Route path="/" element={<Main />} />
