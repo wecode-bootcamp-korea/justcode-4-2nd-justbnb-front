@@ -3,6 +3,7 @@ import AccommodationList from './pages/List/AccommodationList';
 import Main from './pages/Main/Main';
 import Detail from './pages/Detail/Detail';
 import Hosting from './pages/Hosting/Hosting';
+import Management from './pages/Management/Management';
 
 function App() {
   return (
@@ -12,6 +13,7 @@ function App() {
         <Route path="/" element={<Main />} />
         <Route path="/detail" element={<Detail />} />
         <Route path="/hosting" element={<Hosting />} />
+        <Route path="/management" element={<Management />} />
       </Routes>
     </BrowserRouter>
   );
