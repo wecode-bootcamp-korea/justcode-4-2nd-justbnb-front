@@ -3,6 +3,7 @@ import AccommodationList from './pages/List/AccommodationList';
 import Main from './pages/Main/Main';
 import Detail from './pages/Detail/Detail';
 import Hosting from './pages/Hosting/Hosting';
+import Footer from './components/Footer';
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
         <Route path="/detail" element={<Detail />} />
         <Route path="/hosting" element={<Hosting />} />
       </Routes>
+      <Footer />
     </BrowserRouter>
   );
 }
