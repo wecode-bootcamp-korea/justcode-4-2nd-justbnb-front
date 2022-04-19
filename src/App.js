@@ -2,7 +2,6 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import AccommodationList from './pages/List/AccommodationList';
 import Main from './pages/Main/Main';
 import Detail from './pages/Detail/Detail';
-import List from './pages/List/List';
 import Hosting from './pages/Hosting/Hosting';
 
 function App() {
@@ -12,7 +11,6 @@ function App() {
         <Route path="/list/:localName" element={<AccommodationList />} />
         <Route path="/" element={<Main />} />
         <Route path="/detail" element={<Detail />} />
-        <Route path="/list" element={<List />} />
         <Route path="/hosting" element={<Hosting />} />
       </Routes>
     </BrowserRouter>
