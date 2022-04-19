@@ -1,18 +1,27 @@
 import React from 'react';
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 
 function LogoutToggle({ showToggle }) {
   return (
-    <Container style={showToggle}>
-      <List>회원가입</List>
-      <List>로그인</List>
-      <List>숙소호스트 되기</List>
-      <List>도움말</List>
-    </Container>
+    <ToggleBox style={showToggle}>
+      <ToggleList>회원가입</ToggleList>
+      <ToggleList>로그인</ToggleList>
+      <Link
+        to="/hosting"
+        style={{
+          textDecoration: 'none',
+          color: 'black',
+        }}
+      >
+        <ToggleList>숙소호스트 되기</ToggleList>
+      </Link>
+      <ToggleList>도움말</ToggleList>
+    </ToggleBox>
   );
 }
 
-const Container = styled.div`
+const ToggleBox = styled.div`
   position: absolute;
   width: 15em;
   background: #ffffff;
@@ -20,10 +29,15 @@ const Container = styled.div`
   list-style: none;
 `;
 
-const List = styled.li`
-  padding: 20px;
+const ToggleList = styled.li`
+  margin: 10px 0;
+  padding: 15px;
   font-size: 14px;
-  cursor: pointer;
+
+  &:hover {
+    background-color: rgb(247, 247, 247);
+    cursor: pointer;
+  }
 
   &:first-child {
     font-weight: 600;

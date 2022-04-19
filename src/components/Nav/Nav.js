@@ -2,8 +2,10 @@ import React, { useState } from 'react';
 import { GiHamburgerMenu } from 'react-icons/gi';
 import { RiUser3Line } from 'react-icons/ri';
 import { CgGlobeAlt } from 'react-icons/cg';
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import LogoutToggle from './LogoutToggle';
+// import LoginToggle from './LoginToggle';
 
 function Nav() {
   const [showToggle, setShowToggle] = useState({ display: 'none' });
@@ -14,7 +16,6 @@ function Nav() {
       : setShowToggle({ display: 'none' });
   };
 
-  console.log('showToggle: ', showToggle);
   return (
     <>
       <Aside>
@@ -30,7 +31,9 @@ function Nav() {
           <Menu>숙소</Menu>
           <div>
             <Navbar>
-              <Buttons>호스트 되기</Buttons>
+              <Link to="/hosting" style={{ textDecoration: 'none' }}>
+                <Buttons>호스트 되기</Buttons>
+              </Link>
               <Buttons>
                 <CgGlobeAlt fontSize={20} />
               </Buttons>
@@ -44,6 +47,7 @@ function Nav() {
               </UserBox>
             </Navbar>
             <LogoutToggle showToggle={showToggle} />
+            {/* {token && <LoginToggle showToggle={showToggle} />} */}
           </div>
         </Container>
         <SearchBar>search bar UI</SearchBar>
@@ -130,7 +134,7 @@ const Buttons = styled.li`
   display: flex;
   align-items: center;
   margin: 0 5px;
-  padding: 0 15px;
+  padding: 15px;
   color: #ffffff;
   border-radius: 22px;
   font-weight: 400;
