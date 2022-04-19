@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import { AiFillGithub } from 'react-icons/ai';
 
 function Footer() {
   return (
@@ -7,46 +8,74 @@ function Footer() {
       <footer>
         <StyledSection>
           <StyledDiv>
-            에어비앤비 지원
-            <li>도움말 센터</li>
-            <li>안전 정보</li>
-            <li>예약 취소 옵션</li>
-            <li>에어비앤비의 코로나19 대응 방안</li>
-            <li>장애인 지원</li>
-            <li>이웃 민원 신고</li>
+            <Title>저스트비앤비 지원</Title>
+            <List>도움말 센터</List>
+            <List>안전 정보</List>
+            <List>예약 취소 옵션</List>
+            <List>저스트비앤비의 코로나19 대응 방안</List>
+            <List>장애인 지원</List>
+            <List>이웃 민원 신고</List>
           </StyledDiv>
           <StyledDiv>
-            커뮤니티
-            <li>Airbnb.org: 재난 구호 숙소</li>
-            <li>아프간 난민지원</li>
-            <li>차별 철폐를 위한 노력</li>
+            <Title>커뮤니티</Title>
+            <List>Justbnb.org: 재난 구호 숙소</List>
+            <List>아프간 난민지원</List>
+            <List>차별 철폐를 위한 노력</List>
           </StyledDiv>
           <StyledDiv>
-            호스팅
-            <li>호스팅 시작하기</li>
-            <li>에어커버: 호스트를 위한 보호 프로그램</li>
-            <li>호스팅 자료 둘러보기</li>
-            <li>커뮤니티 포럼 방문하기</li>
-            <li>책임감 있는 호스팅</li>
+            <Title>호스팅</Title>
+            <List>호스팅 시작하기</List>
+            <List>저스트커버: 호스트를 위한 보호 프로그램</List>
+            <List>호스팅 자료 둘러보기</List>
+            <List>커뮤니티 포럼 방문하기</List>
+            <List>책임감 있는 호스팅</List>
           </StyledDiv>
           <StyledDiv>
-            소개
-            <li>뉴스룸</li>
-            <li>새로운 기능에 대해 알아보기</li>
-            <li>에어비앤비 공동창업자의 메세지</li>
-            <li>채용정보</li>
-            <li>투자자 정보</li>
-            <li>에어비앤비 Luxe</li>
+            <Title>소개</Title>
+            <List>뉴스룸</List>
+            <List>새로운 기능에 대해 알아보기</List>
+            <List>저스트비앤비 공동창업자의 메세지</List>
+            <List>채용정보</List>
+            <List>투자자 정보</List>
+            <List>저스트비앤비 Luxe</List>
           </StyledDiv>
         </StyledSection>
-        <Icons>
-          <li className="icons">f</li>
-          <li className="icons">f</li>
-          <li className="icons">f</li>
-          <li className="icons">f</li>
-          <li className="icons">f</li>
-          <li className="icons">f</li>
-        </Icons>
+        <IconContainer>
+          <Icons
+            onClick={() =>
+              window.open('https://xxziiko.tistory.com/', '_blank')
+            }
+          >
+            <AiFillGithub />
+          </Icons>
+          <Icons
+            onClick={() =>
+              window.open('https://velog.io/@minzyaaaaaa', '_blank')
+            }
+          >
+            <AiFillGithub />
+          </Icons>
+          <Icons
+            onClick={() => window.open('https://velog.io/@sseul22', '_blank')}
+          >
+            <AiFillGithub />
+          </Icons>
+          <Icons
+            onClick={() => window.open('https://velog.io/@shw779', '_blank')}
+          >
+            <AiFillGithub />
+          </Icons>
+          <Icons
+            onClick={() => window.open('https://velog.io/@jml22', '_blank')}
+          >
+            <AiFillGithub />
+          </Icons>
+          <Icons
+            onClick={() => window.open('https://velog.io/@wlsun', '_blank')}
+          >
+            <AiFillGithub />
+          </Icons>
+        </IconContainer>
       </footer>
     </StyledFooter>
   );
@@ -62,16 +91,45 @@ const StyledFooter = styled.footer`
 `;
 
 const StyledSection = styled.section`
-  padding: 10px 70px;
+  padding: 20px 70px 50px 70px;
   display: flex;
+  border-bottom: 1px solid rgb(221, 221, 221);
+  font-size: 11px;
 `;
 
 const StyledDiv = styled.div`
-  padding: 50px;
+  padding-top: 30px;
+  padding-right: 170px;
 `;
 
-const Icons = styled.div`
+const IconContainer = styled.div`
   display: flex;
+  justify-content: right;
+  padding-top: 30px;
+`;
+
+const List = styled.li`
+  padding-bottom: 14px;
+  font-weight: 400;
+
+  &:hover {
+    text-decoration: underline;
+    cursor: pointer;
+  }
+`;
+
+const Title = styled.div`
+  padding-bottom: 20px;
+  font-weight: 700;
+  font-size: 14px;
+`;
+
+const Icons = styled.button`
+  padding-left: 15px;
+  font-size: 23px;
+  border: none;
+  background: #f7f7f7;
+  cursor: pointer;
 `;
 
 export default Footer;
