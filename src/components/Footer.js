@@ -82,26 +82,43 @@ function Footer() {
 }
 
 const StyledFooter = styled.footer`
-  width: 100%;
   margin: 0 auto;
   display: flex;
   justify-content: center;
-  background: #f7f7f7;
+  background-color: #f7f7f7;
   list-style: none;
+
+  @media screen and (max-width: 1127px) {
+    display: inline;
+    background-color: #f7f7f7;
+  }
 `;
 
 const StyledSection = styled.section`
   padding: 20px 70px 50px 70px;
   display: flex;
-  border-bottom: 1px solid rgb(221, 221, 221);
-  font-size: 11px;
+  font-size: 0.9em;
+
+  @media screen and (max-width: 1127px) {
+    display: inline;
+    font-size: 0.8em;
+  }
 `;
 
 const StyledDiv = styled.div`
   padding-top: 30px;
   padding-right: 170px;
-`;
 
+  @media screen and (min-width: 1127px) {
+    border-bottom: 1px solid rgb(221, 221, 221);
+  }
+
+  @media screen and (max-width: 1127px) {
+    margin-left: 40px;
+    margin-right: 40px;
+    border-bottom: 1px solid rgb(221, 221, 221);
+  }
+`;
 const IconContainer = styled.div`
   display: flex;
   justify-content: right;
@@ -109,26 +126,29 @@ const IconContainer = styled.div`
 `;
 
 const List = styled.li`
-  padding-bottom: 14px;
+  padding-bottom: 20px;
   font-weight: 400;
 
   &:hover {
     text-decoration: underline;
     cursor: pointer;
   }
+
+  @media screen and (max-width: 1585px) {
+    padding-bottom: 30px;
+  }
 `;
 
 const Title = styled.div`
   padding-bottom: 20px;
   font-weight: 700;
-  font-size: 14px;
+  font-size: 15px;
 `;
 
-const Icons = styled.button`
+const Icons = styled.div`
   padding-left: 15px;
   font-size: 23px;
   border: none;
-  background: #f7f7f7;
   cursor: pointer;
 `;
 
