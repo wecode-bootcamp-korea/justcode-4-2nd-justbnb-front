@@ -1,12 +1,12 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 
-function LogoutToggle({ showToggle }) {
+function LogoutToggle({ openToggle, modalHandler }) {
   return (
-    <ToggleBox style={showToggle}>
+    <ToggleBox style={openToggle}>
       <ToggleList>회원가입</ToggleList>
-      <ToggleList>로그인</ToggleList>
+      <ToggleList onClick={modalHandler}>로그인</ToggleList>
       <Link
         to="/hosting"
         style={{

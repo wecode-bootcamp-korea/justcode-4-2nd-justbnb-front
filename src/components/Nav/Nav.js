@@ -5,15 +5,22 @@ import { CgGlobeAlt } from 'react-icons/cg';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import LogoutToggle from './LogoutToggle';
+import LoginModal from '../Modal/LoginModal';
 // import LoginToggle from './LoginToggle';
 
 function Nav() {
-  const [showToggle, setShowToggle] = useState({ display: 'none' });
+  const [openToggle, setOpenToggle] = useState({ display: 'none' });
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const toggleHandler = () => {
-    showToggle.display === 'none'
-      ? setShowToggle({ display: 'block' })
-      : setShowToggle({ display: 'none' });
+    openToggle.display === 'none'
+      ? setOpenToggle({ display: 'block' })
+      : setOpenToggle({ display: 'none' });
+  };
+
+  const modalHandler = () => {
+    !isModalOpen && setIsModalOpen(true);
+    setOpenToggle({ display: 'none' });
   };
 
   return (
@@ -46,12 +53,13 @@ function Nav() {
                 </User>
               </UserBox>
             </Navbar>
-            <LogoutToggle showToggle={showToggle} />
+            <LogoutToggle openToggle={openToggle} modalHandler={modalHandler} />
             {/* {token && <LoginToggle showToggle={showToggle} />} */}
           </div>
         </Container>
         <SearchBar>search bar UI</SearchBar>
       </Header>
+      {isModalOpen && <LoginModal setIsModalOpen={setIsModalOpen} />}
     </>
   );
 }

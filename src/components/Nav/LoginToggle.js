@@ -1,9 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
 
-function LoginToggle({ showToggle }) {
+function LoginToggle({ openToggle }) {
   return (
-    <ToggleBox style={showToggle}>
+    <ToggleBox style={openToggle}>
       <ToggleList>위시리스트</ToggleList>
       <ToggleList>숙소관리</ToggleList>
       <ToggleList>로그아웃</ToggleList>
