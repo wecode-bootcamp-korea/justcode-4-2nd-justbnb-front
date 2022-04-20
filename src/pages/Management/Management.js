@@ -1,9 +1,35 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import styled from 'styled-components';
 
 function Management() {
   const [data, setData] = useState([]);
   const [data2, setData2] = useState([]);
+
+  const [currentSlide, setCurrentSlide] = useState(0);
+  const slideRef = useRef(null);
+
+  // const TOTAL_CARD = data.length;
+  const TOTAL_CARD = 14;
+
+  // Next 버튼 클릭 시
+  const NextSlide = () => {
+    if (currentSlide >= TOTAL_CARD) {
+      // 더 이상 넘어갈 슬라이드가 없으면
+      setCurrentSlide(0); // 1번째 사진으로 넘어갑니다.
+      // return;  // 클릭이 작동하지 않습니다.
+    } else {
+      setCurrentSlide(currentSlide + 1);
+    }
+  };
+  // Prev 버튼 클릭 시
+  const PrevSlide = () => {
+    if (currentSlide === 0) {
+      setCurrentSlide(TOTAL_CARD); // 마지막 사진으로 넘어갑니다.
+      // return;  // 클릭이 작동하지 않습니다.
+    } else {
+      setCurrentSlide(currentSlide - 1);
+    }
+  };
 
   useEffect(() => {
     fetch('/data/hwseol/list.json', {
@@ -31,8 +57,13 @@ function Management() {
       });
   }, []);
 
+  useEffect(() => {
+    slideRef.current.style.transition = 'all 0.5s ease-in-out';
+    slideRef.current.style.transform = `translateX(-${currentSlide}0%)`;
+  }, [currentSlide]);
+
   return (
-    <div>
+    <Body>
       <Banner>&nbsp;</Banner>
       <GuestCardWide>
         <BookingText>예약</BookingText>
@@ -44,31 +75,35 @@ function Management() {
           <Button>예정(0건)</Button>
         </ManageButtons>
         <Accommodation>
-          {/* 여기서부터 슬라이드 */}
-          {data2.map((el, index) => {
-            if (index <= 30) {
-              return (
-                <Card2 key={el.id}>
-                  <Img2 src={el.imageUrl} alt="test" />
-                  <CardDescription2>Guest : {el.guest}</CardDescription2>
-                  <CardDescription2>
-                    총 인원 : {el.total_members} 명
-                  </CardDescription2>
-                  <CardDescription2>Check-In : {el.check_in}</CardDescription2>
-                  <CardDescription2>
-                    Check-Out : {el.check_out}
-                  </CardDescription2>
-                  <CardDescription2>
-                    숙소 이름 : {el.accommodations_name}
-                  </CardDescription2>
-                </Card2>
-              );
-            }
-          })}
-          {/* 여기까지 슬라이드 */}
+          <Slide ref={slideRef}>
+            {/* 여기서부터 슬라이드 */}
+            {data2.map((el, index) => {
+              if (index <= 30) {
+                return (
+                  <Card2 key={el.id}>
+                    <Img2 src={el.imageUrl} alt="test" />
+                    <CardDescription2>Guest : {el.guest}</CardDescription2>
+                    <CardDescription2>
+                      총 인원 : {el.total_members} 명
+                    </CardDescription2>
+                    <CardDescription2>
+                      Check-In : {el.check_in}
+                    </CardDescription2>
+                    <CardDescription2>
+                      Check-Out : {el.check_out}
+                    </CardDescription2>
+                    <CardDescription2>
+                      숙소 이름 : {el.accommodations_name}
+                    </CardDescription2>
+                  </Card2>
+                );
+              }
+            })}
+            {/* 여기까지 슬라이드 */}
+          </Slide>
         </Accommodation>
-        <button>왼쪽</button>
-        <button>오른쪽</button>
+        <button onClick={NextSlide}>왼쪽</button>
+        <button onClick={PrevSlide}>오른쪽</button>
       </GuestCardWide>
 
       <ManagementFooter>
@@ -88,11 +123,15 @@ function Management() {
           </Tips>
         </TextAndTips>
       </ManagementFooter>
-    </div>
+    </Body>
   );
 }
 
 export default Management;
+
+const Body = styled.div`
+  /* display: flex; */
+`;
 
 const Banner = styled.div`
   height: 10em;
@@ -106,12 +145,12 @@ const Banner = styled.div`
 `;
 
 const GuestCardWide = styled.div`
-  margin: 0 7em;
+  margin: auto;
   display: flex;
   justify-content: center;
   flex-direction: column;
   border: 1px solid red;
-  /* max-width: 100%; */
+  max-width: 100em;
 `;
 
 const BookingText = styled.div`
@@ -155,7 +194,6 @@ const TextAndTips = styled.div`
   flex-direction: column;
   /* align-items: center; */
   /* width: 50%; */
-  /* border: 1px solid red; */
 `;
 
 const Text = styled.div`
@@ -165,7 +203,6 @@ const Text = styled.div`
   font-weight: bold;
   margin-left: 3.7em;
   padding: 60px 0 20px 0;
-  /* border: 1px solid red; */
 `;
 
 const Tips = styled.div`
@@ -196,19 +233,11 @@ const Img = styled.img`
   height: 17em;
   /* min-height: 17em; */
 `;
-//-----------------------------------------------------------------------
 const Accommodation = styled.div`
   background-color: rgba(0, 0, 0, 0.1);
   border-radius: 30px;
-
   display: flex;
   justify-content: space-between;
-  /*align-items: center; */
-  /* justify-content: space-around; */
-  /* flex-direction: row; */
-  /* display: grid;
-  grid-template-columns: repeat(800, 1fr);
-  flex-wrap: nowrap; */
   padding: 30px;
   overflow: hidden;
 `;
@@ -216,23 +245,29 @@ const Accommodation = styled.div`
 const Card2 = styled.div`
   min-width: 300px;
   border-radius: 20px;
-  margin: 0 2%;
+  margin: 0 2.8%;
   overflow: hidden;
   background-color: rgba(100, 100, 100, 1);
   padding-bottom: 10px;
-
-  /* border : 1px solid red; */
 `;
 
 const CardDescription2 = styled.div`
   color: white;
   padding: 8px 0px 5px 10px;
   background-color: rgba(100, 100, 100, 1);
-  font-size: 15px;
+  font-size: 19px;
 `;
 
 const Img2 = styled.img`
   min-width: 340px;
   height: 16em;
   /* min-height : 16em; */
+`;
+
+const Slide = styled.div`
+  display: flex;
+  justify-content: space-between;
+  border: 1px red solid;
+  /* padding: 30px; */
+  overflow: hidden;
 `;
