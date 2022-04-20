@@ -1,10 +1,67 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import styled, { css, keyframes } from 'styled-components';
 import { BsFacebook } from 'react-icons/bs';
 import { FcGoogle } from 'react-icons/fc';
 import { FaApple } from 'react-icons/fa';
+import { RiErrorWarningFill } from 'react-icons/ri';
+import { AiFillCloseCircle } from 'react-icons/ai';
 
 function LoginModal({ loginModalHandler }) {
+  const [inputs, setInputs] = useState({
+    email: '',
+    password: '',
+  });
+  const { email, password } = inputs;
+  const [emailErr, setEmailErr] = useState(false);
+  const [passwordErr, setPasswordErr] = useState(false);
+
+  const idInput = e => {
+    setInputs({ ...inputs, email: e.target.value });
+    email === '' ? setEmailErr(true) : setEmailErr(false);
+  };
+
+  const passwordInput = e => {
+    setInputs({ ...inputs, password: e.target.value });
+    let regPassword = /(?=.*\d)(?=.*[a-zA-ZS]).{8,20}/;
+    !regPassword.test(password) ? setPasswordErr(true) : setPasswordErr(false);
+  };
+
+  const errHandler = () => {
+    if (email === '' || password === '') {
+      !email
+        ? setEmailErr({ display: 'block' })
+        : setEmailErr({ display: 'none' });
+      !password ? setPasswordErr(true) : setPasswordErr(false);
+    }
+  };
+  const postLogin = () => {
+    fetch('http://localhost:8000/users/login', {
+      method: 'POST',
+      headers: {
+        'content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        email: email,
+        password: password,
+      }),
+    })
+      .then(res => {
+        if (res.status === 201) {
+          // loginSuccess();
+          return res.json();
+        } else if (res.status === 400) {
+          return res.json();
+        } else return res.json();
+      })
+      .then(res => {
+        if (res.token) {
+          localStorage.setItem('token', res.token);
+        } else {
+          console.log('에러발생 : ', res.message);
+        }
+      });
+  };
+
   return (
     <div>
       <BackgroundModal>
@@ -22,13 +79,35 @@ function LoginModal({ loginModalHandler }) {
             </HeadLine>
             <ContentsWrapper>
               <Text>저스트비앤비에 오신 것을 환영합니다.</Text>
-              <InputContainer>
-                <Input placeholder="이메일" />
-              </InputContainer>
-              <InputContainer>
-                <Input placeholder="비밀번호" />
-              </InputContainer>
-              <CountinueBtn>로그인</CountinueBtn>
+              <Input placeholder="이메일" onChange={idInput} />
+              {emailErr && (
+                <ErrBox>
+                  <RiErrorWarningFill fontSize={20} />
+                  <ErrText>이메일이 필요합니다.</ErrText>
+                </ErrBox>
+              )}
+              <Input
+                placeholder="비밀번호"
+                type="password"
+                onChange={passwordInput}
+              />
+              {passwordErr && (
+                <>
+                  <ErrBox>
+                    <RiErrorWarningFill fontSize={20} />
+                    <ErrText>비밀번호를 확인하세요.</ErrText>
+                  </ErrBox>
+                  <ErrBox>
+                    <AiFillCloseCircle />
+                    <ErrText>최소 8자</ErrText>
+                  </ErrBox>
+                  <ErrBox>
+                    <AiFillCloseCircle />
+                    <ErrText>영문, 숫자가 모두 포함되어야 합니다.</ErrText>
+                  </ErrBox>
+                </>
+              )}
+              <CountinueBtn onClick={errHandler}>로그인</CountinueBtn>
               <Text2>또는</Text2>
               <BtnWrapper>
                 <Btns>
@@ -66,12 +145,12 @@ const BackgroundModal = styled.div`
 const move = keyframes`
 0%{
   opacity: 0;
-  top: 300px;
+  top: 500px;
 } 50% {
   opacity: 0.8;
 } 100% {
   opacity: 1;
-  top: -50px;
+  top: -20px;
 }`;
 
 const ModalWrapper = styled.div`
@@ -81,7 +160,7 @@ const ModalWrapper = styled.div`
   bottom: 0;
   left: 0;
   z-index: 1000;
-  overflow: auto;
+  overflow: hidden;
   outline: 0;
 
   animation: ${move} 0.3s ease-in-out forwards;
@@ -142,14 +221,6 @@ const BtnLayout = css`
   border-radius: 8px;
   cursor: pointer;
 `;
-
-const InputContainer = styled.div`
-  display: flex;
-  margin-bottom: 10px;
-  border-radius: 10px;
-  border: 1px solid gray;
-`;
-
 const CountinueBtn = styled.div`
   display: flex;
   align-items: center;
@@ -215,12 +286,33 @@ const BtnText = styled.p`
 `;
 
 const Input = styled.input`
-  margin: 26px 12px 6px;
-  border: none;
+  display: flex;
+  width: 100%;
+  margin-bottom: 10px;
+  padding: 20px 40px;
+  border-radius: 10px;
+  border: 1px solid gray;
 
   &: focus {
-    outline: none;
+    outline-color: black;
   }
+`;
+
+const styledText = css`
+  font-size: 12px;
+`;
+
+const ErrBox = styled.div`
+  display: flex;
+  align-items: center;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  color: rgb(193, 53, 21);
+  ${styledText}
+`;
+
+const ErrText = styled.div`
+  padding-left: 5px;
 `;
 
 export default LoginModal;
