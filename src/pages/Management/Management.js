@@ -36,6 +36,7 @@ function Management() {
           <Button>예정(0건)</Button>
         </ManageButtons>
         <Accommodation>
+          {/* 여기서부터 슬라이드 */}
           {data.map((el, index) => {
             if (index <= 3) {
               return (
@@ -46,6 +47,7 @@ function Management() {
               );
             }
           })}
+          {/* 여기까지 슬라이드 */}
         </Accommodation>
       </GuestCardWide>
       <ManagementFooter>
