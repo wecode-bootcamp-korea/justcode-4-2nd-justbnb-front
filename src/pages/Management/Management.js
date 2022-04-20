@@ -3,7 +3,7 @@ import style from 'styled-components';
 
 function Management() {
   const [data, setData] = useState([]);
-  // const [data2, setData2] = useState({});
+  const [data2, setData2] = useState([]);
 
   useEffect(() => {
     fetch('/data/hwseol/list.json', {
@@ -15,13 +15,21 @@ function Management() {
       .then(res => res.json())
       .then(data => {
         setData(data);
-        console.log(data);
       });
   }, []);
 
-  data.map(el => {
-    console.log(el.id);
-  });
+  useEffect(() => {
+    fetch('/data/dlwjdals/management.json', {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    })
+      .then(res => res.json())
+      .then(data => {
+        setData2(data);
+      });
+  }, []);
 
   return (
     <div>
@@ -37,19 +45,31 @@ function Management() {
         </ManageButtons>
         <Accommodation>
           {/* 여기서부터 슬라이드 */}
-          {data.map((el, index) => {
-            if (index <= 3) {
+          {data2.map((el, index) => {
+            if (index <= 30) {
               return (
-                <Card key={el.id}>
-                  <Img src={el.image} alt="test" />
-                  <CardDescription>{el.name}</CardDescription>
-                </Card>
+                <Card2 key={el.id}>
+                  <Img2 src={el.imageUrl} alt="test" />
+                  <CardDescription2>Guest : {el.guest}</CardDescription2>
+                  <CardDescription2>
+                    총 인원 : {el.total_members} 명
+                  </CardDescription2>
+                  <CardDescription2>Check-In : {el.check_in}</CardDescription2>
+                  <CardDescription2>
+                    Check-Out : {el.check_out}
+                  </CardDescription2>
+                  <CardDescription2>
+                    숙소 이름 : {el.accommodations_name}
+                  </CardDescription2>
+                </Card2>
               );
             }
           })}
           {/* 여기까지 슬라이드 */}
         </Accommodation>
       </GuestCardWide>
+      <button>왼쪽</button>
+      <button>오른쪽</button>
       <ManagementFooter>
         <Text>호스팅 관련 팁과 업데이트</Text>
         <Tips>
@@ -106,16 +126,6 @@ border : 1px solid rgba(0,0,0,0.4);
 margin-right : 10px;
 padding : 15px;
 `;
-
-const Accommodation = style.div`
-height: content-fit;
-background-color : rgba(0,0,0,0.05);
-display : flex;
-justify-content : space-between;
-border-radius : 30px;
-padding : 30px;
-`;
-
 const ManagementFooter = style.div`
 background-color : black;
 margin-top: 100px;
@@ -153,7 +163,38 @@ background-color : rgba(100, 100, 100, 0.6);
 font-size : 20px;`;
 
 const Img = style.img`
-width : 340px;
+min-width : 340px;
 height : auto;
 min-height : 15em;
+`;
+//-----------------------------------------------------------------------
+const Accommodation = style.div`
+background-color : rgba(0,0,0,0.1);
+border-radius : 30px;
+display : flex;
+flex-direction : row;
+padding : 30px;
+overflow : hidden;
+`;
+
+const Card2 = style.div`
+display : flex;
+// border : 1px solid red;
+min-width : 300px;
+flex-direction : column;
+border-radius : 20px;
+margin : 0 10px;
+overflow : hidden;
+`;
+
+const CardDescription2 = style.div`
+color : white;
+padding: 5px 0px 5px 10px;
+background-color : rgba(100, 100, 100, 0.6);
+font-size : 15px;`;
+
+const Img2 = style.img`
+min-width : 340px;
+height : auto;
+min-height : 16em;
 `;
