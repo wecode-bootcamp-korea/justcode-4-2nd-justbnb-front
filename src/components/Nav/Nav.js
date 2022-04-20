@@ -6,11 +6,13 @@ import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import LogoutToggle from './LogoutToggle';
 import LoginModal from '../Modal/LoginModal';
+import SignupModal from '../Modal/SignupModal';
 // import LoginToggle from './LoginToggle';
 
 function Nav() {
   const [openToggle, setOpenToggle] = useState({ display: 'none' });
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
+  const [isSignupModalOpen, setIsSignupModalOpen] = useState(false);
 
   const toggleHandler = () => {
     openToggle.display === 'none'
@@ -18,9 +20,16 @@ function Nav() {
       : setOpenToggle({ display: 'none' });
   };
 
-  const modalHandler = () => {
-    !isModalOpen && setIsModalOpen(true);
-    setOpenToggle({ display: 'none' });
+  const loginModalHandler = display => {
+    !isLoginModalOpen ? setIsLoginModalOpen(true) : setIsLoginModalOpen(false);
+    setOpenToggle({ display: display });
+  };
+
+  const signupModalHandler = display => {
+    !isSignupModalOpen
+      ? setIsSignupModalOpen(true)
+      : setIsSignupModalOpen(false);
+    setOpenToggle({ display: display });
   };
 
   return (
@@ -53,13 +62,20 @@ function Nav() {
                 </User>
               </UserBox>
             </Navbar>
-            <LogoutToggle openToggle={openToggle} modalHandler={modalHandler} />
+            <LogoutToggle
+              openToggle={openToggle}
+              loginModalHandler={loginModalHandler}
+              signupModalHandler={signupModalHandler}
+            />
             {/* {token && <LoginToggle showToggle={showToggle} />} */}
           </div>
         </Container>
         <SearchBar>search bar UI</SearchBar>
       </Header>
-      {isModalOpen && <LoginModal setIsModalOpen={setIsModalOpen} />}
+      {isLoginModalOpen && <LoginModal loginModalHandler={loginModalHandler} />}
+      {isSignupModalOpen && (
+        <SignupModal signupModalHandler={signupModalHandler} />
+      )}
     </>
   );
 }

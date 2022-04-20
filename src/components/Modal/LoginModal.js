@@ -4,18 +4,20 @@ import { BsFacebook } from 'react-icons/bs';
 import { FcGoogle } from 'react-icons/fc';
 import { FaApple } from 'react-icons/fa';
 
-function LoginModal({ setIsModalOpen }) {
-  const closeModal = () => {
-    setIsModalOpen(false);
-  };
-
+function LoginModal({ loginModalHandler }) {
   return (
     <div>
       <BackgroundModal>
         <ModalWrapper>
           <ModalInner>
             <HeadLine>
-              <CloseBtn onClick={closeModal}>X</CloseBtn>
+              <CloseBtn
+                onClick={() => {
+                  loginModalHandler('none');
+                }}
+              >
+                X
+              </CloseBtn>
               <Tittle>로그인</Tittle>
             </HeadLine>
             <ContentsWrapper>
