@@ -3,7 +3,7 @@ import { GiHamburgerMenu } from 'react-icons/gi';
 import { RiUser3Line } from 'react-icons/ri';
 import { CgGlobeAlt } from 'react-icons/cg';
 import { Link } from 'react-router-dom';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import LogoutToggle from './LogoutToggle';
 import LoginModal from '../Modal/LoginModal';
 import SignupModal from '../Modal/SignupModal';
@@ -44,7 +44,11 @@ function Nav() {
             src={`${process.env.PUBLIC_URL}/images/로고화이트.png`}
             width="150"
           />
-          <Menu>숙소</Menu>
+          <Wrapper>
+            <Menu>숙소</Menu>
+            <DisableMenu>체험</DisableMenu>
+            <DisableMenu>온라인 체험</DisableMenu>
+          </Wrapper>
           <div>
             <Navbar>
               <Link to="/hosting" style={{ textDecoration: 'none' }}>
@@ -108,13 +112,23 @@ const Container = styled.div`
   align-items: center;
 `;
 
-const Menu = styled.div`
+const Wrapper = styled.div`
+  display: flex;
+  padding-left: 40px;
+`;
+
+const styledMenu = css`
   display: flex;
   flex-direction: column;
   align-items: center;
+  padding-right: 20px;
   color: #ffffff;
-  font-size: 17px;
+  font-size: 15px;
   font-weight: 400;
+`;
+
+const Menu = styled.div`
+  ${styledMenu}
   cursor: pointer;
 
   &: after {
@@ -123,6 +137,12 @@ const Menu = styled.div`
     margin-top: 10px;
     border-bottom: 2px solid #ffffff;
   }
+`;
+
+const DisableMenu = styled.div`
+  ${styledMenu}
+  opacity:0.7;
+  cursor: default;
 `;
 
 const Navbar = styled.nav`

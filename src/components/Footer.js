@@ -1,6 +1,10 @@
 import React from 'react';
 import styled from 'styled-components';
-import { AiFillGithub } from 'react-icons/ai';
+import { FaFacebookF } from 'react-icons/fa';
+import { AiOutlineTwitter, AiFillYoutube } from 'react-icons/ai';
+import { ImInstagram } from 'react-icons/im';
+import { BsStackOverflow } from 'react-icons/bs';
+import { FaTripadvisor } from 'react-icons/fa';
 
 function Footer() {
   return (
@@ -46,34 +50,34 @@ function Footer() {
               window.open('https://xxziiko.tistory.com/', '_blank')
             }
           >
-            <AiFillGithub />
+            <FaFacebookF />
           </Icons>
           <Icons
             onClick={() =>
               window.open('https://velog.io/@minzyaaaaaa', '_blank')
             }
           >
-            <AiFillGithub />
+            <AiOutlineTwitter />
           </Icons>
           <Icons
             onClick={() => window.open('https://velog.io/@sseul22', '_blank')}
           >
-            <AiFillGithub />
+            <AiFillYoutube />
           </Icons>
           <Icons
             onClick={() => window.open('https://velog.io/@shw779', '_blank')}
           >
-            <AiFillGithub />
+            <BsStackOverflow />
           </Icons>
           <Icons
             onClick={() => window.open('https://velog.io/@jml22', '_blank')}
           >
-            <AiFillGithub />
+            <ImInstagram />
           </Icons>
           <Icons
             onClick={() => window.open('https://velog.io/@wlsun', '_blank')}
           >
-            <AiFillGithub />
+            <FaTripadvisor />
           </Icons>
         </IconContainer>
       </footer>
@@ -122,7 +126,8 @@ const StyledDiv = styled.div`
 const IconContainer = styled.div`
   display: flex;
   justify-content: right;
-  padding-top: 30px;
+  padding: 20px 60px;
+  margin-bottom: 10px;
 `;
 
 const List = styled.li`

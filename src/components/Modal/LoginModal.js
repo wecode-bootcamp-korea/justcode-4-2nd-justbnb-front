@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import styled, { css, keyframes } from 'styled-components';
 import { BsFacebook } from 'react-icons/bs';
 import { FcGoogle } from 'react-icons/fc';
@@ -17,7 +17,10 @@ function LoginModal({ loginModalHandler }) {
 
   const idInput = e => {
     setInputs({ ...inputs, email: e.target.value });
-    email === '' ? setEmailErr(true) : setEmailErr(false);
+
+    let regEmail =
+      /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/;
+    !regEmail.test(email) ? setEmailErr(true) : setEmailErr(false);
   };
 
   const passwordInput = e => {
@@ -28,10 +31,9 @@ function LoginModal({ loginModalHandler }) {
 
   const errHandler = () => {
     if (email === '' || password === '') {
-      !email
-        ? setEmailErr({ display: 'block' })
-        : setEmailErr({ display: 'none' });
+      !email ? setEmailErr(true) : setEmailErr(false);
       !password ? setPasswordErr(true) : setPasswordErr(false);
+      return;
     }
   };
   const postLogin = () => {
@@ -47,10 +49,12 @@ function LoginModal({ loginModalHandler }) {
     })
       .then(res => {
         if (res.status === 201) {
-          // loginSuccess();
           return res.json();
         } else if (res.status === 400) {
+          alert('아이디와 비밀번호를 확인해주세요 :)');
           return res.json();
+        } else if (res.status === 500) {
+          console.log('에러메세지: ', res.message);
         } else return res.json();
       })
       .then(res => {
@@ -296,6 +300,15 @@ const Input = styled.input`
   &: focus {
     outline-color: black;
   }
+
+  ${props => {
+    const selected = props.red;
+    return css`
+      &: focus {
+        outline-color: ${selected};
+      }
+    `;
+  }}
 `;
 
 const styledText = css`
