@@ -4,30 +4,47 @@ import styled from 'styled-components';
 function Management() {
   const [data, setData] = useState([]);
   const [data2, setData2] = useState([]);
+  const [leftEndPoint, setLeftEndPoint] = useState('none'); // 왼쪽 버튼 활성화, 비활성화
+  const [rightEndPoint, setRightEndPoint] = useState('auto'); // 오른쪽 버튼 활성화, 비활성화
+  const [leftOpacity, setLeftOpacity] = useState('0.3'); // 왼쪽 버튼 투명도
+  const [rightOpacity, setRightOpacity] = useState('1'); // 오른쪽 버튼 투명도
 
   const [currentSlide, setCurrentSlide] = useState(0);
   const slideRef = useRef(null);
 
-  // const TOTAL_CARD = data.length;
   const TOTAL_CARD = data2.length - 1;
 
-  // Next 버튼 클릭 시
-  const NextSlide = () => {
-    if (currentSlide >= TOTAL_CARD) {
-      // 더 이상 넘어갈 슬라이드가 없으면
-      // setCurrentSlide(0); // 1번째 사진으로 넘어갑니다.
-      return; // 클릭이 작동하지 않습니다.
+  // left 버튼 클릭 시
+  const LeftSlide = () => {
+    // 첫 번째 슬라이드보다 하나 전에 버튼을 비활성화하기 위함.
+    if (currentSlide === 1) {
+      setLeftEndPoint('none');
+      setRightEndPoint('auto');
+      setLeftOpacity('0.3');
+      setRightOpacity('1');
+    }
+    if (currentSlide === 0) {
+      return;
     } else {
-      setCurrentSlide(currentSlide + 1);
+      setRightOpacity('1');
+      setCurrentSlide(currentSlide - 1);
     }
   };
-  // Prev 버튼 클릭 시
-  const PrevSlide = () => {
-    if (currentSlide === 0) {
-      // setCurrentSlide(TOTAL_CARD); // 마지막 사진으로 넘어갑니다.
-      return; // 클릭이 작동하지 않습니다.
+
+  // right 버튼 클릭 시
+  const RightSlide = () => {
+    // 마지막 슬라이드보다 하나 전에 버튼을 비활성화하기 위함.
+    if (currentSlide >= TOTAL_CARD - 1) {
+      setLeftEndPoint('auto');
+      setRightEndPoint('none');
+      setLeftOpacity('1');
+      setRightOpacity('0.3');
+    }
+    if (currentSlide >= TOTAL_CARD) {
+      return;
     } else {
-      setCurrentSlide(currentSlide - 1);
+      setLeftOpacity('1');
+      setCurrentSlide(currentSlide + 1);
     }
   };
 
@@ -59,13 +76,34 @@ function Management() {
 
   useEffect(() => {
     slideRef.current.style.transition = 'all 0.5s ease-in-out';
-    // slideRef.current.style.transform = `translateX(-${currentSlide}0%)`;
     slideRef.current.style.transform = `translateX(calc(${
       (-150 / data2.length) * currentSlide
     }%))`;
   }, [currentSlide]);
 
-  console.log(currentSlide);
+  const ButtonLeft = styled.button`
+    pointer-events: ${leftEndPoint};
+    opacity: ${leftOpacity};
+    position: relative;
+    width: fit-content;
+    height: fit-content;
+    margin: auto;
+    margin-right: 50px;
+    padding: 20px;
+    border-radius: 100px;
+  `;
+
+  const ButtonRight = styled.button`
+    pointer-events: ${rightEndPoint};
+    opacity: ${rightOpacity};
+    position: relative;
+    width: fit-content;
+    height: fit-content;
+    margin: auto;
+    margin-left: 50px;
+    padding: 20px;
+    border-radius: 100px;
+  `;
 
   return (
     <Body>
@@ -75,8 +113,8 @@ function Management() {
         <AllBooking>모든 예약(0건)</AllBooking>
         <ManageButtons>
           <Button>현재 호스팅 중(0건)</Button>
-          <Button>체크인 예정(0건)</Button>
-          <Button>체크아웃 예정(0건)</Button>
+          {/* <Button>체크인 예정(0건)</Button>
+          <Button>체크아웃 예정(0건)</Button> */}
           <Button>예정(0건)</Button>
         </ManageButtons>
         <Accommodation>
@@ -84,33 +122,33 @@ function Management() {
             <Slide ref={slideRef}>
               {/* 여기서부터 슬라이드 */}
               {data2.map((el, index) => {
-                if (index <= 30) {
-                  return (
-                    <Card2 key={el.id}>
-                      <Img2 src={el.imageUrl} alt="test" />
-                      <CardDescription2>Guest : {el.guest}</CardDescription2>
-                      <CardDescription2>
-                        총 인원 : {el.total_members} 명
-                      </CardDescription2>
-                      <CardDescription2>
-                        Check-In : {el.check_in}
-                      </CardDescription2>
-                      <CardDescription2>
-                        Check-Out : {el.check_out}
-                      </CardDescription2>
-                      <CardDescription2>
-                        숙소 이름 : {el.accommodations_name}
-                      </CardDescription2>
-                    </Card2>
-                  );
-                }
+                return (
+                  <Card2 key={el.id}>
+                    <Img2 src={el.imageUrl} alt="test" />
+                    <CardDescription2>Guest : {el.guest}</CardDescription2>
+                    <CardDescription2>
+                      총 인원 : {el.total_members} 명
+                    </CardDescription2>
+                    <CardDescription2>
+                      Check-In : {el.check_in}
+                    </CardDescription2>
+                    <CardDescription2>
+                      Check-Out : {el.check_out}
+                    </CardDescription2>
+                    <CardDescription2>
+                      숙소 이름 : {el.accommodations_name}
+                    </CardDescription2>
+                  </Card2>
+                );
               })}
               {/* 여기까지 슬라이드 */}
             </Slide>
           </Wrapper>
         </Accommodation>
-        <button onClick={NextSlide}>왼쪽</button>
-        <button onClick={PrevSlide}>오른쪽</button>
+        <Buttons>
+          <ButtonLeft onClick={LeftSlide}>&lt;</ButtonLeft>
+          <ButtonRight onClick={RightSlide}>&gt;</ButtonRight>
+        </Buttons>
       </GuestCardWide>
 
       <ManagementFooter>
@@ -183,6 +221,7 @@ const Button = styled.div`
   margin-right: 10px;
   padding: 15px;
 `;
+
 const ManagementFooter = styled.div`
   display: flex;
   justify-content: center;
@@ -236,6 +275,7 @@ const Img = styled.img`
 `;
 
 const Accommodation = styled.div`
+  position: relative;
   background-color: rgba(0, 0, 0, 0.1);
   border-radius: 30px;
   display: flex;
@@ -269,6 +309,14 @@ const CardDescription2 = styled.div`
 `;
 
 const Img2 = styled.img`
+  object-fit: cover;
   min-width: 340px;
   height: 16em;
+`;
+
+const Buttons = styled.div`
+  display: flex;
+  justify-content: space-around;
+  margin: auto;
+  margin-top: 30px;
 `;
