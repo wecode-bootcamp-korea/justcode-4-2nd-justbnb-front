@@ -9,7 +9,7 @@ import {
   Wrap,
   Img,
 } from './AccommodationStyled';
-function Accommodation({ data, localName }) {
+function Accommodation({ data, localName, setlatlng }) {
   const convention = [
     '수영장',
     '바비큐 그릴',
@@ -19,8 +19,15 @@ function Accommodation({ data, localName }) {
     '욕조',
   ];
   const [heart, setHeart] = useState(false);
+
+  const mouseUp = () => {
+    setlatlng({ lat: data.lat, lng: data.long });
+  };
+  const mouseLeave = () => {
+    setlatlng({ lat: 0, lng: 0 });
+  };
   return (
-    <div>
+    <div onMouseOver={mouseUp} onMouseLeave={mouseLeave}>
       <Wrap>
         <div>
           <Img src={data.image} alt="accommodataion" />
