@@ -3,7 +3,9 @@ import DatePickerRangeController from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import Review from './Review.js';
 import InfoSideBar from './InfoSideBar.js';
-import Map from './Map.js';
+import MapInfo from './Map.js';
+import HostInfo from './HostInfo.js';
+import Rules from './Rules.js';
 
 import { IoLocationOutline } from 'react-icons/io5';
 import { VscKey } from 'react-icons/vsc';
@@ -112,7 +114,6 @@ function Detail() {
           </ImgWrapper>
         </div>
       </MainSection>
-
       <InfoSection>
         <InfoText>
           <InfoTitle>
@@ -202,7 +203,6 @@ function Detail() {
         </InfoText>
         <InfoSideBar />
       </InfoSection>
-
       <ReviewSection>
         <header>
           <div>
@@ -280,10 +280,9 @@ function Detail() {
           })}
         </ReviewWrapper>
       </ReviewSection>
-      <Map />
-
-      {/* <MapSection>Hello</MapSection>
-      <HostInfo>Hello</HostInfo>  */}
+      <MapInfo />
+      <HostInfo />
+      <Rules />
     </div>
   );
 }
