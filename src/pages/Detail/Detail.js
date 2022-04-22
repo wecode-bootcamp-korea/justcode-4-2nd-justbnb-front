@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import DatePickerRangeController from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
+import MainSection from './MainSection.js';
 import Review from './Review.js';
-import InfoSideBar from './InfoSideBar.js';
+import SideBar from './SideBar.js';
 import MapInfo from './Map.js';
 import HostInfo from './HostInfo.js';
 import Rules from './Rules.js';
@@ -18,15 +19,8 @@ import {
   FaTv,
   FaCar,
   FaBath,
-  FaRegHeart,
 } from 'react-icons/fa';
 import {
-  MainSection,
-  MainTitle,
-  InfoWrapper,
-  BnbInfo,
-  ImgWrapper,
-  MainImgBox,
   InfoSection,
   InfoText,
   InfoTitle,
@@ -75,45 +69,7 @@ function Detail() {
 
   return (
     <div>
-      <MainSection>
-        <div>
-          <MainTitle>*명동역 도보5분* 123 Guesthouse Single room</MainTitle>
-          <InfoWrapper>
-            <BnbInfo>
-              <div>
-                <FaStar className="faStar" color="#ff385c" />
-              </div>
-              <span>4.61</span>·<span>후기 33개</span>·
-              <span>중구, 서울, 한국</span>
-            </BnbInfo>
-            <div>
-              <FaRegHeart className="icons" />
-              <span>저장</span>
-            </div>
-          </InfoWrapper>
-          <ImgWrapper>
-            <MainImgBox>
-              <img alt="main" src="/images/thump/home1.jpg" />
-            </MainImgBox>
-            <div>
-              <MainImgBox>
-                <img alt="main" src="./images/thump/home1.jpg" />
-              </MainImgBox>
-              <MainImgBox>
-                <img alt="main" src="./images/thump/home1.jpg" />
-              </MainImgBox>
-            </div>
-            <div>
-              <MainImgBox>
-                <img alt="main" src="/images/thump/home1.jpg" />
-              </MainImgBox>
-              <MainImgBox>
-                <img alt="main" src="/images/thump/home1.jpg" />
-              </MainImgBox>
-            </div>
-          </ImgWrapper>
-        </div>
-      </MainSection>
+      <MainSection />
       <InfoSection>
         <InfoText>
           <InfoTitle>
@@ -198,10 +154,12 @@ function Detail() {
               selectsRange
               inline
             />
-            <button type="button">날짜 지우기</button>
+            <div>
+              <button type="button">날짜 지우기</button>
+            </div>
           </InfoCalender>
         </InfoText>
-        <InfoSideBar />
+        <SideBar />
       </InfoSection>
       <ReviewSection>
         <header>
