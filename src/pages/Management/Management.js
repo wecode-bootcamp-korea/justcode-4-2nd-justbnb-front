@@ -26,6 +26,8 @@ function Management() {
     if (currentSlide === 0) {
       return;
     } else {
+      setLeftEndPoint('auto');
+      setRightEndPoint('auto');
       setRightOpacity('1');
       setCurrentSlide(currentSlide - 1);
     }
@@ -43,6 +45,8 @@ function Management() {
     if (currentSlide >= TOTAL_CARD) {
       return;
     } else {
+      setLeftEndPoint('auto');
+      setRightEndPoint('auto');
       setLeftOpacity('1');
       setCurrentSlide(currentSlide + 1);
     }
