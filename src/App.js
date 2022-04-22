@@ -6,6 +6,7 @@ import Hosting from './pages/Hosting/Hosting';
 import Footer from './components/Footer';
 import Nav from './components/Nav/Nav';
 import Management from './pages/Management/Management';
+import Reservation from './pages/Reservation/Reservation';
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
         <Route path="/detail" element={<Detail />} />
         <Route path="/hosting" element={<Hosting />} />
         <Route path="/management" element={<Management />} />
+        <Route path="/reservation" element={<Reservation />} />
       </Routes>
       <Footer />
     </BrowserRouter>
