@@ -5,6 +5,7 @@ import Detail from './pages/Detail/Detail';
 import Hosting from './pages/Hosting/Hosting';
 import Footer from './components/Footer';
 import Nav from './components/Nav/Nav';
+import Management from './pages/Management/Management';
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
         <Route path="/" element={<Main />} />
         <Route path="/detail" element={<Detail />} />
         <Route path="/hosting" element={<Hosting />} />
+        <Route path="/management" element={<Management />} />
       </Routes>
       <Footer />
     </BrowserRouter>
