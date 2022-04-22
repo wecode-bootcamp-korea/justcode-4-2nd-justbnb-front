@@ -154,7 +154,6 @@ function Management() {
           <ButtonRight onClick={RightSlide}>&gt;</ButtonRight>
         </Buttons>
       </GuestCardWide>
-
       <ManagementFooter>
         <TextAndTips>
           <Text>호스팅 관련 팁과 업데이트</Text>
