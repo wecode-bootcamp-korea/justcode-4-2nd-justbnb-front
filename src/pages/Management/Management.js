@@ -26,11 +26,11 @@ function Management() {
     if (currentSlide === 0) {
       return;
     } else {
-      setLeftEndPoint('auto');
       setRightEndPoint('auto');
       setRightOpacity('1');
       setCurrentSlide(currentSlide - 1);
     }
+    return;
   };
 
   // right 버튼 클릭 시
@@ -46,10 +46,10 @@ function Management() {
       return;
     } else {
       setLeftEndPoint('auto');
-      setRightEndPoint('auto');
       setLeftOpacity('1');
       setCurrentSlide(currentSlide + 1);
     }
+    return;
   };
 
   useEffect(() => {
@@ -95,6 +95,10 @@ function Management() {
     margin-right: 50px;
     padding: 20px;
     border-radius: 100px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
   `;
 
   const ButtonRight = styled.button`
@@ -107,6 +111,10 @@ function Management() {
     margin-left: 50px;
     padding: 20px;
     border-radius: 100px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
   `;
 
   return (
