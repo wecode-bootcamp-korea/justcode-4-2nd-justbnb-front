@@ -163,15 +163,8 @@ const Header = styled.section`
 `;
 
 const Body = styled.section`
-  /* height: 80%; */
   width: 100%;
-  /* border: 1px solid blue; */
-  /* display: flex; */
   margin: 55px;
-  /* flex-direction: column;
-  align-items: center;
-  justify-content: center; */
-  /* border: 1px solid red; */
 `;
 
 const Button = styled.button`
@@ -200,7 +193,6 @@ const Button = styled.button`
 const Footer = styled.section`
   padding: 15px;
   width: 100%;
-  /* border: 1px solid red; */
   position: absolute;
   bottom: 0;
   display: flex;
@@ -239,17 +231,23 @@ const Convenience = styled.div`
 `;
 
 const TextAndIcon = styled.div`
-  /* width: fit-content; */
+  &:hover {
+    outline: 3px solid black;
+    /* outline-offset: -3px; */
+    /* box-shadow: 0 0 0 2px #333 inset;*/
+    cursor: pointer;
+  }
   display: flex;
   justify-content: center;
   flex-direction: column;
   align-items: center;
   width: 250px;
+  height: fit-content;
   font-size: 30px;
   font-weight: bolder;
   padding: 40px;
   border: 1px solid rgba(0, 0, 0, 0.2);
-  border-radius: 20px;
+  border-radius: 25px;
   margin: 15px;
 `;
 
