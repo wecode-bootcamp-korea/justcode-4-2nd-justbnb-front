@@ -5,6 +5,7 @@ const Nav = styled.nav`
   align-items: center;
   gap: 4px;
   margin: 16px;
+  z-index: 10;
 `;
 
 const Button = styled.button`

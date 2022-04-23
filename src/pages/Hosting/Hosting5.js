@@ -1,7 +1,64 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
+import { FaSwimmingPool } from 'react-icons/fa';
+import { GiBarbecue } from 'react-icons/gi';
+import { AiOutlineWifi } from 'react-icons/ai';
+import { MdPersonalVideo } from 'react-icons/md';
+import { FaParking } from 'react-icons/fa';
+import { GiBathtub } from 'react-icons/gi';
 
-export default function Hosting2() {
+export default function Hosting5() {
+  const [convenience, setConvenience] = useState([]);
+
+  // 조건문 사용 시 예시
+  // function selectIcon(el) {
+  //   if (el === 'FaSwimmingPool') {
+  //     return <FaSwimmingPool />;
+  //   } else if (el === 'GiBarbecue') {
+  //     return <GiBarbecue />;
+  //   }
+  // }
+
+  function selectIcon(el) {
+    let result;
+    switch (el) {
+      case 'FaSwimmingPool':
+        result = <FaSwimmingPool />;
+        break;
+      case 'GiBarbecue':
+        result = <GiBarbecue />;
+        break;
+      case 'AiOutlineWifi':
+        result = <AiOutlineWifi />;
+        break;
+      case 'MdPersonalVideo':
+        result = <MdPersonalVideo />;
+        break;
+      case 'FaParking':
+        result = <FaParking />;
+        break;
+      case 'GiBathtub':
+        result = <GiBathtub />;
+        break;
+      default:
+        break;
+    }
+    return result;
+  }
+
+  useEffect(() => {
+    fetch('/data/dlwjdals/hosting.json', {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    })
+      .then(res => res.json())
+      .then(data => {
+        setConvenience(data);
+      });
+  }, []);
+
   return (
     <Wrapper>
       <Container>
@@ -18,7 +75,17 @@ export default function Hosting2() {
           <button className="exit-button">나가기</button>
         </Header>
         <Body>
-          <Text2>특별히 내세울만한 시설이 있나요?</Text2>
+          <Text2>특별히 내세울만한 편의시설이 있나요?</Text2>
+          <Convenience>
+            {convenience.map((el, index) => {
+              return (
+                <TextAndIcon key={el.id}>
+                  <Icon>{selectIcon(el.icon)}</Icon>
+                  <Text3>{el.convenience}</Text3>
+                </TextAndIcon>
+              );
+            })}
+          </Convenience>
         </Body>
         <Footer>
           <p>뒤로</p>
@@ -162,4 +229,37 @@ const Footer = styled.section`
 const Text2 = styled.div`
   font-size: 35px;
   font-weight: bold;
+  margin: 14px;
+`;
+
+const Convenience = styled.div`
+  display: grid;
+  grid-template-columns: repeat(3, 0fr);
+  margin: 50px 0;
+`;
+
+const TextAndIcon = styled.div`
+  /* width: fit-content; */
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  width: 250px;
+  font-size: 30px;
+  font-weight: bolder;
+  padding: 40px;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  border-radius: 20px;
+  margin: 15px;
+`;
+
+const Icon = styled.div`
+  margin-bottom: 10px;
+  font-size: 40px;
+  font-weight: bolder;
+`;
+
+const Text3 = styled.div`
+  font-size: 20px;
+  font-weight: bolder;
 `;
