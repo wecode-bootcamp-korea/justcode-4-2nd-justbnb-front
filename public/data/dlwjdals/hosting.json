@@ -1,0 +1,32 @@
+[
+  {
+    "id": 1,
+    "convenience": "수영장",
+    "icon": "FaSwimmingPool"
+  },
+  {
+    "id": 2,
+    "convenience": "바베큐 그릴",
+    "icon": "GiBarbecue"
+  },
+  {
+    "id": 3,
+    "convenience": "WIFI",
+    "icon": "AiOutlineWifi"
+  },
+  {
+    "id": 4,
+    "convenience": "TV",
+    "icon": "MdPersonalVideo"
+  },
+  {
+    "id": 5,
+    "convenience": "주차공간",
+    "icon": "FaParking"
+  },
+  {
+    "id": 6,
+    "convenience": "욕조",
+    "icon": "GiBathtub"
+  }
+]
