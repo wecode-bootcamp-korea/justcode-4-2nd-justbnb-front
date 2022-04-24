@@ -1,12 +1,46 @@
-import styled, { keyframes } from 'styled-components';
+import styled, { keyframes, css } from 'styled-components';
+
+const boxFade = keyframes`
+  0% {
+    left:0px;
+    
+  }
+  100% {
+    left:-1000px;
+  }
+`;
+const boxShow = keyframes`
+  0% {
+    left:-1000px;
+    
+  }
+  100% {
+    left:0px;
+  }
+`;
 
 const ListContainer = styled.div`
-  width: 88%;
+  width: 50%;
   margin: 0px auto;
-  margin-left: 15px;
+  z-index: 1;
+  padding-left: 15px;
+  background-color: white;
+  position: absolute;
+  animation-duration: 1s;
+  animation: ${props => {
+    if (props.active === 'true') {
+      return css`
+        ${boxFade} 1s 0s ease alternate forwards;
+      `;
+    } else {
+      return css`
+        ${boxShow} 1s 0s ease alternate forwards;
+      `;
+    }
+  }}
   @media only screen and (max-width: 1308px) {
     width: 100%;
-    margin-left: 0px;
+    padding-left:
     padding: 5px;
   }
 `;
@@ -49,8 +83,8 @@ const Button = styled.div`
   z-index: 10px;
   background-color: white;
   position: absolute;
-  left: ${props => props.left || '48%'};
-  top: 42%;
+  left: ${props => props.left || '3%'};
+  top: 2%;
   box-shadow: 0.5px 0.5px 0.5px 0.5px gray;
   border-radius: 8px;
   text-align: center;
@@ -65,7 +99,9 @@ const WrapContainer = styled.div``;
 const Map = styled.div``;
 
 const Box = styled.div`
-  width: 100%;
+  width: ${props => (props.active === 'true' ? '100%' : '50%')};
+  position: sticky;
+  left: 50%;
   height: ${props => props.height || '1250px'};
 `;
 

@@ -1,7 +1,5 @@
 import React from 'react';
 import { useState, useEffect, useRef } from 'react';
-import Accommodation from '../../components/Accommodation/Accommodation';
-import Pagination from '../../components/paging/Pagination';
 import MapMarkerItem from './MapMarkerItem';
 import { Button, Box } from './AccommodationListStyled';
 
@@ -135,7 +133,7 @@ function MapContainer({
 
   let height = level >= 13 ? '1900px' : '1250px';
   return (
-    <Box height={height}>
+    <Box height={height} active={changeMap ? 'true' : 'false'}>
       <div id="kakaoMap" style={mapStyle} />
       {positions.map(position => (
         <MapMarkerItem
@@ -158,7 +156,6 @@ function MapContainer({
         <Button
           width="50px"
           onClick={() => {
-            if (level >= 13) map.current.setLevel(8);
             setChangeMap(!changeMap);
           }}
         >

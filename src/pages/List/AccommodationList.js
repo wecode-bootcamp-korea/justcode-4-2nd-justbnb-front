@@ -4,10 +4,8 @@ import { AiFillTrophy } from 'react-icons/ai';
 import { useState, useEffect, useRef } from 'react';
 import Accommodation from '../../components/Accommodation/Accommodation';
 import Pagination from '../../components/paging/Pagination';
-import MapMarkerItem from './MapMarkerItem';
 import BigCategoryList from './BigCategoryList';
 import MapContainer from './AcommodationMap';
-import { useAsync } from 'react-async';
 import {
   ListContainer,
   Container,
@@ -16,7 +14,6 @@ import {
   IconTextWrap,
   Icon,
   H2,
-  Button,
   WrapContainer,
 } from './AccommodationListStyled';
 
@@ -24,7 +21,6 @@ const AccommodationList = () => {
   const { localName } = useParams();
   const [local, setLocal] = useState(localName);
   const [datas, setData] = useState([]);
-  let count = useRef(0);
 
   const [limit, setlimit] = useState(5);
   const [page, setPage] = useState(1);
@@ -76,51 +72,49 @@ const AccommodationList = () => {
   return (
     <WrapContainer>
       <Container>
-        {changeMap === false ? (
-          <ListContainer>
-            <Text>{local}에 위치한 300개 이상의 숙소</Text>
-            <Text>
-              여행 날짜와 게스트 인원수를 입력하면 1박당 총 요금을 확인할 수
-              있습니다.
-            </Text>
-            <IconTextWrap>
-              <Icon>
-                <AiFillTrophy size="28" color="red" />
-              </Icon>
-              <Text2>
-                390,000명의 게스트가 {local}의 숙소에 머물렀습니다. 게스트는
-                평균적으로 이 숙소를 별 5개 만점에 4.8점으로 평가했습니다.
-              </Text2>
-            </IconTextWrap>
-            {level >= 13 ? <BigCategoryList data={datas} /> : null}
-            {level >= 13 ? (
-              <H2>{_data.length}개 이상의 숙소 둘러보기</H2>
-            ) : null}
-            {width > 1308
-              ? _data.slice(offset, offset + limit).map((data, index) => (
-                  <Accommodation
-                    data={data}
-                    key={data.id}
-                    localName={data.local}
-                    setlatlng={setlatlng} //{{ lat: datas[index].lat, lng: datas[index].long }}
-                  />
-                ))
-              : datas.slice(offset, offset + limit).map((data, index) => (
-                  <Accommodation
-                    data={data}
-                    key={data.id}
-                    localName={data.local}
-                    setlatlng={setlatlng} //{{ lat: datas[index].lat, lng: datas[index].long }}
-                  />
-                ))}
-            <Pagination
-              total={width > 1308 ? _data.length : datas.length}
-              limit={limit}
-              page={page}
-              setPage={setPage}
-            />
-          </ListContainer>
-        ) : null}
+        {/* {changeMap === false ? ( */}
+        <ListContainer active={changeMap ? 'true' : 'false'}>
+          <Text>{local}에 위치한 300개 이상의 숙소</Text>
+          <Text>
+            여행 날짜와 게스트 인원수를 입력하면 1박당 총 요금을 확인할 수
+            있습니다.
+          </Text>
+          <IconTextWrap>
+            <Icon>
+              <AiFillTrophy size="28" color="red" />
+            </Icon>
+            <Text2>
+              390,000명의 게스트가 {local}의 숙소에 머물렀습니다. 게스트는
+              평균적으로 이 숙소를 별 5개 만점에 4.8점으로 평가했습니다.
+            </Text2>
+          </IconTextWrap>
+          {level >= 13 ? <BigCategoryList data={datas} /> : null}
+          {level >= 13 ? <H2>{_data.length}개 이상의 숙소 둘러보기</H2> : null}
+          {width > 1308
+            ? _data.slice(offset, offset + limit).map((data, index) => (
+                <Accommodation
+                  data={data}
+                  key={data.id}
+                  localName={data.local}
+                  setlatlng={setlatlng} //{{ lat: datas[index].lat, lng: datas[index].long }}
+                />
+              ))
+            : datas.slice(offset, offset + limit).map((data, index) => (
+                <Accommodation
+                  data={data}
+                  key={data.id}
+                  localName={data.local}
+                  setlatlng={setlatlng} //{{ lat: datas[index].lat, lng: datas[index].long }}
+                />
+              ))}
+          <Pagination
+            total={width > 1308 ? _data.length : datas.length}
+            limit={limit}
+            page={page}
+            setPage={setPage}
+          />
+        </ListContainer>
+        {/* ) : null} */}
         {/* {datas.length !== 0 ? ( */}
         {width >= 1308 && datas.length !== 0 ? (
           <MapContainer

@@ -1,6 +1,5 @@
-import React, { Component } from 'react';
-import { useState, useEffect, useRef } from 'react';
-import { Wrap, Img, TextBox, P } from './MapMarkerItemStyled';
+import React from 'react';
+import { useState } from 'react';
 
 function MapMarkerItem({ position, latlng, map }) {
   return (
