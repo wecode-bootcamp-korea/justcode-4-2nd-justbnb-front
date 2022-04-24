@@ -4,7 +4,6 @@ import styled from 'styled-components';
 export default function CounterValue2() {
   const [num, setNum] = useState(1);
 
-  //최대 16명, 최소 1명//
   const upNum = () => {
     setNum(num >= 4 ? 4 : num + 1);
   };
