@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 
 export default function CounterValue3() {
-  const [num, setNum] = useState(0);
+  const [num, setNum] = useState(20000);
 
   //최대 16명, 최소 1명//
   const upNum = () => {
