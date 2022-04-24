@@ -118,7 +118,7 @@ function MapContainer({
   useEffect(() => {
     if (changeMap === false) {
       setMapStyle({
-        width: '98%',
+        width: '100%',
         height: '600px',
         position: 'sticky',
         top: '365px',
@@ -126,14 +126,16 @@ function MapContainer({
       });
     } else {
       setMapStyle({
-        width: '98%',
+        width: '100%',
         height: '1300px',
         position: 'none',
       });
     }
   }, [changeMap]);
+
+  let height = level >= 13 ? '1900px' : '1250px';
   return (
-    <Box>
+    <Box height={height}>
       <div id="kakaoMap" style={mapStyle} />
       {positions.map(position => (
         <MapMarkerItem

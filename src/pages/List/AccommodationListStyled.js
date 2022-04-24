@@ -66,7 +66,7 @@ const Map = styled.div``;
 
 const Box = styled.div`
   width: 100%;
-  height: 1250px;
+  height: ${props => props.height || '1250px'};
 `;
 
 export {
