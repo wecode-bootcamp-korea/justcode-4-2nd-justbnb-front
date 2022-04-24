@@ -1,12 +1,13 @@
-import React, { useRef } from 'react';
+import React from 'react';
 import { useParams } from 'react-router-dom';
 import { AiFillTrophy } from 'react-icons/ai';
-import { useState, useEffect, useMemo } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import Accommodation from '../../components/Accommodation/Accommodation';
 import Pagination from '../../components/paging/Pagination';
-import { Map } from 'react-kakao-maps-sdk';
 import MapMarkerItem from './MapMarkerItem';
-import styled from 'styled-components';
+import BigCategoryList from './BigCategoryList';
+import MapContainer from './AcommodationMap';
+import { useAsync } from 'react-async';
 import {
   ListContainer,
   Container,
@@ -14,19 +15,29 @@ import {
   Text2,
   IconTextWrap,
   Icon,
+  H2,
+  Button,
+  WrapContainer,
 } from './AccommodationListStyled';
 
 const AccommodationList = () => {
   const { localName } = useParams();
+  const [local, setLocal] = useState(localName);
   const [datas, setData] = useState([]);
+  let count = useRef(0);
 
   const [limit, setlimit] = useState(5);
   const [page, setPage] = useState(1);
   const offset = (page - 1) * limit;
 
+  const [level, setLevel] = useState();
+  const [_data, _setData] = useState([]);
+  const [latlng, setlatlng] = useState({ lat: 0, lng: 0 });
+  const [changeMap, setChangeMap] = useState(false);
+
   /*목데이터 가져오기 */
-  useEffect(() => {
-    fetch('/data/hwseol/list.json', {
+  const refreshData = async () => {
+    await fetch('/data/hwseol/list.json', {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
@@ -34,126 +45,100 @@ const AccommodationList = () => {
     })
       .then(res => res.json())
       .then(data => {
-        setData(data);
-      });
-  }, []);
-
-  /*map*/
-  let positions = [];
-  const [latlng, setlatlng] = useState({});
-  const [area, setArea] = useState();
-
-  for (let i = 0; i < datas.length; i++) {
-    positions[i] = {
-      title: datas[i].name,
-      latlng: { lat: datas[i].lat, lng: datas[i].long },
-      image: datas[i].image,
-      buildType: datas[i].build_type,
-      localName: localName,
-      desc: datas[i].desc,
-    };
-  }
-  /*map marker 범위 설정*/
-  const [map, setMap] = useState();
-  const bounds = useMemo(() => {
-    const { kakao } = window;
-    const bounds = new kakao.maps.LatLngBounds();
-
-    datas.forEach(data => {
-      bounds.extend(new kakao.maps.LatLng(data.lat, data.long));
-    });
-    return bounds;
-  }, [datas]);
-
-  useEffect(() => {
-    if (map) map.setBounds(bounds);
-  }, [bounds]);
-
-  /* 맵을 움직일때 보여지는 마커의 리스트만 가져오기 */
-  const [_data, _setData] = useState([]);
-  useEffect(() => {
-    let markers = [];
-    if (area !== undefined) {
-      for (let i = 0; i < datas.length; i++) {
-        if (datas[i].lat < area.sw.Ma || datas[i].lat > area.ne.Ma) {
-          continue;
-        }
-        if (datas[i].long < area.sw.La || datas[i].long > area.ne.La) {
-          continue;
-        }
-        markers.push(datas[i]);
-      }
-    }
-    _setData(markers);
-  }, [area]);
-
-  return (
-    <div>
-      <Container>
-        <ListContainer>
-          <Text>{localName}에 위치한 300개 이상의 숙소</Text>
-          <Text>
-            여행 날짜와 게스트 인원수를 입력하면 1박당 총 요금을 확인할 수
-            있습니다.
-          </Text>
-          <IconTextWrap>
-            <Icon>
-              <AiFillTrophy size="28" color="red" />
-            </Icon>
-            <Text2>
-              390,000명의 게스트가 {localName}의 숙소에 머물렀습니다. 게스트는
-              평균적으로 이 숙소를 별 5개 만점에 4.8점으로 평가했습니다.
-            </Text2>
-          </IconTextWrap>
-          {_data.slice(offset, offset + limit).map((data, index) => (
-            <Accommodation
-              data={data}
-              key={data.id}
-              localName={localName}
-              setlatlng={setlatlng}
-            />
-          ))}
-          <Pagination
-            total={_data.length}
-            limit={limit}
-            page={page}
-            setPage={setPage}
-          />
-        </ListContainer>
-
-        <Map // 지도를 표시할 Container
-          center={{
-            // 지도의 중심좌표
-            lat: 37.56610344059421,
-            lng: 126.97884488662002,
-          }}
-          style={{
-            width: '55%',
-            height: '1000px',
-            position: 'fixed',
-            top: 0,
-            left: '45%',
-          }}
-          level={3} // 지도의 확대 레벨
-          onCreate={setMap}
-          onBoundsChanged={map =>
-            setArea({
-              sw: map.getBounds().getSouthWest(),
-              ne: map.getBounds().getNorthEast(),
-            })
+        let temp = [];
+        for (let i = 0; i < data.length; i++) {
+          if (local === '지도에 표시된 지역') {
+            temp.push(data[i]);
+          } else if (data[i].local === local) {
+            temp.push(data[i]);
           }
-        >
-          {positions.map((position, index) => (
-            <MapMarkerItem
-              position={position}
-              latlng={latlng}
-              key={`${position.title}-${position.latlng}`}
+        }
+        setData([...temp]);
+      });
+  };
+  useEffect(() => {
+    refreshData();
+  }, [local]);
+  //rendering이 한박자 늦어서 어쩔수 없이 한번 더 리랜더링
+  useEffect(() => {}, [datas]);
+
+  //반응형 웹
+  const [width, setWidth] = useState(window.innerWidth);
+  const resizeWindow = () => {
+    setWidth(window.innerWidth);
+  };
+  useEffect(() => {
+    window.addEventListener('resize', resizeWindow);
+    return () => {
+      window.removeEventListener('resize', resizeWindow);
+    };
+  });
+  return (
+    <WrapContainer>
+      <Container>
+        {changeMap === false ? (
+          <ListContainer>
+            <Text>{local}에 위치한 300개 이상의 숙소</Text>
+            <Text>
+              여행 날짜와 게스트 인원수를 입력하면 1박당 총 요금을 확인할 수
+              있습니다.
+            </Text>
+            <IconTextWrap>
+              <Icon>
+                <AiFillTrophy size="28" color="red" />
+              </Icon>
+              <Text2>
+                390,000명의 게스트가 {local}의 숙소에 머물렀습니다. 게스트는
+                평균적으로 이 숙소를 별 5개 만점에 4.8점으로 평가했습니다.
+              </Text2>
+            </IconTextWrap>
+            {level >= 13 ? <BigCategoryList data={datas} /> : null}
+            {level >= 13 ? (
+              <H2>{_data.length}개 이상의 숙소 둘러보기</H2>
+            ) : null}
+            {width > 1308
+              ? _data.slice(offset, offset + limit).map((data, index) => (
+                  <Accommodation
+                    data={data}
+                    key={data.id}
+                    localName={data.local}
+                    setlatlng={setlatlng} //{{ lat: datas[index].lat, lng: datas[index].long }}
+                  />
+                ))
+              : datas.slice(offset, offset + limit).map((data, index) => (
+                  <Accommodation
+                    data={data}
+                    key={data.id}
+                    localName={data.local}
+                    setlatlng={setlatlng} //{{ lat: datas[index].lat, lng: datas[index].long }}
+                  />
+                ))}
+            <Pagination
+              total={width > 1308 ? _data.length : datas.length}
+              limit={limit}
+              page={page}
+              setPage={setPage}
             />
-          ))}
-        </Map>
+          </ListContainer>
+        ) : null}
+        {/* {datas.length !== 0 ? ( */}
+        {width >= 1308 && datas.length !== 0 ? (
+          <MapContainer
+            datas={datas}
+            setLocal={setLocal}
+            level={level}
+            setLevel={setLevel}
+            _data={_data}
+            _setData={_setData}
+            setlatlng={setlatlng}
+            latlng={latlng}
+            changeMap={changeMap}
+            setChangeMap={setChangeMap}
+          />
+        ) : null}
       </Container>
-    </div>
+    </WrapContainer>
   );
 };
 
-export default AccommodationList;
+export default React.memo(AccommodationList);
