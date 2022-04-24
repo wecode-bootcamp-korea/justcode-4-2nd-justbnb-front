@@ -7,9 +7,9 @@ export default function Hosting6() {
     <Wrapper>
       <Container>
         <Text1>
-          숙소 편의시설 정보를 추가해
+          이제 숙소 사진을 올릴
           <br />
-          주세요.
+          차례입니다.
         </Text1>
       </Container>
 
@@ -169,4 +169,5 @@ const Text4 = styled.div`
   margin-top: 7vw;
   margin-bottom: 3vw;
   text-decoration: underline;
+  cursor: pointer;
 `;

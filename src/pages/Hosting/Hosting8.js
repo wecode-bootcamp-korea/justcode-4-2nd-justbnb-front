@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 
 export default function Hosting8() {
+  const [textlength, setTextLength] = useState(0);
+
   return (
     <Wrapper>
       <Container>
@@ -17,9 +19,11 @@ export default function Hosting8() {
           <TextAndInput>
             <Text2>숙소 설명 작성하기</Text2>
             <Input
-              maxLength={500}
+              onKeyUp={e => setTextLength(e.target.value.length)}
+              maxLength={499}
               placeholder="독특하면서도 가족이 머물기 적합한 이 곳에서 잊지 못할 추억을 만드세요."
             />
+            <TextLength>{textlength} / 500</TextLength>
           </TextAndInput>
         </Body>
         <Footer>
@@ -159,4 +163,8 @@ const Input = styled.textarea`
   border: 2px solid rgba(0, 0, 0, 0.2);
   border-radius: 10px;
   /* font-weight: bold; */
+`;
+
+const TextLength = styled.div`
+  font-size: 1vw;
 `;
