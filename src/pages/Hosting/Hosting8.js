@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 
-export default function Hosting7() {
+export default function Hosting8() {
   return (
     <Wrapper>
       <Container>
-        <Text1>숙소 이름을 만들어주세요.</Text1>
+        <Text1>숙소에 대해 설명해 주세요.</Text1>
       </Container>
 
       <Container2>
@@ -15,8 +15,11 @@ export default function Hosting7() {
         </Header>
         <Body>
           <TextAndInput>
-            <Text2>숙소 이름 정하기</Text2>
-            <Input maxLength={50} placeholder="숙소 이름을 적어주세요." />
+            <Text2>숙소 설명 작성하기</Text2>
+            <Input
+              maxLength={500}
+              placeholder="독특하면서도 가족이 머물기 적합한 이 곳에서 잊지 못할 추억을 만드세요."
+            />
           </TextAndInput>
         </Body>
         <Footer>
@@ -147,8 +150,9 @@ const Input = styled.textarea`
   display: flex;
   margin: 1vw 0;
   padding: 1.5vw;
-  font-size: 1.5vw;
+  font-size: 1vw;
   min-width: 30vw;
+
   max-width: 30vw;
   height: 20vh;
   max-height: 50vh;
