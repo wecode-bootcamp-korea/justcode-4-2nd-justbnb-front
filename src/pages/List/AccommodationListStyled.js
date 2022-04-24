@@ -3,6 +3,12 @@ import styled, { keyframes } from 'styled-components';
 const ListContainer = styled.div`
   width: 88%;
   margin: 0px auto;
+  margin-left: 15px;
+  @media only screen and (max-width: 1308px) {
+    width: 100%;
+    margin-left: 0px;
+    padding: 5px;
+  }
 `;
 
 const Container = styled.div`

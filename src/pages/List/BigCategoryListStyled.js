@@ -7,6 +7,7 @@ const H2 = styled.h2`
 `;
 const Line = styled.div`
   display: flex;
+  margin-right: 30px;
   margin-top: ${props => props.marginTop || '40px;'}; ;
 `;
 const P = styled.p`

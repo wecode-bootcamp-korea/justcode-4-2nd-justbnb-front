@@ -86,6 +86,13 @@ function MultipleSlider({ data }) {
           slidesToScroll: 1,
         },
       },
+      {
+        breakpoint: 1854,
+        settings: {
+          slidesToShow: 2,
+          slidesToScroll: 1,
+        },
+      },
     ],
   };
   return (
