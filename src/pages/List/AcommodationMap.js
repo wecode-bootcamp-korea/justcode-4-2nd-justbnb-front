@@ -127,7 +127,7 @@ function MapContainer({
     } else {
       setMapStyle({
         width: '100%',
-        height: '1300px',
+        height: '1250px',
         position: 'none',
       });
     }
@@ -158,6 +158,7 @@ function MapContainer({
         <Button
           width="50px"
           onClick={() => {
+            if (level >= 13) map.current.setLevel(8);
             setChangeMap(!changeMap);
           }}
         >
