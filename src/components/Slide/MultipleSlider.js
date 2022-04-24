@@ -62,24 +62,28 @@ function MultipleSlider({ data }) {
         breakpoint: 744,
         settings: {
           slidesToShow: 1,
+          slidesToScroll: 1,
         },
       },
       {
         breakpoint: 1127,
         settings: {
           slidesToShow: 3,
+          slidesToScroll: 1,
         },
       },
       {
         breakpoint: 1258,
         settings: {
           slidesToShow: 2,
+          slidesToScroll: 1,
         },
       },
       {
         breakpoint: 1854,
         settings: {
           slidesToShow: 2,
+          slidesToScroll: 1,
         },
       },
     ],
