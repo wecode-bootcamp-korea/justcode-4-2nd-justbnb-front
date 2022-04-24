@@ -103,10 +103,10 @@ function MapContainer({
 
   //지도 크기 동적 변경
   const [mapStyle, setMapStyle] = useState({
-    width: '55%',
+    width: '50%',
     height: '540px',
     position: 'fixed',
-    left: '45%',
+    left: '50%',
   });
 
   useEffect(() => {
@@ -118,14 +118,15 @@ function MapContainer({
   useEffect(() => {
     if (changeMap === false) {
       setMapStyle({
-        width: '55%',
-        height: '540px',
-        position: 'fixed',
-        left: '45%',
+        width: '98%',
+        height: '600px',
+        position: 'sticky',
+        top: '365px',
+        left: '50%',
       });
     } else {
       setMapStyle({
-        width: '100%',
+        width: '98%',
         height: '1300px',
         position: 'none',
       });

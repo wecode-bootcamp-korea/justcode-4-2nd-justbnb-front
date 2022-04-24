@@ -6,7 +6,7 @@ const ListContainer = styled.div`
 `;
 
 const Container = styled.div`
-  width: 45%;
+  width: 100%;
   height: 100%;
   display: flex;
   margin-top: 360px;
@@ -43,7 +43,7 @@ const Button = styled.div`
   z-index: 10px;
   background-color: white;
   position: absolute;
-  left: ${props => props.left || '46%'};
+  left: ${props => props.left || '48%'};
   top: 42%;
   box-shadow: 0.5px 0.5px 0.5px 0.5px gray;
   border-radius: 8px;
@@ -58,7 +58,10 @@ const WrapContainer = styled.div``;
 
 const Map = styled.div``;
 
-const Box = styled.div``;
+const Box = styled.div`
+  width: 100%;
+  height: 1250px;
+`;
 
 export {
   ListContainer,
