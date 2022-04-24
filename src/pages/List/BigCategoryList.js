@@ -1,8 +1,10 @@
 import MultipleSlider from '../../components/Slide/MultipleSlider';
 import React from 'react';
 import { H2, Wrap, Line, P } from './BigCategoryListStyled';
+
 const BigCategoryList = React.memo(function BigCategoryList({ data }) {
   let _data = { 서울: [], 부산: [] };
+
   for (let i = 0; i < data.length; i++) {
     if (data[i].local === '서울') _data['서울'].push(data[i]);
     else if (data[i].local === '부산') _data['부산'].push(data[i]);

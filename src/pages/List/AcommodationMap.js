@@ -1,7 +1,5 @@
 import React from 'react';
 import { useState, useEffect, useRef } from 'react';
-import Accommodation from '../../components/Accommodation/Accommodation';
-import Pagination from '../../components/paging/Pagination';
 import MapMarkerItem from './MapMarkerItem';
 import { Button, Box } from './AccommodationListStyled';
 
@@ -118,22 +116,24 @@ function MapContainer({
   useEffect(() => {
     if (changeMap === false) {
       setMapStyle({
-        width: '98%',
+        width: '100%',
         height: '600px',
         position: 'sticky',
-        top: '365px',
+        top: '360px',
         left: '50%',
       });
     } else {
       setMapStyle({
-        width: '98%',
-        height: '1300px',
+        width: '100%',
+        height: '1250px',
         position: 'none',
       });
     }
   }, [changeMap]);
+
+  let height = level >= 13 ? '1900px' : '1250px';
   return (
-    <Box>
+    <Box height={height} active={changeMap ? 'true' : 'false'}>
       <div id="kakaoMap" style={mapStyle} />
       {positions.map(position => (
         <MapMarkerItem
