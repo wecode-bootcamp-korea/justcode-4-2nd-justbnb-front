@@ -1,17 +1,32 @@
-import { React, useState } from 'react';
+import { React, useEffect, useState } from 'react';
 import styled from 'styled-components';
 
 import DatePickerRangeController from 'react-datepicker';
+import 'react-datepicker/dist/react-datepicker.css';
+// import Calendar from '../../../components/Calendar/Calendar';
 
 function CalendarModal(props) {
-  const [startDate, setStartDate] = useState(new Date());
-  const [endDate, setEndDate] = useState(null);
+  const { start, end, change, deleteDate, dateDeleted } = props;
+  const [checkInValue, setCheckInValue] = useState(null);
+  const [checkOutValue, setCheckOutValue] = useState(null);
 
-  const onChange = dates => {
-    const [start, end] = dates;
-    setStartDate(start);
-    setEndDate(end);
-  };
+  useEffect(() => {
+    setCheckInValue(start);
+    // startDate가 null일 경우 렌더링이 되지 않는 오류 발생
+    if (start !== null) {
+      let newStartDate = `${start.getFullYear()}.${start.getMonth()}.${start.getDate()}`;
+      setCheckInValue(newStartDate);
+    }
+  }, [start]);
+
+  useEffect(() => {
+    setCheckOutValue(end);
+    // startDate가 null일 경우 렌더링이 되지 않는 오류 발생
+    if (end !== null) {
+      let newEndDate = `${end.getFullYear()}.${end.getMonth()}.${end.getDate()}`;
+      setCheckOutValue(newEndDate);
+    }
+  }, [end]);
 
   return (
     <Wrapper style={{ display: props.open ? 'block' : 'none' }}>
@@ -23,31 +38,37 @@ function CalendarModal(props) {
         <InputWrapper>
           <CheckIn>
             <div>체크인</div>
-            <Input placeholder="날짜 추가" value={startDate} />
+            <Input
+              placeholder="날짜 추가"
+              value={!dateDeleted ? '' : checkInValue}
+            />
           </CheckIn>
           <CheckOut>
             <div>체크아웃</div>
-            <Input placeholder="날짜 추가" value={endDate} />
+            <Input
+              placeholder="날짜 추가"
+              value={!dateDeleted ? '' : checkOutValue}
+            />
           </CheckOut>
         </InputWrapper>
       </Header>
-      <Calender>
+      <CalenderWrapper>
+        {/* <Calendar /> */}
         <DatePickerRangeController
-          selected={startDate}
-          onChange={onChange}
-          startDate={startDate}
-          endDate={endDate}
+          selected={start}
+          onChange={change}
+          startDate={start}
+          endDate={end}
           dateFormat="yyyy/MM/dd"
           monthsShown={2}
           selectsRange
           inline
         />
-      </Calender>
+      </CalenderWrapper>
       <ButtonWrapper>
         <Delete
           onClick={() => {
-            setStartDate(null);
-            setEndDate(null);
+            deleteDate();
           }}
         >
           날짜 지우기
@@ -125,7 +146,7 @@ const Input = styled.input`
   width: 100%;
 `;
 
-const Calender = styled.div`
+const CalenderWrapper = styled.div`
   width: 530px;
   margin-bottom: 20px;
 `;

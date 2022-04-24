@@ -2,7 +2,6 @@ import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 
 function Review(props) {
-  console.log('props', props);
   return (
     <Wrapper>
       <User>

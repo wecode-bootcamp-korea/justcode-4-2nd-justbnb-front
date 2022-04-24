@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { FaStar, FaRegHeart } from 'react-icons/fa';
 
-function MainSection() {
+function Main() {
   return (
     <Wrapper>
       <div>
@@ -47,7 +47,7 @@ function MainSection() {
 
 const Wrapper = styled.section`
   padding-top: 80px;
-  margin: 0 80px;
+  /* margin: 0 80px; */
 `;
 
 const MainTitle = styled.h1`
@@ -133,5 +133,4 @@ const MainImgBox = styled.div`
   }
 `;
 
-// InfoSect
-export default MainSection;
+export default Main;

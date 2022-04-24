@@ -3,21 +3,21 @@ import { FaPlus, FaMinus } from 'react-icons/fa';
 import { useState } from 'react';
 
 function SideBarHeadCount(props) {
-  const [headCount, setHeadCount] = useState(0);
-  const [petCount, setPetCount] = useState(0);
+  const { open, close, handleHeadCount, handlePetCount, headCount, petCount } =
+    props;
 
   return (
-    <Wrapper style={{ display: props.open ? 'block' : 'none' }}>
+    <Wrapper style={{ display: open ? 'block' : 'none' }}>
       <ListWrapper>
         <List>
           <Text>인원</Text>
           <Count>
             <Button
               onClick={() => {
-                setHeadCount(headCount - 1);
+                handleHeadCount(headCount - 1);
               }}
               type="button"
-              disabled={headCount === 0 ? 'disabled' : null}
+              disabled={headCount === 1 ? 'disabled' : null}
             >
               <FaMinus className="icons" />
             </Button>
@@ -25,7 +25,7 @@ function SideBarHeadCount(props) {
             <Button
               type="button"
               onClick={() => {
-                setHeadCount(headCount + 1);
+                handleHeadCount(headCount + 1);
               }}
             >
               <FaPlus className="icons" />
@@ -38,7 +38,7 @@ function SideBarHeadCount(props) {
             <Button
               type="button"
               onClick={() => {
-                setPetCount(petCount - 1);
+                handlePetCount(petCount - 1);
               }}
               disabled={petCount === 0 ? 'disabled' : null}
             >
@@ -48,7 +48,7 @@ function SideBarHeadCount(props) {
             <Button
               type="button"
               onClick={() => {
-                setPetCount(petCount + 1);
+                handlePetCount(petCount + 1);
               }}
             >
               <FaPlus className="icons" />
@@ -60,7 +60,7 @@ function SideBarHeadCount(props) {
         <Close
           type="button"
           onClick={() => {
-            props.close();
+            close();
           }}
         >
           닫기
@@ -71,7 +71,6 @@ function SideBarHeadCount(props) {
 }
 
 const Wrapper = styled.section`
-  /* display: flex; */
   display: none;
   flex-direction: column;
   align-items: flex-end;

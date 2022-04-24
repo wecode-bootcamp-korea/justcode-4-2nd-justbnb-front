@@ -1,10 +1,12 @@
-import { React, useState } from 'react';
+import { React, useEffect, useState } from 'react';
 import styled from 'styled-components';
 import SideBarHeadCount from './SideBarHeadCount';
 import CalendarModal from './CalendarModal';
 import { FaStar, FaAngleDown } from 'react-icons/fa';
 
-function InfoSideBar() {
+function InfoSideBar(props) {
+  const { start, end, change, deleteDate, dateDeleted } = props;
+
   // 캘린더 모달 open 관리
   const [calendarModalOpen, setCalendarModalOpen] = useState(false);
   const [CountModalOpen, setCountModalOpen] = useState(false);
@@ -13,6 +15,40 @@ function InfoSideBar() {
   };
   const handleCountModalClose = () => {
     setCountModalOpen(false);
+  };
+
+  // 캘린더 input
+  const [checkInValue, setCheckInValue] = useState(null);
+  const [checkOutValue, setCheckOutValue] = useState(null);
+
+  const handleCheckInValue = useEffect(() => {
+    !dateDeleted
+      ? setCheckInValue('')
+      : setCheckInValue(
+          start !== null
+            ? `${start.getFullYear()}.${start.getMonth()}.${start.getDate()}`
+            : null
+        );
+  }, [start]);
+
+  const handleCheckOutValue = useEffect(() => {
+    !dateDeleted
+      ? setCheckOutValue('')
+      : setCheckOutValue(
+          end !== null
+            ? `${end.getFullYear()}.${end.getMonth()}.${end.getDate()}`
+            : null
+        );
+  }, [end]);
+
+  // 인원 관리
+  const [headCount, setHeadCount] = useState(1);
+  const [petCount, setPetCount] = useState(0);
+  const handleHeadCount = count => {
+    setHeadCount(count);
+  };
+  const handlePetCount = count => {
+    setPetCount(count);
   };
 
   return (
@@ -33,6 +69,11 @@ function InfoSideBar() {
         <CalendarModal
           open={calendarModalOpen}
           close={handleCalendarModalClose}
+          start={start}
+          end={end}
+          change={change}
+          deleteDate={deleteDate}
+          dateDeleted={dateDeleted}
         />
         <Form>
           <InputWrapper>
@@ -46,11 +87,11 @@ function InfoSideBar() {
             >
               <CheckInput>
                 <span>체크인</span>
-                <Input placeholder="날짜 추가" />
+                <Input placeholder="날짜 추가" value={checkInValue} />
               </CheckInput>
               <CheckInput>
                 <span>체크아웃</span>
-                <Input placeholder="날짜 추가" />
+                <Input placeholder="날짜 추가" value={checkOutValue} />
               </CheckInput>
             </CheckWrapper>
             <Guest
@@ -60,7 +101,8 @@ function InfoSideBar() {
             >
               <div>
                 <span>인원</span>
-                <span>게스트 1명</span>
+                <span>{`게스트 ${headCount}명`}</span>
+                <span>{petCount > 0 ? `, 반려동물 ${petCount}마리` : ''}</span>
               </div>
               <FaAngleDown />
             </Guest>
@@ -68,6 +110,10 @@ function InfoSideBar() {
           <SideBarHeadCount
             open={CountModalOpen}
             close={handleCountModalClose}
+            headCount={headCount}
+            petCount={petCount}
+            handleHeadCount={handleHeadCount}
+            handlePetCount={handlePetCount}
           />
           <Button type="button">예약하기</Button>
         </Form>
@@ -159,15 +205,16 @@ const Guest = styled.div`
   align-items: center;
   padding: 10px;
   cursor: pointer;
-  span:first-child {
-    display: block;
-    font-size: 12px;
-    font-weight: 500;
-    padding: 5px 0;
-  }
-  span:last-child {
+  span {
     font-size: 14px;
     color: rgba(0, 0, 0, 0.5);
+  }
+  span:first-child {
+    display: block;
+    padding: 5px 0;
+    font-size: 12px;
+    font-weight: 500;
+    color: black;
   }
 `;
 
