@@ -75,17 +75,19 @@ export default function Hosting5() {
           <button className="exit-button">나가기</button>
         </Header>
         <Body>
-          <Text2>특별히 내세울만한 편의시설이 있나요?</Text2>
-          <Convenience>
-            {convenience.map((el, index) => {
-              return (
-                <TextAndIcon key={el.id}>
-                  <Icon>{selectIcon(el.icon)}</Icon>
-                  <Text3>{el.convenience}</Text3>
-                </TextAndIcon>
-              );
-            })}
-          </Convenience>
+          <TextAndConvenience>
+            <Text2>특별히 내세울만한 편의시설이 있나요?</Text2>
+            <Convenience>
+              {convenience.map((el, index) => {
+                return (
+                  <TextAndIcon key={el.id}>
+                    <Icon>{selectIcon(el.icon)}</Icon>
+                    <Text3>{el.convenience}</Text3>
+                  </TextAndIcon>
+                );
+              })}
+            </Convenience>
+          </TextAndConvenience>
         </Body>
         <Footer>
           <p>뒤로</p>
@@ -164,30 +166,22 @@ const Header = styled.section`
 
 const Body = styled.section`
   width: 100%;
-  margin: 55px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 `;
 
-const Button = styled.button`
-  background-color: white;
-  border-radius: 10px;
-  border: 1px solid rgba(155, 149, 167, 0.44);
-  font-size: 18px;
-  font-weight: 500;
-  text-align: left;
-  padding: 32px;
-  width: 65%;
-  margin: 8px;
+const Text2 = styled.div`
+  font-size: 35px;
+  font-weight: bold;
+  margin-right: auto;
+`;
+
+const TextAndConvenience = styled.div`
   display: flex;
+  flex-direction: column;
   align-items: center;
-  justify-content: space-between;
-  .img-wrapper {
-    height: 100%;
-    width: 20px;
-  }
-  img {
-    width: 100%;
-    height: 100%;
-  }
 `;
 
 const Footer = styled.section`
@@ -218,16 +212,11 @@ const Footer = styled.section`
   }
 `;
 
-const Text2 = styled.div`
-  font-size: 35px;
-  font-weight: bold;
-  margin: 14px;
-`;
-
 const Convenience = styled.div`
   display: grid;
   grid-template-columns: repeat(3, 0fr);
   margin: 50px 0;
+  width: fit-content;
 `;
 
 const TextAndIcon = styled.div`

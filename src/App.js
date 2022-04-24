@@ -5,6 +5,7 @@ import Detail from './pages/Detail/Detail';
 import Hosting from './pages/Hosting/Hosting';
 
 import Hosting5 from './pages/Hosting/Hosting5';
+import Hosting6 from './pages/Hosting/Hosting6';
 
 import Footer from './components/Footer';
 import Nav from './components/Nav/Nav';
@@ -22,6 +23,7 @@ function App() {
         <Route path="/hosting" element={<Hosting />} />
 
         <Route path="/hosting/5" element={<Hosting5 />} />
+        <Route path="/hosting/6" element={<Hosting6 />} />
         <Route path="/management" element={<Management />} />
         <Route path="/reservation" element={<Reservation />} />
       </Routes>
