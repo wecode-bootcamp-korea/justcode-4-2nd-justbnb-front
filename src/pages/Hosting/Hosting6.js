@@ -19,7 +19,14 @@ export default function Hosting6() {
           <button className="exit-button">나가기</button>
         </Header>
         <Body>
-          <NoPicture>여기로 사진을 끌어다 놓으세요.</NoPicture>
+          <Line>
+            <PictureIcon>
+              <AiOutlinePicture />
+            </PictureIcon>
+            <Text2>여기로 사진을 끌어다 놓으세요.</Text2>
+            <Text3>5장 이상의 사진을 올리세요.</Text3>
+            <Text4>기기에서 업로드</Text4>
+          </Line>
         </Body>
         <Footer>
           <p>뒤로</p>
@@ -98,30 +105,7 @@ const Header = styled.section`
 
 const Body = styled.section`
   width: 100%;
-  margin: 55px;
-`;
-
-const Button = styled.button`
-  background-color: white;
-  border-radius: 10px;
-  border: 1px solid rgba(155, 149, 167, 0.44);
-  font-size: 18px;
-  font-weight: 500;
-  text-align: left;
-  padding: 32px;
-  width: 65%;
-  margin: 8px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  .img-wrapper {
-    height: 100%;
-    width: 20px;
-  }
-  img {
-    width: 100%;
-    height: 100%;
-  }
+  margin: auto;
 `;
 
 const Footer = styled.section`
@@ -152,6 +136,36 @@ const Footer = styled.section`
   }
 `;
 
-const NoPicture = styled.div`
-  border: 1px doted black;
+const Text2 = styled.div`
+  font-size: 30px;
+  font-weight: bold;
+`;
+
+const Line = styled.div`
+  /* border: 1px dashed rgb(176, 176, 176) !important; */
+  outline: 1px dashed rgb(176, 176, 176) !important;
+  /* outline: 1px dashed black; */
+  width: fit-content;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  padding: 350px 150px 0 150px;
+  margin: auto;
+`;
+
+const PictureIcon = styled.div`
+  font-size: 80px;
+`;
+
+const Text3 = styled.div`
+  font-size: 22px;
+  margin: 12px;
+`;
+
+const Text4 = styled.div`
+  font-size: 20px;
+  font-weight: bold;
+  margin-top: 250px;
+  margin-bottom: 100px;
+  text-decoration: underline;
 `;
