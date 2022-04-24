@@ -17,11 +17,8 @@ const Img = styled.img`
   height: 180px;
 `;
 const TextBox = styled.div`
+  margin-top: 15px;
   padding-top: 10px;
-  padding-left: 20px;
-`;
-const TextBox2 = styled.div`
-  padding-top: 5px;
   padding-left: 20px;
 `;
 const P = styled.p`
@@ -32,4 +29,4 @@ const P = styled.p`
   text-overflow: ellipsis;
   overflow: hidden;
 `;
-export { Wrap, Img, TextBox, TextBox2, P };
+export { Wrap, Img, TextBox, P };

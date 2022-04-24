@@ -1,156 +1,303 @@
 [
   {
     "id": 1,
-    "name": "인사동 빌라",
     "members": "5",
     "convenient_id": [1, 3, 4],
     "build_type": "아파트",
-    "image": "/images/thump/home1.jpg",
+    "image": [
+      "/images/thump/home1.jpg",
+      "/images/thump/home2.jpg",
+      "/images/thump/home3.jpg"
+    ],
     "lat": 37.55538051135069,
     "long": 126.97355140988027,
-    "desc": "인사동에서 내가 제일 잘나가~핫피플이라면 무조건 여기다 여기!"
+    "name": "인사동에서 내가 제일 잘나가~핫피플이라면 무조건 여기다 여기!",
+    "local": "서울"
   },
   {
     "id": 2,
-    "name": "빵빵주택",
     "members": "2",
     "convenient_id": [1, 4, 5],
     "build_type": "주택",
-    "image": "/images/thump/home2.jpg",
+    "image": [
+      "/images/thump/home2.jpg",
+      "/images/thump/home1.jpg",
+      "/images/thump/home4.jpg"
+    ],
     "lat": 37.50590348861693,
     "long": 126.95019141078933,
-    "desc": "빵빵하게 제대로 숙박해보고싶다면?! 바로 여기 빵빵 주택!!"
+    "name": "빵빵하게 제대로 숙박해보고싶다면?! 바로 여기 빵빵 주택!!",
+    "local": "서울"
   },
   {
     "id": 3,
-    "name": "민지네 숙소",
     "members": "6",
     "convenient_id": [2, 3],
     "build_type": "독특한 숙소",
-    "image": "/images/thump/home3.jpg",
+    "image": [
+      "/images/thump/home3.jpg",
+      "/images/thump/home1.jpg",
+      "/images/thump/home4.jpg"
+    ],
     "lat": 37.57293346799279,
     "long": 127.01827044999308,
-    "desc": "열쩡넘치는 숙소주인 민지님의 케어를 받고 싶다면 여기로 오세요!"
+    "name": "열쩡넘치는 숙소주인 민지님의 케어를 받고 싶다면 여기로 오세요!",
+    "local": "서울"
   },
   {
     "id": 4,
-    "name": "혜원 아파트",
     "members": "6",
     "convenient_id": [1, 2, 3, 4],
     "build_type": "아파트",
-    "image": "/images/thump/home4.jpg",
+    "image": [
+      "/images/thump/home4.jpg",
+      "/images/thump/home1.jpg",
+      "/images/thump/home5.jpg"
+    ],
     "lat": 37.56638464352463,
     "long": 126.99946800745194,
-    "desc": "아파트의 세련됨을 느끼고싶다면 그곳은 바로 여기!!!"
+    "name": "아파트의 세련됨을 느끼고싶다면 그곳은 바로 여기!!!",
+    "local": "서울"
   },
   {
     "id": 5,
-    "name": "의택 별채",
     "members": "5",
     "convenient_id": [1, 4],
     "build_type": "별채",
-    "image": "/images/thump/home5.jpg",
+    "image": [
+      "/images/thump/home5.jpg",
+      "/images/thump/home1.jpg",
+      "/images/thump/home4.jpg"
+    ],
     "lat": 37.56431221305604,
     "long": 127.00576120649784,
-    "desc": "새로운 경험을 하고싶으신가요? 그렇다면 의택별채입니다."
+    "name": "새로운 경험을 하고싶으신가요? 그렇다면 의택별채입니다.",
+    "local": "서울"
   },
   {
     "id": 6,
-    "name": "정민정민 아파트",
     "members": "5",
     "convenient_id": [1, 2, 3, 4, 5, 6],
     "build_type": "아파트",
-    "image": "/images/thump/home6.jpg",
+    "image": [
+      "/images/thump/home6.jpg",
+      "/images/thump/home1.jpg",
+      "/images/thump/home4.jpg"
+    ],
     "lat": 37.55364402861663,
     "long": 127.01107374631505,
-    "desc": "금싸라기 땅에 지어진 고급 아파트, 이곳에서 머물러볼 행운을 잡을 사람은 누구???!"
+    "name": "금싸라기 땅에 지어진 고급 아파트, 이곳에서 머물러볼 행운을 잡을 사람은 누구???!",
+    "local": "서울"
   },
   {
     "id": 7,
-    "name": "의리의리한 슬기's 저택",
     "members": "4",
     "convenient_id": [1, 2, 3, 4, 6],
     "build_type": "주택",
-    "image": "/images/thump/home7.jpg",
+    "image": [
+      "/images/thump/home7.jpg",
+      "/images/thump/home1.jpg",
+      "/images/thump/home4.jpg"
+    ],
     "lat": 37.55609289752076,
     "long": 126.92333571125994,
-    "desc": "의리의리한 저택에 의리의리한 저택주인 슬기님과의 만남을 원한다면 바로 여기!"
+    "name": "의리의리한 저택에 의리의리한 저택주인 슬기님과의 만남을 원한다면 바로 여기!",
+    "local": "서울"
   },
   {
     "id": 8,
-    "name": "먼지날리는 민박",
     "members": "3",
     "convenient_id": [1, 5],
     "build_type": "독특한 숙소",
-    "image": "/images/thump/home8.jpg",
+    "image": [
+      "/images/thump/home8.jpg",
+      "/images/thump/home1.jpg",
+      "/images/thump/home4.jpg"
+    ],
     "lat": 37.56950064949044,
     "long": 126.96253258177477,
-    "desc": "우리 가게 정상 영업 합니다!!!!"
+    "name": "우리 가게 정상 영업 합니다!!!!",
+    "local": "서울"
   },
   {
     "id": 9,
-    "name": "지호네 휴양지",
     "members": "2",
     "convenient_id": [3, 4, 6],
     "build_type": "별채",
-    "image": "/images/thump/home9.jpg",
+    "image": [
+      "/images/thump/home9.jpg",
+      "/images/thump/home1.jpg",
+      "/images/thump/home4.jpg"
+    ],
     "lat": 37.56440527759331,
     "long": 126.98007910412308,
-    "desc": "사진만 보고 판단하지 마세요 와이파이도 되는 최신시설이 갖춰진 휴양지입니다!"
+    "name": "사진만 보고 판단하지 마세요 와이파이도 되는 최신시설이 갖춰진 휴양지입니다!",
+    "local": "서울"
   },
   {
     "id": 10,
-    "name": "xxx 호스텔",
     "members": "8",
     "convenient_id": [1, 3, 4],
     "build_type": "아파트",
-    "image": "/images/thump/home10.jpg",
+    "image": [
+      "/images/thump/home10.jpg",
+      "/images/thump/home1.jpg",
+      "/images/thump/home4.jpg"
+    ],
     "lat": 37.5605319278269,
     "long": 126.9867351810532,
-    "desc": "호스텔하면 여기지~~~~~호텔 버금가는 호스텔, xxx호스텔로 오세요"
+    "name": "호스텔하면 여기지~~~~~호텔 버금가는 호스텔, xxx호스텔로 오세요",
+    "local": "서울"
   },
   {
     "id": 11,
-    "name": "시설좋은 홍길동 콘도",
     "members": "5",
     "convenient_id": [4],
     "build_type": "별채",
-    "image": "/images/thump/home11.jpg",
+    "image": [
+      "/images/thump/home11.jpg",
+      "/images/thump/home1.jpg",
+      "/images/thump/home4.jpg"
+    ],
     "lat": 37.56087490168228,
     "long": 126.99404664952024,
-    "desc": "길동이가 운영하는 홍길동 콘도로 오세요!"
+    "name": "길동이가 운영하는 홍길동 콘도로 오세요!",
+    "local": "서울"
   },
   {
     "id": 12,
-    "name": "와르르 멘션",
     "members": "5",
     "convenient_id": [1, 3, 4],
     "build_type": "아파트",
-    "image": "/images/thump/home12.jpg",
+    "image": [
+      "/images/thump/home12.jpg",
+      "/images/thump/home1.jpg",
+      "/images/thump/home4.jpg"
+    ],
     "lat": 37.5604243619444,
     "long": 127.00672294465915,
-    "desc": "50년전에 지어져 와르르 무너질것같은 멘션이지만 아직 무너지지 않았습니다."
+    "name": "50년전에 지어져 와르르 무너질것같은 멘션이지만 아직 무너지지 않았습니다.",
+    "local": "서울"
   },
   {
     "id": 13,
-    "name": "한번쯤 묵어볼만한 집",
     "members": "1",
     "convenient_id": [1, 2, 3, 4],
     "build_type": "별채",
-    "image": "/images/thump/home13.jpg",
+    "image": [
+      "/images/thump/home13.jpg",
+      "/images/thump/home1.jpg",
+      "/images/thump/home4.jpg"
+    ],
     "lat": 37.55305395688476,
     "long": 126.98983735739364,
-    "desc": "일단 한번 묵어봐~~~후회없는 선택!"
+    "name": "일단 한번 묵어봐~~~후회없는 선택!",
+    "local": "서울"
   },
   {
     "id": 14,
-    "name": "거미줄 있는 집",
     "members": "3",
     "convenient_id": [1, 6],
     "build_type": "독특한 숙소",
-    "image": "/images/thump/home14.jpg",
+    "image": [
+      "/images/thump/home14.jpg",
+      "/images/thump/home1.jpg",
+      "/images/thump/home4.jpg"
+    ],
     "lat": 37.54767102029982,
     "long": 126.91382744919558,
-    "desc": "거미도 소중한 생명체 입니다."
+    "name": "거미도 소중한 생명체 입니다.",
+    "local": "서울"
+  },
+
+  {
+    "id": 15,
+    "members": "2",
+    "convenient_id": [3, 4, 6],
+    "build_type": "별채",
+    "image": [
+      "/images/thump/home9.jpg",
+      "/images/thump/home1.jpg",
+      "/images/thump/home4.jpg"
+    ],
+    "lat": 35.18020680110019,
+    "long": 129.07555173235392,
+    "name": "사진만 보고 판단하지 마세요 와이파이도 되는 최신시설이 갖춰진 휴양지입니다!",
+    "local": "부산"
+  },
+  {
+    "id": 16,
+    "members": "8",
+    "convenient_id": [1, 3, 4],
+    "build_type": "아파트",
+    "image": [
+      "/images/thump/home10.jpg",
+      "/images/thump/home1.jpg",
+      "/images/thump/home4.jpg"
+    ],
+    "lat": 35.18683786764674,
+    "long": 129.08193332167176,
+    "name": "호스텔하면 여기지~~~~~호텔 버금가는 호스텔, xxx호스텔로 오세요",
+    "local": "부산"
+  },
+  {
+    "id": 17,
+    "members": "5",
+    "convenient_id": [4],
+    "build_type": "별채",
+    "image": [
+      "/images/thump/home11.jpg",
+      "/images/thump/home1.jpg",
+      "/images/thump/home4.jpg"
+    ],
+    "lat": 35.18548234118603,
+    "long": 129.07795809734992,
+    "name": "길동이가 운영하는 홍길동 콘도로 오세요!",
+    "local": "부산"
+  },
+  {
+    "id": 18,
+    "members": "5",
+    "convenient_id": [1, 3, 4],
+    "build_type": "아파트",
+    "image": [
+      "/images/thump/home12.jpg",
+      "/images/thump/home1.jpg",
+      "/images/thump/home4.jpg"
+    ],
+    "lat": 35.19166291830593,
+    "long": 129.06803812575117,
+    "name": "50년전에 지어져 와르르 무너질것같은 멘션이지만 아직 무너지지 않았습니다.",
+    "local": "부산"
+  },
+  {
+    "id": 19,
+    "members": "1",
+    "convenient_id": [1, 4, 5],
+    "build_type": "별채",
+    "image": [
+      "/images/thump/home13.jpg",
+      "/images/thump/home1.jpg",
+      "/images/thump/home4.jpg"
+    ],
+    "lat": 35.177062858191285,
+    "long": 129.08597540084915,
+    "name": "일단 한번 묵어봐~~~후회없는 선택!",
+    "local": "부산"
+  },
+  {
+    "id": 20,
+    "members": "3",
+    "convenient_id": [1, 6],
+    "build_type": "독특한 숙소",
+    "image": [
+      "/images/thump/home14.jpg",
+      "/images/thump/home1.jpg",
+      "/images/thump/home4.jpg"
+    ],
+    "lat": 35.17255394030103,
+    "long": 129.07146102320647,
+    "name": "거미도 소중한 생명체 입니다.",
+    "local": "부산"
   }
 ]
