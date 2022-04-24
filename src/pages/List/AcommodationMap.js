@@ -121,7 +121,7 @@ function MapContainer({
         width: '100%',
         height: '600px',
         position: 'sticky',
-        top: '365px',
+        top: '360px',
         left: '50%',
       });
     } else {
