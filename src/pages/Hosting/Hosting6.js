@@ -1,4 +1,41 @@
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
+import { AiOutlinePicture } from 'react-icons/ai';
+
+export default function Hosting6() {
+  return (
+    <Wrapper>
+      <Container>
+        <Text1>
+          숙소 편의시설 정보를 추가해
+          <br />
+          주세요.
+        </Text1>
+      </Container>
+
+      <Container2>
+        <Header>
+          <button className="help-button">도움말</button>
+          <button className="exit-button">나가기</button>
+        </Header>
+        <Body>
+          <Line>
+            <PictureIcon>
+              <AiOutlinePicture />
+            </PictureIcon>
+            <Text2>여기로 사진을 끌어다 놓으세요.</Text2>
+            <Text3>5장 이상의 사진을 올리세요.</Text3>
+            <Text4>기기에서 업로드</Text4>
+          </Line>
+        </Body>
+        <Footer>
+          <p>뒤로</p>
+          <button className="next-button">다음</button>
+        </Footer>
+      </Container2>
+    </Wrapper>
+  );
+}
 
 const Wrapper = styled.div`
   width: 100%;
@@ -18,21 +55,12 @@ const Container = styled.section`
   display: flex;
   align-items: center;
   line-height: 3.5em;
-  position: relative;
-  img {
-    width: 80px;
-    height: 70px;
-    position: absolute;
-    top: 0;
-    margin-top: 30px;
-    margin-left: 40px;
-  }
 `;
 
 const Text1 = styled.div`
   color: white;
-  font-weight: 530;
-  font-size: 48.5px;
+  font-weight: bold;
+  font-size: 50px;
   margin-left: 55px;
 `;
 
@@ -55,7 +83,6 @@ const Header = styled.section`
   display: flex;
   justify-content: flex-end;
   margin-top: 10px;
-  z-index: 1;
   .help-button {
     font-size: 12px;
     font-weight: 500;
@@ -63,8 +90,7 @@ const Header = styled.section`
     border-radius: 20px;
     margin-right: 15px;
     border: 1px solid rgba(155, 149, 167, 0);
-    background-color: black;
-    color: white;
+    background-color: rgba(155, 149, 167, 0.1);
   }
   .exit-button {
     font-size: 12px;
@@ -73,61 +99,18 @@ const Header = styled.section`
     border-radius: 20px;
     margin-right: 30px;
     border: 1px solid rgba(155, 149, 167, 0);
-    background-color: black;
-    color: white;
-    &:hover {
-      cursor: pointer;
-    }
+    background-color: rgba(155, 149, 167, 0.1);
   }
 `;
 
 const Body = styled.section`
-  /* height: 80%; */
   width: 100%;
-  /* border: 1px solid blue; */
-  display: flex;
-  margin-top: 15px;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-`;
-
-// const Map = styled.div`
-//   z-index: 0;
-// `;
-
-const ButtonTextWrapper = styled.button`
-  z-index: 1;
-  background-color: white;
-  border-radius: 50px;
-  border: 1px solid rgba(155, 149, 167, 0.44);
-  font-size: 16px;
-  font-weight: 700;
-  text-align: left;
-  padding: 18px;
-  width: 80%;
-  margin-top: 65px;
-  display: flex;
-  align-items: center;
-  /* color: grey; */
-`;
-
-const Icon = styled.div`
-  margin-right: 10px;
-  margin-left: 10px;
-  font-size: 25px;
-  margin-top: 5px;
-`;
-
-const Text2 = styled.div`
-  margin-left: 14px;
-  color: grey;
+  margin: auto;
 `;
 
 const Footer = styled.section`
   padding: 15px;
   width: 100%;
-  /* border: 1px solid red; */
   position: absolute;
   bottom: 0;
   display: flex;
@@ -153,15 +136,36 @@ const Footer = styled.section`
   }
 `;
 
-export {
-  Container,
-  Text1,
-  Container2,
-  Header,
-  Body,
-  ButtonTextWrapper,
-  Icon,
-  Text2,
-  Footer,
-  Wrapper,
-};
+const Text2 = styled.div`
+  font-size: 30px;
+  font-weight: bold;
+`;
+
+const Line = styled.div`
+  /* border: 1px dashed rgb(176, 176, 176) !important; */
+  outline: 1px dashed rgb(176, 176, 176) !important;
+  /* outline: 1px dashed black; */
+  width: fit-content;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  padding: 350px 150px 0 150px;
+  margin: auto;
+`;
+
+const PictureIcon = styled.div`
+  font-size: 80px;
+`;
+
+const Text3 = styled.div`
+  font-size: 22px;
+  margin: 12px;
+`;
+
+const Text4 = styled.div`
+  font-size: 20px;
+  font-weight: bold;
+  margin-top: 250px;
+  margin-bottom: 100px;
+  text-decoration: underline;
+`;

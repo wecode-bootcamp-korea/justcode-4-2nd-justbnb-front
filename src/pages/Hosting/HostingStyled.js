@@ -91,6 +91,12 @@ const Button = styled.button`
   display: flex;
   align-items: center;
   justify-content: space-between;
+  &:hover {
+    border: 2px solid black;
+    /* outline-offset: -3px; */
+    /* box-shadow: 0 0 0 2px #333 inset;*/
+    cursor: pointer;
+  }
   .img-wrapper {
     /* padding: 30px; */
     /* height: 100%; */

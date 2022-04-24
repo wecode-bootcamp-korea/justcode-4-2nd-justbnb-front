@@ -18,15 +18,6 @@ const Container = styled.section`
   display: flex;
   align-items: center;
   line-height: 3.5em;
-  position: relative;
-  img {
-    width: 80px;
-    height: 70px;
-    position: absolute;
-    top: 0;
-    margin-top: 30px;
-    margin-left: 40px;
-  }
 `;
 
 const Text1 = styled.div`
@@ -55,7 +46,6 @@ const Header = styled.section`
   display: flex;
   justify-content: flex-end;
   margin-top: 10px;
-  z-index: 1;
   .help-button {
     font-size: 12px;
     font-weight: 500;
@@ -63,8 +53,7 @@ const Header = styled.section`
     border-radius: 20px;
     margin-right: 15px;
     border: 1px solid rgba(155, 149, 167, 0);
-    background-color: black;
-    color: white;
+    background-color: rgba(155, 149, 167, 0.1);
   }
   .exit-button {
     font-size: 12px;
@@ -73,11 +62,7 @@ const Header = styled.section`
     border-radius: 20px;
     margin-right: 30px;
     border: 1px solid rgba(155, 149, 167, 0);
-    background-color: black;
-    color: white;
-    &:hover {
-      cursor: pointer;
-    }
+    background-color: rgba(155, 149, 167, 0.1);
   }
 `;
 
@@ -92,37 +77,36 @@ const Body = styled.section`
   justify-content: center;
 `;
 
-// const Map = styled.div`
-//   z-index: 0;
+// const CounterWrapper = styled.section`
+//   border: 1px solid black;
 // `;
 
-const ButtonTextWrapper = styled.button`
-  z-index: 1;
-  background-color: white;
-  border-radius: 50px;
-  border: 1px solid rgba(155, 149, 167, 0.44);
-  font-size: 16px;
-  font-weight: 700;
-  text-align: left;
-  padding: 18px;
-  width: 80%;
-  margin-top: 65px;
-  display: flex;
-  align-items: center;
-  /* color: grey; */
-`;
-
-const Icon = styled.div`
-  margin-right: 10px;
-  margin-left: 10px;
-  font-size: 25px;
-  margin-top: 5px;
-`;
-
 const Text2 = styled.div`
-  margin-left: 14px;
-  color: grey;
+  color: red;
 `;
+
+// const Button = styled.button`
+//   background-color: white;
+//   border-radius: 10px;
+//   border: 1px solid rgba(155, 149, 167, 0.44);
+//   font-size: 18px;
+//   font-weight: 500;
+//   text-align: left;
+//   padding: 32px;
+//   width: 65%;
+//   margin: 8px;
+//   display: flex;
+//   align-items: center;
+//   justify-content: space-between;
+//   .img-wrapper {
+//     height: 100%;
+//     width: 20px;
+//   }
+//   img {
+//     width: 100%;
+//     height: 100%;
+//   }
+// `;
 
 const Footer = styled.section`
   padding: 15px;
@@ -153,15 +137,4 @@ const Footer = styled.section`
   }
 `;
 
-export {
-  Container,
-  Text1,
-  Container2,
-  Header,
-  Body,
-  ButtonTextWrapper,
-  Icon,
-  Text2,
-  Footer,
-  Wrapper,
-};
+export { Container, Text1, Container2, Header, Body, Text2, Footer, Wrapper };
