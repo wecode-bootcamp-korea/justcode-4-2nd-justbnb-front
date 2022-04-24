@@ -50,10 +50,10 @@ const Accommodation = React.memo(function Accommodation({
             <BlankDiv />
 
             <hr width="30px" align="left" size="1" styles="color:gray" />
-            <GrayText>최대인원 {data.members}명</GrayText>
+            <GrayText>최대인원 {data.total_members}명</GrayText>
             <WrapConv>
-              {data.convenient_id.map((conv, index) => (
-                <GrayText key={index}>{convention[Number(conv - 1)]}</GrayText>
+              {data.convenience_name.map((conv, index) => (
+                <GrayText key={index}>{conv}</GrayText>
               ))}
             </WrapConv>
           </Inner>
