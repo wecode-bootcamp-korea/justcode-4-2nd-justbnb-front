@@ -127,6 +127,10 @@ const Button = styled.button`
   display: flex;
   align-items: center;
   justify-content: space-between;
+  &:hover {
+    border: 2px solid black;
+    cursor: pointer;
+  }
   .but-name {
     padding: 30px;
   }

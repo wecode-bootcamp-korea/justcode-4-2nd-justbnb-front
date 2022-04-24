@@ -1,5 +1,33 @@
-import { BsFileX } from 'react-icons/bs';
+import React from 'react';
 import styled from 'styled-components';
+import CounterValue3 from './Component/Counter3';
+
+export default function Hosting9() {
+  return (
+    <Wrapper>
+      <Container>
+        <Text1>이제 요금을 설정하실 차례입니다</Text1>
+      </Container>
+
+      <Container2>
+        <Header>
+          <button className="help-button">도움말</button>
+          <button className="exit-button">나가기</button>
+        </Header>
+        <Body>
+          <PriceBox>
+            <CounterValue3 />
+          </PriceBox>
+          <Text2>/박</Text2>
+        </Body>
+        <Footer>
+          <p>뒤로</p>
+          <button className="next-button">다음</button>
+        </Footer>
+      </Container2>
+    </Wrapper>
+  );
+}
 
 const Wrapper = styled.div`
   width: 100%;
@@ -25,7 +53,7 @@ const Text1 = styled.div`
   color: white;
   font-weight: 530;
   font-size: 48.5px;
-  margin-left: 55px;
+  margin-left: 20px;
 `;
 
 const Container2 = styled.section`
@@ -72,47 +100,56 @@ const Body = styled.section`
   width: 100%;
   /* border: 1px solid blue; */
   display: flex;
-  margin-top: 15px;
+  margin-top: 50px;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  text-align: center;
 `;
 
-const Button = styled.button`
+// const CounterWrapper = styled.section`
+//   border: 1px solid black;
+// `;
+
+const PriceBox = styled.div`
   background-color: white;
   border-radius: 10px;
   border: 1px solid rgba(155, 149, 167, 0.44);
-  font-size: 17.5px;
-  font-weight: 500;
-  text-align: left;
+  font-size: 50px;
+  font-weight: 600;
+  text-align: center;
   /* padding: 32px; */
   width: 65%;
-  margin: 8px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  &:hover {
-    border: 2px solid black;
-    /* outline-offset: -3px; */
-    /* box-shadow: 0 0 0 2px #333 inset;*/
-    cursor: pointer;
-  }
-  .img-wrapper {
-    /* padding: 30px; */
-    /* height: 100%; */
-    margin: 10px;
-  }
-  .but-name {
-    margin-left: 18px;
-  }
-  img {
-    /* padding: 30px; */
-    width: 55px;
-    height: 55px;
-    border-radius: 5px;
-    margin-top: 5px;
-  }
+  padding: 30px;
 `;
+
+const Text2 = styled.div`
+  margin-top: 15px;
+  font-size: 16px;
+`;
+
+// const Button = styled.button`
+//   background-color: white;
+//   border-radius: 10px;
+//   border: 1px solid rgba(155, 149, 167, 0.44);
+//   font-size: 18px;
+//   font-weight: 500;
+//   text-align: left;
+//   padding: 32px;
+//   width: 65%;
+//   margin: 8px;
+//   display: flex;
+//   align-items: center;
+//   justify-content: space-between;
+//   .img-wrapper {
+//     height: 100%;
+//     width: 20px;
+//   }
+//   img {
+//     width: 100%;
+//     height: 100%;
+//   }
+// `;
 
 const Footer = styled.section`
   padding: 15px;
@@ -142,5 +179,3 @@ const Footer = styled.section`
     background-color: black;
   }
 `;
-
-export { Container, Text1, Container2, Header, Body, Button, Footer, Wrapper };

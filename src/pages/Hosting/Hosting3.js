@@ -34,6 +34,7 @@ export default function Hosting3() {
         </Header>
         <Body>
           <Map
+            className="map"
             center={{
               lat: 37.56610344059421,
               lng: 126.97884488662002,

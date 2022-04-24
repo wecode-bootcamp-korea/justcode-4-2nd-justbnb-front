@@ -1,5 +1,6 @@
 import React from 'react';
-import CounterValue from '../../components/Hosting/Counter';
+import CounterValue from './Component/Counter';
+import CounterValue2 from './Component/Counter2';
 import {
   Text1,
   Container,
@@ -31,7 +32,7 @@ export default function Hosting4() {
           <Text2>게스트</Text2>
           <CounterValue />
           <Text2>반려동물</Text2>
-          <CounterValue />
+          <CounterValue2 />
         </Body>
         <Footer>
           <p>뒤로</p>

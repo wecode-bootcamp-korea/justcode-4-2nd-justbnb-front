@@ -92,9 +92,7 @@ const Body = styled.section`
   justify-content: center;
 `;
 
-// const Map = styled.div`
-//   z-index: 0;
-// `;
+const Map = styled.div``;
 
 const ButtonTextWrapper = styled.button`
   z-index: 1;
@@ -159,6 +157,7 @@ export {
   Container2,
   Header,
   Body,
+  Map,
   ButtonTextWrapper,
   Icon,
   Text2,
