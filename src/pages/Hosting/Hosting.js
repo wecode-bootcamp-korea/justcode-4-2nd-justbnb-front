@@ -28,14 +28,29 @@ export default function Hosting() {
         </Header>
         <Body>
           <Button>
-            <div>아파트</div>
+            <div className="but-name">아파트</div>
             <div className="img-wrapper">
               <img src="/images/thump/home10.jpg" />
             </div>
           </Button>
-          <Button>주택</Button>
-          <Button>별채</Button>
-          <Button>독특한 숙소</Button>
+          <Button>
+            <div className="but-name">주택</div>
+            <div className="img-wrapper">
+              <img src="/images/thump/home3.jpg" />
+            </div>
+          </Button>
+          <Button>
+            <div className="but-name">별채</div>
+            <div className="img-wrapper">
+              <img src="/images/thump/home14.jpg" />
+            </div>
+          </Button>
+          <Button>
+            <div className="but-name">독특한 숙소</div>
+            <div className="img-wrapper">
+              <img src="/images/thump/home1.jpg" />
+            </div>
+          </Button>
         </Body>
         <Footer>
           <p>뒤로</p>

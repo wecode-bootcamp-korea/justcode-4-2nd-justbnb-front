@@ -1,4 +1,3 @@
-import { BsFileX } from 'react-icons/bs';
 import styled from 'styled-components';
 
 const Wrapper = styled.div`
@@ -78,35 +77,36 @@ const Body = styled.section`
   justify-content: center;
 `;
 
-const Button = styled.button`
-  background-color: white;
-  border-radius: 10px;
-  border: 1px solid rgba(155, 149, 167, 0.44);
-  font-size: 17.5px;
-  font-weight: 500;
-  text-align: left;
-  /* padding: 32px; */
-  width: 65%;
-  margin: 8px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  .img-wrapper {
-    /* padding: 30px; */
-    /* height: 100%; */
-    margin: 10px;
-  }
-  .but-name {
-    margin-left: 18px;
-  }
-  img {
-    /* padding: 30px; */
-    width: 55px;
-    height: 55px;
-    border-radius: 5px;
-    margin-top: 5px;
-  }
+// const CounterWrapper = styled.section`
+//   border: 1px solid black;
+// `;
+
+const Text2 = styled.div`
+  color: red;
 `;
+
+// const Button = styled.button`
+//   background-color: white;
+//   border-radius: 10px;
+//   border: 1px solid rgba(155, 149, 167, 0.44);
+//   font-size: 18px;
+//   font-weight: 500;
+//   text-align: left;
+//   padding: 32px;
+//   width: 65%;
+//   margin: 8px;
+//   display: flex;
+//   align-items: center;
+//   justify-content: space-between;
+//   .img-wrapper {
+//     height: 100%;
+//     width: 20px;
+//   }
+//   img {
+//     width: 100%;
+//     height: 100%;
+//   }
+// `;
 
 const Footer = styled.section`
   padding: 15px;
@@ -137,4 +137,4 @@ const Footer = styled.section`
   }
 `;
 
-export { Container, Text1, Container2, Header, Body, Button, Footer, Wrapper };
+export { Container, Text1, Container2, Header, Body, Text2, Footer, Wrapper };
