@@ -4,6 +4,7 @@ import Main from './pages/Main/Main';
 import Detail from './pages/Detail/Detail';
 import Hosting from './pages/Hosting/Hosting';
 
+import Hosting3 from './pages/Hosting/Hosting3';
 import Hosting5 from './pages/Hosting/Hosting5';
 import Hosting6 from './pages/Hosting/Hosting6';
 import Hosting7 from './pages/Hosting/Hosting7';
@@ -24,6 +25,7 @@ function App() {
         <Route path="/detail" element={<Detail />} />
         <Route path="/hosting" element={<Hosting />} />
 
+        <Route path="/hosting/3" element={<Hosting3 />} />
         <Route path="/hosting/5" element={<Hosting5 />} />
         <Route path="/hosting/6" element={<Hosting6 />} />
         <Route path="/hosting/7" element={<Hosting7 />} />
