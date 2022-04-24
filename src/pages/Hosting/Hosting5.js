@@ -171,13 +171,6 @@ const Body = styled.section`
   align-items: center;
 `;
 
-const Text2 = styled.div`
-  font-size: 22px;
-  font-weight: bold;
-  margin-right: auto;
-  margin-left: 14px;
-`;
-
 const TextAndConvenience = styled.div`
   display: flex;
   width: fit-content;
@@ -214,6 +207,13 @@ const Footer = styled.section`
     border: 1px solid rgba(155, 149, 167, 0.1);
     background-color: black;
   }
+`;
+
+const Text2 = styled.div`
+  font-size: 22px;
+  font-weight: bold;
+  margin-right: auto;
+  margin-left: 14px;
 `;
 
 const Convenience = styled.div`

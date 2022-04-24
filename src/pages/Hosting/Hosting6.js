@@ -135,37 +135,38 @@ const Footer = styled.section`
     background-color: black;
   }
 `;
-
-const Text2 = styled.div`
-  font-size: 30px;
-  font-weight: bold;
-`;
-
 const Line = styled.div`
   /* border: 1px dashed rgb(176, 176, 176) !important; */
   outline: 1px dashed rgb(176, 176, 176) !important;
   /* outline: 1px dashed black; */
   width: fit-content;
+  height: fit-content;
   display: flex;
   align-items: center;
   flex-direction: column;
-  padding: 350px 150px 0 150px;
-  margin: auto;
+  /* padding: 350px 150px 0 150px; */
+  padding: 12vw 5vw 1vw 5vw;
+  margin: auto auto 7vw auto;
 `;
 
 const PictureIcon = styled.div`
-  font-size: 80px;
+  font-size: 5vw;
+`;
+
+const Text2 = styled.div`
+  font-size: 1.7vw;
+  font-weight: bold;
 `;
 
 const Text3 = styled.div`
-  font-size: 22px;
+  font-size: 1.5vw;
   margin: 12px;
 `;
 
 const Text4 = styled.div`
-  font-size: 20px;
+  font-size: 1vw;
   font-weight: bold;
-  margin-top: 250px;
-  margin-bottom: 100px;
+  margin-top: 7vw;
+  margin-bottom: 3vw;
   text-decoration: underline;
 `;
