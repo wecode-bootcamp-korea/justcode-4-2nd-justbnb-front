@@ -39,12 +39,14 @@ const ToggleBox = styled.div`
   background: #ffffff;
   border-radius: 10px;
   list-style: none;
+  box-shadow: 2px 2px 10px #dddddd;
 `;
 
 const ToggleList = styled.li`
   margin: 10px 0;
   padding: 15px;
   font-size: 14px;
+  color: black;
 
   &:hover {
     background-color: rgb(247, 247, 247);

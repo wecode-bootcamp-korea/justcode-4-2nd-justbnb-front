@@ -8,7 +8,7 @@ import LogoutToggle from './LogoutToggle';
 import LoginModal from '../Modal/LoginModal';
 import SignupModal from '../Modal/SignupModal';
 
-function UserNav() {
+function UserNav({ scrollPosition }) {
   const [openToggle, setOpenToggle] = useState({ display: 'none' });
   const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
   const [isSignupModalOpen, setIsSignupModalOpen] = useState(false);
@@ -34,12 +34,33 @@ function UserNav() {
   return (
     <div>
       <Navbar>
-        <Link to="/hosting" style={{ textDecoration: 'none' }}>
-          <Buttons>호스트 되기</Buttons>
-        </Link>
-        <Buttons>
-          <CgGlobeAlt fontSize={20} style={{ opacity: '0.5' }} />
-        </Buttons>
+        {scrollPosition < 100 ? (
+          <>
+            <Link to="/hosting" style={{ textDecoration: 'none' }}>
+              <Buttons color="#ffffff" background="#262626">
+                호스트 되기
+              </Buttons>
+            </Link>
+            <Buttons background="#262626">
+              <CgGlobeAlt
+                fontSize={20}
+                style={{ opacity: '0.5' }}
+                color="#ffffff"
+              />
+            </Buttons>
+          </>
+        ) : (
+          <>
+            <Link to="/hosting" style={{ textDecoration: 'none' }}>
+              <Buttons color="black" background="#F7F7F7">
+                호스트 되기
+              </Buttons>
+            </Link>
+            <Buttons color="black" background="#F7F7F7">
+              <CgGlobeAlt fontSize={20} style={{ opacity: '0.5' }} />
+            </Buttons>
+          </>
+        )}
         <UserBox onClick={toggleHandler}>
           <StyledIcon>
             <GiHamburgerMenu fontSize={16} />
@@ -98,15 +119,20 @@ const Buttons = styled.li`
   align-items: center;
   margin: 0 5px;
   padding: 15px;
-  color: #ffffff;
+  color: ${props => props.color};
   border-radius: 22px;
-  font-weight: 400;
+  font-weight: 600;
   font-size: 14px;
 
   &: hover {
-    color: #dddddd;
     cursor: pointer;
-    background: #262626;
+    background: ${props => props.background};
+  }
+
+  &:nth-child(1) {
+    &:hover {
+      color: #dddddd;
+    }
   }
 `;
 

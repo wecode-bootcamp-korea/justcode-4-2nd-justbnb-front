@@ -10,10 +10,9 @@ function Nav() {
   const updateScroll = () => {
     setScrollPosition(window.scrollY || document.documentElement.scrollTop);
   };
-
   useEffect(() => {
     window.addEventListener('scroll', updateScroll);
-  });
+  }, []);
 
   return (
     <Box>
@@ -23,40 +22,43 @@ function Nav() {
             저스트비앤비의 코로나 19 대응 방안에 대한 최신 정보를 확인하세요.
           </Aside>
         )}
-        <Container>
-          <Link to="/" style={{ textDecoration: 'none' }}>
-            {scrollPosition < 100 ? (
+
+        <Link to="/" style={{ textDecoration: 'none' }}>
+          {scrollPosition < 100 ? (
+            <Container>
               <img
                 alt="main-logo"
                 src={`${process.env.PUBLIC_URL}/images/로고화이트.png`}
                 width="150"
                 style={{ cursor: 'pointer' }}
               />
-            ) : (
+
+              <Wrapper>
+                <Menu>숙소</Menu>
+                <DisableMenu>체험</DisableMenu>
+                <DisableMenu>온라인 체험</DisableMenu>
+              </Wrapper>
+              <UserNav scrollPosition={scrollPosition} />
+            </Container>
+          ) : (
+            <Container color="#ffffff">
               <img
                 alt="main-logo"
                 src={`${process.env.PUBLIC_URL}/images/로고핑크.png`}
                 width="150"
                 style={{ cursor: 'pointer' }}
               />
-            )}
-          </Link>
-          {scrollPosition < 100 ? (
-            <Wrapper>
-              <Menu>숙소</Menu>
-              <DisableMenu>체험</DisableMenu>
-              <DisableMenu>온라인 체험</DisableMenu>
-            </Wrapper>
-          ) : (
-            <SearchBtn>
-              <Text>검색 시작하기</Text>
-              <div>
-                <BiSearch font-size={20} />
-              </div>
-            </SearchBtn>
+              <SearchBtn>
+                <Text>검색 시작하기</Text>
+                <BtnBox>
+                  <BiSearch font-size={20} />
+                </BtnBox>
+              </SearchBtn>
+              <UserNav scrollPosition={scrollPosition} />
+            </Container>
           )}
-          <UserNav />
-        </Container>
+        </Link>
+
         <SearchBar
           scrollPosition={scrollPosition}
           updateScroll={updateScroll}
@@ -88,7 +90,7 @@ const Aside = styled.aside`
   }
 `;
 
-const moveTop = keyframes`
+const move = keyframes`
 0%{
   opacity:0;
   top:-200px;
@@ -106,7 +108,7 @@ const Header = styled.header`
   margin: 0 auto;
   background: black;
 
-  animation: ${moveTop} 0.3s linear forwards;
+  animation: ${move} 0.3s linear forwards;
 `;
 
 const Container = styled.div`
@@ -114,6 +116,7 @@ const Container = styled.div`
   justify-content: space-between;
   align-items: center;
   padding: 0 70px;
+  background-color: ${props => props.color};
 `;
 
 const Wrapper = styled.div`
@@ -150,7 +153,8 @@ const DisableMenu = styled.div`
 `;
 
 const Text = styled.div`
-  padding-right: 100px;
+  padding-right: 200px;
+  color: black;
   font-weight: 500;
   font-size: 0.9rem;
 `;
@@ -158,10 +162,22 @@ const Text = styled.div`
 const SearchBtn = styled.button`
   display: flex;
   align-items: center;
-  padding: 15px 10px 15px 20px;
+  padding: 10px 10px 10px 20px;
+  color: #ffffff;
   border-radius: 30px;
   border: 1px solid #dddddd;
   background-color: #ffffff;
+  box-shadow: 2px 2px 10px #dddddd;
+
+  &:hover {
+    cursor: pointer;
+  }
+`;
+
+const BtnBox = styled.div`
+  padding: 7px 7px 5px 7px;
+  border-radius: 50%;
+  background-color: #ff385c;
 `;
 
 export default Nav;

@@ -61,9 +61,14 @@ function SearchBar({ scrollPosition, updateScroll }) {
 }
 
 const Container = styled.div`
-  display: flex;
+  display: fixed;
   justify-content: center;
-  padding-bottom: 10px;
+
+  top: -header.height;
+  width: 100%;
+  transition: top 0.3s;
+  margin: 0 auto;
+  background: black;
 `;
 
 const SearchWrapper = styled.div`

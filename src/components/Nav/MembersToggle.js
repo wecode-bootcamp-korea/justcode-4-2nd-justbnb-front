@@ -40,6 +40,7 @@ const Container = styled.div`
   padding: 10px;
   background-color: #ffffff;
   border-radius: 20px;
+  box-shadow: 2px 2px 10px #dddddd;
   font-size: 0.8rem;
 `;
 
