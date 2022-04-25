@@ -1,16 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
-import { AiOutlinePicture } from 'react-icons/ai';
 
-export default function Hosting6() {
+export default function Hosting7() {
+  const [textlength, setTextLength] = useState(0);
+
   return (
     <Wrapper>
       <Container>
-        <Text1>
-          이제 숙소 사진을 올릴
-          <br />
-          차례입니다.
-        </Text1>
+        <Text1>숙소 이름을 만들어주세요.</Text1>
       </Container>
 
       <Container2>
@@ -19,14 +16,15 @@ export default function Hosting6() {
           <button className="exit-button">나가기</button>
         </Header>
         <Body>
-          <Line>
-            <PictureIcon>
-              <AiOutlinePicture />
-            </PictureIcon>
-            <Text2>여기로 사진을 끌어다 놓으세요.</Text2>
-            <Text3>5장 이상의 사진을 올리세요.</Text3>
-            <Text4>기기에서 업로드</Text4>
-          </Line>
+          <TextAndInput>
+            <Text2>숙소 이름 정하기</Text2>
+            <Input
+              onKeyUp={e => setTextLength(e.target.value.length)}
+              maxLength={49}
+              placeholder="숙소 이름을 적어주세요."
+            />
+            <TextLength>{textlength} / 50</TextLength>
+          </TextAndInput>
         </Body>
         <Footer>
           <p>뒤로</p>
@@ -106,6 +104,9 @@ const Header = styled.section`
 const Body = styled.section`
   width: 100%;
   margin: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `;
 
 const Footer = styled.section`
@@ -135,39 +136,34 @@ const Footer = styled.section`
     background-color: black;
   }
 `;
-const Line = styled.div`
-  /* border: 1px dashed rgb(176, 176, 176) !important; */
-  outline: 1px dashed rgb(176, 176, 176) !important;
-  /* outline: 1px dashed black; */
-  width: fit-content;
-  height: fit-content;
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-  /* padding: 350px 150px 0 150px; */
-  padding: 12vw 5vw 1vw 5vw;
-  margin: auto auto 7vw auto;
-`;
 
-const PictureIcon = styled.div`
-  font-size: 5vw;
+const TextAndInput = styled.div`
+  /* width: fit-content;
+  height: fit-content; */
+  display: flex;
+  flex-direction: column;
 `;
 
 const Text2 = styled.div`
-  font-size: 1.7vw;
-  font-weight: bold;
-`;
-
-const Text3 = styled.div`
   font-size: 1.5vw;
-  margin: 12px;
+  font-weight: bold;
+  margin: auto auto auto 0;
 `;
 
-const Text4 = styled.div`
+const Input = styled.textarea`
+  display: flex;
+  margin: 1vw 0;
+  padding: 1.5vw;
+  font-size: 1.1vw;
+  min-width: 30vw;
+  max-width: 30vw;
+  height: 20vh;
+  max-height: 50vh;
+  border: 2px solid rgba(0, 0, 0, 0.2);
+  border-radius: 10px;
+  /* font-weight: bold; */
+`;
+
+const TextLength = styled.div`
   font-size: 1vw;
-  font-weight: bold;
-  margin-top: 7vw;
-  margin-bottom: 3vw;
-  text-decoration: underline;
-  cursor: pointer;
 `;

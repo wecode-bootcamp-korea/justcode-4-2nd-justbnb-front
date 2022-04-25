@@ -136,9 +136,6 @@ const Container2 = styled.section`
 `;
 
 const Header = styled.section`
-  /* position: absolute;
-  top: 0; */
-  /* border: 1px solid red; */
   width: 100%;
   padding: 20px;
   display: flex;
@@ -168,18 +165,18 @@ const Body = styled.section`
   width: 100%;
   margin: 0 auto;
   display: flex;
+  padding: auto;
+  justify-content: center;
   flex-direction: column;
   align-items: center;
 `;
 
-const Text2 = styled.div`
-  font-size: 35px;
-  font-weight: bold;
-  margin-right: auto;
-`;
-
 const TextAndConvenience = styled.div`
   display: flex;
+  width: fit-content;
+  /* height: fit-content; */
+  margin: auto;
+  /* padding: auto; */
   flex-direction: column;
   align-items: center;
 `;
@@ -212,6 +209,13 @@ const Footer = styled.section`
   }
 `;
 
+const Text2 = styled.div`
+  font-size: 22px;
+  font-weight: bold;
+  margin-right: auto;
+  margin-left: 14px;
+`;
+
 const Convenience = styled.div`
   display: grid;
   grid-template-columns: repeat(3, 0fr);
@@ -230,11 +234,10 @@ const TextAndIcon = styled.div`
   justify-content: center;
   flex-direction: column;
   align-items: center;
-  width: 250px;
-  height: fit-content;
-  font-size: 30px;
-  font-weight: bolder;
-  padding: 40px;
+  /* width: 120% !important; */
+  width: 14vw;
+  /* height: fit-content; */
+  padding: 3vw;
   border: 1px solid rgba(0, 0, 0, 0.2);
   border-radius: 25px;
   margin: 15px;
