@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 
-export default function Hosting2() {
+export default function Hosting2({ onChange, resultChoice }) {
   return (
     <Wrapper>
       <Container>
@@ -18,20 +18,17 @@ export default function Hosting2() {
           <button className="exit-button">나가기</button>
         </Header>
         <Body>
-          <Button>
+          <Button id="2" onClick={e => onChange(e)} value="공간 전체">
             <div className="but-name">공간 전체</div>
           </Button>
-          <Button>
+          <Button id="2" onClick={e => onChange(e)} value="개인실">
             <div className="but-name">개인실</div>
           </Button>
-          <Button>
+          <Button id="2" onClick={e => onChange(e)} value="다인실">
             <div className="but-name">다인실</div>
           </Button>
         </Body>
-        <Footer>
-          <p>뒤로</p>
-          <button className="next-button">다음</button>
-        </Footer>
+        <Footer />
       </Container2>
     </Wrapper>
   );
@@ -121,7 +118,7 @@ const Button = styled.button`
   align-items: center;
   justify-content: space-between;
   &:hover {
-    border: 2px solid black;
+    outline: 1.5px solid black;
     cursor: pointer;
   }
   .but-name {
@@ -138,21 +135,4 @@ const Footer = styled.section`
   justify-content: space-between;
   background-color: white;
   align-items: center;
-  border-top: 2px solid rgba(155, 149, 167, 0.2);
-  p {
-    text-decoration: underline;
-    font-size: 16px;
-    font-weight: 500;
-    margin-left: 30px;
-  }
-  .next-button {
-    font-size: 16px;
-    font-weight: 400;
-    color: white;
-    padding: 13px 23px;
-    margin-right: 30px;
-    border-radius: 8px;
-    border: 1px solid rgba(155, 149, 167, 0.1);
-    background-color: black;
-  }
 `;

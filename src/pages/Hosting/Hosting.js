@@ -1,5 +1,17 @@
 import React from 'react';
 import styled from 'styled-components';
+import { useState } from 'react';
+
+// const Say = () => {
+//   const [message, setMessage] = useState('');
+
+//   const onClickEnter = () => setMessage('Enter');
+//   const onClickLeave = () => setMessage('Leave');
+
+//   const handleClick = (event) => {
+//     const getStyleAttr = event.target.getAttribute("style");
+//     const message = document.getElementById("message");
+// };
 
 export default function Hosting({ onChange, resultChoice }) {
   return (
@@ -47,10 +59,7 @@ export default function Hosting({ onChange, resultChoice }) {
             </div>
           </Button>
         </Body>
-        <Footer>
-          <p>뒤로</p>
-          <button className="next-button">다음</button>
-        </Footer>
+        <Footer />
       </Container2>
     </Wrapper>
   );
@@ -58,6 +67,7 @@ export default function Hosting({ onChange, resultChoice }) {
 
 const Wrapper = styled.div`
   width: 100%;
+  height: 100%;
   display: flex;
 `;
 
@@ -85,11 +95,13 @@ const Text1 = styled.div`
 
 const Container2 = styled.section`
   width: 50%;
-  min-height: 100vh;
+  /* border: 5px solid green; */
+  height: 80vh;
   position: relative;
   display: flex;
   flex-wrap: wrap;
   flex-direction: column;
+  z-index: 999;
 `;
 
 const Header = styled.section`
@@ -140,7 +152,7 @@ const Button = styled.button`
   align-items: center;
   justify-content: space-between;
   &:hover {
-    border: 2px solid black;
+    outline: 1.5px solid black;
     cursor: pointer;
   }
   .img-wrapper {
@@ -166,8 +178,8 @@ const Footer = styled.section`
   justify-content: space-between;
   background-color: white;
   align-items: center;
-  border-top: 2px solid rgba(155, 149, 167, 0.2);
-  p {
+  /* border-top: 2px solid rgba(155, 149, 167, 0.2); */
+  /* p {
     text-decoration: underline;
     font-size: 16px;
     font-weight: 500;
@@ -182,5 +194,5 @@ const Footer = styled.section`
     border-radius: 8px;
     border: 1px solid rgba(155, 149, 167, 0.1);
     background-color: black;
-  }
+  } */
 `;

@@ -40,10 +40,7 @@ export default function Hosting4() {
             <CounterValue2 />
           </PetCount>
         </Body>
-        <Footer>
-          <p>뒤로</p>
-          <button className="next-button">다음</button>
-        </Footer>
+        <Footer />
       </Container2>
     </Wrapper>
   );

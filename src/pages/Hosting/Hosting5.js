@@ -79,7 +79,7 @@ export default function Hosting5({ onChange, resultChoice }) {
           <Convenience onClick={e => onChange(e)}>
             {convenience.map((el, index) => {
               return (
-                <TextAndIcon key={el.id} id="2" value={el.convenience}>
+                <TextAndIcon key={el.id} id="3" value={el.convenience}>
                   <Icon>{selectIcon(el.icon)}</Icon>
                   <Text3>{el.convenience}</Text3>
                 </TextAndIcon>
@@ -87,10 +87,7 @@ export default function Hosting5({ onChange, resultChoice }) {
             })}
           </Convenience>
         </Body>
-        <Footer>
-          <p>뒤로</p>
-          <button className="next-button">다음</button>
-        </Footer>
+        <Footer />
       </Container2>
     </Wrapper>
   );
@@ -187,23 +184,6 @@ const Footer = styled.section`
   justify-content: space-between;
   background-color: white;
   align-items: center;
-  border-top: 2px solid rgba(155, 149, 167, 0.2);
-  p {
-    text-decoration: underline;
-    font-size: 16px;
-    font-weight: 500;
-    margin-left: 30px;
-  }
-  .next-button {
-    font-size: 16px;
-    font-weight: 400;
-    color: white;
-    padding: 13px 23px;
-    margin-right: 30px;
-    border-radius: 8px;
-    border: 1px solid rgba(155, 149, 167, 0.1);
-    background-color: black;
-  }
 `;
 
 const Text2 = styled.div`
