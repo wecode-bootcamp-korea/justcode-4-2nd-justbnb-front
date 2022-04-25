@@ -35,7 +35,7 @@ function LogoutToggle({ openToggle, loginModalHandler, signupModalHandler }) {
 
 const ToggleBox = styled.div`
   position: absolute;
-  width: 15em;
+  width: 15rem;
   background: #ffffff;
   border-radius: 10px;
   list-style: none;

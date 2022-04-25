@@ -2,19 +2,18 @@ import React, { useState } from 'react';
 import { GiHamburgerMenu } from 'react-icons/gi';
 import { RiUser3Line } from 'react-icons/ri';
 import { CgGlobeAlt } from 'react-icons/cg';
-import { BiSearch } from 'react-icons/bi';
 import { Link } from 'react-router-dom';
 import styled, { css } from 'styled-components';
 import LogoutToggle from './LogoutToggle';
 import LoginModal from '../Modal/LoginModal';
 import SignupModal from '../Modal/SignupModal';
+import SearchBar from './SearchBar';
 // import LoginToggle from './LoginToggle';
 
 function Nav() {
   const [openToggle, setOpenToggle] = useState({ display: 'none' });
   const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
   const [isSignupModalOpen, setIsSignupModalOpen] = useState(false);
-  const [highlightBtn, setHighlightBtn] = useState();
 
   const toggleHandler = () => {
     openToggle.display === 'none'
@@ -34,10 +33,6 @@ function Nav() {
     setOpenToggle({ display: display });
   };
 
-  const onClickBar = () => {
-    setHighlightBtn({});
-  };
-
   return (
     <>
       <Aside>
@@ -49,6 +44,7 @@ function Nav() {
             alt="main-logo"
             src={`${process.env.PUBLIC_URL}/images/로고화이트.png`}
             width="150"
+            style={{ cursor: 'pointer' }}
           />
           <Wrapper>
             <Menu>숙소</Menu>
@@ -80,30 +76,7 @@ function Nav() {
             {/* {token && <LoginToggle showToggle={showToggle} />} */}
           </div>
         </Container>
-        <SearchBarWrapper>
-          <SearchBar>
-            <SearchInner>
-              <SearchKeyword>위치</SearchKeyword>
-              <Input placeholder="어디로 여행가세요?" />
-            </SearchInner>
-            <SearchInner>
-              <SearchKeyword>체크인</SearchKeyword>
-              <Input placeholder="날짜 입력" />
-            </SearchInner>
-            <SearchInner>
-              <SearchKeyword>체크아웃</SearchKeyword>
-              <Input placeholder="날짜 입력" />
-            </SearchInner>
-            <SearchInner>
-              <SearchKeyword>인원</SearchKeyword>
-              <Input placeholder="게스트 추가" />
-            </SearchInner>
-            <SearchBtns>
-              <BiSearch font-size={20} />
-              <SearchKeyword2>검색</SearchKeyword2>
-            </SearchBtns>
-          </SearchBar>
-        </SearchBarWrapper>
+        <SearchBar />
       </Header>
       {isLoginModalOpen && <LoginModal loginModalHandler={loginModalHandler} />}
       {isSignupModalOpen && (
@@ -114,12 +87,12 @@ function Nav() {
 }
 
 const Aside = styled.aside`
-  padding: 16px 0;
+  padding: 20px 0;
   background: black;
   color: #ffffff;
   text-align: center;
   text-decoration: underline;
-  font-size: 15px;
+  font-size: 0.9rem;
   font-weight: 400;
 
   &: hover {
@@ -138,12 +111,12 @@ const Container = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 30px;
+  padding: 0 70px;
 `;
 
 const Wrapper = styled.div`
   display: flex;
-  padding-left: 60px;
+  padding-left: 80px;
 `;
 
 const styledMenu = css`
@@ -207,7 +180,7 @@ const Buttons = styled.li`
   display: flex;
   align-items: center;
   margin: 0 5px;
-  padding: 10px;
+  padding: 15px;
   color: #ffffff;
   border-radius: 22px;
   font-weight: 400;
@@ -217,68 +190,6 @@ const Buttons = styled.li`
     color: #dddddd;
     cursor: pointer;
     background: #262626;
-  }
-`;
-
-const SearchBarWrapper = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-`;
-
-const SearchBar = styled.div`
-  display: flex;
-  align-items: center;
-  padding-right: 10px;
-  background-color: #ffffff;
-  border-radius: 40px;
-`;
-
-const SearchInner = styled.div`
-  display: flex;
-  flex-direction: column;
-  padding: 15px 30px 15px 25px;
-  background-color: #ffffff;
-  border-radius: 40px;
-
-  &: hover {
-    background: #ebebeb;
-    cursor: pointer;
-  }
-`;
-
-const SearchBtns = styled.div`
-  display: flex;
-  align-items: center;
-  padding: 15px 15px;
-  background: linear-gradient(
-    to right,
-    rgb(230, 30, 77) 0%,
-    rgb(227, 28, 95) 50%,
-    rgb(215, 4, 102) 100%
-  );
-  color: #ffffff;
-  border-radius: 40px;
-`;
-
-const SearchKeyword = styled.div`
-  padding-left: 5px;
-  padding-bottom: 5px;
-  font-size: 0.8em;
-  font-weight: 600;
-`;
-
-const SearchKeyword2 = styled.div`
-  padding-left: 5px;
-  font-size: 1em;
-`;
-
-const Input = styled.input`
-  border: none;
-  background: none;
-
-  &:focus {
-    outline: none;
   }
 `;
 export default Nav;
