@@ -76,15 +76,10 @@ export default function Hosting5({ onChange, resultChoice }) {
         </Header>
         <Body>
           <Text2>특별히 내세울만한 편의시설이 있나요?</Text2>
-          <Convenience>
+          <Convenience onClick={e => onChange(e)}>
             {convenience.map((el, index) => {
               return (
-                <TextAndIcon
-                  key={el.id}
-                  onClick={e => onChange(e)}
-                  id="2"
-                  value={el.convenience}
-                >
+                <TextAndIcon key={el.id} id="2" value={el.convenience}>
                   <Icon>{selectIcon(el.icon)}</Icon>
                   <Text3>{el.convenience}</Text3>
                 </TextAndIcon>
