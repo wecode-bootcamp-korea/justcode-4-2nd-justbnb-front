@@ -7,7 +7,7 @@ import { MdPersonalVideo } from 'react-icons/md';
 import { FaParking } from 'react-icons/fa';
 import { GiBathtub } from 'react-icons/gi';
 
-export default function Hosting5() {
+export default function Hosting5({ onChange, resultChoice }) {
   const [convenience, setConvenience] = useState([]);
 
   // 조건문 사용 시 예시
@@ -18,7 +18,7 @@ export default function Hosting5() {
   //     return <GiBarbecue />;
   //   }
   // }
-
+  console.log('ddddd', resultChoice);
   function selectIcon(el) {
     let result;
     switch (el) {
@@ -97,7 +97,6 @@ export default function Hosting5() {
     </Wrapper>
   );
 }
-
 const Wrapper = styled.div`
   width: 100%;
   display: flex;
@@ -223,7 +222,7 @@ const Convenience = styled.div`
   width: fit-content;
 `;
 
-const TextAndIcon = styled.div`
+const TextAndIcon = styled.button`
   &:hover {
     outline: 3px solid black;
     /* outline-offset: -3px; */

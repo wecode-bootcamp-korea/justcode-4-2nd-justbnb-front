@@ -1,9 +1,15 @@
 import React from 'react';
 import Footer from '../../components/Footer';
 import styled from 'styled-components';
+import Nav from '../../components/Nav/Nav';
 
 function Main() {
-  return <Container />;
+  return (
+    <>
+      <Nav />
+      <Footer />
+    </>
+  );
 }
 
 const Container = styled.div`
