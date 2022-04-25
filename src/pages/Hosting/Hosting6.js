@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { AiOutlinePicture } from 'react-icons/ai';
-import Hosting5 from './Hosting5';
-import Hosting7 from './Hosting7';
+import { Link } from 'react-router-dom';
 
 export default function Hosting6() {
   // const [step, setStep] = useState(1);
@@ -20,12 +19,6 @@ export default function Hosting6() {
   //       return;
   //   }
   // }
-
-  function test() {
-    console.log('asdf');
-    return <Hosting5 />;
-  }
-
   return (
     <Wrapper>
       <Container>
@@ -52,8 +45,8 @@ export default function Hosting6() {
           </Line>
         </Body>
         <Footer>
-          <Prev>뒤로</Prev>
-          <Next>다음</Next>
+          <Prev to="/hosting/5">뒤로</Prev>
+          <Next to="/hosting/7">다음</Next>
         </Footer>
       </Container2>
     </Wrapper>
@@ -143,14 +136,15 @@ const Footer = styled.section`
   border-top: 2px solid rgba(155, 149, 167, 0.2);
 `;
 
-const Prev = styled.div`
-  text-decoration: underline;
+const Prev = styled(Link)`
+  text-decoration: none;
   font-size: 16px;
   font-weight: 500;
   margin-left: 30px;
 `;
 
-const Next = styled.div`
+const Next = styled(Link)`
+  text-decoration: none;
   font-size: 16px;
   font-weight: 400;
   color: white;
