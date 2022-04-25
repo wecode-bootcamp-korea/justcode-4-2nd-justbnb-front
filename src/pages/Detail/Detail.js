@@ -224,7 +224,7 @@ function Detail() {
             <div>정확성</div>
             <div className="wrapper">
               <div className="ratingBar">
-                <div className="rating"></div>
+                <div className="rating" />
               </div>
               <div>4.5</div>
             </div>
@@ -233,7 +233,7 @@ function Detail() {
             <div>의사소통</div>
             <div className="wrapper">
               <div className="ratingBar">
-                <div className="rating"></div>
+                <div className="rating" />
               </div>
               <div>4.5</div>
             </div>
@@ -242,7 +242,7 @@ function Detail() {
             <div>위치</div>
             <div className="wrapper">
               <div className="ratingBar">
-                <div className="rating"></div>
+                <div className="rating" />
               </div>
               <div>4.5</div>
             </div>
@@ -251,7 +251,7 @@ function Detail() {
             <div>체크인</div>
             <div className="wrapper" ㄴ>
               <div className="ratingBar">
-                <div className="rating"></div>
+                <div className="rating" />
               </div>
               <div>4.5</div>
             </div>
@@ -260,7 +260,7 @@ function Detail() {
             <div>가격 대비 만족도</div>
             <div className="wrapper">
               <div className="ratingBar">
-                <div className="rating"></div>
+                <div className="rating" />
               </div>
               <div>4.5</div>
             </div>

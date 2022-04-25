@@ -13,7 +13,7 @@ function LoginToggle({ openToggle }) {
 }
 
 const ToggleBox = styled.div`
-  position: sticky;
+  position: absolute;
   width: 15em;
   background: #ffffff;
   border-radius: 10px;
