@@ -1,8 +1,31 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { AiOutlinePicture } from 'react-icons/ai';
+import Hosting5 from './Hosting5';
+import Hosting7 from './Hosting7';
 
 export default function Hosting6() {
+  // const [step, setStep] = useState(1);
+
+  // function GotoStep({ step, onChange, result }) {
+  //   switch (step) {
+  //     case 1:
+  //       return <Hosting5 />;
+  //       break;
+  //     case 2:
+  //       return <Hosting7 />;
+  //       break;
+  //     default:
+  //       console.log('default!');
+  //       return;
+  //   }
+  // }
+
+  function test() {
+    console.log('asdf');
+    return <Hosting5 />;
+  }
+
   return (
     <Wrapper>
       <Container>
@@ -29,8 +52,8 @@ export default function Hosting6() {
           </Line>
         </Body>
         <Footer>
-          <p>뒤로</p>
-          <button className="next-button">다음</button>
+          <Prev>뒤로</Prev>
+          <Next>다음</Next>
         </Footer>
       </Container2>
     </Wrapper>
@@ -118,23 +141,26 @@ const Footer = styled.section`
   background-color: white;
   align-items: center;
   border-top: 2px solid rgba(155, 149, 167, 0.2);
-  p {
-    text-decoration: underline;
-    font-size: 16px;
-    font-weight: 500;
-    margin-left: 30px;
-  }
-  .next-button {
-    font-size: 16px;
-    font-weight: 400;
-    color: white;
-    padding: 13px 23px;
-    margin-right: 30px;
-    border-radius: 8px;
-    border: 1px solid rgba(155, 149, 167, 0.1);
-    background-color: black;
-  }
 `;
+
+const Prev = styled.div`
+  text-decoration: underline;
+  font-size: 16px;
+  font-weight: 500;
+  margin-left: 30px;
+`;
+
+const Next = styled.div`
+  font-size: 16px;
+  font-weight: 400;
+  color: white;
+  padding: 13px 23px;
+  margin-right: 30px;
+  border-radius: 8px;
+  border: 1px solid rgba(155, 149, 167, 0.1);
+  background-color: black;
+`;
+
 const Line = styled.div`
   /* border: 1px dashed rgb(176, 176, 176) !important; */
   outline: 1px dashed rgb(176, 176, 176) !important;
