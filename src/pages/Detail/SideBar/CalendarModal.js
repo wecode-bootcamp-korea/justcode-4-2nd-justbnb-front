@@ -6,24 +6,33 @@ import 'react-datepicker/dist/react-datepicker.css';
 // import Calendar from '../../../components/Calendar/Calendar';
 
 function CalendarModal(props) {
-  const { start, end, change, deleteDate, dateDeleted } = props;
+  const { start, end, change, deleteDate, dateDiff, dateDeleted } = props;
   const [checkInValue, setCheckInValue] = useState(null);
   const [checkOutValue, setCheckOutValue] = useState(null);
+  const [checkInDate, setCheckInDate] = useState(0);
 
   useEffect(() => {
-    setCheckInValue(start);
+    setCheckInDate(dateDiff);
+  }, [dateDiff]);
+
+  useEffect(() => {
+    // setCheckInValue(start);
     // startDate가 null일 경우 렌더링이 되지 않는 오류 발생
     if (start !== null) {
-      let newStartDate = `${start.getFullYear()}.${start.getMonth()}.${start.getDate()}`;
+      let newStartDate = `${start.getFullYear()}.${
+        start.getMonth() + 1
+      }.${start.getDate()}`;
       setCheckInValue(newStartDate);
     }
   }, [start]);
 
   useEffect(() => {
-    setCheckOutValue(end);
+    // setCheckOutValue(end);
     // startDate가 null일 경우 렌더링이 되지 않는 오류 발생
     if (end !== null) {
-      let newEndDate = `${end.getFullYear()}.${end.getMonth()}.${end.getDate()}`;
+      let newEndDate = `${end.getFullYear()}.${
+        end.getMonth() + 1
+      }.${end.getDate()}`;
       setCheckOutValue(newEndDate);
     }
   }, [end]);
@@ -32,8 +41,17 @@ function CalendarModal(props) {
     <Wrapper style={{ display: props.open ? 'block' : 'none' }}>
       <Header>
         <Text>
-          <h2>날짜 선택</h2>
-          <span>여행 날짜를 입력하여 정확한 요금을 확인하세요.</span>
+          {/* <h2>날짜 선택</h2> */}
+          <h2>{end ? `${checkInDate}박` : '날짜 선택'}</h2>
+          <span>
+            {end
+              ? `${start.getFullYear()}년 ${
+                  start.getMonth() + 1
+                }월 ${start.getDate()}일 ~ ${end.getFullYear()}년 ${
+                  end.getMonth() + 1
+                }월 ${end.getDate()}일`
+              : '여행 날짜를 입력하여 정확한 요금을 확인하세요.'}
+          </span>
         </Text>
         <InputWrapper>
           <CheckIn>
@@ -61,6 +79,7 @@ function CalendarModal(props) {
           endDate={end}
           dateFormat="yyyy/MM/dd"
           monthsShown={2}
+          minDate={new Date()}
           selectsRange
           inline
         />

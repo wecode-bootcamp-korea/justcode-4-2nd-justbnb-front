@@ -5,7 +5,16 @@ import CalendarModal from './CalendarModal';
 import { FaStar, FaAngleDown } from 'react-icons/fa';
 
 function InfoSideBar(props) {
-  const { start, end, change, deleteDate, dateDeleted } = props;
+  const {
+    start,
+    end,
+    change,
+    deleteDate,
+    dateDiff,
+    dateDeleted,
+    charge,
+    total_members,
+  } = props;
 
   // 캘린더 모달 open 관리
   const [calendarModalOpen, setCalendarModalOpen] = useState(false);
@@ -26,7 +35,9 @@ function InfoSideBar(props) {
       ? setCheckInValue('')
       : setCheckInValue(
           start !== null
-            ? `${start.getFullYear()}.${start.getMonth()}.${start.getDate()}`
+            ? `${start.getFullYear()}.${
+                start.getMonth() + 1
+              }.${start.getDate()}`
             : null
         );
   }, [start]);
@@ -36,7 +47,7 @@ function InfoSideBar(props) {
       ? setCheckOutValue('')
       : setCheckOutValue(
           end !== null
-            ? `${end.getFullYear()}.${end.getMonth()}.${end.getDate()}`
+            ? `${end.getFullYear()}.${end.getMonth() + 1}.${end.getDate()}`
             : null
         );
   }, [end]);
@@ -55,8 +66,7 @@ function InfoSideBar(props) {
     <Section>
       <Wrapper>
         <Title>
-          요금을 확인하려면 날짜를 <br />
-          입력하세요.
+          {end ? `₩${charge} / 박` : `요금을 확인하려면 날짜를 입력하세요.`}
         </Title>
         <Text1>
           <div>
@@ -72,6 +82,7 @@ function InfoSideBar(props) {
           start={start}
           end={end}
           change={change}
+          dateDiff={dateDiff}
           deleteDate={deleteDate}
           dateDeleted={dateDeleted}
         />
@@ -107,6 +118,7 @@ function InfoSideBar(props) {
               <FaAngleDown />
             </Guest>
           </InputWrapper>
+
           <SideBarHeadCount
             open={CountModalOpen}
             close={handleCountModalClose}
@@ -114,9 +126,22 @@ function InfoSideBar(props) {
             petCount={petCount}
             handleHeadCount={handleHeadCount}
             handlePetCount={handlePetCount}
+            total_members={total_members}
           />
           <Button type="button">예약하기</Button>
         </Form>
+        <div style={{ display: end ? 'block' : 'none' }}>
+          <DetailPrice>
+            <div>
+              ₩{charge} x {dateDiff}박
+            </div>
+            <div>₩{charge * dateDiff}</div>
+          </DetailPrice>
+          <AmountPrice>
+            <div>총 합계</div>
+            <div>₩{charge * dateDiff}</div>
+          </AmountPrice>
+        </div>
       </Wrapper>
     </Section>
   );
@@ -166,6 +191,26 @@ const Form = styled.form`
 const InputWrapper = styled.div`
   border: 1px solid rgba(0, 0, 0, 0.2);
   border-radius: 10px;
+`;
+
+const DetailPrice = styled.div`
+  display: flex;
+  justify-content: space-between;
+  padding: 20px 0;
+  color: rgba(0, 0, 0, 0.8);
+  font-size: 16px;
+  div:first-child {
+    text-decoration: underline;
+  }
+`;
+
+const AmountPrice = styled.div`
+  display: flex;
+  justify-content: space-between;
+  padding: 20px 0;
+  border-top: 1px solid rgba(0, 0, 0, 0.2);
+  font-size: 18px;
+  font-weight: 500;
 `;
 
 const CheckWrapper = styled.div`

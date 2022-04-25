@@ -6,13 +6,16 @@ import { IoLocationOutline } from 'react-icons/io5';
 import { VscKey } from 'react-icons/vsc';
 import { BsBookmark } from 'react-icons/bs';
 
-function InfoText() {
+function InfoText(props) {
+  const { name, build_type, room_type, description, total_members } = props;
   return (
     <InfoTextWrapper>
       <InfoTitle>
         <Text>
-          <h2>수지님이 호스팅하는 콘도의 개인실</h2>
-          <span>최대 인원 1명 · 원룸침대 1개 · 욕실 1개</span>
+          <h2>
+            {name}님이 호스팅하는 {build_type}의 {room_type}
+          </h2>
+          <span>최대 인원 {total_members}명</span>
         </Text>
         <ImgBox>
           <img alt="user" src="/images/thump/user.jpeg" />
@@ -45,9 +48,7 @@ function InfoText() {
           </div>
         </List>
       </InfoPoint>
-      <InfoDescription>
-        명동역에서 5분거리에 위치한 게스트하우스입니다
-      </InfoDescription>
+      <InfoDescription>{description}</InfoDescription>
     </InfoTextWrapper>
   );
 }

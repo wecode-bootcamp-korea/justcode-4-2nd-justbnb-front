@@ -3,8 +3,15 @@ import { FaPlus, FaMinus } from 'react-icons/fa';
 import { useState } from 'react';
 
 function SideBarHeadCount(props) {
-  const { open, close, handleHeadCount, handlePetCount, headCount, petCount } =
-    props;
+  const {
+    open,
+    close,
+    handleHeadCount,
+    handlePetCount,
+    headCount,
+    petCount,
+    total_members,
+  } = props;
 
   return (
     <Wrapper style={{ display: open ? 'block' : 'none' }}>
@@ -23,10 +30,11 @@ function SideBarHeadCount(props) {
             </Button>
             <Num>{headCount}</Num>
             <Button
-              type="button"
               onClick={() => {
                 handleHeadCount(headCount + 1);
               }}
+              type="button"
+              disabled={headCount >= total_members ? 'disabled' : null}
             >
               <FaPlus className="icons" />
             </Button>

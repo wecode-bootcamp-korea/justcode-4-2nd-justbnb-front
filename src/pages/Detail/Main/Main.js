@@ -1,18 +1,35 @@
+import { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { FaStar, FaRegHeart } from 'react-icons/fa';
 
-function Main() {
+function Main(props) {
+  const [imageUrlArray, setImageUrlArray] = useState([]);
+  const { name, location } = props;
+
+  useEffect(() => {
+    fetch('/data/minji/accommodationsImages.json', {
+      method: 'GET',
+    })
+      .then(res => res.json())
+      .then(result => {
+        setImageUrlArray(result.accommodationsImages[0].image_url);
+      });
+  }, []);
+
+  useEffect(() => {
+    setImageUrlArray(imageUrlArray);
+  }, [imageUrlArray]);
+
   return (
     <Wrapper>
       <div>
-        <MainTitle>*명동역 도보5분* 123 Guesthouse Single room</MainTitle>
+        <MainTitle>{name}</MainTitle>
         <InfoWrapper>
           <BnbInfo>
             <div>
               <FaStar className="faStar" color="#ff385c" />
             </div>
-            <span>4.61</span>·<span>후기 33개</span>·
-            <span>중구, 서울, 한국</span>
+            <span>4.61</span>·<span>후기 33개</span>·<span>{location}</span>
           </BnbInfo>
           <div>
             <FaRegHeart className="icons" />
@@ -21,22 +38,22 @@ function Main() {
         </InfoWrapper>
         <ImgWrapper>
           <MainImgBox>
-            <img alt="main" src="/images/thump/home1.jpg" />
+            <img alt="main" src={imageUrlArray[0]} />
           </MainImgBox>
           <div>
             <MainImgBox>
-              <img alt="main" src="./images/thump/home1.jpg" />
+              <img alt="main" src={imageUrlArray[1]} />
             </MainImgBox>
             <MainImgBox>
-              <img alt="main" src="./images/thump/home1.jpg" />
+              <img alt="main" src={imageUrlArray[2]} />
             </MainImgBox>
           </div>
           <div>
             <MainImgBox>
-              <img alt="main" src="/images/thump/home1.jpg" />
+              <img alt="main" src={imageUrlArray[3]} />
             </MainImgBox>
             <MainImgBox>
-              <img alt="main" src="/images/thump/home1.jpg" />
+              <img alt="main" src={imageUrlArray[4]} />
             </MainImgBox>
           </div>
         </ImgWrapper>

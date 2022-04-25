@@ -1,37 +1,45 @@
+import { useState, useEffect } from 'react';
 import styled from 'styled-components';
 
 import { GiBarbecue } from 'react-icons/gi';
 import { FaSwimmingPool, FaWifi, FaTv, FaCar, FaBath } from 'react-icons/fa';
 
 function InfoConvenience() {
+  const [convenienceArray, setConvenienceArray] = useState([]);
+  // 숙소 편의시설 받아오기
+  useEffect(() => {
+    fetch('data/minji/accommodationsConvenience.json', {
+      method: 'GET',
+    }).then(res =>
+      res.json().then(result => {
+        setConvenienceArray(
+          result.accommodationsConvenience[0].convenience_name
+        );
+      })
+    );
+  }, []);
+
+  useEffect(() => {
+    setConvenienceArray(convenienceArray);
+  }, [convenienceArray]);
+
   return (
     <Wrapper>
       <Title>숙소 편의시설</Title>
       <ul>
-        <List>
-          <FaSwimmingPool className="icons" />
-          <span>수영장</span>
-        </List>
-        <List>
-          <GiBarbecue className="icons" />
-          <span>바비큐 그릴</span>
-        </List>
-        <List>
-          <FaWifi className="icons" />
-          <span>와이파이</span>
-        </List>
-        <List>
-          <FaTv className="icons" />
-          <span>TV</span>
-        </List>
-        <List>
-          <FaCar className="icons" />
-          <span>주차공간</span>
-        </List>
-        <List>
-          <FaBath className="icons" />
-          <span>욕조</span>
-        </List>
+        {convenienceArray.map(el => {
+          return (
+            <List>
+              {el == '수영장' ? <FaSwimmingPool className="icons" /> : null}
+              {el == '바비큐 그릴' ? <GiBarbecue className="icons" /> : null}
+              {el == '와이파이' ? <FaWifi className="icons" /> : null}
+              {el == 'TV' ? <FaTv className="icons" /> : null}
+              {el == '주차공간' ? <FaCar className="icons" /> : null}
+              {el == '욕조' ? <FaBath className="icons" /> : null}
+              <span>{el}</span>
+            </List>
+          );
+        })}
       </ul>
     </Wrapper>
   );
