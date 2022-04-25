@@ -9,6 +9,8 @@ import {
   Header,
   Footer,
   Body,
+  GuestCount,
+  PetCount,
   Text2,
 } from './Hosting4Styled';
 
@@ -29,10 +31,14 @@ export default function Hosting4() {
           <button className="exit-button">나가기</button>
         </Header>
         <Body>
-          <Text2>게스트</Text2>
-          <CounterValue />
-          <Text2>반려동물</Text2>
-          <CounterValue2 />
+          <GuestCount>
+            <Text2>게스트</Text2>
+            <CounterValue />
+          </GuestCount>
+          <PetCount>
+            <Text2>반려동물</Text2>
+            <CounterValue2 />
+          </PetCount>
         </Body>
         <Footer>
           <p>뒤로</p>

@@ -73,16 +73,31 @@ const Body = styled.section`
   display: flex;
   margin-top: 15px;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
+  font-size: 21px;
+  padding: 150px;
 `;
 
 // const CounterWrapper = styled.section`
 //   border: 1px solid black;
 // `;
 
+const GuestCount = styled.section`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+`;
+
+const PetCount = styled.section`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  padding-top: 40px;
+`;
+
 const Text2 = styled.div`
-  color: red;
+  font-size: 28px;
+  font-weight: 500;
+  margin-right: 280px;
 `;
 
 // const Button = styled.button`
@@ -137,4 +152,15 @@ const Footer = styled.section`
   }
 `;
 
-export { Container, Text1, Container2, Header, Body, Text2, Footer, Wrapper };
+export {
+  Container,
+  Text1,
+  Container2,
+  Header,
+  Body,
+  Text2,
+  GuestCount,
+  PetCount,
+  Footer,
+  Wrapper,
+};

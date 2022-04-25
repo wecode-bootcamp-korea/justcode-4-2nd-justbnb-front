@@ -13,15 +13,16 @@ import Hosting9 from './pages/Hosting/Hosting9';
 import Hosting7 from './pages/Hosting/Hosting7';
 import Hosting8 from './pages/Hosting/Hosting8';
 
-import Footer from './components/Footer';
-import Nav from './components/Nav/Nav';
+// import Footer from './components/Footer';
+// import Nav from './components/Nav/Nav';
 import Management from './pages/Management/Management';
 import Reservation from './pages/Reservation/Reservation';
+import HostingLayout from './components/hostingLayout/HostingLayout';
 
 function App() {
   return (
     <BrowserRouter>
-      <Nav />
+      {/* <Nav /> */}
       <Routes>
         <Route path="/list/:localName" element={<AccommodationList />} />
         <Route path="/" element={<Main />} />
@@ -30,6 +31,9 @@ function App() {
         <Route path="/hosting/2" element={<Hosting2 />} />
         <Route path="/hosting/3" element={<Hosting3 />} />
         <Route path="/hosting/4" element={<Hosting4 />} />
+        <Route path="/layout" element={<HostingLayout />} />
+        <Route path="/hosting" element={<Hosting />} />
+
         <Route path="/hosting/5" element={<Hosting5 />} />
         <Route path="/hosting/6" element={<Hosting6 />} />
         <Route path="/hosting/9" element={<Hosting9 />} />
@@ -39,7 +43,7 @@ function App() {
         <Route path="/management" element={<Management />} />
         <Route path="/reservation" element={<Reservation />} />
       </Routes>
-      <Footer />
+      {/* <Footer /> */}
     </BrowserRouter>
   );
 }

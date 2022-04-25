@@ -28,9 +28,10 @@ const Button = styled.div`
   display: flex;
   justify-content: space-around;
   button {
-    border-radius: 12px;
+    border-radius: 20px;
     border: 1px solid grey;
-    font-size: 15px;
+    font-size: 20px;
+    padding: 5px 10px;
     background-color: white;
   }
 `;

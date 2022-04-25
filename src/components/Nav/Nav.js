@@ -39,7 +39,7 @@ function Nav() {
   };
 
   return (
-    <>
+    <Box>
       <Aside>
         저스트비앤비의 코로나 19 대응 방안에 대한 최신 정보를 확인하세요.
       </Aside>
@@ -109,10 +109,17 @@ function Nav() {
       {isSignupModalOpen && (
         <SignupModal signupModalHandler={signupModalHandler} />
       )}
-    </>
+    </Box>
   );
 }
 
+const Box = styled.div`
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 20;
+`;
 const Aside = styled.aside`
   padding: 16px 0;
   background: black;
