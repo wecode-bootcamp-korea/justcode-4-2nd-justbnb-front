@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { GiHamburgerMenu } from 'react-icons/gi';
 import { RiUser3Line } from 'react-icons/ri';
 import { CgGlobeAlt } from 'react-icons/cg';
@@ -8,12 +8,21 @@ import LogoutToggle from './LogoutToggle';
 import LoginModal from '../Modal/LoginModal';
 import SignupModal from '../Modal/SignupModal';
 import SearchBar from './SearchBar';
+import FixedNav from './FixedNav';
 // import LoginToggle from './LoginToggle';
 
 function Nav() {
   const [openToggle, setOpenToggle] = useState({ display: 'none' });
   const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
   const [isSignupModalOpen, setIsSignupModalOpen] = useState(false);
+  const [scrollPosition, setScrollPosition] = useState(0);
+  const updateScroll = () => {
+    setScrollPosition(window.scrollY || document.documentElement.scrollTop);
+  };
+
+  useEffect(() => {
+    window.addEventListener('scroll', updateScroll);
+  });
 
   const toggleHandler = () => {
     openToggle.display === 'none'
@@ -38,46 +47,50 @@ function Nav() {
       <Aside>
         저스트비앤비의 코로나 19 대응 방안에 대한 최신 정보를 확인하세요.
       </Aside>
-      <Header>
-        <Container>
-          <img
-            alt="main-logo"
-            src={`${process.env.PUBLIC_URL}/images/로고화이트.png`}
-            width="150"
-            style={{ cursor: 'pointer' }}
-          />
-          <Wrapper>
-            <Menu>숙소</Menu>
-            <DisableMenu>체험</DisableMenu>
-            <DisableMenu>온라인 체험</DisableMenu>
-          </Wrapper>
-          <div>
-            <Navbar>
-              <Link to="/hosting" style={{ textDecoration: 'none' }}>
-                <Buttons>호스트 되기</Buttons>
-              </Link>
-              <Buttons>
-                <CgGlobeAlt fontSize={20} />
-              </Buttons>
-              <UserBox onClick={toggleHandler}>
-                <StyledIcon>
-                  <GiHamburgerMenu fontSize={16} />
-                </StyledIcon>
-                <User>
-                  <RiUser3Line fontSize={18} />
-                </User>
-              </UserBox>
-            </Navbar>
-            <LogoutToggle
-              openToggle={openToggle}
-              loginModalHandler={loginModalHandler}
-              signupModalHandler={signupModalHandler}
+      {scrollPosition < 40 ? (
+        <Header>
+          <Container>
+            <img
+              alt="main-logo"
+              src={`${process.env.PUBLIC_URL}/images/로고화이트.png`}
+              width="150"
+              style={{ cursor: 'pointer' }}
             />
-            {/* {token && <LoginToggle showToggle={showToggle} />} */}
-          </div>
-        </Container>
-        <SearchBar />
-      </Header>
+            <Wrapper>
+              <Menu>숙소</Menu>
+              <DisableMenu>체험</DisableMenu>
+              <DisableMenu>온라인 체험</DisableMenu>
+            </Wrapper>
+            <div>
+              <Navbar>
+                <Link to="/hosting" style={{ textDecoration: 'none' }}>
+                  <Buttons>호스트 되기</Buttons>
+                </Link>
+                <Buttons>
+                  <CgGlobeAlt fontSize={20} style={{ opacity: '0.5' }} />
+                </Buttons>
+                <UserBox onClick={toggleHandler}>
+                  <StyledIcon>
+                    <GiHamburgerMenu fontSize={16} />
+                  </StyledIcon>
+                  <User>
+                    <RiUser3Line fontSize={18} />
+                  </User>
+                </UserBox>
+              </Navbar>
+              <LogoutToggle
+                openToggle={openToggle}
+                loginModalHandler={loginModalHandler}
+                signupModalHandler={signupModalHandler}
+              />
+              {/* {token && <LoginToggle showToggle={showToggle} />} */}
+            </div>
+          </Container>
+          <SearchBar />
+        </Header>
+      ) : (
+        <FixedNav />
+      )}
       {isLoginModalOpen && <LoginModal loginModalHandler={loginModalHandler} />}
       {isSignupModalOpen && (
         <SignupModal signupModalHandler={signupModalHandler} />
@@ -109,9 +122,12 @@ const Aside = styled.aside`
 `;
 
 const Header = styled.header`
+  position: fixed;
+  top: -header.height;
+  width: 100%;
+  transition: top 0.5s;
   margin: 0 auto;
   background: black;
-  padding-bottom: 80px;
 `;
 
 const Container = styled.div`

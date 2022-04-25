@@ -57,6 +57,7 @@ function SearchBar() {
 const Container = styled.div`
   display: flex;
   justify-content: center;
+  padding-bottom: 80px;
 `;
 
 const SearchWrapper = styled.div`
