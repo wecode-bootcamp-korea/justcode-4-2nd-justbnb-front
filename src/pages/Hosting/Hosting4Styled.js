@@ -31,16 +31,12 @@ const Container2 = styled.section`
   width: 50%;
   min-height: 100vh;
   position: relative;
-  /* border: 1px solid green; */
   display: flex;
   flex-wrap: wrap;
   flex-direction: column;
 `;
 
 const Header = styled.section`
-  /* position: absolute;
-  top: 0; */
-  /* border: 1px solid red; */
   width: 100%;
   padding: 20px;
   display: flex;
@@ -67,9 +63,7 @@ const Header = styled.section`
 `;
 
 const Body = styled.section`
-  /* height: 80%; */
   width: 100%;
-  /* border: 1px solid blue; */
   display: flex;
   margin-top: 15px;
   flex-direction: column;
@@ -77,56 +71,27 @@ const Body = styled.section`
   padding: 150px;
 `;
 
-// const CounterWrapper = styled.section`
-//   border: 1px solid black;
-// `;
-
 const GuestCount = styled.section`
   display: flex;
   flex-direction: row;
-  justify-content: space-evenly;
+  justify-content: space-between;
 `;
 
 const PetCount = styled.section`
   display: flex;
   flex-direction: row;
-  justify-content: space-evenly;
+  justify-content: space-between;
   padding-top: 40px;
 `;
 
 const Text2 = styled.div`
-  font-size: 28px;
+  font-size: 27px;
   font-weight: 500;
-  margin-right: 280px;
 `;
-
-// const Button = styled.button`
-//   background-color: white;
-//   border-radius: 10px;
-//   border: 1px solid rgba(155, 149, 167, 0.44);
-//   font-size: 18px;
-//   font-weight: 500;
-//   text-align: left;
-//   padding: 32px;
-//   width: 65%;
-//   margin: 8px;
-//   display: flex;
-//   align-items: center;
-//   justify-content: space-between;
-//   .img-wrapper {
-//     height: 100%;
-//     width: 20px;
-//   }
-//   img {
-//     width: 100%;
-//     height: 100%;
-//   }
-// `;
 
 const Footer = styled.section`
   padding: 15px;
   width: 100%;
-  /* border: 1px solid red; */
   position: absolute;
   bottom: 0;
   display: flex;

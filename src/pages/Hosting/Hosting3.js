@@ -91,7 +91,6 @@ const Container2 = styled.section`
   width: 50%;
   /* min-height: 100vh; */
   position: relative;
-  /* border: 1px solid green; */
   display: flex;
   flex-wrap: wrap;
   flex-direction: column;
@@ -99,15 +98,10 @@ const Container2 = styled.section`
 
 const Header = styled.section`
   position: absolute;
-  /* position: absolute;
-  top: 0; */
-  /* border: 1px solid red; */
-  /* background-color: red; */
   width: 100%;
   padding: 20px;
   display: flex;
   justify-content: flex-end;
-  /* margin-top: 10px; */
   z-index: -1;
   .help-button {
     font-size: 12px;
@@ -135,9 +129,7 @@ const Header = styled.section`
 `;
 
 const Body = styled.section`
-  /* height: 80%; */
   width: 100%;
-  /* border: 1px solid blue; */
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -167,7 +159,6 @@ const Footer = styled.section`
   position: absolute;
   padding: 15px;
   width: 100%;
-  /* border: 1px solid red; */
   position: absolute;
   bottom: 0;
   display: flex;
@@ -197,7 +188,6 @@ const Map = styled.div`
   position: relative;
   z-index: -999;
   margin: 0;
-  /* width: fit-content; */
 `;
 
 const ButtonTextWrapper = styled.button`
@@ -215,5 +205,4 @@ const ButtonTextWrapper = styled.button`
   top: 20vw;
   display: flex;
   align-items: center;
-  /* color: grey; */
 `;

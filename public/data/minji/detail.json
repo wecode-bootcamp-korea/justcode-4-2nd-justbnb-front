@@ -16,7 +16,7 @@
     "build-type": "콘도",
     "total-members": 4,
     "description": "자가격리 불가능한 집입니다.",
-    "convenience_name": [1, 2, 3],
+    "convenience_name": ["wifi", "주차", "욕조"],
     "lat": 37.553651,
     "long": 126.969763
   },
@@ -37,7 +37,7 @@
     "build-type": "콘도",
     "total-members": 4,
     "description": "자가격리 불가능한 집입니다.",
-    "convenience_name": [1, 2, 3],
+    "convenience_name": ["wifi", "주차", "욕조"],
     "lat": 37.553651,
     "long": 126.969763
   },
@@ -58,7 +58,7 @@
     "build-type": "콘도",
     "total-members": 4,
     "description": "자가격리 불가능한 집입니다.",
-    "convenience_name": [1, 2, 3],
+    "convenience_name": ["wifi", "주차", "욕조"],
     "lat": 37.553651,
     "long": 126.969763
   }

@@ -82,9 +82,7 @@ const Header = styled.section`
 `;
 
 const Body = styled.section`
-  /* height: 80%; */
   width: 100%;
-  /* border: 1px solid blue; */
   display: flex;
   margin-top: 15px;
   flex-direction: column;
@@ -107,7 +105,6 @@ const ButtonTextWrapper = styled.button`
   margin-top: 65px;
   display: flex;
   align-items: center;
-  /* color: grey; */
 `;
 
 const Icon = styled.div`
@@ -125,7 +122,6 @@ const Text2 = styled.div`
 const Footer = styled.section`
   padding: 15px;
   width: 100%;
-  /* border: 1px solid red; */
   position: absolute;
   bottom: 0;
   display: flex;

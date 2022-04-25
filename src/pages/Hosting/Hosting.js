@@ -23,25 +23,25 @@ export default function Hosting({ onChange, resultChoice }) {
             <div className="but-name">아파트</div> */}
           {/* ======= */}
           <Button id="1" onClick={e => onChange(e)} value="아파트">
-            <div>아파트</div>
+            <div className="but-name">아파트</div>
             <div className="img-wrapper">
               <img src="/images/thump/home10.jpg" />
             </div>
           </Button>
           <Button id="1" onClick={e => onChange(e)} value="주택">
-            <div>주택</div>
+            <div className="but-name">주택</div>
             <div className="img-wrapper">
               <img src="/images/thump/home3.jpg" />
             </div>
           </Button>
           <Button id="1" onClick={e => onChange(e)} value="별채">
-            <div>별채</div>
+            <div className="but-name">별채</div>
             <div className="img-wrapper">
               <img src="/images/thump/home14.jpg" />
             </div>
           </Button>
           <Button id="1" onClick={e => onChange(e)} value="독특한 숙소">
-            <div>독특한 숙소</div>
+            <div className="but-name">독특한 숙소</div>
             <div className="img-wrapper">
               <img src="/images/thump/home1.jpg" />
             </div>
@@ -87,16 +87,12 @@ const Container2 = styled.section`
   width: 50%;
   min-height: 100vh;
   position: relative;
-  /* border: 1px solid green; */
   display: flex;
   flex-wrap: wrap;
   flex-direction: column;
 `;
 
 const Header = styled.section`
-  /* position: absolute;
-  top: 0; */
-  /* border: 1px solid red; */
   width: 100%;
   padding: 20px;
   display: flex;
@@ -123,9 +119,7 @@ const Header = styled.section`
 `;
 
 const Body = styled.section`
-  /* height: 80%; */
   width: 100%;
-  /* border: 1px solid blue; */
   display: flex;
   margin-top: 15px;
   flex-direction: column;
@@ -140,7 +134,6 @@ const Button = styled.button`
   font-size: 17.5px;
   font-weight: 500;
   text-align: left;
-  /* padding: 32px; */
   width: 65%;
   margin: 8px;
   display: flex;
@@ -151,15 +144,12 @@ const Button = styled.button`
     cursor: pointer;
   }
   .img-wrapper {
-    /* padding: 30px; */
-    /* height: 100%; */
     margin: 10px;
   }
   .but-name {
     margin-left: 18px;
   }
   img {
-    /* padding: 30px; */
     width: 55px;
     height: 55px;
     border-radius: 5px;
@@ -170,7 +160,6 @@ const Button = styled.button`
 const Footer = styled.section`
   padding: 15px;
   width: 100%;
-  /* border: 1px solid red; */
   position: absolute;
   bottom: 0;
   display: flex;

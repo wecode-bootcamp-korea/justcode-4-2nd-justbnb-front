@@ -15,9 +15,7 @@ export default function Hosting9() {
           <button className="exit-button">나가기</button>
         </Header>
         <Body>
-          <PriceBox>
-            <CounterValue3 />
-          </PriceBox>
+          <CounterValue3 />
           <Text2>/박</Text2>
         </Body>
         <Footer>
@@ -60,16 +58,12 @@ const Container2 = styled.section`
   width: 50%;
   min-height: 100vh;
   position: relative;
-  /* border: 1px solid green; */
   display: flex;
   flex-wrap: wrap;
   flex-direction: column;
 `;
 
 const Header = styled.section`
-  /* position: absolute;
-  top: 0; */
-  /* border: 1px solid red; */
   width: 100%;
   padding: 20px;
   display: flex;
@@ -96,60 +90,19 @@ const Header = styled.section`
 `;
 
 const Body = styled.section`
-  /* height: 80%; */
   width: 100%;
-  /* border: 1px solid blue; */
   display: flex;
-  margin-top: 50px;
+  margin-top: 60px;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   text-align: center;
 `;
 
-// const CounterWrapper = styled.section`
-//   border: 1px solid black;
-// `;
-
-const PriceBox = styled.div`
-  background-color: white;
-  border-radius: 10px;
-  border: 1px solid rgba(155, 149, 167, 0.44);
-  font-size: 50px;
-  font-weight: 600;
-  text-align: center;
-  /* padding: 32px; */
-  width: 65%;
-  padding: 30px;
-`;
-
 const Text2 = styled.div`
   margin-top: 15px;
   font-size: 16px;
 `;
-
-// const Button = styled.button`
-//   background-color: white;
-//   border-radius: 10px;
-//   border: 1px solid rgba(155, 149, 167, 0.44);
-//   font-size: 18px;
-//   font-weight: 500;
-//   text-align: left;
-//   padding: 32px;
-//   width: 65%;
-//   margin: 8px;
-//   display: flex;
-//   align-items: center;
-//   justify-content: space-between;
-//   .img-wrapper {
-//     height: 100%;
-//     width: 20px;
-//   }
-//   img {
-//     width: 100%;
-//     height: 100%;
-//   }
-// `;
 
 const Footer = styled.section`
   padding: 15px;

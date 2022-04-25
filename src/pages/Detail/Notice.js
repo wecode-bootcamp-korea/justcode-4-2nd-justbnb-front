@@ -7,7 +7,7 @@ import {
   FaQuestionCircle,
 } from 'react-icons/fa';
 
-function Rules() {
+function Notice() {
   return (
     <Wrapper>
       <MainTitle>알아두어야 할 사항</MainTitle>
@@ -60,7 +60,7 @@ function Rules() {
 }
 
 const Wrapper = styled.section`
-  margin: 0 80px;
+  /* margin: 0 80px; */
   padding: 50px 0;
 `;
 
@@ -91,4 +91,4 @@ const List = styled.div`
     margin-right: 10px;
   }
 `;
-export default Rules;
+export default Notice;

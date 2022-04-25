@@ -68,16 +68,12 @@ const Container2 = styled.section`
   width: 50%;
   min-height: 100vh;
   position: relative;
-  /* border: 1px solid green; */
   display: flex;
   flex-wrap: wrap;
   flex-direction: column;
 `;
 
 const Header = styled.section`
-  /* position: absolute;
-  top: 0; */
-  /* border: 1px solid red; */
   width: 100%;
   padding: 20px;
   display: flex;
@@ -104,9 +100,7 @@ const Header = styled.section`
 `;
 
 const Body = styled.section`
-  /* height: 80%; */
   width: 100%;
-  /* border: 1px solid blue; */
   display: flex;
   margin-top: 15px;
   flex-direction: column;
@@ -121,7 +115,6 @@ const Button = styled.button`
   font-size: 17.5px;
   font-weight: 500;
   text-align: left;
-  /* padding: 32px; */
   width: 65%;
   margin: 8px;
   display: flex;
@@ -139,7 +132,6 @@ const Button = styled.button`
 const Footer = styled.section`
   padding: 15px;
   width: 100%;
-  /* border: 1px solid red; */
   position: absolute;
   bottom: 0;
   display: flex;
