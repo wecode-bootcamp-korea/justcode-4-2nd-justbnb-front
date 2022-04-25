@@ -10,6 +10,7 @@ import Footer from './components/Footer';
 import Nav from './components/Nav/Nav';
 import Management from './pages/Management/Management';
 import Reservation from './pages/Reservation/Reservation';
+import HostingLayout from './components/hostingLayout/HostingLayout';
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
         <Route path="/list/:localName" element={<AccommodationList />} />
         <Route path="/" element={<Main />} />
         <Route path="/detail" element={<Detail />} />
+        <Route path="/layout" element={<HostingLayout />} />
         <Route path="/hosting" element={<Hosting />} />
 
         <Route path="/hosting/5" element={<Hosting5 />} />
