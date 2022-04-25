@@ -192,12 +192,12 @@ const CloseBtn = styled.button`
   text-align: left;
   border: none;
   background-color: #ffffff;
-  font-size: 0.9em;
+  font-size: 0.9rem;
   cursor: pointer;
 `;
 
 const Tittle = styled.div`
-  font-size: 1.1em;
+  font-size: 1.1rem;
   padding-left: 230px;
   font-weight: 700;
 `;
@@ -209,7 +209,7 @@ const ContentsWrapper = styled.div`
 const Text = styled.div`
   &:first-child {
     padding-bottom: 40px;
-    font-size: 1.3em;
+    font-size: 1.3rem;
     font-weight: 600;
   }
 
