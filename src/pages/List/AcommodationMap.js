@@ -89,7 +89,7 @@ function MapContainer({
     }
 
     count.current += 1;
-    if (count.current > 2) setLocal('지도에 표시된 지역');
+    if (count.current > 2) setLocal('all');
   }, [area, datas]);
 
   //zoom level 변함에 따라 리스트 내용 변경
@@ -102,7 +102,7 @@ function MapContainer({
   //지도 크기 동적 변경
   const [mapStyle, setMapStyle] = useState({
     width: '50%',
-    height: '540px',
+    height: '740px',
     position: 'fixed',
     left: '50%',
   });
@@ -117,9 +117,9 @@ function MapContainer({
     if (changeMap === false) {
       setMapStyle({
         width: '100%',
-        height: '600px',
+        height: '740px',
         position: 'sticky',
-        top: '360px',
+        top: '250px',
         left: '50%',
       });
     } else {
@@ -132,6 +132,9 @@ function MapContainer({
   }, [changeMap]);
 
   let height = level >= 13 ? '1900px' : '1250px';
+  if (changeMap && level >= 13) {
+    map.current.setLevel(10);
+  }
   return (
     <Box height={height} active={changeMap ? 'true' : 'false'}>
       <div id="kakaoMap" style={mapStyle} />

@@ -6,6 +6,8 @@ import Accommodation from '../../components/Accommodation/Accommodation';
 import Pagination from '../../components/paging/Pagination';
 import BigCategoryList from './BigCategoryList';
 import MapContainer from './AcommodationMap';
+import Nav from '../../components/Nav/Nav';
+import Footer from '../../components/Footer';
 import {
   ListContainer,
   Container,
@@ -34,7 +36,7 @@ const AccommodationList = () => {
   /*목데이터 가져오기 */
   const refreshData = async () => {
     //await fetch('/data/hwseol/list.json', {
-    await fetch('http://localhost:8000/accommodations?city=서울시', {
+    await fetch(`http://localhost:8000/accommodations?city=${local}`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
@@ -43,20 +45,14 @@ const AccommodationList = () => {
       .then(res => res.json())
       .then(data => {
         let temp = [];
-        for (let i = 0; i < data['accommodationsList'].length; i++) {
-          if (local === '지도에 표시된 지역') {
-            temp.push(data['accommodationsList'][i]);
-          } else if (data['accommodationsList'][i].city === local) {
-            temp.push(data['accommodationsList'][i]);
-          }
+        for (let i = 0; i < data.accommodationsList.length; i++) {
+          temp.push(data.accommodationsList[i]);
         }
-        console.log('temp', temp);
         setData([...temp]);
       });
   };
   useEffect(() => {
     refreshData();
-    console.log('datas :', datas);
   }, [local]);
   //rendering이 한박자 늦어서 어쩔수 없이 한번 더 리랜더링
   useEffect(() => {}, [datas]);
@@ -75,10 +71,14 @@ const AccommodationList = () => {
   if (datas === []) return null;
   return (
     <WrapContainer>
+      <Nav />
       <Container>
         {/* {changeMap === false ? ( */}
         <ListContainer active={changeMap ? 'true' : 'false'}>
-          <Text>{local}에 위치한 300개 이상의 숙소</Text>
+          <Text>
+            {local === 'all' ? '지도에 표시된 지역' : local}에 위치한 300개
+            이상의 숙소
+          </Text>
           <Text>
             여행 날짜와 게스트 인원수를 입력하면 1박당 총 요금을 확인할 수
             있습니다.
@@ -99,7 +99,7 @@ const AccommodationList = () => {
                 <Accommodation
                   data={data}
                   key={data.id}
-                  localName={data.local}
+                  localName={data.city}
                   setlatlng={setlatlng} //{{ lat: datas[index].lat, lng: datas[index].long }}
                 />
               ))
@@ -135,6 +135,7 @@ const AccommodationList = () => {
           />
         ) : null}
       </Container>
+      <Footer />
     </WrapContainer>
   );
 };
