@@ -48,9 +48,9 @@ function MapContainer({
         id: datas[i].id,
         title: datas[i].name,
         latlng: new kakao.maps.LatLng(datas[i].lat, datas[i].long),
-        image: datas[i].image,
+        image: datas[i].image_url[0],
         buildType: datas[i].build_type,
-        localName: datas[i].local,
+        localName: datas[i].city,
       };
     }
     setPositions(_positions);

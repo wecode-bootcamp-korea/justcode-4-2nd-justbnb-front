@@ -93,7 +93,7 @@ function BasicSlider({ data, flag }) {
   return (
     <SliderWrap>
       <Slider {...settings}>
-        {data.image.map((img, index) => {
+        {data.image_url.map((img, index) => {
           return (
             <SliderStep key={index}>
               <Img src={img} alt="accommodataion" />

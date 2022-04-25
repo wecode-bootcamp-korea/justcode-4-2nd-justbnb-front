@@ -3,10 +3,13 @@ const SliderStep = styled.div`
   width: 100%;
 `;
 const SliderWrap = styled.div`
-  width: 860px;
+  width: 950px;
   justify-content: center;
   margin-bottom: 20px;
   @media only screen and (max-width: 1308px) {
+    width: 100%;
+  }
+  @media only screen and (max-width: 1730px) {
     width: 100%;
   }
 `;

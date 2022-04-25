@@ -33,7 +33,8 @@ const AccommodationList = () => {
 
   /*목데이터 가져오기 */
   const refreshData = async () => {
-    await fetch('/data/hwseol/list.json', {
+    //await fetch('/data/hwseol/list.json', {
+    await fetch('http://localhost:8000/accommodations?city=서울시', {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
@@ -42,18 +43,20 @@ const AccommodationList = () => {
       .then(res => res.json())
       .then(data => {
         let temp = [];
-        for (let i = 0; i < data.length; i++) {
+        for (let i = 0; i < data['accommodationsList'].length; i++) {
           if (local === '지도에 표시된 지역') {
-            temp.push(data[i]);
-          } else if (data[i].local === local) {
-            temp.push(data[i]);
+            temp.push(data['accommodationsList'][i]);
+          } else if (data['accommodationsList'][i].city === local) {
+            temp.push(data['accommodationsList'][i]);
           }
         }
+        console.log('temp', temp);
         setData([...temp]);
       });
   };
   useEffect(() => {
     refreshData();
+    console.log('datas :', datas);
   }, [local]);
   //rendering이 한박자 늦어서 어쩔수 없이 한번 더 리랜더링
   useEffect(() => {}, [datas]);
@@ -69,6 +72,7 @@ const AccommodationList = () => {
       window.removeEventListener('resize', resizeWindow);
     };
   });
+  if (datas === []) return null;
   return (
     <WrapContainer>
       <Container>
