@@ -21,36 +21,36 @@ function SearchBar() {
   };
 
   return (
-    <>
-      <Container>
-        <SearchWrapper>
+    <Container>
+      <SearchWrapper>
+        <div>
           <SearchInner onClick={searchToggleHandler}>
             <SearchKeyword>위치</SearchKeyword>
             <Text>어디로 여행가세요?</Text>
           </SearchInner>
-          <SearchInner>
-            <SearchKeyword>체크인</SearchKeyword>
-            <Input placeholder="날짜 입력" />
-          </SearchInner>
-          <SearchInner>
-            <SearchKeyword>체크아웃</SearchKeyword>
-            <Input placeholder="날짜 입력" />
-          </SearchInner>
+          {isSearchToggleOpen && <SearchToggle />}
+        </div>
+        <SearchInner>
+          <SearchKeyword>체크인</SearchKeyword>
+          <Input placeholder="날짜 입력" />
+        </SearchInner>
+        <SearchInner>
+          <SearchKeyword>체크아웃</SearchKeyword>
+          <Input placeholder="날짜 입력" />
+        </SearchInner>
+        <div>
           <SearchInner onClick={membersToggleHandler}>
             <SearchKeyword>인원</SearchKeyword>
             <Text>게스트 추가</Text>
-            {/* <Input placeholder="게스트 추가" /> */}
           </SearchInner>
-          <SearchBtns>
-            <BiSearch font-size={20} />
-            <SearchKeyword2>검색</SearchKeyword2>
-          </SearchBtns>
-        </SearchWrapper>
-      </Container>
-      {isSearchToggleOpen && <SearchToggle />}
-
-      {isMembersToggleOpen && <MembersToggle />}
-    </>
+          {isMembersToggleOpen && <MembersToggle />}
+        </div>
+        <SearchBtns>
+          <BiSearch font-size={20} />
+          <SearchKeyword2>검색</SearchKeyword2>
+        </SearchBtns>
+      </SearchWrapper>
+    </Container>
   );
 }
 

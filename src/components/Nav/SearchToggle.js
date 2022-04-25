@@ -13,20 +13,6 @@ function SearchToggle() {
     { id: 5, name: '제주도' },
   ];
 
-  // const colorChangeHandler = () => {
-  //   !changeColor
-  //     ? setChangeColor({
-  //         background: `linear-gradient(
-  //           to right,
-  //           rgb(230, 30, 77) 0%,
-  //           rgb(227, 28, 95) 50%,
-  //           rgb(215, 4, 102) 100%
-  //         )`,
-  //         border: 'none',
-  //         color: '#ffffff',
-  //       })
-  //     : setChangeColor();
-  // };
   return (
     <Wrapper>
       <div>언제 어디로든 떠나는 여행</div>
@@ -46,9 +32,9 @@ function SearchToggle() {
 
 const Wrapper = styled.div`
   position: absolute;
-  width: 25rem;
+  width: 22rem;
   margin-top: 10px;
-  margin-left: 18rem;
+  margin-left: 10px;
   padding: 20px;
   background-color: #ffffff;
   border-radius: 20px;

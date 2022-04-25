@@ -29,7 +29,7 @@ function BtnCard({ list, cityId }) {
 
 const BtnLayout = styled.div`
   display: flex;
-
+  justify-content: center;
   margin-top: 15px;
   padding: 10px;
   border-radius: 8px;
