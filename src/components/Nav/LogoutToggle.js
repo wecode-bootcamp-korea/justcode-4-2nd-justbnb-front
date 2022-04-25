@@ -39,7 +39,7 @@ const ToggleBox = styled.div`
   background: #ffffff;
   border-radius: 10px;
   list-style: none;
-  box-shadow: 2px 2px 10px #dddddd;
+  box-shadow: 1px 1px 2px #dddddd;
 `;
 
 const ToggleList = styled.li`
