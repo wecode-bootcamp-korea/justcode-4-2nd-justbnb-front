@@ -45,22 +45,14 @@ function BasicSlider({ data, flag }) {
       },
     ],
   };
-  const setWidth = _flag => {
-    if (_flag === 'overlay') {
-      return '250px';
-    } else if (_flag === 'little') {
-      return '240px';
-    } else {
-      //list
-      return '300px';
-    }
-  };
   let Img = styled.img`
     width: 300px;
     height: 200px;
     border-radius: 5%;
     @media only screen and (max-width: 744px) {
-      width: 100%;
+      margin: 0px auto;
+      width: 90%;
+      height: 100%;
       object-fit: cover;
     }
   `;
@@ -82,6 +74,9 @@ function BasicSlider({ data, flag }) {
       width: 100%;
       border-radius: 5%;
       height: 150px;
+      @media only screen and (max-width: 1854px) {
+        height: 250px;
+      }
     `;
     SliderWrap = styled.div`
       width: 240px;
@@ -93,7 +88,7 @@ function BasicSlider({ data, flag }) {
   return (
     <SliderWrap>
       <Slider {...settings}>
-        {data.image.map((img, index) => {
+        {data.image_url.map((img, index) => {
           return (
             <SliderStep key={index}>
               <Img src={img} alt="accommodataion" />
