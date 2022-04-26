@@ -7,7 +7,7 @@ import DatePickerRangeController from 'react-datepicker';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 
-function SearchBar({ scrollPosition, updateScroll }) {
+function SearchBar({ scrollPosition, updateScroll, flag }) {
   const [startDate, setStartDate] = useState(new Date());
   const [endDate, setEndDate] = useState();
 
@@ -55,17 +55,25 @@ function SearchBar({ scrollPosition, updateScroll }) {
   );
 
   return (
-    <Container>
+    <Container bgColor={flag === 'list' ? 'white' : 'black'}>
       {scrollPosition < 100 && (
-        <SearchWrapper>
+        <SearchWrapper bgColor={flag === 'list' ? '#EBEBEB' : '#ffffff'}>
           <div>
-            <SearchInner onClick={searchToggleHandler}>
+            <SearchInner
+              onClick={searchToggleHandler}
+              bgColor={flag === 'list' ? '#EBEBEB' : '#ffffff'}
+              hoverColor={flag === 'list' ? '#ffffff' : '#EBEBEB'}
+            >
               <SearchKeyword>위치</SearchKeyword>
               <Text>어디로 여행가세요?</Text>
             </SearchInner>
             {isSearchToggleOpen && <SearchToggle setCity={setCity} />}
           </div>
-          <SearchInner onClick={datesToggleHandler}>
+          <SearchInner
+            onClick={datesToggleHandler}
+            bgColor={flag === 'list' ? '#EBEBEB' : '#ffffff'}
+            hoverColor={flag === 'list' ? '#ffffff' : '#EBEBEB'}
+          >
             <SearchKeyword>체크인</SearchKeyword>
             {!startDate ? (
               <Text>날짜 선택</Text>
@@ -79,7 +87,10 @@ function SearchBar({ scrollPosition, updateScroll }) {
               />
             )}
           </SearchInner>
-          <SearchInner>
+          <SearchInner
+            bgColor={flag === 'list' ? '#EBEBEB' : '#ffffff'}
+            hoverColor={flag === 'list' ? '#ffffff' : '#EBEBEB'}
+          >
             <SearchKeyword>체크아웃</SearchKeyword>
             <DatePickerRangeController
               selected={endDate}
@@ -89,7 +100,11 @@ function SearchBar({ scrollPosition, updateScroll }) {
             />
           </SearchInner>
           <div>
-            <SearchInner onClick={membersToggleHandler}>
+            <SearchInner
+              onClick={membersToggleHandler}
+              bgColor={flag === 'list' ? '#EBEBEB' : '#ffffff'}
+              hoverColor={flag === 'list' ? '#ffffff' : '#EBEBEB'}
+            >
               <SearchKeyword>인원</SearchKeyword>
               <Text>게스트 추가</Text>
             </SearchInner>
@@ -119,14 +134,14 @@ const Container = styled.div`
   width: 100%;
   transition: top 0.3s;
   margin: 0 auto;
-  background: black;
+  background: ${props => props.bgColor};
 `;
 
 const SearchWrapper = styled.div`
   display: flex;
   align-items: center;
   padding-right: 14px;
-  background-color: #ffffff;
+  background-color: ${props => props.bgColor};
   border-radius: 40px;
 `;
 
@@ -134,11 +149,10 @@ const SearchInner = styled.div`
   display: flex;
   flex-direction: column;
   padding: 20px 30px 20px 25px;
-  background-color: #ffffff;
+  background-color: ${props => props.bgColor};
   border-radius: 40px;
-
   &: hover {
-    background: #ebebeb;
+    background: ${props => props.hoverColor};
     cursor: pointer;
   }
 `;
