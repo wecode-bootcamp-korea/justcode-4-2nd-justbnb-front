@@ -12,7 +12,7 @@ const BigCategoryList = React.memo(function BigCategoryList({ data }) {
     <Wrap>
       <Line>
         <H2>서울시</H2>
-        <P>보기({_data['서울시'].length}+개)</P>
+        <P>보기&nbsp;({_data['서울시'].length}+개)</P>
       </Line>
       <MultipleSlider data={_data['서울시']} />
       <Line marginTop="100px">

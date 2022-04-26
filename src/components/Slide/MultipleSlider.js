@@ -13,9 +13,9 @@ function NextArrow(props) {
       style={{
         ...style,
         display: 'block',
-        position: 'absolute',
+        //position: 'absolute',
         top: '-30px',
-        left: '96%',
+        left: '90%',
         borderRadius: '100%',
         backgroundColor: 'gray',
         width: '20px',
@@ -35,9 +35,9 @@ function PrevArrow(props) {
         ...style,
         display: 'block',
         background: 'black',
-        postion: 'absolute',
+        //postion: 'absolute',
         top: '-30px',
-        left: '92%', //'740px',
+        left: '85%', //'740px',
         borderRadius: '100%',
         backgroundColor: 'gray',
         width: '20px',
@@ -86,13 +86,6 @@ function MultipleSlider({ data }) {
           slidesToScroll: 1,
         },
       },
-      {
-        breakpoint: 1854,
-        settings: {
-          slidesToShow: 2,
-          slidesToScroll: 1,
-        },
-      },
     ],
   };
   return (
@@ -102,7 +95,9 @@ function MultipleSlider({ data }) {
           return (
             <SliderStep key={index}>
               <BasicSlider data={_data} flag="little" />
-              {_data.build_type} 전체 ·{_data.local}
+              <Desc>
+                {_data.build_type} 전체 ·{_data.local}
+              </Desc>
               <Desc>{_data.name}</Desc>
             </SliderStep>
           );

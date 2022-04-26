@@ -11,7 +11,7 @@ const Line = styled.div`
   margin-top: ${props => props.marginTop || '40px;'}; ;
 `;
 const P = styled.p`
-  width: 81%;
+  width: 76%;
   font-size: 1em;
   font-weight: 600;
   text-align: right;

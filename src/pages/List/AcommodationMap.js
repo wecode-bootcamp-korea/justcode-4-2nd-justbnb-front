@@ -1,7 +1,7 @@
 import React from 'react';
 import { useState, useEffect, useRef } from 'react';
 import MapMarkerItem from './MapMarkerItem';
-import { Button, Box } from './AccommodationListStyled';
+import { Button, Box, MapBox } from './AccommodationListStyled';
 
 function MapContainer({
   datas,
@@ -110,8 +110,9 @@ function MapContainer({
   useEffect(() => {
     if (map.current) {
       map.current.relayout();
+      console.log('hello');
     }
-  }, [map.current, mapStyle]);
+  }, [map.current, changeMap]);
 
   useEffect(() => {
     if (changeMap === false) {
@@ -137,7 +138,8 @@ function MapContainer({
   }
   return (
     <Box height={height} active={changeMap ? 'true' : 'false'}>
-      <div id="kakaoMap" style={mapStyle} />
+      {/* <div id="kakaoMap" style={mapStyle} /> */}
+      <MapBox id="kakaoMap" changeMap={changeMap ? 'true' : 'false'} />
       {positions.map(position => (
         <MapMarkerItem
           position={position}
