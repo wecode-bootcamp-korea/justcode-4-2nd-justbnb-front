@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { TransitionGroup, CSSTransition } from 'react-transition-group';
 
 const Box = styled.div`
   width: 100%;
@@ -14,6 +15,21 @@ const ProgressWrap = styled.div`
   bottom: 0;
   /* border: 3px solid orange; */
 `;
+
+// @keyframes loadEffect {
+//   0% {
+//     opacity: 0;
+//     transform: translateX(-30px);
+//   }
+//   50% {
+//     opacity: 0.5;
+//     transform: translateX(30px);
+//   }
+//   100% {
+//     opacity: 1;
+//     transform: translateX(0px);
+//   }
+// };
 
 const ProgressDiv = styled.div`
   display: flex;

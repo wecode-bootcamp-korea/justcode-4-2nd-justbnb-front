@@ -14,7 +14,7 @@ import {
   Text2,
 } from './Hosting4Styled';
 
-export default function Hosting4() {
+export default function Hosting4({ onChange, resultChoice }) {
   return (
     <Wrapper>
       <Container>
@@ -33,11 +33,11 @@ export default function Hosting4() {
         <Body>
           <GuestCount>
             <Text2>게스트</Text2>
-            <CounterValue />
+            <CounterValue onChange={onChange} />
           </GuestCount>
           <PetCount>
             <Text2>반려동물</Text2>
-            <CounterValue2 />
+            <CounterValue2 onChange={onChange} />
           </PetCount>
         </Body>
         <Footer />

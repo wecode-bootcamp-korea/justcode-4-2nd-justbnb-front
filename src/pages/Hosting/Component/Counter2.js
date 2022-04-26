@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { FaPlus, FaMinus } from 'react-icons/fa';
 import styled from 'styled-components';
 
-export default function CounterValue2() {
+export default function CounterValue2({ onChange, resultChoice }) {
   const [num, setNum] = useState(0);
 
   const upNum = () => {
@@ -13,10 +13,24 @@ export default function CounterValue2() {
     setNum(num <= 0 ? 0 : num - 1);
   };
 
+  const NumUp = e => {
+    onChange(e);
+    upNum(e);
+  };
+
+  const NumDown = e => {
+    onChange(e);
+    downNum(e);
+  };
+
   return (
     <CounterWrapper>
       <Button>
-        <button onClick={downNum}>
+        <button
+          id="4"
+          onClick={e => NumDown(e)}
+          value={num === 0 ? 'false' : 'true'}
+        >
           <FaMinus className="icons" />
         </button>
       </Button>
@@ -24,7 +38,11 @@ export default function CounterValue2() {
         <h1>{num}</h1>
       </Num>
       <Button2>
-        <button onClick={upNum}>
+        <button
+          id="4"
+          onClick={e => NumUp(e)}
+          value={num === 0 ? 'false' : 'true'}
+        >
           <FaPlus classBane="icons " />
         </button>
       </Button2>

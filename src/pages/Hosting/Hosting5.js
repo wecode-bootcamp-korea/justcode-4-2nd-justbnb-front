@@ -19,32 +19,6 @@ export default function Hosting5({ onChange, resultChoice }) {
   //   }
   // }
   console.log('ddddd', resultChoice);
-  function selectIcon(el) {
-    let result;
-    switch (el) {
-      case 'FaSwimmingPool':
-        result = <FaSwimmingPool />;
-        break;
-      case 'GiBarbecue':
-        result = <GiBarbecue />;
-        break;
-      case 'AiOutlineWifi':
-        result = <AiOutlineWifi />;
-        break;
-      case 'MdPersonalVideo':
-        result = <MdPersonalVideo />;
-        break;
-      case 'FaParking':
-        result = <FaParking />;
-        break;
-      case 'GiBathtub':
-        result = <GiBathtub />;
-        break;
-      default:
-        break;
-    }
-    return result;
-  }
 
   useEffect(() => {
     fetch('/data/dlwjdals/hosting.json', {
@@ -76,21 +50,73 @@ export default function Hosting5({ onChange, resultChoice }) {
         </Header>
         <Body>
           <Text2>특별히 내세울만한 편의시설이 있나요?</Text2>
-          <Convenience onClick={e => onChange(e)}>
-            {convenience.map((el, index) => {
-              return (
-                <TextAndIcon key={el.id} id="3" value={el.convenience}>
-                  <Icon>{selectIcon(el.icon)}</Icon>
-                  <Text3>{el.convenience}</Text3>
-                </TextAndIcon>
-              );
-            })}
+          <Convenience>
+            <Button>
+              {convenience.map((el, index) => (
+                <ConvMap
+                  el={el}
+                  onChange={onChange}
+                  resultChoice={resultChoice}
+                  key={el.id}
+                />
+              ))}
+            </Button>
           </Convenience>
         </Body>
         <Footer />
       </Container2>
     </Wrapper>
   );
+}
+function compareResult(resultChoice, el) {
+  if (!resultChoice.hasOwnProperty(5)) return false;
+  for (let i = 0; i < resultChoice[5].length; i++) {
+    if (resultChoice[5][i] === el.convenience) {
+      return 'on';
+    }
+  }
+}
+function ConvMap({ el, onChange, resultChoice }) {
+  return (
+    <div key={el.id}>
+      <TextAndIcon
+        key={el.id}
+        onClick={e => onChange(e)}
+        id="5"
+        value={el.convenience}
+        type="checkbox"
+        defaultChecked={compareResult(resultChoice, el)}
+      />
+      <Icon>{selectIcon(el.icon)}</Icon>
+      <Text3>{el.convenience}</Text3>
+    </div>
+  );
+}
+function selectIcon(el) {
+  let result;
+  switch (el) {
+    case 'FaSwimmingPool':
+      result = <FaSwimmingPool />;
+      break;
+    case 'GiBarbecue':
+      result = <GiBarbecue />;
+      break;
+    case 'AiOutlineWifi':
+      result = <AiOutlineWifi />;
+      break;
+    case 'MdPersonalVideo':
+      result = <MdPersonalVideo />;
+      break;
+    case 'FaParking':
+      result = <FaParking />;
+      break;
+    case 'GiBathtub':
+      result = <GiBathtub />;
+      break;
+    default:
+      break;
+  }
+  return result;
 }
 const Wrapper = styled.div`
   width: 100%;
@@ -121,7 +147,7 @@ const Text1 = styled.div`
 
 const Container2 = styled.section`
   width: 50%;
-  min-height: 100vh;
+  min-height: 90vh;
   position: relative;
   /* border: 1px solid green; */
   display: flex;
@@ -130,6 +156,9 @@ const Container2 = styled.section`
 `;
 
 const Header = styled.section`
+  /* position: absolute;
+  top: 0; */
+  /* border: 1px solid red; */
   width: 100%;
   padding: 20px;
   display: flex;
@@ -157,50 +186,47 @@ const Header = styled.section`
 
 const Body = styled.section`
   width: 100%;
-  margin: 0 auto;
-  display: flex;
-  padding: auto;
-  justify-content: center;
-  flex-direction: column;
-  align-items: center;
+  /* padding: 55px; */
 `;
 
-const TextAndConvenience = styled.div`
-  display: flex;
-  width: fit-content;
-  /* height: fit-content; */
-  margin: auto;
-  /* padding: auto; */
-  flex-direction: column;
-  align-items: center;
-`;
-
-const Footer = styled.section`
-  padding: 15px;
-  width: 100%;
-  position: absolute;
-  bottom: 0;
-  display: flex;
-  justify-content: space-between;
+const Button = styled.button`
   background-color: white;
+  border-radius: 10px;
+  border: 1px solid rgba(155, 149, 167, 0.44);
+  font-size: 18px;
+  font-weight: 500;
+  text-align: left;
+  padding: 32px;
+  width: 65%;
+  margin: 8px;
+  display: flex;
   align-items: center;
+  justify-content: space-between;
+  .img-wrapper {
+    height: 100%;
+    width: 20px;
+  }
+  //   img {
+  //     width: 100%;
+  //     height: 100%;
+  //   }
+  //
 `;
 
 const Text2 = styled.div`
-  font-size: 22px;
+  font-size: 35px;
   font-weight: bold;
-  margin-right: auto;
-  margin-left: 14px;
+  margin: 14px;
 `;
 
 const Convenience = styled.div`
   display: grid;
   grid-template-columns: repeat(3, 0fr);
   margin: 50px 0;
-  width: fit-content;
+  width: 100%;
 `;
 
-const TextAndIcon = styled.button`
+const TextAndIcon = styled.input`
   &:hover {
     outline: 3px solid black;
     /* outline-offset: -3px; */
@@ -208,13 +234,13 @@ const TextAndIcon = styled.button`
     cursor: pointer;
   }
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   flex-direction: column;
   align-items: center;
-  /* width: 120% !important; */
-  width: 14vw;
   /* height: fit-content; */
-  padding: 3vw;
+  font-size: 30px;
+  font-weight: bolder;
+  padding: 40px;
   border: 1px solid rgba(0, 0, 0, 0.2);
   border-radius: 25px;
   margin: 15px;
@@ -229,4 +255,15 @@ const Icon = styled.div`
 const Text3 = styled.div`
   font-size: 20px;
   font-weight: bolder;
+`;
+
+const Footer = styled.section`
+  padding: 15px;
+  width: 100%;
+  position: absolute;
+  bottom: 0;
+  display: flex;
+  justify-content: space-between;
+  background-color: white;
+  align-items: center;
 `;

@@ -22,7 +22,6 @@ import HostingLayout from './components/hostingLayout/HostingLayout';
 function App() {
   return (
     <BrowserRouter>
-      {/* <Nav /> */}
       <Routes>
         <Route path="/list/:localName" element={<AccommodationList />} />
         <Route path="/" element={<Main />} />
@@ -43,7 +42,6 @@ function App() {
         <Route path="/management" element={<Management />} />
         <Route path="/reservation" element={<Reservation />} />
       </Routes>
-      {/* <Footer /> */}
     </BrowserRouter>
   );
 }
