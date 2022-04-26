@@ -1,34 +1,15 @@
-import React, { useState } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 
-function BtnCard({ list, setCity }) {
-  const [changeColor, setChangeColor] = useState();
-
-  const colorChangeHandler = () => {
-    !changeColor
-      ? setChangeColor({
-          background: `linear-gradient(
-            to right,
-            rgb(230, 30, 77) 0%,
-            rgb(227, 28, 95) 50%,
-            rgb(215, 4, 102) 100%
-          )`,
-          border: 'none',
-          color: '#ffffff',
-        })
-      : setChangeColor();
-  };
-
+function BtnCard({ list, setCity, close }) {
   const onClickBtn = () => {
     setCity(list.name);
-    colorChangeHandler();
+    close();
   };
 
   return (
     <BtnsWrapper>
-      <BtnLayout onClick={onClickBtn} style={changeColor}>
-        {list.name}
-      </BtnLayout>
+      <BtnLayout onClick={onClickBtn}>{list.name}</BtnLayout>
     </BtnsWrapper>
   );
 }

@@ -1,12 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import Footer from '../../components/Footer';
 import styled from 'styled-components';
 import Nav from '../../components/Nav/Nav';
 import CityCard from './CityCard';
 
 function Main() {
-  const params = useParams();
   const navigate = useNavigate();
   const [cities, setCities] = useState([]);
 
@@ -19,6 +18,7 @@ function Main() {
     navigate(`/hosting`);
     window.scrollTo(0.0);
   };
+
   useEffect(() => {
     fetch('/data/jiho/cities.json', {
       method: 'GET',
