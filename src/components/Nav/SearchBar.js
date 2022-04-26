@@ -7,11 +7,7 @@ import DatePickerRangeController from 'react-datepicker';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 
-<<<<<<< HEAD
-function SearchBar({ scrollPosition, updateScroll }) {
-=======
 function SearchBar({ scrollPosition, updateScroll, flag }) {
->>>>>>> feature/hosting2
   const [startDate, setStartDate] = useState(new Date());
   const [endDate, setEndDate] = useState();
 
@@ -59,13 +55,6 @@ function SearchBar({ scrollPosition, updateScroll, flag }) {
   );
 
   return (
-<<<<<<< HEAD
-    <Container>
-      {scrollPosition < 100 && (
-        <SearchWrapper>
-          <div>
-            <SearchInner onClick={searchToggleHandler}>
-=======
     <Container bgColor={flag === 'list' ? 'white' : 'black'}>
       {scrollPosition < 100 && (
         <SearchWrapper bgColor={flag === 'list' ? '#EBEBEB' : '#ffffff'}>
@@ -75,21 +64,16 @@ function SearchBar({ scrollPosition, updateScroll, flag }) {
               bgColor={flag === 'list' ? '#EBEBEB' : '#ffffff'}
               hoverColor={flag === 'list' ? '#ffffff' : '#EBEBEB'}
             >
->>>>>>> feature/hosting2
               <SearchKeyword>위치</SearchKeyword>
               <Text>어디로 여행가세요?</Text>
             </SearchInner>
             {isSearchToggleOpen && <SearchToggle setCity={setCity} />}
           </div>
-<<<<<<< HEAD
-          <SearchInner onClick={datesToggleHandler}>
-=======
           <SearchInner
             onClick={datesToggleHandler}
             bgColor={flag === 'list' ? '#EBEBEB' : '#ffffff'}
             hoverColor={flag === 'list' ? '#ffffff' : '#EBEBEB'}
           >
->>>>>>> feature/hosting2
             <SearchKeyword>체크인</SearchKeyword>
             {!startDate ? (
               <Text>날짜 선택</Text>
@@ -103,14 +87,10 @@ function SearchBar({ scrollPosition, updateScroll, flag }) {
               />
             )}
           </SearchInner>
-<<<<<<< HEAD
-          <SearchInner>
-=======
           <SearchInner
             bgColor={flag === 'list' ? '#EBEBEB' : '#ffffff'}
             hoverColor={flag === 'list' ? '#ffffff' : '#EBEBEB'}
           >
->>>>>>> feature/hosting2
             <SearchKeyword>체크아웃</SearchKeyword>
             <DatePickerRangeController
               selected={endDate}
@@ -120,15 +100,11 @@ function SearchBar({ scrollPosition, updateScroll, flag }) {
             />
           </SearchInner>
           <div>
-<<<<<<< HEAD
-            <SearchInner onClick={membersToggleHandler}>
-=======
             <SearchInner
               onClick={membersToggleHandler}
               bgColor={flag === 'list' ? '#EBEBEB' : '#ffffff'}
               hoverColor={flag === 'list' ? '#ffffff' : '#EBEBEB'}
             >
->>>>>>> feature/hosting2
               <SearchKeyword>인원</SearchKeyword>
               <Text>게스트 추가</Text>
             </SearchInner>
@@ -158,22 +134,14 @@ const Container = styled.div`
   width: 100%;
   transition: top 0.3s;
   margin: 0 auto;
-<<<<<<< HEAD
-  background: black;
-=======
   background: ${props => props.bgColor};
->>>>>>> feature/hosting2
 `;
 
 const SearchWrapper = styled.div`
   display: flex;
   align-items: center;
   padding-right: 14px;
-<<<<<<< HEAD
-  background-color: #ffffff;
-=======
   background-color: ${props => props.bgColor};
->>>>>>> feature/hosting2
   border-radius: 40px;
 `;
 
@@ -181,18 +149,10 @@ const SearchInner = styled.div`
   display: flex;
   flex-direction: column;
   padding: 20px 30px 20px 25px;
-<<<<<<< HEAD
-  background-color: #ffffff;
-  border-radius: 40px;
-
-  &: hover {
-    background: #ebebeb;
-=======
   background-color: ${props => props.bgColor};
   border-radius: 40px;
   &: hover {
     background: ${props => props.hoverColor};
->>>>>>> feature/hosting2
     cursor: pointer;
   }
 `;

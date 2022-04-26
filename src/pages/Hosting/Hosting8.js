@@ -26,10 +26,10 @@ export default function Hosting8({ onChange, resultChoice }) {
             <TextLength>{textlength} / 500</TextLength>
           </TextAndInput>
         </Body>
-        <Footer>
+        {/* <Footer>
           <p>뒤로</p>
           <button className="next-button">다음</button>
-        </Footer>
+        </Footer> */}
       </Container2>
     </Wrapper>
   );

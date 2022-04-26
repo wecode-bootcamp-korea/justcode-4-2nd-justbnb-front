@@ -85,10 +85,10 @@ export default function Hosting6() {
           </Line> */}
           {/* -------------------------------------------------------------------- */}
         </Body>
-        <Footer>
+        {/* <Footer>
           <Prev to="/hosting/5">뒤로</Prev>
           <Next to="/hosting/7">다음</Next>
-        </Footer>
+        </Footer> */}
       </Container2>
     </Wrapper>
   );
