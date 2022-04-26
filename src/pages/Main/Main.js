@@ -1,9 +1,35 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import { useParams, useNavigate } from 'react-router-dom';
 import Footer from '../../components/Footer';
 import styled from 'styled-components';
 import Nav from '../../components/Nav/Nav';
+import Link from 'react-scroll/modules/components/Link';
+import CityCard from './CityCard';
 
 function Main() {
+  const params = useParams();
+  const navigate = useNavigate();
+  const [cities, setCities] = useState([]);
+
+  const goToList = city => {
+    navigate(`/list/:${city}`);
+    window.scrollTo(0.0);
+  };
+
+  const goToHosting = () => {
+    navigate(`/hosting`);
+    window.scrollTo(0.0);
+  };
+  useEffect(() => {
+    fetch('/data/jiho/cities.json', {
+      method: 'GET',
+    })
+      .then(res => res.json())
+      .then(result => {
+        setCities(result);
+      });
+  }, []);
+
   return (
     <>
       <Nav />
@@ -20,21 +46,34 @@ function Main() {
         </MainBanner>
       </Container>
 
-      <PictureBanner>
-        <Text color="#ffffff">호기심을 자극하는 숙소로 떠나보세요</Text>
-        <Button>
-          <Text2>유연한 검색</Text2>
-        </Button>
-      </PictureBanner>
-      <CityContainer>
-        <Text color="black">설레이는 다음 여행을 위한 아이디어</Text>
-      </CityContainer>
+      <div>
+        <PictureBox>
+          <Text color="#ffffff">호기심을 자극하는 숙소로 떠나보세요</Text>
+          <Button>
+            <Text2>유연한 검색</Text2>
+          </Button>
+        </PictureBox>
+        <CityContainer>
+          <Text color="black">설레이는 다음 여행을 위한 아이디어</Text>
+          <Wrapper>
+            {cities.map(list => (
+              <div
+                onClick={() => {
+                  goToList(list.name);
+                }}
+              >
+                <CityCard key={list.id} list={list} />
+              </div>
+            ))}
+          </Wrapper>
+        </CityContainer>
+      </div>
       <HostingBanner>
         <Box>
           <Text color="#ffffff"> 호스팅에 관해 궁금하신 점이 있나요?</Text>
         </Box>
         <div>
-          <Button2>슈퍼호스트에게 물어보세요</Button2>
+          <Button2 onClick={goToHosting}>슈퍼호스트에게 물어보세요</Button2>
         </div>
       </HostingBanner>
       <Footer />
@@ -48,18 +87,17 @@ const Container = styled.div`
 `;
 
 const MainBanner = styled.div`
-  display: flex;
-  justify-content: center;
-  padding: 80px 80px 300px 80px;
+  position: relative;
+  margin: 10px 10vw;
+  padding: 80px 0 400px 0px;
   background-color: black;
 `;
 
 const PinkBox = styled.div`
-  position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 100px;
+  padding: 100px 20px;
   border-radius: 10px;
   background: #ff385c;
 `;
@@ -92,6 +130,7 @@ const Button = styled.div`
 
   &:hover {
     cursor: pointer;
+    opacity: 0.8;
   }
 `;
 const Text2 = styled.div`
@@ -101,10 +140,11 @@ const Text2 = styled.div`
   -webkit-background-clip: text;
 `;
 
-const PictureBanner = styled.div`
+const PictureBox = styled.div`
   position: absolute;
-  top: 700px;
-  left: 80px;
+  top: 750px;
+  left: 10vw;
+  right: 10vw;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -115,13 +155,17 @@ const PictureBanner = styled.div`
 `;
 
 const CityContainer = styled.div`
-  padding: 500px 0 500px 80px;
+  padding: 500px 50px 300px 50px;
+`;
+
+const Wrapper = styled.div`
+  display: flex;
 `;
 
 const HostingBanner = styled.div`
   display: flex;
   flex-direction: column;
-  padding: 50px 10px;
+  padding: 50px;
   background-image: url('https://ifh.cc/g/B2bWvW.jpg');
   background-size: cover;
 `;
@@ -141,6 +185,7 @@ const Button2 = styled.button`
 
   &:hover {
     cursor: pointer;
+    box-shadow: 4px 5px 5px gray;
   }
 `;
 

@@ -7,6 +7,7 @@ import { Link } from 'react-router-dom';
 import LogoutToggle from './LogoutToggle';
 import LoginModal from '../Modal/LoginModal';
 import SignupModal from '../Modal/SignupModal';
+// import LoginToggle from '../Modal/LoginModal';
 
 function UserNav({ scrollPosition }) {
   const [openToggle, setOpenToggle] = useState({ display: 'none' });
@@ -97,6 +98,11 @@ const UserBox = styled.div`
   border: 1px solid #dddddd;
   border-radius: 22px;
   cursor: pointer;
+
+  &:hover {
+    box-shadow: 4px 5px 5px lightgray;
+    transform: scale(1, 1);
+  }
 `;
 
 const User = styled.div`
@@ -127,12 +133,6 @@ const Buttons = styled.li`
   &: hover {
     cursor: pointer;
     background: ${props => props.background};
-  }
-
-  &:nth-child(1) {
-    &:hover {
-      color: #dddddd;
-    }
   }
 `;
 
