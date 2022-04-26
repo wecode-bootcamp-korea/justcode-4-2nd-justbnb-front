@@ -1,18 +1,62 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import { AiOutlinePlus, AiOutlineMinus } from 'react-icons/ai';
 
-function MembersToggle() {
+function MembersToggle({ count, setCount, setHaveAnimal }) {
+  const [changeColor, setChangeColor] = useState({
+    changeYes: { backgroundColor: '#ffffff' },
+    changeNo: { backgroundColor: '#ffffff' },
+  });
+  const { changeYes, changeNo } = changeColor;
+  const minus = () => {
+    if (count === 1) return;
+    setCount(prev => prev - 1);
+  };
+
+  const plus = () => {
+    setCount(prev => prev + 1);
+  };
+
+  const onClickYesBtn = () => {
+    if (changeYes.backgroundColor === '#ffffff') {
+      setChangeColor({
+        changeYes: { backgroundColor: '#ebebeb' },
+        changeNo: { backgroundColor: '#ffffff' },
+      });
+      setHaveAnimal('y');
+    } else {
+      setChangeColor({
+        ...changeColor,
+        changeYes: { backgroundColor: '#ffffff' },
+      });
+    }
+  };
+
+  const onClickNoBtn = () => {
+    if (changeNo.backgroundColor === '#ffffff') {
+      setChangeColor({
+        changeYes: { backgroundColor: '#ffffff' },
+        changeNo: { backgroundColor: '#ebebeb' },
+      });
+      setHaveAnimal('n');
+    } else {
+      setChangeColor({
+        ...changeColor,
+        changeNo: { backgroundColor: '#ffffff' },
+      });
+    }
+  };
+
   return (
     <Container>
       <Wrapper>
         <Tittle>인원 수</Tittle>
         <div>
-          <Buttons>
+          <Buttons onClick={minus}>
             <AiOutlineMinus />
           </Buttons>
-          1
-          <Buttons>
+          {count}
+          <Buttons onClick={plus}>
             <AiOutlinePlus />
           </Buttons>
         </div>
@@ -20,8 +64,12 @@ function MembersToggle() {
       <Wrapper>
         <Tittle>반려동물 동반</Tittle>
         <BtnWrapper>
-          <Buttons>O</Buttons>
-          <Buttons>X</Buttons>
+          <Buttons onClick={onClickYesBtn} style={changeYes}>
+            O
+          </Buttons>
+          <Buttons onClick={onClickNoBtn} style={changeNo}>
+            X
+          </Buttons>
         </BtnWrapper>
       </Wrapper>
       <Text>
@@ -40,6 +88,7 @@ const Container = styled.div`
   padding: 10px;
   background-color: #ffffff;
   border-radius: 20px;
+  box-shadow: 1px 1px 2px #dddddd;
   font-size: 0.8rem;
 `;
 
@@ -63,9 +112,13 @@ const Buttons = styled.button`
   margin: 10px;
   padding: 6px 8px;
   border-radius: 50%;
-  border: 1px solid #dddddd;
-  color: #dddddd;
+  border: 1px solid black;
+  color: black;
   background-color: #ffffff;
+
+  &:hover {
+    cursor: pointer;
+  }
 `;
 
 const BtnWrapper = styled.div`

@@ -1,11 +1,13 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
 import { AiFillTrophy } from 'react-icons/ai';
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect } from 'react';
 import Accommodation from '../../components/Accommodation/Accommodation';
 import Pagination from '../../components/paging/Pagination';
 import BigCategoryList from './BigCategoryList';
 import MapContainer from './AcommodationMap';
+import ListNav from '../../components/Nav/ListNav';
+import Footer from '../../components/Footer';
 import {
   ListContainer,
   Container,
@@ -15,6 +17,7 @@ import {
   Icon,
   H2,
   WrapContainer,
+  TextArea,
 } from './AccommodationListStyled';
 
 const AccommodationList = () => {
@@ -31,29 +34,35 @@ const AccommodationList = () => {
   const [latlng, setlatlng] = useState({ lat: 0, lng: 0 });
   const [changeMap, setChangeMap] = useState(false);
 
+  const buildType = ''; //별채
+  const roomType = ''; //개인실
+  const animalYn = ''; //Y
+  const totalMembers = ''; //3
+
   /*목데이터 가져오기 */
   const refreshData = async () => {
-    await fetch('/data/hwseol/list.json', {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    })
+    //await fetch('/data/hwseol/list.json', {
+    await fetch(
+      `http://localhost:8000/accommodations?city=${local}&buildType=${buildType}&roomType=${roomType}&animaYn=${animalYn}&totalMembers=${totalMembers}`,
+      {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      }
+    )
       .then(res => res.json())
       .then(data => {
         let temp = [];
-        for (let i = 0; i < data.length; i++) {
-          if (local === '지도에 표시된 지역') {
-            temp.push(data[i]);
-          } else if (data[i].local === local) {
-            temp.push(data[i]);
-          }
+        for (let i = 0; i < data.accommodationsList.length; i++) {
+          temp.push(data.accommodationsList[i]);
         }
         setData([...temp]);
       });
   };
   useEffect(() => {
     refreshData();
+    console.log('local ', local);
   }, [local]);
   //rendering이 한박자 늦어서 어쩔수 없이 한번 더 리랜더링
   useEffect(() => {}, [datas]);
@@ -69,25 +78,33 @@ const AccommodationList = () => {
       window.removeEventListener('resize', resizeWindow);
     };
   });
+  if (datas === []) return null;
+
   return (
     <WrapContainer>
+      <ListNav />
       <Container>
         {/* {changeMap === false ? ( */}
         <ListContainer active={changeMap ? 'true' : 'false'}>
-          <Text>{local}에 위치한 300개 이상의 숙소</Text>
-          <Text>
-            여행 날짜와 게스트 인원수를 입력하면 1박당 총 요금을 확인할 수
-            있습니다.
-          </Text>
-          <IconTextWrap>
-            <Icon>
-              <AiFillTrophy size="28" color="red" />
-            </Icon>
-            <Text2>
-              390,000명의 게스트가 {local}의 숙소에 머물렀습니다. 게스트는
-              평균적으로 이 숙소를 별 5개 만점에 4.8점으로 평가했습니다.
-            </Text2>
-          </IconTextWrap>
+          <TextArea>
+            <Text>
+              {local === 'all' ? '지도에 표시된 지역' : local}에 위치한 300개
+              이상의 숙소
+            </Text>
+            <Text>
+              여행 날짜와 게스트 인원수를 입력하면 1박당 총 요금을 확인할 수
+              있습니다.
+            </Text>
+            <IconTextWrap>
+              <Icon>
+                <AiFillTrophy size="28" color="red" />
+              </Icon>
+              <Text2>
+                390,000명의 게스트가 {local}의 숙소에 머물렀습니다. 게스트는
+                평균적으로 이 숙소를 별 5개 만점에 4.8점으로 평가했습니다.
+              </Text2>
+            </IconTextWrap>
+          </TextArea>
           {level >= 13 ? <BigCategoryList data={datas} /> : null}
           {level >= 13 ? <H2>{_data.length}개 이상의 숙소 둘러보기</H2> : null}
           {width > 1308
@@ -95,7 +112,7 @@ const AccommodationList = () => {
                 <Accommodation
                   data={data}
                   key={data.id}
-                  localName={data.local}
+                  localName={data.city}
                   setlatlng={setlatlng} //{{ lat: datas[index].lat, lng: datas[index].long }}
                 />
               ))
@@ -103,7 +120,7 @@ const AccommodationList = () => {
                 <Accommodation
                   data={data}
                   key={data.id}
-                  localName={data.local}
+                  localName={data.city}
                   setlatlng={setlatlng} //{{ lat: datas[index].lat, lng: datas[index].long }}
                 />
               ))}
@@ -131,6 +148,7 @@ const AccommodationList = () => {
           />
         ) : null}
       </Container>
+      <Footer />
     </WrapContainer>
   );
 };

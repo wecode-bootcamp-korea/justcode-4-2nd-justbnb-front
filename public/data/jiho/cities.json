@@ -1,0 +1,37 @@
+[
+  {
+    "id": 0,
+    "name": "서울시",
+    "distance": "2km",
+    "imgUrl": "https://ifh.cc/g/Tk20MJ.jpg",
+    "colors": "rgb(204, 45, 74)"
+  },
+  {
+    "id": 1,
+    "name": "대전시",
+    "distance": "140km",
+    "imgUrl": "https://ifh.cc/g/XyZswm.jpg",
+    "colors": "rgb(188, 26, 110)"
+  },
+  {
+    "id": 2,
+    "name": "대구시",
+    "distance": "237km",
+    "imgUrl": "https://ifh.cc/g/QYNyXo.jpg",
+    "colors": "rgb(222, 49, 81)"
+  },
+  {
+    "id": 3,
+    "name": "부산시",
+    "distance": "437km",
+    "imgUrl": "https://ifh.cc/g/27vFsP.jpg",
+    "colors": "rgb(204, 45, 74)"
+  },
+  {
+    "id": 4,
+    "name": "제주시",
+    "distance": "889km",
+    "imgUrl": "https://ifh.cc/g/zHKndl.jpg",
+    "colors": "rgb(217, 59, 48)"
+  }
+]

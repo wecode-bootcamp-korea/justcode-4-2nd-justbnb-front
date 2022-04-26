@@ -2,7 +2,6 @@ import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 
 function Review(props) {
-  console.log('props', props);
   return (
     <Wrapper>
       <User>
@@ -39,8 +38,16 @@ const Photo = styled.div`
   }
 `;
 const Text = styled.div``;
-const Name = styled.div``;
-const Date = styled.div``;
+
+const Name = styled.div`
+  font-weight: 600;
+  margin-bottom: 5px;
+`;
+
+const Date = styled.div`
+  font-size: 13px;
+  color: rgba(0, 0, 0, 0.5);
+`;
 const Content = styled.div``;
 
 export default Review;
