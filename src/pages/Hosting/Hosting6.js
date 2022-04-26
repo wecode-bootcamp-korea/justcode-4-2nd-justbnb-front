@@ -15,6 +15,10 @@ export default function Hosting6() {
     setFiles(newFiles);
   };
 
+  const UploadCancel = e => {
+    return setFiles(null);
+  };
+
   return (
     <Wrapper>
       <Container>
@@ -32,7 +36,6 @@ export default function Hosting6() {
         </Header>
         <Body>
           {/* {console.log(files.length)} */}
-
           {files.length === 0 ? (
             <Line>
               <PictureIcon>
@@ -40,7 +43,14 @@ export default function Hosting6() {
               </PictureIcon>
               <Text2>멋진 숙소 사진을 올려주세요!</Text2>
               <Text3>최대 5장까지 업로드하실 수 있습니다.</Text3>
-              <UploadImage onChange={Upload} type="file" multiple="multiple" />
+              <Label>
+                <LabelDescription>사진 올리기</LabelDescription>
+                <UploadImage
+                  onChange={Upload}
+                  type="file"
+                  multiple="multiple"
+                />
+              </Label>
             </Line>
           ) : (
             <Line2>
@@ -52,6 +62,7 @@ export default function Hosting6() {
                   }
                 })}
               </Pictures>
+              {/* <Empty onChange={UploadCancel}>사진 비우기</Empty> */}
             </Line2>
           )}
 
@@ -201,14 +212,12 @@ const Line = styled.div`
 `;
 
 const Line2 = styled.div`
-  outline: 1px dashed rgb(176, 176, 176) !important;
+  /* outline: 1px dashed rgb(176, 176, 176) !important; */
   width: fit-content;
   height: auto;
   display: flex;
   align-items: center;
   flex-direction: column;
-  /* padding: 350px 150px 0 150px; */
-  /* padding: 12vw 5vw 1vw 5vw; */
   margin: auto auto 7vw auto;
   /* overflow-y: auto; */
 `;
@@ -240,10 +249,21 @@ const UploadImage = styled.input`
   /* border: 1px solid red; */
   margin-top: 10px;
   width: 50%;
+  pointer-events: none;
+  opacity: 0;
 `;
 
-const Confirm = styled.button`
-  font-size: 15px;
+const Label = styled.label`
+  width: 30%;
+  border: 1px black solid;
+  cursor: pointer;
+  margin: 1vw 0 8vw 0;
+`;
+
+const LabelDescription = styled.div`
+  position: absolute;
+  margin: 0.5vw 1.3vw;
+  font-weight: bold;
 `;
 
 const Image = styled.img`
@@ -256,4 +276,8 @@ const Image = styled.img`
 const Pictures = styled.div`
   display: grid;
   grid-template-columns: repeat(2, 1fr);
+`;
+
+const Empty = styled.button`
+  font-size: 1vw;
 `;
