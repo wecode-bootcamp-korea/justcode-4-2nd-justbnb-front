@@ -167,10 +167,10 @@ const SearchBtn = styled.button`
   border-radius: 30px;
   border: 1px solid #dddddd;
   background-color: #ffffff;
-  box-shadow: 2px 2px 10px #dddddd;
 
   &:hover {
     cursor: pointer;
+    box-shadow: 4px 5px 5px lightgray;
   }
 `;
 
