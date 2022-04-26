@@ -7,7 +7,7 @@ import DatePickerRangeController from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 
 function InfoCalender(props) {
-  const { start, end, change, deleteDate, dateDiff, location } = props;
+  const { start, end, change, deleteDate, dateDiff, district } = props;
   const [checkInDate, setCheckInDate] = useState(0);
 
   useEffect(() => {
@@ -18,11 +18,11 @@ function InfoCalender(props) {
     <Wrapper>
       <h2>
         {end
-          ? `${location}에서의 ${checkInDate}박`
+          ? `${district}에서의 ${checkInDate}박`
           : '체크인 날짜를 선택해주세요'}
       </h2>
       <span>
-        {end
+        {start && end
           ? `${start.getFullYear()}년 ${
               start.getMonth() + 1
             }월 ${start.getDate()}일 ~ ${end.getFullYear()}년 ${

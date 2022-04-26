@@ -58,7 +58,6 @@ function Detail() {
 
   useEffect(() => {
     setAccommodation(accommodation);
-    console.log('accommodation', accommodation);
   }, [accommodation]);
 
   // 리뷰 데이터 받아오기
@@ -77,7 +76,8 @@ function Detail() {
       <Main
         key={accommodation.id}
         name={accommodation.accommodations_name}
-        location={accommodation.sub_location}
+        district={accommodation.district}
+        neighborhood={accommodation.neighborhood}
       />
       <InfoSection>
         <InfoWrapper>
@@ -95,7 +95,7 @@ function Detail() {
             change={onChange}
             deleteDate={deleteDate}
             dateDiff={dateDiff}
-            location={accommodation.sub_location}
+            district={accommodation.district}
           />
         </InfoWrapper>
         <SideBar
@@ -127,7 +127,8 @@ function Detail() {
       </ReviewSection>
       <MapInfo
         city={accommodation.city}
-        sub_location={accommodation.sub_location}
+        district={accommodation.district}
+        neighborhood={accommodation.neighborhood}
         lat={accommodation.lat}
         long={accommodation.long}
       />

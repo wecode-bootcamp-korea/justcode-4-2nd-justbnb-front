@@ -4,7 +4,7 @@ import { FaStar, FaRegHeart } from 'react-icons/fa';
 
 function Main(props) {
   const [imageUrlArray, setImageUrlArray] = useState([]);
-  const { name, location } = props;
+  const { name, location, district, neighborhood } = props;
 
   useEffect(() => {
     fetch('/data/minji/accommodationsImages.json', {
@@ -29,7 +29,8 @@ function Main(props) {
             <div>
               <FaStar className="faStar" color="#ff385c" />
             </div>
-            <span>4.61</span>·<span>후기 33개</span>·<span>{location}</span>
+            <span>4.61</span>·<span>후기 33개</span>·
+            <span>{`${district}, ${neighborhood}`}</span>
           </BnbInfo>
           <div>
             <FaRegHeart className="icons" />
@@ -37,25 +38,33 @@ function Main(props) {
           </div>
         </InfoWrapper>
         <ImgWrapper>
-          <MainImgBox>
-            <img alt="main" src={imageUrlArray[0]} />
-          </MainImgBox>
-          <div>
+          <FirstBox>
             <MainImgBox>
-              <img alt="main" src={imageUrlArray[1]} />
+              <img alt="main" src={imageUrlArray[0]} />
             </MainImgBox>
-            <MainImgBox>
-              <img alt="main" src={imageUrlArray[2]} />
-            </MainImgBox>
-          </div>
-          <div>
-            <MainImgBox>
-              <img alt="main" src={imageUrlArray[3]} />
-            </MainImgBox>
-            <MainImgBox>
-              <img alt="main" src={imageUrlArray[4]} />
-            </MainImgBox>
-          </div>
+          </FirstBox>
+          <SecondBox>
+            <div>
+              <MainImgBox>
+                <img alt="main" src={imageUrlArray[1]} />
+              </MainImgBox>
+            </div>
+            <div>
+              <MainImgBox>
+                <img alt="main" src={imageUrlArray[2]} />
+              </MainImgBox>
+            </div>
+            <div>
+              <MainImgBox>
+                <img alt="main" src={imageUrlArray[3]} />
+              </MainImgBox>
+            </div>
+            <div>
+              <MainImgBox>
+                <img alt="main" src={imageUrlArray[4]} />
+              </MainImgBox>
+            </div>
+          </SecondBox>
         </ImgWrapper>
       </div>
     </Wrapper>
@@ -64,7 +73,6 @@ function Main(props) {
 
 const Wrapper = styled.section`
   padding-top: 80px;
-  /* margin: 0 80px; */
 `;
 
 const MainTitle = styled.h1`
@@ -119,25 +127,33 @@ const ImgWrapper = styled.section`
   justify-content: center;
   border-radius: 20px;
   overflow: hidden;
+`;
 
+const FirstBox = styled.div`
+  width: 50%;
+  margin-right: 5px;
+`;
+
+const SecondBox = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  width: 50%;
   & > div {
-    display: flex;
-    flex-direction: column;
-    width: 25%;
-    margin-left: 5px;
-    & > div:first-child {
+    width: 50%;
+    height: 50%;
+    &:nth-child(2) {
       margin-bottom: 5px;
     }
-    &:first-of-type {
-      width: 50%;
-      margin: 0px;
+    &:first-child,
+    &:nth-child(3) {
+      padding-right: 5px;
     }
   }
 `;
 
 const MainImgBox = styled.div`
   width: 100%;
-  border-radius: 12px;
+  height: 100%;
 
   img {
     width: 100%;

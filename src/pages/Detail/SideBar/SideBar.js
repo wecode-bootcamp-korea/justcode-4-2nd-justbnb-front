@@ -1,4 +1,4 @@
-import { React, useEffect, useState } from 'react';
+import { React, useEffect, useState, useRef } from 'react';
 import styled from 'styled-components';
 import SideBarHeadCount from './SideBarHeadCount';
 import CalendarModal from './CalendarModal';
@@ -16,10 +16,11 @@ function InfoSideBar(props) {
     total_members,
   } = props;
 
-  // 캘린더 모달 open 관리
+  // 모달 open 관리
   const [calendarModalOpen, setCalendarModalOpen] = useState(false);
   const [CountModalOpen, setCountModalOpen] = useState(false);
-  const handleCalendarModalClose = () => {
+
+  const handleCalendarModalClose = e => {
     setCalendarModalOpen(false);
   };
   const handleCountModalClose = () => {
@@ -27,14 +28,14 @@ function InfoSideBar(props) {
   };
 
   // 캘린더 input
-  const [checkInValue, setCheckInValue] = useState(null);
-  const [checkOutValue, setCheckOutValue] = useState(null);
+  const [checkInValue, setCheckInValue] = useState('');
+  const [checkOutValue, setCheckOutValue] = useState('');
 
   const handleCheckInValue = useEffect(() => {
     !dateDeleted
       ? setCheckInValue('')
       : setCheckInValue(
-          start !== null
+          start
             ? `${start.getFullYear()}.${
                 start.getMonth() + 1
               }.${start.getDate()}`
@@ -42,13 +43,21 @@ function InfoSideBar(props) {
         );
   }, [start]);
 
+  // checkInValue 초기값 할당 시 state 값이 바뀌지 않는 오류
+  useEffect(() => {
+    const newDate = new Date();
+    setCheckInValue(
+      `${newDate.getFullYear()}.${newDate.getMonth() + 1}.${newDate.getDate()}`
+    );
+  }, []);
+
   const handleCheckOutValue = useEffect(() => {
     !dateDeleted
       ? setCheckOutValue('')
       : setCheckOutValue(
-          end !== null
+          end
             ? `${end.getFullYear()}.${end.getMonth() + 1}.${end.getDate()}`
-            : null
+            : ''
         );
   }, [end]);
 
@@ -76,16 +85,19 @@ function InfoSideBar(props) {
             <span>4.61 · 후기 33개</span>
           </div>
         </Text1>
-        <CalendarModal
-          open={calendarModalOpen}
-          close={handleCalendarModalClose}
-          start={start}
-          end={end}
-          change={change}
-          dateDiff={dateDiff}
-          deleteDate={deleteDate}
-          dateDeleted={dateDeleted}
-        />
+        {calendarModalOpen && (
+          <CalendarModal
+            open={calendarModalOpen}
+            setCalendarModalOpen={setCalendarModalOpen}
+            close={handleCalendarModalClose}
+            start={start}
+            end={end}
+            change={change}
+            dateDiff={dateDiff}
+            deleteDate={deleteDate}
+            dateDeleted={dateDeleted}
+          />
+        )}
         <Form>
           <InputWrapper>
             <CheckWrapper
@@ -98,11 +110,17 @@ function InfoSideBar(props) {
             >
               <CheckInput>
                 <span>체크인</span>
-                <Input placeholder="날짜 추가" value={checkInValue} />
+                <Input
+                  placeholder="날짜 추가"
+                  defaultValue={checkInValue || ''}
+                />
               </CheckInput>
               <CheckInput>
                 <span>체크아웃</span>
-                <Input placeholder="날짜 추가" value={checkOutValue} />
+                <Input
+                  placeholder="날짜 추가"
+                  defaultValue={checkOutValue || ''}
+                />
               </CheckInput>
             </CheckWrapper>
             <Guest
@@ -122,6 +140,7 @@ function InfoSideBar(props) {
           <SideBarHeadCount
             open={CountModalOpen}
             close={handleCountModalClose}
+            setCountModalOpen={setCountModalOpen}
             headCount={headCount}
             petCount={petCount}
             handleHeadCount={handleHeadCount}

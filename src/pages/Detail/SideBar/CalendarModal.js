@@ -1,4 +1,4 @@
-import { React, useEffect, useState } from 'react';
+import { React, useEffect, useState, useRef } from 'react';
 import styled from 'styled-components';
 
 import DatePickerRangeController from 'react-datepicker';
@@ -6,10 +6,35 @@ import 'react-datepicker/dist/react-datepicker.css';
 // import Calendar from '../../../components/Calendar/Calendar';
 
 function CalendarModal(props) {
-  const { start, end, change, deleteDate, dateDiff, dateDeleted } = props;
-  const [checkInValue, setCheckInValue] = useState(null);
-  const [checkOutValue, setCheckOutValue] = useState(null);
+  const {
+    start,
+    end,
+    change,
+    deleteDate,
+    dateDiff,
+    dateDeleted,
+    setCalendarModalOpen,
+  } = props;
+  const [checkInValue, setCheckInValue] = useState('');
+  const [checkOutValue, setCheckOutValue] = useState('');
   const [checkInDate, setCheckInDate] = useState(0);
+
+  const wrapperRef = useRef();
+
+  useEffect(() => {
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  });
+
+  const handleClickOutside = event => {
+    if (wrapperRef && !wrapperRef.current.contains(event.target)) {
+      setCalendarModalOpen(false);
+    } else {
+      setCalendarModalOpen(true);
+    }
+  };
 
   useEffect(() => {
     setCheckInDate(dateDiff);
@@ -38,7 +63,10 @@ function CalendarModal(props) {
   }, [end]);
 
   return (
-    <Wrapper style={{ display: props.open ? 'block' : 'none' }}>
+    <Wrapper
+      ref={wrapperRef}
+      style={{ display: props.open ? 'block' : 'none' }}
+    >
       <Header>
         <Text>
           {/* <h2>날짜 선택</h2> */}
@@ -58,14 +86,14 @@ function CalendarModal(props) {
             <div>체크인</div>
             <Input
               placeholder="날짜 추가"
-              value={!dateDeleted ? '' : checkInValue}
+              defaultValue={!dateDeleted ? '' : checkInValue}
             />
           </CheckIn>
           <CheckOut>
             <div>체크아웃</div>
             <Input
               placeholder="날짜 추가"
-              value={!dateDeleted ? '' : checkOutValue}
+              defaultValue={!dateDeleted ? '' : checkOutValue}
             />
           </CheckOut>
         </InputWrapper>
