@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 
-function BtnCard({ list, cityId }) {
+function BtnCard({ list, setCity }) {
   const [changeColor, setChangeColor] = useState();
 
   const colorChangeHandler = () => {
@@ -18,9 +18,15 @@ function BtnCard({ list, cityId }) {
         })
       : setChangeColor();
   };
+
+  const onClickBtn = () => {
+    setCity(list.name);
+    colorChangeHandler();
+  };
+
   return (
     <BtnsWrapper>
-      <BtnLayout onClick={colorChangeHandler} style={changeColor}>
+      <BtnLayout onClick={onClickBtn} style={changeColor}>
         {list.name}
       </BtnLayout>
     </BtnsWrapper>

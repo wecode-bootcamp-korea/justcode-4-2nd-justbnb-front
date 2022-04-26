@@ -3,7 +3,6 @@ import { useParams, useNavigate } from 'react-router-dom';
 import Footer from '../../components/Footer';
 import styled from 'styled-components';
 import Nav from '../../components/Nav/Nav';
-import Link from 'react-scroll/modules/components/Link';
 import CityCard from './CityCard';
 
 function Main() {
@@ -58,6 +57,7 @@ function Main() {
           <Wrapper>
             {cities.map(list => (
               <div
+                key={list.id}
                 onClick={() => {
                   goToList(list.name);
                 }}
@@ -148,7 +148,7 @@ const PictureBox = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 240px;
+  padding: 240px 200px;
   border-radius: 10px;
   background-image: url('https://ifh.cc/g/qZM3wa.jpg');
   background-size: cover;

@@ -138,7 +138,7 @@ const Menu = styled.div`
   ${styledMenu}
   cursor: pointer;
 
-  &: after {
+  &:after {
     content: '';
     width: 20px;
     margin-top: 10px;

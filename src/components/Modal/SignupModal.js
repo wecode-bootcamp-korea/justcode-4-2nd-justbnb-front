@@ -198,6 +198,7 @@ const ModalInner = styled.div`
   box-shadow: 0 0 6px 0 rgba(0, 0, 0, 0.5);
   background-color: #fff;
   border-radius: 10px;
+  cursor: default;
 `;
 
 const HeadLine = styled.div`
@@ -212,7 +213,9 @@ const CloseBtn = styled.button`
   border: none;
   background-color: #ffffff;
   font-size: 0.9em;
-  cursor: pointer;
+  &:hover {
+    cursor: pointer;
+  }
 `;
 
 const Tittle = styled.div`
@@ -231,7 +234,9 @@ const BtnLayout = css`
   margin-top: 15px;
   padding: 15px 20px;
   border-radius: 8px;
-  cursor: pointer;
+  &:hover {
+    cursor: pointer;
+  }
 `;
 
 const Input = styled.input`
@@ -242,7 +247,7 @@ const Input = styled.input`
   border-radius: 10px;
   border: 1px solid gray;
 
-  &: focus {
+  &:focus {
     outline-color: black;
   }
 `;

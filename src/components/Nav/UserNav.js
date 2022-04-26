@@ -49,6 +49,14 @@ function UserNav({ scrollPosition }) {
                 color="#ffffff"
               />
             </Buttons>
+            <UserBox onClick={toggleHandler} active={false}>
+              <StyledIcon>
+                <GiHamburgerMenu fontSize={16} />
+              </StyledIcon>
+              <User>
+                <RiUser3Line fontSize={18} />
+              </User>
+            </UserBox>
           </>
         ) : (
           <>
@@ -60,16 +68,16 @@ function UserNav({ scrollPosition }) {
             <Buttons color="black" background="#F7F7F7">
               <CgGlobeAlt fontSize={20} style={{ opacity: '0.5' }} />
             </Buttons>
+            <UserBox onClick={toggleHandler} active={true}>
+              <StyledIcon>
+                <GiHamburgerMenu fontSize={16} />
+              </StyledIcon>
+              <User>
+                <RiUser3Line fontSize={18} />
+              </User>
+            </UserBox>
           </>
         )}
-        <UserBox onClick={toggleHandler}>
-          <StyledIcon>
-            <GiHamburgerMenu fontSize={16} />
-          </StyledIcon>
-          <User>
-            <RiUser3Line fontSize={18} />
-          </User>
-        </UserBox>
       </Navbar>
       <LogoutToggle
         openToggle={openToggle}
@@ -100,7 +108,7 @@ const UserBox = styled.div`
   cursor: pointer;
 
   &:hover {
-    box-shadow: 4px 5px 5px lightgray;
+    box-shadow: ${props => props.active && '2px 2px 3px lightgray'};
     transform: scale(1, 1);
   }
 `;
