@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 
-export default function Hosting7() {
+export default function Hosting7({ onChange, resultChoice }) {
   const [textlength, setTextLength] = useState(0);
 
   return (

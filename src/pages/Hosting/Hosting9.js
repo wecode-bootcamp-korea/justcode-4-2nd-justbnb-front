@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import CounterValue3 from './Component/Counter3';
 
-export default function Hosting9() {
+export default function Hosting9({ onChange, resultChoice }) {
   return (
     <Wrapper>
       <Container>

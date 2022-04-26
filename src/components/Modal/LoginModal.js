@@ -166,6 +166,8 @@ const ModalWrapper = styled.div`
   z-index: 1000;
   overflow: hidden;
   outline: 0;
+  box-shadow: 2px 2px 10px #dddddd;
+  cursor: default;
 
   animation: ${move} 0.3s ease-in-out forwards;
 `;
@@ -192,14 +194,15 @@ const CloseBtn = styled.button`
   text-align: left;
   border: none;
   background-color: #ffffff;
-  font-size: 0.9em;
+  font-size: 0.9rem;
   cursor: pointer;
 `;
 
 const Tittle = styled.div`
-  font-size: 1.1em;
+  font-size: 1.1rem;
   padding-left: 230px;
   font-weight: 700;
+  color: black;
 `;
 
 const ContentsWrapper = styled.div`
@@ -209,8 +212,9 @@ const ContentsWrapper = styled.div`
 const Text = styled.div`
   &:first-child {
     padding-bottom: 40px;
-    font-size: 1.3em;
+    font-size: 1.3rem;
     font-weight: 600;
+    color: black;
   }
 
   &:last-child {
@@ -276,8 +280,9 @@ const Btns = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  font-size: 0.9em;
   border: 1px solid black;
+  font-size: 0.9em;
+  color: black;
   ${BtnLayout}
 
   &: hover {

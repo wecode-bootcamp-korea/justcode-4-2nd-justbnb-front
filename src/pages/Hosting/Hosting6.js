@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { AiOutlinePicture } from 'react-icons/ai';
 
-export default function Hosting6() {
+export default function Hosting6({ onChange, resultChoice }) {
   return (
     <Wrapper>
       <Container>

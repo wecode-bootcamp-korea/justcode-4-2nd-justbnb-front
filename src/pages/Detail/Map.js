@@ -1,13 +1,15 @@
 import styled from 'styled-components';
 import { Map } from 'react-kakao-maps-sdk';
 
-function MapInfo() {
+function MapInfo(props) {
+  const { city, sub_location, lat, long } = props;
+
   return (
     <Wrapper>
       <Title>호스팅 지역</Title>
-      <Address>은평구, 서울, 한국</Address>
+      <Address>{`${sub_location}, ${city}`}</Address>
       <Map
-        center={{ lat: 33.450701, lng: 126.570667 }}
+        center={{ lat: lat, lng: long }}
         style={{ width: '1120px', height: '480px' }}
         level={3}
       ></Map>
