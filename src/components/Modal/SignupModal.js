@@ -184,6 +184,7 @@ const ModalWrapper = styled.div`
   z-index: 1000;
   overflow: hidden;
   outline: 0;
+  box-shadow: 2px 2px 10px #dddddd;
 
   animation: ${move} 0.3s ease-in-out forwards;
 `;
