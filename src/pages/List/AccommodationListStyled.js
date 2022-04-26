@@ -50,7 +50,7 @@ const Container = styled.div`
   width: 100%;
   height: 100%;
   display: flex;
-  margin-top: 315px;
+  margin-top: 200px;
   @media only screen and (max-width: 1308px) {
     width: 100%;
   }
@@ -115,10 +115,10 @@ const TextArea = styled.div`
 `;
 
 const MapBox = styled.div`
-  height: 740px;
+  height: 860px;
   width: 100%;
   position: ${props => (props.changeMap === 'false' ? 'sticky' : 'absolute')};
-  top: ${props => (props.changeMap === 'false' ? '250px' : 'none')};
+  top: ${props => (props.changeMap === 'false' ? '105px' : 'none')};
   animation-duration: 1s;
   z-index: -10;
   transition: all 4s ease-in;
