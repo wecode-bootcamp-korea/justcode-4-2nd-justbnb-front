@@ -4,21 +4,17 @@ import { AiOutlinePicture } from 'react-icons/ai';
 import { Link } from 'react-router-dom';
 
 export default function Hosting6() {
-  // const [step, setStep] = useState(1);
+  const [files, setFiles] = useState([]);
 
-  // function GotoStep({ step, onChange, result }) {
-  //   switch (step) {
-  //     case 1:
-  //       return <Hosting5 />;
-  //       break;
-  //     case 2:
-  //       return <Hosting7 />;
-  //       break;
-  //     default:
-  //       console.log('default!');
-  //       return;
-  //   }
-  // }
+  const Upload = e => {
+    const files = Array.from(e.target.files);
+    // const files = e.target.files;
+    const newFiles = files.map(file => {
+      return URL.createObjectURL(file);
+    });
+    setFiles(newFiles);
+  };
+
   return (
     <Wrapper>
       <Container>
@@ -35,14 +31,48 @@ export default function Hosting6() {
           <button className="exit-button">나가기</button>
         </Header>
         <Body>
-          <Line>
+          {/* {console.log(files.length)} */}
+
+          {files.length === 0 ? (
+            <Line>
+              <PictureIcon>
+                <AiOutlinePicture />
+              </PictureIcon>
+              <Text2>멋진 숙소 사진을 올려주세요!</Text2>
+              <Text3>최대 5장까지 업로드하실 수 있습니다.</Text3>
+              <UploadImage onChange={Upload} type="file" multiple="multiple" />
+            </Line>
+          ) : (
+            <Line2>
+              <Pictures>
+                {files.map((file, index) => {
+                  if (index < 5) {
+                    // 5장을 넘기지 않게 하기 위해
+                    return <Image key={null} src={file} />;
+                  }
+                })}
+              </Pictures>
+            </Line2>
+          )}
+
+          {/* -------------------------------------------------------------------- */}
+          {/* <Line>
+            <Pictures>
+              {files.map((file, index) => {
+                if (index < 5) {
+                  // 5장을 넘기지 않게 하기 위해
+                  return <Image key={null} src={file} />;
+                }
+              })}
+            </Pictures>
             <PictureIcon>
               <AiOutlinePicture />
             </PictureIcon>
-            <Text2>여기로 사진을 끌어다 놓으세요.</Text2>
-            <Text3>5장 이상의 사진을 올리세요.</Text3>
-            <Text4>기기에서 업로드</Text4>
-          </Line>
+            <Text2>멋진 숙소 사진을 올려주세요!</Text2>
+            <Text3>최대 5장까지 업로드하실 수 있습니다.</Text3>
+            <UploadImage onChange={Upload} type="file" multiple="multiple" />
+          </Line> */}
+          {/* -------------------------------------------------------------------- */}
         </Body>
         <Footer>
           <Prev to="/hosting/5">뒤로</Prev>
@@ -160,13 +190,27 @@ const Line = styled.div`
   outline: 1px dashed rgb(176, 176, 176) !important;
   /* outline: 1px dashed black; */
   width: fit-content;
-  height: fit-content;
+  height: auto;
   display: flex;
   align-items: center;
   flex-direction: column;
   /* padding: 350px 150px 0 150px; */
   padding: 12vw 5vw 1vw 5vw;
   margin: auto auto 7vw auto;
+  overflow-y: auto;
+`;
+
+const Line2 = styled.div`
+  outline: 1px dashed rgb(176, 176, 176) !important;
+  width: fit-content;
+  height: auto;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  /* padding: 350px 150px 0 150px; */
+  /* padding: 12vw 5vw 1vw 5vw; */
+  margin: auto auto 7vw auto;
+  /* overflow-y: auto; */
 `;
 
 const PictureIcon = styled.div`
@@ -190,4 +234,26 @@ const Text4 = styled.div`
   margin-bottom: 3vw;
   text-decoration: underline;
   cursor: pointer;
+`;
+
+const UploadImage = styled.input`
+  /* border: 1px solid red; */
+  margin-top: 10px;
+  width: 50%;
+`;
+
+const Confirm = styled.button`
+  font-size: 15px;
+`;
+
+const Image = styled.img`
+  object-fit: cover;
+  width: 90%;
+  height: 10vw;
+  margin: 5px;
+`;
+
+const Pictures = styled.div`
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
 `;
