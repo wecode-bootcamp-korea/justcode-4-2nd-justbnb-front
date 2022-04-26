@@ -1,12 +1,16 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { BiSearch } from 'react-icons/bi';
 import SearchToggle from './SearchToggle';
 import MembersToggle from './MembersToggle';
 
-function SearchBar() {
+function SearchBar({ scrollPosition, updateScroll }) {
   const [isSearchToggleOpen, setIsSearchToggleOpen] = useState(false);
   const [isMembersToggleOpen, setIsMembersToggleOpen] = useState(false);
+
+  useEffect(() => {
+    window.addEventListener('scroll', updateScroll);
+  });
 
   const searchToggleHandler = () => {
     !isSearchToggleOpen
@@ -22,42 +26,49 @@ function SearchBar() {
 
   return (
     <Container>
-      <SearchWrapper>
-        <div>
-          <SearchInner onClick={searchToggleHandler}>
-            <SearchKeyword>위치</SearchKeyword>
-            <Text>어디로 여행가세요?</Text>
+      {scrollPosition < 100 && (
+        <SearchWrapper>
+          <div>
+            <SearchInner onClick={searchToggleHandler}>
+              <SearchKeyword>위치</SearchKeyword>
+              <Text>어디로 여행가세요?</Text>
+            </SearchInner>
+            {isSearchToggleOpen && <SearchToggle />}
+          </div>
+          <SearchInner>
+            <SearchKeyword>체크인</SearchKeyword>
+            <Input placeholder="날짜 입력" />
           </SearchInner>
-          {isSearchToggleOpen && <SearchToggle />}
-        </div>
-        <SearchInner>
-          <SearchKeyword>체크인</SearchKeyword>
-          <Input placeholder="날짜 입력" />
-        </SearchInner>
-        <SearchInner>
-          <SearchKeyword>체크아웃</SearchKeyword>
-          <Input placeholder="날짜 입력" />
-        </SearchInner>
-        <div>
-          <SearchInner onClick={membersToggleHandler}>
-            <SearchKeyword>인원</SearchKeyword>
-            <Text>게스트 추가</Text>
+          <SearchInner>
+            <SearchKeyword>체크아웃</SearchKeyword>
+            <Input placeholder="날짜 입력" />
           </SearchInner>
-          {isMembersToggleOpen && <MembersToggle />}
-        </div>
-        <SearchBtns>
-          <BiSearch font-size={20} />
-          <SearchKeyword2>검색</SearchKeyword2>
-        </SearchBtns>
-      </SearchWrapper>
+          <div>
+            <SearchInner onClick={membersToggleHandler}>
+              <SearchKeyword>인원</SearchKeyword>
+              <Text>게스트 추가</Text>
+            </SearchInner>
+            {isMembersToggleOpen && <MembersToggle />}
+          </div>
+          <SearchBtns>
+            <BiSearch font-size={20} />
+            <SearchKeyword2>검색</SearchKeyword2>
+          </SearchBtns>
+        </SearchWrapper>
+      )}
     </Container>
   );
 }
 
 const Container = styled.div`
-  display: flex;
+  display: fixed;
   justify-content: center;
-  padding-bottom: 80px;
+
+  top: -header.height;
+  width: 100%;
+  transition: top 0.3s;
+  margin: 0 auto;
+  background: black;
 `;
 
 const SearchWrapper = styled.div`
