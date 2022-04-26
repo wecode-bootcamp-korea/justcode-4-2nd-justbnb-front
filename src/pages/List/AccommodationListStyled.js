@@ -29,17 +29,17 @@ const ListContainer = styled.div`
   animation-duration: 1s;
   box-shadow: 5px 0px 10px grey;
   animation: ${props => {
-      if (props.active === 'true') {
-        return css`
-          ${boxFade} 1s 0s ease alternate forwards;
-        `;
-      } else {
-        return css`
-          ${boxShow} 1s 0s ease alternate forwards;
-        `;
-      }
-    }}
-    @media only screen and (max-width: 1308px) {
+    if (props.active === 'true') {
+      return css`
+        ${boxFade} 1s 0s ease alternate forwards;
+      `;
+    } else {
+      return css`
+        ${boxShow} 1s 0s ease alternate forwards;
+      `;
+    }
+  }};
+  @media only screen and (max-width: 1308px) {
     width: 100%;
     padding-left: 0px;
     padding: 5px;
@@ -50,7 +50,7 @@ const Container = styled.div`
   width: 100%;
   height: 100%;
   display: flex;
-  margin-top: 315px;
+  margin-top: 200px;
   @media only screen and (max-width: 1308px) {
     width: 100%;
   }
@@ -115,10 +115,10 @@ const TextArea = styled.div`
 `;
 
 const MapBox = styled.div`
-  height: 740px;
+  height: 860px;
   width: 100%;
   position: ${props => (props.changeMap === 'false' ? 'sticky' : 'absolute')};
-  top: ${props => (props.changeMap === 'false' ? '250px' : 'none')};
+  top: ${props => (props.changeMap === 'false' ? '105px' : 'none')};
   animation-duration: 1s;
   z-index: -10;
   transition: all 4s ease-in;

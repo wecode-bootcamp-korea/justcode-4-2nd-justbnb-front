@@ -6,7 +6,7 @@ import Accommodation from '../../components/Accommodation/Accommodation';
 import Pagination from '../../components/paging/Pagination';
 import BigCategoryList from './BigCategoryList';
 import MapContainer from './AcommodationMap';
-import Nav from '../../components/Nav/Nav';
+import ListNav from '../../components/Nav/ListNav';
 import Footer from '../../components/Footer';
 import {
   ListContainer,
@@ -62,6 +62,7 @@ const AccommodationList = () => {
   };
   useEffect(() => {
     refreshData();
+    console.log('local ', local);
   }, [local]);
   //rendering이 한박자 늦어서 어쩔수 없이 한번 더 리랜더링
   useEffect(() => {}, [datas]);
@@ -78,9 +79,10 @@ const AccommodationList = () => {
     };
   });
   if (datas === []) return null;
+
   return (
     <WrapContainer>
-      <Nav />
+      <ListNav />
       <Container>
         {/* {changeMap === false ? ( */}
         <ListContainer active={changeMap ? 'true' : 'false'}>
