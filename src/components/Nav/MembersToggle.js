@@ -8,13 +8,22 @@ function MembersToggle({ count, setCount, setHaveAnimal }) {
     changeNo: { backgroundColor: '#ffffff' },
   });
   const { changeYes, changeNo } = changeColor;
+  const [disabled, setDisabled] = useState({
+    color: '#ebebeb',
+    borderColor: '#ebebeb',
+  });
+
   const minus = () => {
-    if (count === 1) return;
+    if (count === 0) return;
+    if (count === 1) {
+      setDisabled({ color: '#ebebeb', borderColor: '#ebebeb' });
+    }
     setCount(prev => prev - 1);
   };
 
   const plus = () => {
     setCount(prev => prev + 1);
+    setDisabled({ color: 'black', borderColor: 'black' });
   };
 
   const onClickYesBtn = () => {
@@ -52,7 +61,7 @@ function MembersToggle({ count, setCount, setHaveAnimal }) {
       <Wrapper>
         <Tittle>인원 수</Tittle>
         <div>
-          <Buttons onClick={minus}>
+          <Buttons onClick={minus} style={disabled}>
             <AiOutlineMinus />
           </Buttons>
           {count}

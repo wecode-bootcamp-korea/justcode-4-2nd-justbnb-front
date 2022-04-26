@@ -3,31 +3,66 @@ import styled from 'styled-components';
 import { BiSearch } from 'react-icons/bi';
 import SearchToggle from './SearchToggle';
 import MembersToggle from './MembersToggle';
-import DatePickerRangeController from 'react-datepicker';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 
 function SearchBar({ scrollPosition, updateScroll, flag }) {
   const [startDate, setStartDate] = useState(new Date());
   const [endDate, setEndDate] = useState();
+  const [isCheckIn, setIsCheckIn] = useState(true);
+  const [isCheckOut, setIsCheckOut] = useState(true);
 
   const [city, setCity] = useState();
-  const [count, setCount] = useState(1);
+  const [count, setCount] = useState(0);
   const [haveAnimal, setHaveAnimal] = useState('');
 
   const [isSearchToggleOpen, setIsSearchToggleOpen] = useState(false);
   const [isMembersToggleOpen, setIsMembersToggleOpen] = useState(false);
-  const [isDatesOpen, setIsDatesOpen] = useState(true);
+
+  const goToList = () => {
+    fetch(`http://localhost:8000/list/:${city}`, {
+      method: 'post',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        city: city,
+        startDate: startDate,
+        endDate: endDate,
+        count: count,
+        haveAnimal: haveAnimal,
+      }),
+    })
+      .then(res => res.json())
+      .then(res => {
+        console.log('SUCCESS');
+      });
+  };
 
   useEffect(() => {
     window.addEventListener('scroll', updateScroll);
   });
 
+  useEffect(() => {
+    setEndDate(startDate);
+  }, [startDate]);
+
+  const onClickCheckIn = () => {
+    setIsCheckIn(false);
+    setIsMembersToggleOpen(false);
+    setIsSearchToggleOpen(false);
+  };
+
+  const onClickCheckOut = () => {
+    setIsCheckOut(false);
+    setIsMembersToggleOpen(false);
+    setIsSearchToggleOpen(false);
+  };
+
   const searchToggleHandler = () => {
     if (!isSearchToggleOpen) {
       setIsSearchToggleOpen(true);
       setIsMembersToggleOpen(false);
-      setIsDatesOpen(false);
     } else {
       setIsSearchToggleOpen(false);
     }
@@ -36,17 +71,8 @@ function SearchBar({ scrollPosition, updateScroll, flag }) {
     if (!isMembersToggleOpen) {
       setIsMembersToggleOpen(true);
       setIsSearchToggleOpen(false);
-      setIsDatesOpen(false);
     } else {
       setIsMembersToggleOpen(false);
-    }
-  };
-
-  const datesToggleHandler = () => {
-    if (isDatesOpen) {
-      setIsDatesOpen(false);
-      setIsMembersToggleOpen(false);
-      setIsSearchToggleOpen(false);
     }
   };
 
@@ -65,39 +91,46 @@ function SearchBar({ scrollPosition, updateScroll, flag }) {
               hoverColor={flag === 'list' ? '#ffffff' : '#EBEBEB'}
             >
               <SearchKeyword>위치</SearchKeyword>
-              <Text>어디로 여행가세요?</Text>
+              {!city && <Text>어디로 여행가세요?</Text>}
+              {city && <Text2>{city}</Text2>}
             </SearchInner>
-            {isSearchToggleOpen && <SearchToggle setCity={setCity} />}
+            {isSearchToggleOpen && (
+              <SearchToggle setCity={setCity} close={searchToggleHandler} />
+            )}
           </div>
           <SearchInner
-            onClick={datesToggleHandler}
+            onClick={onClickCheckIn}
             bgColor={flag === 'list' ? '#EBEBEB' : '#ffffff'}
             hoverColor={flag === 'list' ? '#ffffff' : '#EBEBEB'}
           >
             <SearchKeyword>체크인</SearchKeyword>
-            {!startDate ? (
-              <Text>날짜 선택</Text>
-            ) : (
+            {isCheckIn && <Text>날짜 선택</Text>}
+            {!isCheckIn && (
               <DatePicker
                 selected={startDate}
                 onChange={(date: Date) => setStartDate(date)}
+                dateFormat="MM월 dd일"
                 minDate={new Date()}
-                monthsShown={2}
                 customInput={<ExampleCustomInput />}
               />
             )}
           </SearchInner>
           <SearchInner
+            onClick={onClickCheckOut}
             bgColor={flag === 'list' ? '#EBEBEB' : '#ffffff'}
             hoverColor={flag === 'list' ? '#ffffff' : '#EBEBEB'}
           >
             <SearchKeyword>체크아웃</SearchKeyword>
-            <DatePickerRangeController
-              selected={endDate}
-              onChange={(date: Date) => setEndDate(date)}
-              minDate={new Date()}
-              customInput={<ExampleCustomInput />}
-            />
+            {isCheckOut && <Text>날짜 선택</Text>}
+            {!isCheckOut && (
+              <DatePicker
+                selected={endDate}
+                onChange={(date: Date) => setEndDate(date)}
+                minDate={new Date()}
+                dateFormat="MM월 dd일"
+                customInput={<ExampleCustomInput />}
+              />
+            )}
           </SearchInner>
           <div>
             <SearchInner
@@ -106,19 +139,21 @@ function SearchBar({ scrollPosition, updateScroll, flag }) {
               hoverColor={flag === 'list' ? '#ffffff' : '#EBEBEB'}
             >
               <SearchKeyword>인원</SearchKeyword>
-              <Text>게스트 추가</Text>
+              {count === 0 && <Text>게스트 추가</Text>}
+              {count > 0 && <Text2>{count} 명</Text2>}
             </SearchInner>
             {isMembersToggleOpen && (
               <MembersToggle
                 count={count}
                 setCount={setCount}
                 setHaveAnimal={setHaveAnimal}
+                close={membersToggleHandler}
               />
             )}
           </div>
           <SearchBtns>
             <BiSearch font-size={20} />
-            <SearchKeyword2>검색</SearchKeyword2>
+            <SearchKeyword2 onClick={goToList}>검색</SearchKeyword2>
           </SearchBtns>
         </SearchWrapper>
       )}
@@ -148,7 +183,7 @@ const SearchWrapper = styled.div`
 const SearchInner = styled.div`
   display: flex;
   flex-direction: column;
-  padding: 20px 30px 20px 25px;
+  padding: 10px 50px 15px 40px;
   background-color: ${props => props.bgColor};
   border-radius: 40px;
   &: hover {
@@ -178,9 +213,14 @@ const Text = styled.div`
   font-size: 0.8rem;
   color: #838383;
 `;
+
+const Text2 = styled.div`
+  padding-top: 5px;
+  padding-right: 80px;
+  font-size: 0.9rem;
+`;
 const SearchKeyword = styled.div`
-  padding-left: 5px;
-  padding-bottom: 5px;
+  padding: 5px 0 5px;
   font-size: 0.9rem;
   font-weight: 600;
 `;
@@ -191,6 +231,7 @@ const SearchKeyword2 = styled.div`
 `;
 
 const DateInput = styled.div`
+  padding-right: 30px;
   font-size: 14px;
   font-weight: 500;
 `;

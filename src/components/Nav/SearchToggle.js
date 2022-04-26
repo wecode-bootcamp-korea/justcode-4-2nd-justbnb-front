@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import BtnCard from './BtnCard';
 
-function SearchToggle({ setCity }) {
+function SearchToggle({ setCity, close }) {
   const cities = [
     { id: 1, name: '서울' },
     { id: 2, name: '대전' },
@@ -16,7 +16,13 @@ function SearchToggle({ setCity }) {
       <div>언제 어디로든 떠나는 여행</div>
 
       {cities.map(list => (
-        <BtnCard list={list} key={list.id} name={list.name} setCity={setCity} />
+        <BtnCard
+          list={list}
+          key={list.id}
+          name={list.name}
+          setCity={setCity}
+          close={close}
+        />
       ))}
     </Wrapper>
   );
