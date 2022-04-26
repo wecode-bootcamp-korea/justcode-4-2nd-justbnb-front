@@ -247,6 +247,7 @@ const Text4 = styled.div`
 
 const UploadImage = styled.input`
   /* border: 1px solid red; */
+  position: absolute;
   margin-top: 10px;
   width: 50%;
   pointer-events: none;
@@ -261,8 +262,8 @@ const Label = styled.label`
 `;
 
 const LabelDescription = styled.div`
-  position: absolute;
-  margin: 0.5vw 1.3vw;
+  /* position: absolute; */
+  margin: 1.5vw 1.3vw;
   font-weight: bold;
 `;
 

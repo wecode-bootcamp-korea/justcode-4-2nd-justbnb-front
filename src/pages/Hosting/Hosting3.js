@@ -1,20 +1,89 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { IoLocationSharp } from 'react-icons/io5';
 import styled from 'styled-components';
 
+const { kakao } = window;
+
 export default function Hosting3() {
+  // const [InputText, setInputText] = useState('');
+  // const [Place, setPlace] = useState('');
+
+  // const onChange = e => {
+  //   setInputText(e.target.value);
+  // };
+
+  // const handleSubmit = e => {
+  //   e.preventDefault();
+  //   setPlace(InputText);
+  //   setInputText('');
+  // };
+
+  // useEffect(() => {
+  //   let infowindow = new kakao.maps.InfoWindow({ zIndex: 1 });
+
+  //   const container = document.getElementById('map');
+  //   const options = {
+  //     center: new kakao.maps.LatLng(33.450701, 126.570667),
+  //     level: 3,
+  //   };
+  //   const map = new kakao.maps.Map(container, options);
+
+  //   const ps = new kakao.maps.services.Places();
+
+  //   ps.keywordSearch(Place, placesSearchCB);
+
+  //   function placesSearchCB(data, status, pagination) {
+  //     if (status === kakao.maps.services.Status.OK) {
+  //       let bounds = new kakao.maps.LatLngBounds();
+
+  //       for (let i = 0; i < data.length; i++) {
+  //         displayMarker(data[i]);
+  //         bounds.extend(new kakao.maps.LatLng(data[i].y, data[i].x));
+  //       }
+
+  //       map.setBounds(bounds);
+  //     }
+  //   }
+
+  //   function displayMarker(place) {
+  //     let marker = new kakao.maps.Marker({
+  //       map: map,
+  //       position: new kakao.maps.LatLng(place.y, place.x),
+  //     });
+
+  //     // 마커에 클릭이벤트를 등록합니다
+  //     kakao.maps.event.addListener(marker, 'click', function () {
+  //       // 마커를 클릭하면 장소명이 인포윈도우에 표출됩니다
+  //       infowindow.setContent(
+  //         '<div style="padding:5px;font-size:12px;">' +
+  //           place.place_name +
+  //           '</div>'
+  //       );
+  //       infowindow.open(map, marker);
+  //     });
+  //   }
+  // }, [Place]);
+  // ------------------------------------------------------------------------------------
   const container = useRef(null);
 
   useEffect(() => {
+    const container = document.getElementById('map');
     const options = {
-      //지도를 생성할 때 필요한 기본 옵션
-      center: new window.kakao.maps.LatLng(33.450701, 126.570667), //지도의 중심좌표.
-      level: 3, //지도의 레벨(확대, 축소 정도)
+      center: new kakao.maps.LatLng(33.450701, 126.570667),
+      level: 3,
     };
+    const map = new kakao.maps.Map(container, options);
 
-    new window.kakao.maps.Map(container.current, options); //지도 생성 및 객체 리턴
-    return () => {};
+    function setCenter() {
+      let moveLatLon = new kakao.maps.LatLng(37.5283169, 126.9294254); // seoul
+
+      map.setCenter(moveLatLon);
+    }
+
+    // function panTo() {
+    //   let moveLatLon = new kakao.maps.LatLng(33.45058, 126.574942);
+    // }
   }, []);
 
   return (
@@ -39,8 +108,14 @@ export default function Hosting3() {
               <IoLocationSharp />
             </Icon>
             <Text2 placeholder="주소를 입력하세요." />
+            <TestBtn1>TestBtn1</TestBtn1>
+            <TestBtn2>TestBtn2</TestBtn2>
           </ButtonTextWrapper>
-          <Map style={{ width: '100%', height: '1000px' }} ref={container} />
+          <Map
+            id="map"
+            style={{ width: '100%', height: '1000px' }}
+            ref={container}
+          />
         </Body>
         <Footer>
           <p>뒤로</p>
@@ -205,4 +280,12 @@ const ButtonTextWrapper = styled.button`
   top: 20vw;
   display: flex;
   align-items: center;
+`;
+
+const TestBtn1 = styled.button`
+  font-size: 10px;
+`;
+
+const TestBtn2 = styled.button`
+  font-size: 10px;
 `;
