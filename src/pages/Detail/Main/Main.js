@@ -1,13 +1,17 @@
 import { useState, useEffect } from 'react';
 import styled from 'styled-components';
-import { FaStar, FaRegHeart } from 'react-icons/fa';
+import LoginModal from '../../../components/Modal/LoginModal';
+import ImageModal from './ImageModal';
+import { FaStar, FaRegHeart, FaHeart } from 'react-icons/fa';
 
 function Main(props) {
+  const [clickSaveBtn, setClickSaveBtn] = useState(false);
   const [imageUrlArray, setImageUrlArray] = useState([]);
   const { name, location, district, neighborhood } = props;
 
+  // 숙소 이미지 받아오기
   useEffect(() => {
-    fetch('/data/minji/accommodationsImages.json', {
+    fetch('http://localhost:8000/accommodations/images?accommodationsId=21', {
       method: 'GET',
     })
       .then(res => res.json())
@@ -20,8 +24,53 @@ function Main(props) {
     setImageUrlArray(imageUrlArray);
   }, [imageUrlArray]);
 
+  // wishList 받아오기
+  useEffect(() => {
+    fetch('http://localhost:8000/wish?accommodationsId=1', {
+      method: 'GET',
+    })
+      .then(res => res.json())
+      .then(result => {
+        console.log(result);
+      });
+  }, []);
+
+  // wishList 보내기
+  const postWishList = () => {
+    fetch('http://localhost:8000/wish', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        accessToken: '토큰값',
+        accommodationsId: 7,
+      }),
+    })
+      .then(res => res.json())
+      .then(result => {
+        console.log(result);
+        console.log('posted');
+      });
+  };
+
+  // wishList 삭제
+  const deleteWishList = () => {
+    fetch('http://localhost:8000/wish?accommodationsId=7', {
+      method: 'DELETE',
+    })
+      .then(res => res.json())
+      .then(result => {
+        console.log(result);
+        console.log('deleted');
+      });
+  };
+
   return (
     <Wrapper>
+      {/* <ImageModal /> */}
+
+      {/* {clickSaveBtn ? <LoginModal /> : null} */}
       <div>
         <MainTitle>{name}</MainTitle>
         <InfoWrapper>
@@ -32,10 +81,20 @@ function Main(props) {
             <span>4.61</span>·<span>후기 33개</span>·
             <span>{`${district}, ${neighborhood}`}</span>
           </BnbInfo>
-          <div>
-            <FaRegHeart className="icons" />
-            <span>저장</span>
-          </div>
+          <SaveBtn
+            onClick={() => {
+              setClickSaveBtn(!clickSaveBtn);
+              clickSaveBtn ? deleteWishList() : postWishList();
+            }}
+          >
+            {clickSaveBtn ? (
+              <FaHeart className="icons" style={{ color: 'red' }} />
+            ) : (
+              <FaRegHeart className="icons" />
+            )}
+
+            <span>{clickSaveBtn ? '저장 목록' : '저장'}</span>
+          </SaveBtn>
         </InfoWrapper>
         <ImgWrapper>
           <FirstBox>
@@ -122,6 +181,24 @@ const BnbInfo = styled.div`
   }
 `;
 
+const SaveBtn = styled.button`
+  display: flex;
+  padding: 8px;
+  border: none;
+  border-radius: 10px;
+  background-color: transparent;
+  font-size: 15px;
+  cursor: pointer;
+  &:hover {
+    background-color: rgba(0, 0, 0, 0.05);
+  }
+  .icons {
+    margin-right: 5px;
+  }
+  span {
+    text-decoration: underline;
+  }
+`;
 const ImgWrapper = styled.section`
   display: flex;
   justify-content: center;

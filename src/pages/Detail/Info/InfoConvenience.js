@@ -8,9 +8,12 @@ function InfoConvenience() {
   const [convenienceArray, setConvenienceArray] = useState([]);
   // 숙소 편의시설 받아오기
   useEffect(() => {
-    fetch('data/minji/accommodationsConvenience.json', {
-      method: 'GET',
-    }).then(res =>
+    fetch(
+      'http://localhost:8000/accommodations/convenience?accommodationsId=13',
+      {
+        method: 'GET',
+      }
+    ).then(res =>
       res.json().then(result => {
         setConvenienceArray(
           result.accommodationsConvenience[0].convenience_name

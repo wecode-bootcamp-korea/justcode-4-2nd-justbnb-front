@@ -14,6 +14,7 @@ function InfoSideBar(props) {
     dateDeleted,
     charge,
     total_members,
+    selected,
   } = props;
 
   // 모달 open 관리
@@ -71,6 +72,7 @@ function InfoSideBar(props) {
     setPetCount(count);
   };
 
+  console.log('selectedSideBar', selected);
   return (
     <Section>
       <Wrapper>
@@ -87,6 +89,7 @@ function InfoSideBar(props) {
         </Text1>
         {calendarModalOpen && (
           <CalendarModal
+            selected={start}
             open={calendarModalOpen}
             setCalendarModalOpen={setCalendarModalOpen}
             close={handleCalendarModalClose}

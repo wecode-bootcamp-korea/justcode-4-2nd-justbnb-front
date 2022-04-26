@@ -11,6 +11,7 @@ import Review from './Review/Review.js';
 import MapInfo from './Map.js';
 import HostInfo from './HostInfo.js';
 import Notice from './Notice.js';
+import Footer from '../../components/Footer.js';
 
 function Detail() {
   const [accommodation, setAccommodation] = useState({});
@@ -19,8 +20,18 @@ function Detail() {
   // Calendar
   const [startDate, setStartDate] = useState(new Date());
   const [endDate, setEndDate] = useState(null);
+  // const [selected, setSelected] = useState(null);
+
   const [dateDeleted, setDateDeleted] = useState(false);
   const [dateDiff, setDateDiff] = useState(0);
+
+  // useEffect(() => {
+  //   if (!endDate) {
+  //     setSelected(startDate);
+  //   } else {
+  //     setSelected(endDate);
+  //   }
+  // }, [startDate, endDate]);
 
   const onChange = dates => {
     const [start, end] = dates;
@@ -47,11 +58,12 @@ function Detail() {
 
   // 숙소 데이터 받아오기
   useEffect(() => {
-    fetch('/data/minji/accommodations.json', {
+    fetch('http://localhost:8000/accommodations/13', {
       method: 'GET',
     })
       .then(res => res.json())
       .then(result => {
+        console.log(result);
         setAccommodation(result.accommodations[0]);
       });
   }, []);
@@ -72,69 +84,74 @@ function Detail() {
   }, []);
 
   return (
-    <Wrapper>
-      <Main
-        key={accommodation.id}
-        name={accommodation.accommodations_name}
-        district={accommodation.district}
-        neighborhood={accommodation.neighborhood}
-      />
-      <InfoSection>
-        <InfoWrapper>
-          <InfoText
-            name={accommodation.host_name}
-            build_type={accommodation.build_type}
-            room_type={accommodation.room_type}
-            description={accommodation.description}
-            total_members={accommodation.total_members}
-          />
-          <InfoConvenience />
-          <InfoCalender
+    <div>
+      <Wrapper>
+        <Main
+          key={accommodation.id}
+          name={accommodation.accommodations_name}
+          district={accommodation.district}
+          neighborhood={accommodation.neighborhood}
+        />
+        <InfoSection>
+          <InfoWrapper>
+            <InfoText
+              name={accommodation.host_name}
+              build_type={accommodation.build_type}
+              room_type={accommodation.room_type}
+              description={accommodation.description}
+              total_members={accommodation.total_members}
+            />
+            <InfoConvenience />
+            <InfoCalender
+              // selected={selected}
+              start={startDate}
+              end={endDate}
+              change={onChange}
+              deleteDate={deleteDate}
+              dateDiff={dateDiff}
+              district={accommodation.district}
+            />
+          </InfoWrapper>
+          <SideBar
+            // selected={selected}
             start={startDate}
             end={endDate}
             change={onChange}
             deleteDate={deleteDate}
             dateDiff={dateDiff}
-            district={accommodation.district}
+            dateDeleted={dateDeleted}
+            charge={accommodation.charge}
+            total_members={accommodation.total_members}
           />
-        </InfoWrapper>
-        <SideBar
-          start={startDate}
-          end={endDate}
-          change={onChange}
-          deleteDate={deleteDate}
-          dateDiff={dateDiff}
-          dateDeleted={dateDeleted}
-          charge={accommodation.charge}
-          total_members={accommodation.total_members}
+        </InfoSection>
+        <ReviewSection>
+          <ReviewRating />
+          <ReviewWrapper>
+            {reviewArray.map(el => {
+              return (
+                <Review
+                  id={el.id}
+                  date={el.date}
+                  imgUrl={el.imgUrl}
+                  name={el.name}
+                  content={el.content}
+                />
+              );
+            })}
+          </ReviewWrapper>
+        </ReviewSection>
+        <MapInfo
+          city={accommodation.city}
+          district={accommodation.district}
+          neighborhood={accommodation.neighborhood}
+          lat={accommodation.lat}
+          long={accommodation.long}
         />
-      </InfoSection>
-      <ReviewSection>
-        <ReviewRating />
-        <ReviewWrapper>
-          {reviewArray.map(el => {
-            return (
-              <Review
-                id={el.id}
-                date={el.date}
-                imgUrl={el.imgUrl}
-                name={el.name}
-                content={el.content}
-              />
-            );
-          })}
-        </ReviewWrapper>
-      </ReviewSection>
-      <MapInfo
-        city={accommodation.city}
-        district={accommodation.district}
-        neighborhood={accommodation.neighborhood}
-        lat={accommodation.lat}
-        long={accommodation.long}
-      />
-      <HostInfo host_name={accommodation.host_name} />
-      <Notice />
-    </Wrapper>
+        <HostInfo host_name={accommodation.host_name} />
+        <Notice />
+      </Wrapper>
+      <Footer />
+    </div>
   );
 }
 

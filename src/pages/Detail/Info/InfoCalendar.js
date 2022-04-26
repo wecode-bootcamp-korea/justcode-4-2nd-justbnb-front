@@ -7,7 +7,8 @@ import DatePickerRangeController from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 
 function InfoCalender(props) {
-  const { start, end, change, deleteDate, dateDiff, district } = props;
+  const { start, end, change, deleteDate, dateDiff, district, selected } =
+    props;
   const [checkInDate, setCheckInDate] = useState(0);
 
   useEffect(() => {

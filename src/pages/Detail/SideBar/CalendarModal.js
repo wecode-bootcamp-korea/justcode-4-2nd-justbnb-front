@@ -43,18 +43,19 @@ function CalendarModal(props) {
   useEffect(() => {
     // setCheckInValue(start);
     // startDate가 null일 경우 렌더링이 되지 않는 오류 발생
-    if (start !== null) {
+    if (start) {
       let newStartDate = `${start.getFullYear()}.${
         start.getMonth() + 1
       }.${start.getDate()}`;
       setCheckInValue(newStartDate);
     }
+    // setCheckOutValue('');
   }, [start]);
 
   useEffect(() => {
     // setCheckOutValue(end);
     // startDate가 null일 경우 렌더링이 되지 않는 오류 발생
-    if (end !== null) {
+    if (end) {
       let newEndDate = `${end.getFullYear()}.${
         end.getMonth() + 1
       }.${end.getDate()}`;
@@ -105,7 +106,6 @@ function CalendarModal(props) {
           onChange={change}
           startDate={start}
           endDate={end}
-          dateFormat="yyyy/MM/dd"
           monthsShown={2}
           minDate={new Date()}
           selectsRange
