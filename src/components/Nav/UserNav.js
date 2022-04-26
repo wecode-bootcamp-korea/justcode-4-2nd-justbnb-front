@@ -37,7 +37,7 @@ function UserNav({ scrollPosition }) {
       <Navbar>
         {scrollPosition < 100 ? (
           <>
-            <Link to="/hosting" style={{ textDecoration: 'none' }}>
+            <Link to="/layout" style={{ textDecoration: 'none' }}>
               <Buttons color="#ffffff" background="#262626">
                 호스트 되기
               </Buttons>

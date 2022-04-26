@@ -29,17 +29,17 @@ const ListContainer = styled.div`
   animation-duration: 1s;
   box-shadow: 5px 0px 10px grey;
   animation: ${props => {
-      if (props.active === 'true') {
-        return css`
-          ${boxFade} 1s 0s ease alternate forwards;
-        `;
-      } else {
-        return css`
-          ${boxShow} 1s 0s ease alternate forwards;
-        `;
-      }
-    }}
-    @media only screen and (max-width: 1308px) {
+    if (props.active === 'true') {
+      return css`
+        ${boxFade} 1s 0s ease alternate forwards;
+      `;
+    } else {
+      return css`
+        ${boxShow} 1s 0s ease alternate forwards;
+      `;
+    }
+  }};
+  @media only screen and (max-width: 1308px) {
     width: 100%;
     padding-left: 0px;
     padding: 5px;
