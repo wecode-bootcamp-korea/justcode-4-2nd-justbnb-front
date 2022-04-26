@@ -167,6 +167,7 @@ const ModalWrapper = styled.div`
   overflow: hidden;
   outline: 0;
   box-shadow: 2px 2px 10px #dddddd;
+  cursor: default;
 
   animation: ${move} 0.3s ease-in-out forwards;
 `;
