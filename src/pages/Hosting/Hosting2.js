@@ -1,5 +1,38 @@
-import { BsFileX } from 'react-icons/bs';
+import React from 'react';
 import styled from 'styled-components';
+
+export default function Hosting2({ onChange, resultChoice }) {
+  return (
+    <Wrapper>
+      <Container>
+        <Text1>
+          게스트가 머무르게 될 숙소의
+          <br />
+          종류가 무엇인가요?
+        </Text1>
+      </Container>
+
+      <Container2>
+        <Header>
+          <button className="help-button">도움말</button>
+          <button className="exit-button">나가기</button>
+        </Header>
+        <Body>
+          <Button id="2" onClick={e => onChange(e)} value="공간 전체">
+            <div className="but-name">공간 전체</div>
+          </Button>
+          <Button id="2" onClick={e => onChange(e)} value="개인실">
+            <div className="but-name">개인실</div>
+          </Button>
+          <Button id="2" onClick={e => onChange(e)} value="다인실">
+            <div className="but-name">다인실</div>
+          </Button>
+        </Body>
+        <Footer />
+      </Container2>
+    </Wrapper>
+  );
+}
 
 const Wrapper = styled.div`
   width: 100%;
@@ -32,16 +65,12 @@ const Container2 = styled.section`
   width: 50%;
   min-height: 100vh;
   position: relative;
-  /* border: 1px solid green; */
   display: flex;
   flex-wrap: wrap;
   flex-direction: column;
 `;
 
 const Header = styled.section`
-  /* position: absolute;
-  top: 0; */
-  /* border: 1px solid red; */
   width: 100%;
   padding: 20px;
   display: flex;
@@ -68,9 +97,7 @@ const Header = styled.section`
 `;
 
 const Body = styled.section`
-  /* height: 80%; */
   width: 100%;
-  /* border: 1px solid blue; */
   display: flex;
   margin-top: 15px;
   flex-direction: column;
@@ -82,52 +109,30 @@ const Button = styled.button`
   background-color: white;
   border-radius: 10px;
   border: 1px solid rgba(155, 149, 167, 0.44);
-  font-size: 18px;
+  font-size: 17.5px;
   font-weight: 500;
   text-align: left;
-  padding: 32px;
   width: 65%;
   margin: 8px;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  .img-wrapper {
-    height: 100%;
-    width: 20px;
+  &:hover {
+    outline: 1.5px solid black;
+    cursor: pointer;
   }
-  img {
-    width: 100%;
-    height: 100%;
+  .but-name {
+    padding: 30px;
   }
 `;
 
 const Footer = styled.section`
   padding: 15px;
   width: 100%;
-  /* border: 1px solid red; */
   position: absolute;
   bottom: 0;
   display: flex;
   justify-content: space-between;
   background-color: white;
   align-items: center;
-  border-top: 2px solid rgba(155, 149, 167, 0.2);
-  p {
-    text-decoration: underline;
-    font-size: 16px;
-    font-weight: 500;
-    margin-left: 30px;
-  }
-  .next-button {
-    font-size: 16px;
-    font-weight: 400;
-    color: white;
-    padding: 13px 23px;
-    margin-right: 30px;
-    border-radius: 8px;
-    border: 1px solid rgba(155, 149, 167, 0.1);
-    background-color: black;
-  }
 `;
-
-export { Container, Text1, Container2, Header, Body, Button, Footer, Wrapper };

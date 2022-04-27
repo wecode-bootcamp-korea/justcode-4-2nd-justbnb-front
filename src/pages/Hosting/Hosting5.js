@@ -8,6 +8,7 @@ import { FaParking } from 'react-icons/fa';
 import { GiBathtub } from 'react-icons/gi';
 
 export default function Hosting5({ onChange, resultChoice }) {
+  console.log(resultChoice);
   const [convenience, setConvenience] = useState([]);
 
   // 조건문 사용 시 예시
@@ -19,32 +20,6 @@ export default function Hosting5({ onChange, resultChoice }) {
   //   }
   // }
   console.log('ddddd', resultChoice);
-  function selectIcon(el) {
-    let result;
-    switch (el) {
-      case 'FaSwimmingPool':
-        result = <FaSwimmingPool />;
-        break;
-      case 'GiBarbecue':
-        result = <GiBarbecue />;
-        break;
-      case 'AiOutlineWifi':
-        result = <AiOutlineWifi />;
-        break;
-      case 'MdPersonalVideo':
-        result = <MdPersonalVideo />;
-        break;
-      case 'FaParking':
-        result = <FaParking />;
-        break;
-      case 'GiBathtub':
-        result = <GiBathtub />;
-        break;
-      default:
-        break;
-    }
-    return result;
-  }
 
   useEffect(() => {
     fetch('/data/dlwjdals/hosting.json', {
@@ -76,24 +51,74 @@ export default function Hosting5({ onChange, resultChoice }) {
         </Header>
         <Body>
           <Text2>특별히 내세울만한 편의시설이 있나요?</Text2>
-          <Convenience onClick={e => onChange(e)}>
-            {convenience.map((el, index) => {
-              return (
-                <TextAndIcon key={el.id} id="2" value={el.convenience}>
-                  <Icon>{selectIcon(el.icon)}</Icon>
-                  <Text3>{el.convenience}</Text3>
-                </TextAndIcon>
-              );
-            })}
+          <Convenience>
+            <Button>
+              {convenience.map((el, index) => (
+                <ConvMap
+                  el={el}
+                  onChange={onChange}
+                  resultChoice={resultChoice}
+                  key={el.id}
+                />
+              ))}
+            </Button>
           </Convenience>
         </Body>
-        <Footer>
-          <p>뒤로</p>
-          <button className="next-button">다음</button>
-        </Footer>
+        <Footer />
       </Container2>
     </Wrapper>
   );
+}
+function compareResult(resultChoice, el) {
+  console.log(resultChoice);
+  if (!resultChoice.hasOwnProperty(5)) return false;
+  for (let i = 0; i < resultChoice[5].length; i++) {
+    if (resultChoice[5][i] === el.convenience) {
+      return 'on';
+    }
+  }
+}
+function ConvMap({ el, onChange, resultChoice }) {
+  return (
+    <div key={el.id}>
+      <TextAndIcon
+        key={el.id}
+        onClick={e => onChange(e)}
+        id="5"
+        value={el.convenience}
+        type="checkbox"
+        defaultChecked={compareResult(resultChoice, el)}
+      />
+      <Icon>{selectIcon(el.icon)}</Icon>
+      <Text3>{el.convenience}</Text3>
+    </div>
+  );
+}
+function selectIcon(el) {
+  let result;
+  switch (el) {
+    case 'FaSwimmingPool':
+      result = <FaSwimmingPool />;
+      break;
+    case 'GiBarbecue':
+      result = <GiBarbecue />;
+      break;
+    case 'AiOutlineWifi':
+      result = <AiOutlineWifi />;
+      break;
+    case 'MdPersonalVideo':
+      result = <MdPersonalVideo />;
+      break;
+    case 'FaParking':
+      result = <FaParking />;
+      break;
+    case 'GiBathtub':
+      result = <GiBathtub />;
+      break;
+    default:
+      break;
+  }
+  return result;
 }
 const Wrapper = styled.div`
   width: 100%;
@@ -124,7 +149,7 @@ const Text1 = styled.div`
 
 const Container2 = styled.section`
   width: 50%;
-  min-height: 100vh;
+  min-height: 90vh;
   position: relative;
   /* border: 1px solid green; */
   display: flex;
@@ -163,7 +188,7 @@ const Header = styled.section`
 
 const Body = styled.section`
   width: 100%;
-  margin: 55px;
+  /* padding: 55px; */
 `;
 
 const Button = styled.button`
@@ -183,38 +208,11 @@ const Button = styled.button`
     height: 100%;
     width: 20px;
   }
-  img {
-    width: 100%;
-    height: 100%;
-  }
-`;
-
-const Footer = styled.section`
-  padding: 15px;
-  width: 100%;
-  position: absolute;
-  bottom: 0;
-  display: flex;
-  justify-content: space-between;
-  background-color: white;
-  align-items: center;
-  border-top: 2px solid rgba(155, 149, 167, 0.2);
-  p {
-    text-decoration: underline;
-    font-size: 16px;
-    font-weight: 500;
-    margin-left: 30px;
-  }
-  .next-button {
-    font-size: 16px;
-    font-weight: 400;
-    color: white;
-    padding: 13px 23px;
-    margin-right: 30px;
-    border-radius: 8px;
-    border: 1px solid rgba(155, 149, 167, 0.1);
-    background-color: black;
-  }
+  //   img {
+  //     width: 100%;
+  //     height: 100%;
+  //   }
+  //
 `;
 
 const Text2 = styled.div`
@@ -227,9 +225,10 @@ const Convenience = styled.div`
   display: grid;
   grid-template-columns: repeat(3, 0fr);
   margin: 50px 0;
+  width: 100%;
 `;
 
-const TextAndIcon = styled.button`
+const TextAndIcon = styled.input`
   &:hover {
     outline: 3px solid black;
     /* outline-offset: -3px; */
@@ -237,11 +236,10 @@ const TextAndIcon = styled.button`
     cursor: pointer;
   }
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   flex-direction: column;
   align-items: center;
-  width: 250px;
-  height: fit-content;
+  /* height: fit-content; */
   font-size: 30px;
   font-weight: bolder;
   padding: 40px;
@@ -259,4 +257,15 @@ const Icon = styled.div`
 const Text3 = styled.div`
   font-size: 20px;
   font-weight: bolder;
+`;
+
+const Footer = styled.section`
+  padding: 15px;
+  width: 100%;
+  position: absolute;
+  bottom: 0;
+  display: flex;
+  justify-content: space-between;
+  background-color: white;
+  align-items: center;
 `;
