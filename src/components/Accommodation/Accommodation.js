@@ -28,13 +28,13 @@ const Accommodation = React.memo(function Accommodation({
   ];
   const [heart, setHeart] = useState(false);
 
+  if (data === []) return null;
   const mouseUp = () => {
     setlatlng({ lat: data.lat, lng: data.long });
   };
   const mouseLeave = () => {
     setlatlng({ lat: 0, lng: 0 });
   };
-  console.log('data :', data.length);
   return (
     <div onMouseOver={mouseUp} onMouseLeave={mouseLeave}>
       <Wrap>

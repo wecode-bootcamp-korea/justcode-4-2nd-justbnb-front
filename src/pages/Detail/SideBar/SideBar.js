@@ -140,7 +140,6 @@ function InfoSideBar(props) {
               <FaAngleDown />
             </Guest>
           </InputWrapper>
-
           <SideBarHeadCount
             open={CountModalOpen}
             close={handleCountModalClose}

@@ -7,6 +7,7 @@ import { Link } from 'react-router-dom';
 import LogoutToggle from './LogoutToggle';
 import LoginModal from '../Modal/LoginModal';
 import SignupModal from '../Modal/SignupModal';
+// import LoginToggle from '../Modal/LoginModal';
 
 function UserNav({ scrollPosition }) {
   const [openToggle, setOpenToggle] = useState({ display: 'none' });
@@ -36,7 +37,7 @@ function UserNav({ scrollPosition }) {
       <Navbar>
         {scrollPosition < 100 ? (
           <>
-            <Link to="/hosting" style={{ textDecoration: 'none' }}>
+            <Link to="/layout" style={{ textDecoration: 'none' }}>
               <Buttons color="#ffffff" background="#262626">
                 호스트 되기
               </Buttons>
@@ -48,6 +49,14 @@ function UserNav({ scrollPosition }) {
                 color="#ffffff"
               />
             </Buttons>
+            <UserBox onClick={toggleHandler} active={false}>
+              <StyledIcon>
+                <GiHamburgerMenu fontSize={16} />
+              </StyledIcon>
+              <User>
+                <RiUser3Line fontSize={18} />
+              </User>
+            </UserBox>
           </>
         ) : (
           <>
@@ -59,16 +68,16 @@ function UserNav({ scrollPosition }) {
             <Buttons color="black" background="#F7F7F7">
               <CgGlobeAlt fontSize={20} style={{ opacity: '0.5' }} />
             </Buttons>
+            <UserBox onClick={toggleHandler} active={true}>
+              <StyledIcon>
+                <GiHamburgerMenu fontSize={16} />
+              </StyledIcon>
+              <User>
+                <RiUser3Line fontSize={18} />
+              </User>
+            </UserBox>
           </>
         )}
-        <UserBox onClick={toggleHandler}>
-          <StyledIcon>
-            <GiHamburgerMenu fontSize={16} />
-          </StyledIcon>
-          <User>
-            <RiUser3Line fontSize={18} />
-          </User>
-        </UserBox>
       </Navbar>
       <LogoutToggle
         openToggle={openToggle}
@@ -97,6 +106,11 @@ const UserBox = styled.div`
   border: 1px solid #dddddd;
   border-radius: 22px;
   cursor: pointer;
+
+  &:hover {
+    box-shadow: ${props => props.active && '2px 2px 3px lightgray'};
+    transform: scale(1, 1);
+  }
 `;
 
 const User = styled.div`
@@ -127,12 +141,6 @@ const Buttons = styled.li`
   &: hover {
     cursor: pointer;
     background: ${props => props.background};
-  }
-
-  &:nth-child(1) {
-    &:hover {
-      color: #dddddd;
-    }
   }
 `;
 

@@ -37,13 +37,12 @@ const MapMarker = React.memo(function MapMarker({
   // 마커 위에 커스텀오버레이를 표시합니다
   let _content = `
     <div ref="el" style="width:250px; height:270px; border-radius: 5%; position: absolute; top: 0px; left:-120px; background-color: white;">
-    <img src=${position.image[0]} alt="photo" style="width: 100%; border-top-left-radius: 5%; border-top-right-radius: 5%; height: 180px;"/>
+    <img src=${position.image} alt="photo" style="width: 100%; border-top-left-radius: 5%; border-top-right-radius: 5%; height: 180px;"/>
     <div style="margin-top: 15px; padding-top: 10px; padding-left: 20px;">
     ${position.buildType} 전체 · ${position.localName}
     </div>
-    <p style="width: 82%; padding-top: 10px; padding-left: 20px; padding-right: 20px; text-overflow: ellipsis; overflow: hidden;">${position.title}</p>
+    <p style="width: 100%; padding-top: 10px; padding-left: 20px; padding-right: 20px; text-overflow: ellipsis; overflow: hidden;">${position.title}</p>
     </div>`;
-
   let content = document.createElement('p');
   let parser = new DOMParser();
   let doc = parser.parseFromString(_content, 'text/html');

@@ -37,7 +37,8 @@ function LoginModal({ loginModalHandler }) {
     }
   };
   const postLogin = () => {
-    fetch('http://localhost:8000/users/login', {
+    errHandler();
+    fetch('http://localhost:8000/user/signin', {
       method: 'POST',
       headers: {
         'content-Type': 'application/json',
@@ -111,7 +112,7 @@ function LoginModal({ loginModalHandler }) {
                   </ErrBox>
                 </>
               )}
-              <CountinueBtn onClick={errHandler}>로그인</CountinueBtn>
+              <CountinueBtn onClick={postLogin}>로그인</CountinueBtn>
               <Text2>또는</Text2>
               <BtnWrapper>
                 <Btns>
@@ -167,6 +168,7 @@ const ModalWrapper = styled.div`
   overflow: hidden;
   outline: 0;
   box-shadow: 2px 2px 10px #dddddd;
+  cursor: default;
 
   animation: ${move} 0.3s ease-in-out forwards;
 `;
@@ -201,6 +203,7 @@ const Tittle = styled.div`
   font-size: 1.1rem;
   padding-left: 230px;
   font-weight: 700;
+  color: black;
 `;
 
 const ContentsWrapper = styled.div`
@@ -212,6 +215,7 @@ const Text = styled.div`
     padding-bottom: 40px;
     font-size: 1.3rem;
     font-weight: 600;
+    color: black;
   }
 
   &:last-child {
@@ -277,8 +281,9 @@ const Btns = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  font-size: 0.9em;
   border: 1px solid black;
+  font-size: 0.9em;
+  color: black;
   ${BtnLayout}
 
   &: hover {

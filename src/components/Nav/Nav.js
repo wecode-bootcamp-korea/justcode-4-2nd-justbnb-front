@@ -3,16 +3,27 @@ import styled, { css, keyframes } from 'styled-components';
 import SearchBar from './SearchBar';
 import UserNav from './UserNav';
 import { BiSearch } from 'react-icons/bi';
-import { Link } from 'react-router-dom';
 
 function Nav() {
   const [scrollPosition, setScrollPosition] = useState(0);
+  const [isTrue, setIsTrue] = useState(false);
+
+  const goToTop = () => {
+    window.scrollTo(0.0);
+  };
+
   const updateScroll = () => {
     setScrollPosition(window.scrollY || document.documentElement.scrollTop);
   };
+
   useEffect(() => {
     window.addEventListener('scroll', updateScroll);
   }, []);
+
+  const onClickBtn = () => {
+    scrollPosition !== 0 ? setIsTrue(true) : setIsTrue(false);
+    return isTrue;
+  };
 
   return (
     <Box>
@@ -22,47 +33,47 @@ function Nav() {
             저스트비앤비의 코로나 19 대응 방안에 대한 최신 정보를 확인하세요.
           </Aside>
         )}
+        {scrollPosition < 100 ? (
+          <Container>
+            <img
+              alt="main-logo"
+              src={`${process.env.PUBLIC_URL}/images/로고화이트.png`}
+              width="150"
+              style={{ cursor: 'pointer' }}
+              onClick={goToTop}
+            />
 
-        <Link to="/" style={{ textDecoration: 'none' }}>
-          {scrollPosition < 100 ? (
-            <Container>
-              <img
-                alt="main-logo"
-                src={`${process.env.PUBLIC_URL}/images/로고화이트.png`}
-                width="150"
-                style={{ cursor: 'pointer' }}
-              />
-
-              <Wrapper>
-                <Menu>숙소</Menu>
-                <DisableMenu>체험</DisableMenu>
-                <DisableMenu>온라인 체험</DisableMenu>
-              </Wrapper>
-              <UserNav scrollPosition={scrollPosition} />
-            </Container>
-          ) : (
-            <Container color="#ffffff">
-              <img
-                alt="main-logo"
-                src={`${process.env.PUBLIC_URL}/images/로고핑크.png`}
-                width="150"
-                style={{ cursor: 'pointer' }}
-              />
-              <SearchBtn>
-                <Text>검색 시작하기</Text>
-                <BtnBox>
-                  <BiSearch font-size={20} />
-                </BtnBox>
-              </SearchBtn>
-              <UserNav scrollPosition={scrollPosition} />
-            </Container>
-          )}
-        </Link>
-
+            <Wrapper>
+              <Menu>숙소</Menu>
+              <DisableMenu>체험</DisableMenu>
+              <DisableMenu>온라인 체험</DisableMenu>
+            </Wrapper>
+            <UserNav scrollPosition={scrollPosition} />
+          </Container>
+        ) : (
+          <Container color="#ffffff">
+            <img
+              alt="main-logo"
+              src={`${process.env.PUBLIC_URL}/images/로고핑크.png`}
+              width="150"
+              style={{ cursor: 'pointer' }}
+              onClick={goToTop}
+            />
+            <SearchBtn onClick={onClickBtn}>
+              <Text>검색 시작하기</Text>
+              <BtnBox>
+                <BiSearch font-size={20} />
+              </BtnBox>
+            </SearchBtn>
+            <UserNav scrollPosition={scrollPosition} />
+          </Container>
+        )}
+        {isTrue && <SearchBar scrollPosition={0} flag="list" />}
         <SearchBar
           scrollPosition={scrollPosition}
           updateScroll={updateScroll}
         />
+        )}
       </Header>
     </Box>
   );
@@ -115,7 +126,7 @@ const Container = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0 70px;
+  padding: 0 10rem;
   background-color: ${props => props.color};
 `;
 
@@ -138,7 +149,7 @@ const Menu = styled.div`
   ${styledMenu}
   cursor: pointer;
 
-  &: after {
+  &:after {
     content: '';
     width: 20px;
     margin-top: 10px;
@@ -167,10 +178,10 @@ const SearchBtn = styled.button`
   border-radius: 30px;
   border: 1px solid #dddddd;
   background-color: #ffffff;
-  box-shadow: 2px 2px 10px #dddddd;
 
   &:hover {
     cursor: pointer;
+    box-shadow: 4px 5px 5px lightgray;
   }
 `;
 

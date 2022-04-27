@@ -1,7 +1,7 @@
 import React from 'react';
 import { useState, useEffect, useRef } from 'react';
 import MapMarkerItem from './MapMarkerItem';
-import { Button, Box } from './AccommodationListStyled';
+import { Button, Box, MapBox } from './AccommodationListStyled';
 
 function MapContainer({
   datas,
@@ -48,9 +48,9 @@ function MapContainer({
         id: datas[i].id,
         title: datas[i].name,
         latlng: new kakao.maps.LatLng(datas[i].lat, datas[i].long),
-        image: datas[i].image,
+        image: datas[i].image_url[0],
         buildType: datas[i].build_type,
-        localName: datas[i].local,
+        localName: datas[i].city,
       };
     }
     setPositions(_positions);
@@ -89,7 +89,7 @@ function MapContainer({
     }
 
     count.current += 1;
-    if (count.current > 2) setLocal('지도에 표시된 지역');
+    if (count.current > 2) setLocal('all');
   }, [area, datas]);
 
   //zoom level 변함에 따라 리스트 내용 변경
@@ -102,7 +102,7 @@ function MapContainer({
   //지도 크기 동적 변경
   const [mapStyle, setMapStyle] = useState({
     width: '50%',
-    height: '540px',
+    height: '740px',
     position: 'fixed',
     left: '50%',
   });
@@ -110,16 +110,17 @@ function MapContainer({
   useEffect(() => {
     if (map.current) {
       map.current.relayout();
+      console.log('hello');
     }
-  }, [map.current, mapStyle]);
+  }, [map.current, changeMap]);
 
   useEffect(() => {
     if (changeMap === false) {
       setMapStyle({
         width: '100%',
-        height: '600px',
+        height: '740px',
         position: 'sticky',
-        top: '360px',
+        top: '250px',
         left: '50%',
       });
     } else {
@@ -132,9 +133,13 @@ function MapContainer({
   }, [changeMap]);
 
   let height = level >= 13 ? '1900px' : '1250px';
+  if (changeMap && level >= 13) {
+    map.current.setLevel(10);
+  }
   return (
     <Box height={height} active={changeMap ? 'true' : 'false'}>
-      <div id="kakaoMap" style={mapStyle} />
+      {/* <div id="kakaoMap" style={mapStyle} /> */}
+      <MapBox id="kakaoMap" changeMap={changeMap ? 'true' : 'false'} />
       {positions.map(position => (
         <MapMarkerItem
           position={position}
