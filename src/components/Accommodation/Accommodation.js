@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { BsHeart, BsFillHeartFill } from 'react-icons/bs';
 import BasicSlider from '../Slide/Slider';
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import {
   WrapConv,
   BlankDiv,
@@ -27,16 +28,25 @@ const Accommodation = React.memo(function Accommodation({
     '욕조',
   ];
   const [heart, setHeart] = useState(false);
-
+  const navigate = useNavigate();
+  const gotoDetail = id => {
+    navigate('/detail', { state: id });
+  };
+  if (data === []) return null;
   const mouseUp = () => {
     setlatlng({ lat: data.lat, lng: data.long });
   };
   const mouseLeave = () => {
     setlatlng({ lat: 0, lng: 0 });
   };
-  console.log('data :', data.length);
   return (
-    <div onMouseOver={mouseUp} onMouseLeave={mouseLeave}>
+    <div
+      onMouseOver={mouseUp}
+      onMouseLeave={mouseLeave}
+      onClick={() => {
+        gotoDetail(data.id);
+      }}
+    >
       <Wrap>
         <BasicSlider data={data} flag="list" />
         {/* <Img src={data.image} alt="accommodataion" /> */}

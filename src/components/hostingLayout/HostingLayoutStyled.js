@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { TransitionGroup, CSSTransition } from 'react-transition-group';
+// import { TransitionGroup, CSSTransition } from 'react-transition-group';
 
 const Box = styled.div`
   width: 100%;

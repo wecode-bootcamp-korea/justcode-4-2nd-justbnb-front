@@ -35,16 +35,18 @@ function LogoutToggle({ openToggle, loginModalHandler, signupModalHandler }) {
 
 const ToggleBox = styled.div`
   position: absolute;
-  width: 15em;
+  width: 15rem;
   background: #ffffff;
   border-radius: 10px;
   list-style: none;
+  box-shadow: 1px 1px 2px #dddddd;
 `;
 
 const ToggleList = styled.li`
   margin: 10px 0;
   padding: 15px;
   font-size: 14px;
+  color: black;
 
   &:hover {
     background-color: rgb(247, 247, 247);

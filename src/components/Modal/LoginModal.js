@@ -36,8 +36,11 @@ function LoginModal({ loginModalHandler }) {
       return;
     }
   };
+
   const postLogin = () => {
-    fetch('http://localhost:8000/users/login', {
+    errHandler();
+    loginModalHandler('none');
+    fetch('http://localhost:8000/user/signin', {
       method: 'POST',
       headers: {
         'content-Type': 'application/json',
@@ -47,21 +50,13 @@ function LoginModal({ loginModalHandler }) {
         password: password,
       }),
     })
+      .then(res => res.json())
       .then(res => {
-        if (res.status === 201) {
-          return res.json();
-        } else if (res.status === 400) {
-          alert('아이디와 비밀번호를 확인해주세요 :)');
-          return res.json();
-        } else if (res.status === 500) {
-          console.log('에러메세지: ', res.message);
-        } else return res.json();
-      })
-      .then(res => {
-        if (res.token) {
-          localStorage.setItem('token', res.token);
+        if (res.status === 200) {
+          alert('로그인 되었습니다 :)');
+          res.accessToken && localStorage.setItem('token', res.accessToken);
         } else {
-          console.log('에러발생 : ', res.message);
+          alert('아이디와 비밀번호를 확인해주세요 :)');
         }
       });
   };
@@ -111,7 +106,7 @@ function LoginModal({ loginModalHandler }) {
                   </ErrBox>
                 </>
               )}
-              <CountinueBtn onClick={errHandler}>로그인</CountinueBtn>
+              <CountinueBtn onClick={postLogin}>로그인</CountinueBtn>
               <Text2>또는</Text2>
               <BtnWrapper>
                 <Btns>
@@ -166,6 +161,8 @@ const ModalWrapper = styled.div`
   z-index: 1000;
   overflow: hidden;
   outline: 0;
+  box-shadow: 2px 2px 10px #dddddd;
+  cursor: default;
 
   animation: ${move} 0.3s ease-in-out forwards;
 `;
@@ -192,14 +189,15 @@ const CloseBtn = styled.button`
   text-align: left;
   border: none;
   background-color: #ffffff;
-  font-size: 0.9em;
+  font-size: 0.9rem;
   cursor: pointer;
 `;
 
 const Tittle = styled.div`
-  font-size: 1.1em;
+  font-size: 1.1rem;
   padding-left: 230px;
   font-weight: 700;
+  color: black;
 `;
 
 const ContentsWrapper = styled.div`
@@ -209,8 +207,9 @@ const ContentsWrapper = styled.div`
 const Text = styled.div`
   &:first-child {
     padding-bottom: 40px;
-    font-size: 1.3em;
+    font-size: 1.3rem;
     font-weight: 600;
+    color: black;
   }
 
   &:last-child {
@@ -276,8 +275,9 @@ const Btns = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  font-size: 0.9em;
   border: 1px solid black;
+  font-size: 0.9em;
+  color: black;
   ${BtnLayout}
 
   &: hover {

@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import { FaStar } from 'react-icons/fa';
 import { IoShieldCheckmarkSharp, IoShieldHalfOutline } from 'react-icons/io5';
 
-function HostInfo() {
+function HostInfo(props) {
   return (
     <Wrapper>
       <User>
@@ -10,7 +10,7 @@ function HostInfo() {
           <img src="/images/thump/user.jpeg" alt="user" />
         </Img>
         <div>
-          <Name>호스트 : You.And.I님</Name>
+          <Name>호스트 : {props.host_name}님</Name>
           <Date>회원 가입일 : 2020년 12월</Date>
         </div>
       </User>

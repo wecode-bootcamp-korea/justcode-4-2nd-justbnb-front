@@ -1,6 +1,6 @@
 import styled, { keyframes, css } from 'styled-components';
 
-const boxFade = keyframes`
+const boxMove = keyframes`
   0% {
     left:0px;
     
@@ -27,20 +27,21 @@ const ListContainer = styled.div`
   background-color: white;
   position: absolute;
   animation-duration: 1s;
+  box-shadow: 5px 0px 10px grey;
   animation: ${props => {
-    if (props.active === 'true') {
-      return css`
-        ${boxFade} 1s 0s ease alternate forwards;
-      `;
-    } else {
-      return css`
-        ${boxShow} 1s 0s ease alternate forwards;
-      `;
-    }
-  }}
-  @media only screen and (max-width: 1308px) {
+      if (props.active === 'true') {
+        return css`
+          ${boxMove} 1s 0s ease alternate forwards;
+        `;
+      } else {
+        return css`
+          ${boxShow} 1s 0s ease alternate forwards;
+        `;
+      }
+    }}
+    @media only screen and (max-width: 1308px) {
     width: 100%;
-    padding-left:
+    padding-left: 0px;
     padding: 5px;
   }
 `;
@@ -49,7 +50,7 @@ const Container = styled.div`
   width: 100%;
   height: 100%;
   display: flex;
-  margin-top: 360px;
+  margin-top: 200px;
   @media only screen and (max-width: 1308px) {
     width: 100%;
   }
@@ -105,6 +106,51 @@ const Box = styled.div`
   height: ${props => props.height || '1250px'};
 `;
 
+const TextArea = styled.div`
+  @media only screen and (max-width: 744px) {
+    margin: 0px auto;
+    width: 90%;
+    object-fit: cover;
+  }
+`;
+
+const MapBox = styled.div`
+  height: 860px;
+  width: 100%;
+  position: ${props => (props.changeMap === 'false' ? 'sticky' : 'absolute')};
+  top: ${props => (props.changeMap === 'false' ? '105px' : 'none')};
+  animation-duration: 1s;
+  z-index: -10;
+  transition: all 4s ease-in;
+  animation: ${props => {
+    if (props.changeMap === 'false') {
+      return css`
+        ${reveal} 1s 0s ease alternate;
+      `;
+    }
+  }};
+`;
+const reveal = keyframes`
+  from {
+    right:0%;
+    clip-path: inset(0 100% 0 0);
+  }
+  to {
+    right:100%;
+    clip-path: inset(0 0 0 0);
+  }
+`;
+const hide = keyframes`
+  from {
+    right:0%;
+    clip-path: inset(0 0 0 0);
+  }
+  to {
+    right:100%;
+    clip-path: inset(0 0 0 100%);
+  }
+`;
+
 export {
   ListContainer,
   Container,
@@ -117,4 +163,6 @@ export {
   WrapContainer,
   Map,
   Box,
+  TextArea,
+  MapBox,
 };
