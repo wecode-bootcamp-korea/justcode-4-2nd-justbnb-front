@@ -1,15 +1,43 @@
-import { React, useEffect, useState } from 'react';
+import { React, useEffect, useState, useRef } from 'react';
 import styled from 'styled-components';
 
 import DatePickerRangeController from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
+import { check } from 'prettier';
 // import Calendar from '../../../components/Calendar/Calendar';
 
 function CalendarModal(props) {
-  const { start, end, change, deleteDate, dateDiff, dateDeleted } = props;
-  const [checkInValue, setCheckInValue] = useState(null);
-  const [checkOutValue, setCheckOutValue] = useState(null);
+  const {
+    start,
+    end,
+    change,
+    deleteDate,
+    dateDiff,
+    dateDeleted,
+    setCalendarModalOpen,
+    open,
+  } = props;
+
+  const [checkInValue, setCheckInValue] = useState('');
+  const [checkOutValue, setCheckOutValue] = useState('');
   const [checkInDate, setCheckInDate] = useState(0);
+
+  const wrapperRef = useRef();
+
+  useEffect(() => {
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  });
+
+  const handleClickOutside = event => {
+    if (wrapperRef && !wrapperRef.current.contains(event.target)) {
+      setCalendarModalOpen(false);
+    } else {
+      setCalendarModalOpen(true);
+    }
+  };
 
   useEffect(() => {
     setCheckInDate(dateDiff);
@@ -18,18 +46,19 @@ function CalendarModal(props) {
   useEffect(() => {
     // setCheckInValue(start);
     // startDate가 null일 경우 렌더링이 되지 않는 오류 발생
-    if (start !== null) {
+    if (start) {
       let newStartDate = `${start.getFullYear()}.${
         start.getMonth() + 1
       }.${start.getDate()}`;
       setCheckInValue(newStartDate);
     }
+    // setCheckOutValue('');
   }, [start]);
 
   useEffect(() => {
     // setCheckOutValue(end);
     // startDate가 null일 경우 렌더링이 되지 않는 오류 발생
-    if (end !== null) {
+    if (end) {
       let newEndDate = `${end.getFullYear()}.${
         end.getMonth() + 1
       }.${end.getDate()}`;
@@ -37,8 +66,30 @@ function CalendarModal(props) {
     }
   }, [end]);
 
+  const usePrevState = state => {
+    const ref = useRef(state);
+    useEffect(() => {
+      ref.current = state;
+    }, [state]);
+    return ref.current;
+  };
+
+  const prevCheckOutValue = usePrevState(checkOutValue);
+  let temp = useRef(end);
+  // 변해도 렌더링이 되지 않음
+
+  const handleClose = useEffect(() => {
+    temp.current !== end && end
+      ? setCalendarModalOpen(false)
+      : setCalendarModalOpen(true);
+    temp.current = end;
+  }, [end]);
+
   return (
-    <Wrapper style={{ display: props.open ? 'block' : 'none' }}>
+    <Wrapper
+      ref={wrapperRef}
+      style={{ display: props.open ? 'block' : 'none' }}
+    >
       <Header>
         <Text>
           {/* <h2>날짜 선택</h2> */}
@@ -58,14 +109,14 @@ function CalendarModal(props) {
             <div>체크인</div>
             <Input
               placeholder="날짜 추가"
-              value={!dateDeleted ? '' : checkInValue}
+              defaultValue={!dateDeleted ? '' : checkInValue}
             />
           </CheckIn>
           <CheckOut>
             <div>체크아웃</div>
             <Input
               placeholder="날짜 추가"
-              value={!dateDeleted ? '' : checkOutValue}
+              defaultValue={!dateDeleted ? '' : checkOutValue}
             />
           </CheckOut>
         </InputWrapper>
@@ -77,7 +128,6 @@ function CalendarModal(props) {
           onChange={change}
           startDate={start}
           endDate={end}
-          dateFormat="yyyy/MM/dd"
           monthsShown={2}
           minDate={new Date()}
           selectsRange
@@ -183,6 +233,7 @@ const Delete = styled.button`
   text-decoration: underline;
   cursor: pointer;
 `;
+
 const Close = styled.button`
   padding: 8px 15px;
   background-color: black;
