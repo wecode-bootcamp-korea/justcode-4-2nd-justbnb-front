@@ -8,6 +8,7 @@ export default function Hosting6() {
 
   const Upload = e => {
     const files = Array.from(e.target.files);
+    console.log(e.target.files);
     // const files = e.target.files;
     const newFiles = files.map(file => {
       return URL.createObjectURL(file);

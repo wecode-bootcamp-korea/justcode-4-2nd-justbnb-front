@@ -67,24 +67,38 @@ export default function Hosting3() {
   // ------------------------------------------------------------------------------------
   const container = useRef(null);
 
+  const [local, setLocal] = useState('busan');
+
   useEffect(() => {
+    console.log(local);
     const container = document.getElementById('map');
     const options = {
-      center: new kakao.maps.LatLng(33.450701, 126.570667),
-      level: 3,
+      // center: new kakao.maps.LatLng(location.latitude, location.longitude),
+      center: new kakao.maps.LatLng(
+        Movelocation[local].latitude,
+        Movelocation[local].longitude
+      ),
+
+      level: 9,
     };
+
     const map = new kakao.maps.Map(container, options);
+  }, [local]);
 
-    function setCenter() {
-      let moveLatLon = new kakao.maps.LatLng(37.5283169, 126.9294254); // seoul
-
-      map.setCenter(moveLatLon);
-    }
-
-    // function panTo() {
-    //   let moveLatLon = new kakao.maps.LatLng(33.45058, 126.574942);
-    // }
-  }, []);
+  const Movelocation = {
+    jeju: {
+      latitude: 33.40981832937095,
+      longitude: 126.52984973415151,
+    },
+    busan: {
+      latitude: 35.162960289695896,
+      longitude: 129.11194084073773,
+    },
+    seoul: {
+      latitude: 37.5283169,
+      longitude: 126.9294254,
+    },
+  };
 
   return (
     <Wrapper>
@@ -107,9 +121,27 @@ export default function Hosting3() {
             <Icon>
               <IoLocationSharp />
             </Icon>
-            <Text2 placeholder="주소를 입력하세요." />
-            <TestBtn1>TestBtn1</TestBtn1>
-            <TestBtn2>TestBtn2</TestBtn2>
+            <Seoul
+              onClick={() => {
+                setLocal('seoul');
+              }}
+            >
+              Seoul
+            </Seoul>
+            <JejuBtn
+              onClick={() => {
+                setLocal('jeju');
+              }}
+            >
+              JejuBtn
+            </JejuBtn>
+            <BusanBtn
+              onClick={() => {
+                setLocal('busan');
+              }}
+            >
+              BusanBtn
+            </BusanBtn>
           </ButtonTextWrapper>
           <Map
             id="map"
@@ -260,7 +292,9 @@ const Footer = styled.section`
 `;
 
 const Map = styled.div`
-  position: relative;
+  /* position: relative; */
+  /* height: fit-content; */
+  object-fit: cover;
   z-index: -999;
   margin: 0;
 `;
@@ -282,10 +316,14 @@ const ButtonTextWrapper = styled.button`
   align-items: center;
 `;
 
-const TestBtn1 = styled.button`
+const JejuBtn = styled.button`
   font-size: 10px;
 `;
 
-const TestBtn2 = styled.button`
+const BusanBtn = styled.button`
+  font-size: 10px;
+`;
+
+const Seoul = styled.button`
   font-size: 10px;
 `;
