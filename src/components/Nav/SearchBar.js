@@ -31,25 +31,6 @@ function SearchBar({ scrollPosition, updateScroll, flag }) {
         haveAnimal: haveAnimal,
       },
     });
-
-    // 수정
-    // fetch(`http://localhost:8000/list/:${city}`, {
-    //   method: 'post',
-    //   headers: {
-    //     'Content-Type': 'application/json',
-    //   },
-    //   body: JSON.stringify({
-    //     city: city,
-    //     startDate: startDate,
-    //     endDate: endDate,
-    //     count: count,
-    //     haveAnimal: haveAnimal,
-    //   }),
-    // })
-    //   .then(res => res.json())
-    //   .then(res => {
-    //     console.log('SUCCESS');
-    //   });
   };
 
   useEffect(() => {

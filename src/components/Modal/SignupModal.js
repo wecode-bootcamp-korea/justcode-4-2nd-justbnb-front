@@ -41,11 +41,12 @@ function SignupModal({ signupModalHandler }) {
       return;
     }
 
-    signupModalHandler('none');
     signupPost();
   };
 
   const signupPost = () => {
+    signupModalHandler('none');
+
     fetch('http://localhost:8000/user/signup', {
       method: 'POST',
       headers: {
@@ -68,8 +69,6 @@ function SignupModal({ signupModalHandler }) {
         console.log('에러메세지: ', res.message);
       });
   };
-
-  console.log(inputs);
 
   return (
     <div>
