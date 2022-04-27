@@ -75,7 +75,7 @@ const TextWrapper = styled.div`
   justify-content: space-between;
 `;
 
-const Text = styled.div`
+const Text = styled.ul`
   width: 30%;
 `;
 
@@ -84,7 +84,7 @@ const Title = styled.h3`
   font-weight: 500;
 `;
 
-const List = styled.div`
+const List = styled.li`
   display: flex;
   margin-bottom: 10px;
   .icons {

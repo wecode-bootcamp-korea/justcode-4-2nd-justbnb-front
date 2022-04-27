@@ -146,9 +146,7 @@ function Main(props) {
   );
 }
 
-const Wrapper = styled.section`
-  padding-top: 80px;
-`;
+const Wrapper = styled.section``;
 
 const MainTitle = styled.h1`
   font-size: 26px;
