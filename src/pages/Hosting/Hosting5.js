@@ -161,9 +161,8 @@ const Text1 = styled.div`
 
 const Container2 = styled.section`
   width: 50%;
-  min-height: 90vh;
+  min-height: 80vh;
   position: relative;
-  /* border: 1px solid green; */
   display: flex;
   flex-wrap: wrap;
   flex-direction: column;
@@ -172,7 +171,7 @@ const Container2 = styled.section`
 const Header = styled.section`
   /* position: absolute;
   top: 0; */
-  /* border: 1px solid red; */
+  /* border: 1px solid blue; */
   width: 100%;
   padding: 20px;
   display: flex;
@@ -200,6 +199,7 @@ const Header = styled.section`
 
 const Body = styled.section`
   width: 100%;
+  /* border: 1px solid blue; */
   /* padding: 55px; */
 `;
 
@@ -218,7 +218,7 @@ const Convenience = styled.div`
   justify-content: center;
   align-items: center;
   /* grid-template-columns: repeat(3, 0fr); */
-  margin: 15px 0;
+  margin: 10px 0;
   /* width: 100%; */
 `;
 
@@ -234,7 +234,7 @@ const Button = styled.section`
 `;
 
 const BoxWrapper = styled.div`
-  /* border: 1px solid red; */
+  /* border: 1px solid green; */
   display: flex;
   flex-direction: column;
   justify-content: center;

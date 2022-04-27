@@ -15,6 +15,8 @@ import { useState } from 'react';
 // };
 
 export default function Hosting({ onChange, resultChoice }) {
+  // const [color, setColor] = useState('');
+
   return (
     <Wrapper>
       <Container>
@@ -31,13 +33,12 @@ export default function Hosting({ onChange, resultChoice }) {
       <Container2>
         <Header>
           <button className="help-button">도움말</button>
-          <button className="exit-button">나가기</button>
+          <Link to="/">
+            <button className="exit-button">나가기</button>
+          </Link>
         </Header>
         <Body>
-          {/* <<<<<<< HEAD
-          <Button>
-            <div className="but-name">아파트</div> */}
-          {/* ======= */}
+          {/* <div onClickEnter={() => setIsClicking(true)} /> */}
           <Button id="1" onClick={e => onChange(e)} value="아파트">
             <div className="but-name">아파트</div>
             <div className="img-wrapper">
@@ -139,6 +140,9 @@ const Header = styled.section`
     margin-right: 30px;
     border: 1px solid rgba(155, 149, 167, 0);
     background-color: rgba(155, 149, 167, 0.1);
+    &:hover {
+      cursor: pointer;
+    }
   }
 `;
 

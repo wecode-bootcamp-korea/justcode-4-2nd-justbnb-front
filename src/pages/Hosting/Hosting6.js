@@ -78,7 +78,7 @@ const Container2 = styled.section`
   /* border: 5px solid green; */
   height: 80vh;
   position: relative;
-  display: flex;
+
   flex-wrap: wrap;
   flex-direction: column;
   z-index: 999;

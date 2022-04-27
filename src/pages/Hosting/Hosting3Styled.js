@@ -18,7 +18,6 @@ const Container = styled.section`
   display: flex;
   align-items: center;
   line-height: 3.5em;
-  position: relative;
   img {
     width: 80px;
     height: 70px;
@@ -38,12 +37,14 @@ const Text1 = styled.div`
 
 const Container2 = styled.section`
   width: 50%;
-  min-height: 80vh;
+  /* border: 5px solid green; */
+  height: 80vh;
   position: relative;
-  /* border: 1px solid green; */
-  display: flex;
   flex-wrap: wrap;
   flex-direction: column;
+  align-items: center;
+  line-height: 3.5em;
+  /* z-index: 999; */
 `;
 
 const Header = styled.section`
@@ -102,7 +103,7 @@ const ButtonTextWrapper = styled.button`
   text-align: left;
   padding: 18px;
   width: 80%;
-  margin-top: 65px;
+  margin-top: 20px;
   display: flex;
   align-items: center;
 `;

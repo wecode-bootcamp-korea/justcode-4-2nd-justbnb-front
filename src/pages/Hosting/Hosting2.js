@@ -19,7 +19,9 @@ export default function Hosting2({ onChange, resultChoice }) {
       <Container2>
         <Header>
           <button className="help-button">도움말</button>
-          <button className="exit-button">나가기</button>
+          <Link to="/">
+            <button className="exit-button">나가기</button>
+          </Link>
         </Header>
         <Body>
           <Button id="2" onClick={e => onChange(e)} value="공간 전체">
@@ -106,6 +108,9 @@ const Header = styled.section`
     margin-right: 30px;
     border: 1px solid rgba(155, 149, 167, 0);
     background-color: rgba(155, 149, 167, 0.1);
+    &:hover {
+      cursor: pointer;
+    }
   }
 `;
 
