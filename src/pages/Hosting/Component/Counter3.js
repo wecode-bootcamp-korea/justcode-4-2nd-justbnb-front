@@ -2,30 +2,34 @@ import React, { useState } from 'react';
 import { FaPlus, FaMinus, FaAlignJustify } from 'react-icons/fa';
 import styled from 'styled-components';
 
-export default function CounterValue3() {
+export default function CounterValue3({ onChange }) {
   const [num, setNum] = useState(20000);
 
-  const upNum = () => {
+  const upNum = e => {
     setNum(num >= 100000 ? 100000 : num + 1000);
+    e.target.value = Number(e.target.value) + 1000;
+    onChange(e);
   };
 
-  const downNum = () => {
+  const downNum = e => {
     setNum(num <= 0 ? 0 : num - 1000);
+    e.target.value = Number(e.target.value) - 1000;
+    onChange(e);
   };
 
   return (
     <CounterWrapper>
       <Button>
-        <button onClick={downNum}>
-          <FaMinus className="icons " />
+        <button onClick={downNum} id="8" value={num}>
+          -
         </button>
       </Button>
       <NumContainer>
         <h1>₩{num}</h1>
       </NumContainer>
       <Button2>
-        <button onClick={upNum}>
-          <FaPlus className="icons " />
+        <button onClick={upNum} id="8" value={num}>
+          +
         </button>
       </Button2>
     </CounterWrapper>

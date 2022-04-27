@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import { FaPlus, FaMinus } from 'react-icons/fa';
-import { useState } from 'react';
+import { useRef, useEffect } from 'react';
 
 function SideBarHeadCount(props) {
   const {
@@ -11,10 +11,27 @@ function SideBarHeadCount(props) {
     headCount,
     petCount,
     total_members,
+    setCountModalOpen,
   } = props;
 
+  const wrapperRef = useRef();
+
+  useEffect(() => {
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  });
+
+  const handleClickOutside = event => {
+    if (wrapperRef && !wrapperRef.current.contains(event.target)) {
+      setCountModalOpen(false);
+    } else {
+      setCountModalOpen(true);
+    }
+  };
   return (
-    <Wrapper style={{ display: open ? 'block' : 'none' }}>
+    <Wrapper ref={wrapperRef} style={{ display: open ? 'block' : 'none' }}>
       <ListWrapper>
         <List>
           <Text>인원</Text>
