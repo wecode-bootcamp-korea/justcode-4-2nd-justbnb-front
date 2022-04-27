@@ -1,6 +1,6 @@
 import styled, { keyframes, css } from 'styled-components';
 
-const boxFade = keyframes`
+const boxMove = keyframes`
   0% {
     left:0px;
     
@@ -29,17 +29,17 @@ const ListContainer = styled.div`
   animation-duration: 1s;
   box-shadow: 5px 0px 10px grey;
   animation: ${props => {
-    if (props.active === 'true') {
-      return css`
-        ${boxFade} 1s 0s ease alternate forwards;
-      `;
-    } else {
-      return css`
-        ${boxShow} 1s 0s ease alternate forwards;
-      `;
-    }
-  }};
-  @media only screen and (max-width: 1308px) {
+      if (props.active === 'true') {
+        return css`
+          ${boxMove} 1s 0s ease alternate forwards;
+        `;
+      } else {
+        return css`
+          ${boxShow} 1s 0s ease alternate forwards;
+        `;
+      }
+    }}
+    @media only screen and (max-width: 1308px) {
     width: 100%;
     padding-left: 0px;
     padding: 5px;
@@ -123,11 +123,7 @@ const MapBox = styled.div`
   z-index: -10;
   transition: all 4s ease-in;
   animation: ${props => {
-    if (props.changeMap === 'true') {
-      return css`
-        ${reveal} 1s 0s ease alternate;
-      `;
-    } else {
+    if (props.changeMap === 'false') {
       return css`
         ${reveal} 1s 0s ease alternate;
       `;
@@ -137,11 +133,21 @@ const MapBox = styled.div`
 const reveal = keyframes`
   from {
     right:0%;
-    clip-path: inset(0 0 0 100%);
+    clip-path: inset(0 100% 0 0);
   }
   to {
     right:100%;
     clip-path: inset(0 0 0 0);
+  }
+`;
+const hide = keyframes`
+  from {
+    right:0%;
+    clip-path: inset(0 0 0 0);
+  }
+  to {
+    right:100%;
+    clip-path: inset(0 0 0 100%);
   }
 `;
 

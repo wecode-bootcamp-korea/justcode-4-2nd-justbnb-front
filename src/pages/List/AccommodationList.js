@@ -131,8 +131,6 @@ const AccommodationList = () => {
             setPage={setPage}
           />
         </ListContainer>
-        {/* ) : null} */}
-        {/* {datas.length !== 0 ? ( */}
         {width >= 1308 && datas.length !== 0 ? (
           <MapContainer
             datas={datas}

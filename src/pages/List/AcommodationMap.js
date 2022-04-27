@@ -171,4 +171,4 @@ function MapContainer({
   );
 }
 
-export default MapContainer;
+export default React.memo(MapContainer);
