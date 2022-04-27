@@ -7,12 +7,13 @@ import { Link } from 'react-router-dom';
 import LogoutToggle from './LogoutToggle';
 import LoginModal from '../Modal/LoginModal';
 import SignupModal from '../Modal/SignupModal';
-// import LoginToggle from '../Modal/LoginModal';
+import LoginToggle from '../Modal/LoginModal';
 
 function UserNav({ scrollPosition }) {
   const [openToggle, setOpenToggle] = useState({ display: 'none' });
   const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
   const [isSignupModalOpen, setIsSignupModalOpen] = useState(false);
+  const token = localStorage.getItem('token');
 
   const toggleHandler = () => {
     openToggle.display === 'none'
@@ -84,7 +85,7 @@ function UserNav({ scrollPosition }) {
         loginModalHandler={loginModalHandler}
         signupModalHandler={signupModalHandler}
       />
-      {/* {token && <LoginToggle showToggle={showToggle} />} */}
+      {/* {token && <LoginToggle openToggle={openToggle} />} */}
       {isLoginModalOpen && <LoginModal loginModalHandler={loginModalHandler} />}
       {isSignupModalOpen && (
         <SignupModal signupModalHandler={signupModalHandler} />
