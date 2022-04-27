@@ -157,4 +157,4 @@ const Icons = styled.div`
   cursor: pointer;
 `;
 
-export default Footer;
+export default React.memo(Footer);
