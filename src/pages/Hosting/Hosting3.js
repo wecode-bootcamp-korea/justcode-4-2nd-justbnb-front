@@ -5,10 +5,24 @@ import styled from 'styled-components';
 
 const { kakao } = window;
 
-export default function Hosting3() {
+export default function Hosting3({ onChange, resultChoice }) {
   const container = useRef(null);
 
   const [local, setLocal] = useState('seoul');
+
+  // 위도, 경도 정보 전달하기 위한 state
+  const [dnlrud, setDnlrud] = useState({
+    La: 0,
+    Ma: 0,
+  });
+
+  const [wlqjs, setWlqjs] = useState({
+    address: '',
+  });
+
+  function Deliver(e) {
+    onChange(dnlrud);
+  }
 
   const Movelocation = {
     jeju: {
@@ -46,7 +60,9 @@ export default function Hosting3() {
     kakao.maps.event.addListener(map, 'click', function (mouseEvent) {
       // 클릭한 위도, 경도 정보를 가져옵니다
       let latlng = mouseEvent.latLng;
-
+      // console.log(latlng); // 위도, 경도 정보
+      setDnlrud((dnlrud.La = latlng.La), (dnlrud.Ma = latlng.Ma));
+      console.log(dnlrud);
       // 마커 위치를 클릭한 위치로 옮깁니다
       marker.setPosition(latlng);
 
@@ -83,7 +99,6 @@ export default function Hosting3() {
             '<span class="title">법정동 주소정보</span>' +
             detailAddr +
             '</div>';
-
           // 마커를 클릭한 위치에 표시합니다
           marker.setPosition(mouseEvent.latLng);
           marker.setMap(map);
@@ -91,6 +106,10 @@ export default function Hosting3() {
           // 인포윈도우에 클릭한 위치에 대한 법정동 상세 주소정보를 표시합니다
           infowindow.setContent(content);
           infowindow.open(map, marker);
+
+          // console.log(result[0].address.address_name); // 지번주소 정보
+          setWlqjs((wlqjs.address = String(result[0].address.address_name)));
+          console.log(wlqjs);
         }
       });
     });
@@ -147,38 +166,41 @@ export default function Hosting3() {
             <Icon>
               <IoLocationSharp />
             </Icon>
-            <Seoul
-              onClick={() => {
-                setLocal('seoul');
-              }}
-            >
-              Seoul
-            </Seoul>
-            <Jeju
-              onClick={() => {
-                setLocal('jeju');
-              }}
-            >
-              Jeju
-            </Jeju>
-            <Busan
-              onClick={() => {
-                setLocal('busan');
-              }}
-            >
-              Busan
-            </Busan>
+            <Buttons>
+              <Seoul
+                onClick={e => {
+                  setLocal('seoul');
+                  onChange(e);
+                }}
+              >
+                Seoul
+              </Seoul>
+              <Jeju
+                onClick={e => {
+                  setLocal('jeju');
+                  onChange(e);
+                }}
+              >
+                Jeju
+              </Jeju>
+              <Busan
+                onClick={e => {
+                  setLocal('busan');
+                  onChange(e);
+                }}
+              >
+                Busan
+              </Busan>
+              <Confirm onClick={() => onChange({ 3: dnlrud })}>확인</Confirm>
+            </Buttons>
           </ButtonTextWrapper>
           <Map
             id="map"
-            style={{ width: '100%', height: '1000px' }}
+            style={{ width: '100%', height: '900px' }}
             ref={container}
           />
         </Body>
-        <Footer>
-          <p>뒤로</p>
-          <button className="next-button">다음</button>
-        </Footer>
+        <Footer />
       </Container2>
     </Wrapper>
   );
@@ -321,7 +343,7 @@ const Map = styled.div`
   /* position: relative; */
   /* height: fit-content; */
   object-fit: cover;
-  z-index: 998;
+  z-index: 0;
   margin: 0;
 `;
 
@@ -331,7 +353,6 @@ const ButtonTextWrapper = styled.button`
   background-color: white;
   border-radius: 50px;
   border: 1px solid rgba(155, 149, 167, 0.44);
-
   border: red 10px solid;
   font-size: 16px;
   font-weight: 700;
@@ -339,9 +360,13 @@ const ButtonTextWrapper = styled.button`
   padding: 16px;
   box-shadow: 2px 1px 5px 7px rgba(0, 0, 0, 0.14);
   width: 70%;
-  top: 20vw;
+  top: 10vw;
   display: flex;
   align-items: center;
+`;
+
+const Buttons = styled.div`
+  width: 100%;
 `;
 
 const Jeju = styled.button`
@@ -354,4 +379,9 @@ const Busan = styled.button`
 
 const Seoul = styled.button`
   font-size: 10px;
+`;
+
+const Confirm = styled.button`
+  font-size: 15px;
+  /* margin-right: -100vw; */
 `;

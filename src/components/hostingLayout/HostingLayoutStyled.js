@@ -4,7 +4,6 @@ import styled from 'styled-components';
 const Box = styled.div`
   width: 100%;
   display: flex;
-  /* border: 1px solid red; */
   flex-direction: column;
   position: relative;
 `;
@@ -13,6 +12,7 @@ const ProgressWrap = styled.div`
   width: 100%;
   position: absolute;
   bottom: 0;
+  /* background-color: white; */
   /* border: 3px solid orange; */
 `;
 
@@ -57,6 +57,9 @@ const BtnDiv = styled.div`
   width: 50%;
   /* border: 1px solid blue; */
   margin-left: 50%;
+  /* border: 1px solid red; */
+  /* padding-top : 10%; */
+  background-color: white;
   display: flex;
   justify-content: space-between;
 `;

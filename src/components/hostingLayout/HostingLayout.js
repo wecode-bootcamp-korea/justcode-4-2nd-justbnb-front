@@ -42,17 +42,17 @@ function GotoStep({ step, onChange, resultChoice }) {
       return <Hosting2 onChange={onChange} resultChoice={resultChoice} />;
     case 3:
       return <Hosting3 onChange={onChange} resultChoice={resultChoice} />;
-    case 3:
-      return <Hosting4 onChange={onChange} resultChoice={resultChoice} />;
     case 4:
-      return <Hosting5 onChange={onChange} resultChoice={resultChoice} />;
+      return <Hosting4 onChange={onChange} resultChoice={resultChoice} />;
     case 5:
-      return <Hosting6 onChange={onChange} resultChoice={resultChoice} />;
+      return <Hosting5 onChange={onChange} resultChoice={resultChoice} />;
     case 6:
-      return <Hosting7 onChange={onChange} resultChoice={resultChoice} />;
+      return <Hosting6 onChange={onChange} resultChoice={resultChoice} />;
     case 7:
-      return <Hosting8 onChange={onChange} resultChoice={resultChoice} />;
+      return <Hosting7 onChange={onChange} resultChoice={resultChoice} />;
     case 8:
+      return <Hosting8 onChange={onChange} resultChoice={resultChoice} />;
+    case 9:
       return <Hosting9 onChange={onChange} resultChoice={resultChoice} />;
     default:
       console.log('invalid number');
@@ -67,6 +67,11 @@ function HostingLayout() {
 
   const onChange = e => {
     const { value, id } = e.target;
+    if (step === 3) {
+      // setFlag(0);
+      console.log(e);
+    }
+
     if (step === 4) {
       if (resultChoice.hasOwnProperty(5)) {
         if (resultChoice[5].includes(value)) {
