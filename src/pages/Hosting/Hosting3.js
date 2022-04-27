@@ -6,84 +6,9 @@ import styled from 'styled-components';
 const { kakao } = window;
 
 export default function Hosting3() {
-  // const [InputText, setInputText] = useState('');
-  // const [Place, setPlace] = useState('');
-
-  // const onChange = e => {
-  //   setInputText(e.target.value);
-  // };
-
-  // const handleSubmit = e => {
-  //   e.preventDefault();
-  //   setPlace(InputText);
-  //   setInputText('');
-  // };
-
-  // useEffect(() => {
-  //   let infowindow = new kakao.maps.InfoWindow({ zIndex: 1 });
-
-  //   const container = document.getElementById('map');
-  //   const options = {
-  //     center: new kakao.maps.LatLng(33.450701, 126.570667),
-  //     level: 3,
-  //   };
-  //   const map = new kakao.maps.Map(container, options);
-
-  //   const ps = new kakao.maps.services.Places();
-
-  //   ps.keywordSearch(Place, placesSearchCB);
-
-  //   function placesSearchCB(data, status, pagination) {
-  //     if (status === kakao.maps.services.Status.OK) {
-  //       let bounds = new kakao.maps.LatLngBounds();
-
-  //       for (let i = 0; i < data.length; i++) {
-  //         displayMarker(data[i]);
-  //         bounds.extend(new kakao.maps.LatLng(data[i].y, data[i].x));
-  //       }
-
-  //       map.setBounds(bounds);
-  //     }
-  //   }
-
-  //   function displayMarker(place) {
-  //     let marker = new kakao.maps.Marker({
-  //       map: map,
-  //       position: new kakao.maps.LatLng(place.y, place.x),
-  //     });
-
-  //     // 마커에 클릭이벤트를 등록합니다
-  //     kakao.maps.event.addListener(marker, 'click', function () {
-  //       // 마커를 클릭하면 장소명이 인포윈도우에 표출됩니다
-  //       infowindow.setContent(
-  //         '<div style="padding:5px;font-size:12px;">' +
-  //           place.place_name +
-  //           '</div>'
-  //       );
-  //       infowindow.open(map, marker);
-  //     });
-  //   }
-  // }, [Place]);
-  // ------------------------------------------------------------------------------------
   const container = useRef(null);
 
-  const [local, setLocal] = useState('busan');
-
-  useEffect(() => {
-    console.log(local);
-    const container = document.getElementById('map');
-    const options = {
-      // center: new kakao.maps.LatLng(location.latitude, location.longitude),
-      center: new kakao.maps.LatLng(
-        Movelocation[local].latitude,
-        Movelocation[local].longitude
-      ),
-
-      level: 9,
-    };
-
-    const map = new kakao.maps.Map(container, options);
-  }, [local]);
+  const [local, setLocal] = useState('seoul');
 
   const Movelocation = {
     jeju: {
@@ -99,6 +24,107 @@ export default function Hosting3() {
       longitude: 126.9294254,
     },
   };
+
+  useEffect(() => {
+    const container = document.getElementById('map');
+    const options = {
+      center: new kakao.maps.LatLng(
+        Movelocation[local].latitude,
+        Movelocation[local].longitude
+      ),
+
+      level: 9,
+    };
+
+    const map = new kakao.maps.Map(container, options); // 지도 생성
+
+    const marker = new kakao.maps.Marker({
+      position: map.getCenter(),
+    });
+    marker.setMap(map);
+
+    kakao.maps.event.addListener(map, 'click', function (mouseEvent) {
+      // 클릭한 위도, 경도 정보를 가져옵니다
+      let latlng = mouseEvent.latLng;
+
+      // 마커 위치를 클릭한 위치로 옮깁니다
+      marker.setPosition(latlng);
+
+      // 추가 구현위해 일부러 남겨두는 코드------------------------------------------------------
+      // let message = '클릭한 위치의 위도는 ' + latlng.getLat() + ' 이고, ';
+      // message += '경도는 ' + latlng.getLng() + ' 입니다';
+
+      // let resultDiv = document.getElementById('clickLatlng');
+      // resultDiv.innerHTML = message;
+      //-------------------------------------------------------------------------------------
+    });
+    // 주소-좌표 변환 객체를 생성합니다
+    let geocoder = new kakao.maps.services.Geocoder();
+
+    let infowindow = new kakao.maps.InfoWindow({ zindex: 1 }); // 클릭한 위치에 대한 주소를 표시할 인포윈도우입니다
+
+    // 현재 지도 중심좌표로 주소를 검색해서 지도 좌측 상단에 표시합니다
+    searchAddrFromCoords(map.getCenter(), displayCenterInfo);
+
+    // 지도를 클릭했을 때 클릭 위치 좌표에 대한 주소정보를 표시하도록 이벤트를 등록합니다
+    kakao.maps.event.addListener(map, 'click', function (mouseEvent) {
+      searchDetailAddrFromCoords(mouseEvent.latLng, function (result, status) {
+        if (status === kakao.maps.services.Status.OK) {
+          let detailAddr = !!result[0].road_address
+            ? '<div>도로명주소 : ' +
+              result[0].road_address.address_name +
+              '</div>'
+            : '';
+          detailAddr +=
+            '<div>지번 주소 : ' + result[0].address.address_name + '</div>';
+
+          let content =
+            '<div class="bAddr">' +
+            '<span class="title">법정동 주소정보</span>' +
+            detailAddr +
+            '</div>';
+
+          // 마커를 클릭한 위치에 표시합니다
+          marker.setPosition(mouseEvent.latLng);
+          marker.setMap(map);
+
+          // 인포윈도우에 클릭한 위치에 대한 법정동 상세 주소정보를 표시합니다
+          infowindow.setContent(content);
+          infowindow.open(map, marker);
+        }
+      });
+    });
+
+    // 중심 좌표나 확대 수준이 변경됐을 때 지도 중심 좌표에 대한 주소 정보를 표시하도록 이벤트를 등록합니다
+    kakao.maps.event.addListener(map, 'idle', function () {
+      searchAddrFromCoords(map.getCenter(), displayCenterInfo);
+    });
+
+    function searchAddrFromCoords(coords, callback) {
+      // 좌표로 행정동 주소 정보를 요청합니다
+      geocoder.coord2RegionCode(coords.getLng(), coords.getLat(), callback);
+    }
+
+    function searchDetailAddrFromCoords(coords, callback) {
+      // 좌표로 법정동 상세 주소 정보를 요청합니다
+      geocoder.coord2Address(coords.getLng(), coords.getLat(), callback);
+    }
+
+    // 지도 좌측상단에 지도 중심좌표에 대한 주소정보를 표출하는 함수입니다
+    function displayCenterInfo(result, status) {
+      if (status === kakao.maps.services.Status.OK) {
+        let infoDiv = document.getElementById('centerAddr');
+
+        for (let i = 0; i < result.length; i++) {
+          // 행정동의 region_type 값은 'H' 이므로
+          if (result[i].region_type === 'H') {
+            infoDiv.innerHTML = result[i].address_name;
+            break;
+          }
+        }
+      }
+    }
+  }, [local]);
 
   return (
     <Wrapper>
@@ -128,20 +154,20 @@ export default function Hosting3() {
             >
               Seoul
             </Seoul>
-            <JejuBtn
+            <Jeju
               onClick={() => {
                 setLocal('jeju');
               }}
             >
-              JejuBtn
-            </JejuBtn>
-            <BusanBtn
+              Jeju
+            </Jeju>
+            <Busan
               onClick={() => {
                 setLocal('busan');
               }}
             >
-              BusanBtn
-            </BusanBtn>
+              Busan
+            </Busan>
           </ButtonTextWrapper>
           <Map
             id="map"
@@ -295,7 +321,7 @@ const Map = styled.div`
   /* position: relative; */
   /* height: fit-content; */
   object-fit: cover;
-  z-index: -999;
+  z-index: 998;
   margin: 0;
 `;
 
@@ -305,6 +331,8 @@ const ButtonTextWrapper = styled.button`
   background-color: white;
   border-radius: 50px;
   border: 1px solid rgba(155, 149, 167, 0.44);
+
+  border: red 10px solid;
   font-size: 16px;
   font-weight: 700;
   text-align: left;
@@ -316,11 +344,11 @@ const ButtonTextWrapper = styled.button`
   align-items: center;
 `;
 
-const JejuBtn = styled.button`
+const Jeju = styled.button`
   font-size: 10px;
 `;
 
-const BusanBtn = styled.button`
+const Busan = styled.button`
   font-size: 10px;
 `;
 
