@@ -1,7 +1,10 @@
 import { React, useEffect, useState, useRef } from 'react';
 import styled from 'styled-components';
-import SideBarHeadCount from './SideBarHeadCount';
+
 import CalendarModal from './CalendarModal';
+import SideBarHeadCount from './SideBarHeadCount';
+import LoginModal from '../../../components/Modal/LoginModal';
+
 import { FaStar, FaAngleDown } from 'react-icons/fa';
 
 function InfoSideBar(props) {
@@ -17,17 +20,22 @@ function InfoSideBar(props) {
     selected,
     token,
     location,
+    login,
   } = props;
 
   // 모달 open 관리
   const [calendarModalOpen, setCalendarModalOpen] = useState(false);
   const [CountModalOpen, setCountModalOpen] = useState(false);
+  const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
 
   const handleCalendarModalClose = e => {
     setCalendarModalOpen(false);
   };
   const handleCountModalClose = () => {
     setCountModalOpen(false);
+  };
+  const loginModalHandler = () => {
+    !isLoginModalOpen ? setIsLoginModalOpen(true) : setIsLoginModalOpen(false);
   };
 
   // 캘린더 input
@@ -89,27 +97,19 @@ function InfoSideBar(props) {
         checkOut: checkOutValue,
         members: headCount,
       }),
-    })
-      .then(res => {
-        res.json();
+    }).then(res => {
+      res.json();
+      if (res.status === 201) {
+        alert('예약이 완료되었습니다.');
         console.log(res);
-        const token2 = localStorage.getItem('token');
-        console.log('token2', token2);
-
-        if (res.status === 201) {
-          alert('예약이 완료되었습니다.');
-        } else if (res.status === 400) {
-          alert('로그인이 필요한 기능입니다.');
-        } else if (res.status === 409) {
-          alert('호스트는 예약할 수 없습니다.');
-        }
-      })
-      .then(result => {
-        console.log('등록결과', result);
-      });
+      } else if (res.status === 409) {
+        alert('호스트는 예약할 수 없습니다.');
+      }
+    });
   };
   return (
     <Section>
+      {isLoginModalOpen && <LoginModal loginModalHandler={loginModalHandler} />}
       <Wrapper>
         <Title>
           {end ? `₩${charge} / 박` : `요금을 확인하려면 날짜를 입력하세요.`}
@@ -191,7 +191,9 @@ function InfoSideBar(props) {
                 ? null
                 : 'disabled'
             }
-            onClick={postReservation}
+            onClick={() => {
+              login ? postReservation() : setIsLoginModalOpen(true);
+            }}
           >
             예약하기
           </Button>

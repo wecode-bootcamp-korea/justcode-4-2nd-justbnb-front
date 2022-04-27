@@ -3,7 +3,6 @@ import styled from 'styled-components';
 import LoginModal from '../../../components/Modal/LoginModal';
 import ImageModal from './ImageModal';
 import { FaStar, FaRegHeart, FaHeart } from 'react-icons/fa';
-import { GiToken } from 'react-icons/gi';
 
 function Main(props) {
   const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
@@ -41,9 +40,7 @@ function Main(props) {
     })
       .then(res => res.json())
       .then(result => {
-        // console.log('wishListGet:', result.wish[0].wish_yn);
         result.wish[0].wish_yn === 'Y' ? setIsSaved(true) : setIsSaved(false);
-        // console.log('isSaved:', isSaved);
       });
   }, []);
 

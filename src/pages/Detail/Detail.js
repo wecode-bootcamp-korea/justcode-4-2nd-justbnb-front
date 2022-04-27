@@ -13,7 +13,7 @@ import Review from './Review/Review.js';
 import MapInfo from './Map.js';
 import HostInfo from './HostInfo.js';
 import Notice from './Notice.js';
-import Header from '../../components/Nav/Nav';
+import Header from '../../components/Nav/ListNav';
 import Footer from '../../components/Footer.js';
 
 function Detail() {
@@ -131,6 +131,7 @@ function Detail() {
             />
           </InfoWrapper>
           <SideBar
+            login={login}
             token={token}
             location={location}
             selected={selected}
