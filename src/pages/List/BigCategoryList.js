@@ -24,4 +24,4 @@ const BigCategoryList = React.memo(function BigCategoryList({ data }) {
   );
 });
 
-export default BigCategoryList;
+export default React.memo(BigCategoryList);
