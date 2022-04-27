@@ -37,7 +37,8 @@ function LoginModal({ loginModalHandler }) {
     }
   };
   const postLogin = () => {
-    fetch('http://localhost:8000/users/login', {
+    errHandler();
+    fetch('http://localhost:8000/user/signin', {
       method: 'POST',
       headers: {
         'content-Type': 'application/json',
@@ -111,7 +112,7 @@ function LoginModal({ loginModalHandler }) {
                   </ErrBox>
                 </>
               )}
-              <CountinueBtn onClick={errHandler}>로그인</CountinueBtn>
+              <CountinueBtn onClick={postLogin}>로그인</CountinueBtn>
               <Text2>또는</Text2>
               <BtnWrapper>
                 <Btns>
