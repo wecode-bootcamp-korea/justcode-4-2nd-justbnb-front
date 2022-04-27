@@ -15,6 +15,8 @@ function InfoSideBar(props) {
     charge,
     total_members,
     selected,
+    token,
+    location,
   } = props;
 
   // 모달 open 관리
@@ -62,7 +64,6 @@ function InfoSideBar(props) {
             : ''
         );
   }, [end]);
-
   // 인원 관리
 
   const [headCount, setHeadCount] = useState(1);
@@ -74,6 +75,39 @@ function InfoSideBar(props) {
     setPetCount(count);
   };
 
+  // 예약 기능
+  const postReservation = () => {
+    fetch('http://localhost:8000/reservation', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        accessToken: token,
+        accommodationsId: location.state,
+        checkIn: checkInValue,
+        checkOut: checkOutValue,
+        members: headCount,
+      }),
+    })
+      .then(res => {
+        res.json();
+        console.log(res);
+        const token2 = localStorage.getItem('token');
+        console.log('token2', token2);
+
+        if (res.status === 201) {
+          alert('예약이 완료되었습니다.');
+        } else if (res.status === 400) {
+          alert('로그인이 필요한 기능입니다.');
+        } else if (res.status === 409) {
+          alert('호스트는 예약할 수 없습니다.');
+        }
+      })
+      .then(result => {
+        console.log('등록결과', result);
+      });
+  };
   return (
     <Section>
       <Wrapper>
@@ -90,7 +124,7 @@ function InfoSideBar(props) {
         </Text1>
         {calendarModalOpen && (
           <CalendarModal
-            selected={start}
+            selected={selected}
             open={calendarModalOpen}
             setCalendarModalOpen={setCalendarModalOpen}
             close={handleCalendarModalClose}
@@ -150,7 +184,17 @@ function InfoSideBar(props) {
             handlePetCount={handlePetCount}
             total_members={total_members}
           />
-          <Button type="button">예약하기</Button>
+          <Button
+            type="button"
+            disabled={
+              checkInValue.length > 1 && checkOutValue.length > 1
+                ? null
+                : 'disabled'
+            }
+            onClick={postReservation}
+          >
+            예약하기
+          </Button>
         </Form>
         <div style={{ display: end ? 'block' : 'none' }}>
           <DetailPrice>
@@ -296,6 +340,9 @@ const Button = styled.button`
   font-size: 15px;
   font-weight: 500;
   cursor: pointer;
+  &:disabled {
+    background-color: #f7becc;
+  }
 `;
 
 export default InfoSideBar;

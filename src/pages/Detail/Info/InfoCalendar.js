@@ -34,7 +34,7 @@ function InfoCalender(props) {
       <CalendarBox>
         {/* <Calendar/> */}
         <DatePickerRangeController
-          selected={start}
+          selected={selected}
           onChange={change}
           startDate={start}
           endDate={end}

@@ -41,13 +41,13 @@ function Main(props) {
     })
       .then(res => res.json())
       .then(result => {
-        console.log('wishListGet:', result);
-        // "wish_yn": "Y"
-        // setIsSaved(true);
+        // console.log('wishListGet:', result.wish[0].wish_yn);
+        result.wish[0].wish_yn === 'Y' ? setIsSaved(true) : setIsSaved(false);
+        // console.log('isSaved:', isSaved);
       });
   }, []);
 
-  // wishList 보내기
+  // wishList 등록
   const postWishList = () => {
     fetch('http://localhost:8000/wish', {
       method: 'POST',
@@ -55,14 +55,15 @@ function Main(props) {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        accessToken: 'token',
+        accessToken: token,
         accommodationsId: location.state,
       }),
     })
       .then(res => res.json())
       .then(result => {
+        // console.log('token', token);
         console.log(result);
-        console.log('posted');
+        setIsSaved(true);
       });
   };
 
@@ -75,7 +76,7 @@ function Main(props) {
       .then(res => res.json())
       .then(result => {
         console.log(result);
-        console.log('deleted');
+        setIsSaved(false);
       });
   };
 

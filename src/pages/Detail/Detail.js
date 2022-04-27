@@ -23,18 +23,17 @@ function Detail() {
   // Calendar
   const [startDate, setStartDate] = useState(new Date());
   const [endDate, setEndDate] = useState(null);
-  // const [selected, setSelected] = useState(null);
+  const [selected, setSelected] = useState(null);
 
   const [dateDeleted, setDateDeleted] = useState(false);
   const [dateDiff, setDateDiff] = useState(0);
 
-  // useEffect(() => {
-  //   if (!endDate) {
-  //     setSelected(startDate);
-  //   } else {
-  //     setSelected(endDate);
-  //   }
-  // }, [startDate, endDate]);
+  useEffect(() => {
+    setSelected(startDate);
+  }, [startDate]);
+  useEffect(() => {
+    setSelected(endDate);
+  }, [endDate]);
 
   const onChange = dates => {
     const [start, end] = dates;
@@ -88,15 +87,19 @@ function Detail() {
 
   // 로그인 유무 확인하기
   const [login, setLogin] = useState(false);
-  const token = localStorage.getItem('token') || '';
+  const token = localStorage.getItem('token')
+    ? localStorage.getItem('token')
+    : '';
 
-  const handleLogin = useEffect(() => {
+  useEffect(() => {
     token.length > 1 ? setLogin(true) : setLogin(false);
+    // console.log('token', token);
+    // console.log('login', login);
   }, [token]);
 
   return (
     <div>
-      {/* <Header /> */}
+      <Header />
       <Wrapper>
         <Main
           location={location}
@@ -118,7 +121,7 @@ function Detail() {
             />
             <InfoConvenience location={location} />
             <InfoCalender
-              // selected={selected}
+              selected={selected}
               start={startDate}
               end={endDate}
               change={onChange}
@@ -128,7 +131,9 @@ function Detail() {
             />
           </InfoWrapper>
           <SideBar
-            // selected={selected}
+            token={token}
+            location={location}
+            selected={selected}
             start={startDate}
             end={endDate}
             change={onChange}
@@ -173,6 +178,7 @@ function Detail() {
 const Wrapper = styled.div`
   width: 1120px;
   margin: 0 auto;
+  padding-top: 200px;
 `;
 const InfoSection = styled.section`
   margin: 50px 0px;
