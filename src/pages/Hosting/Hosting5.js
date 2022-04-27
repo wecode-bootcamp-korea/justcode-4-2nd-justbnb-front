@@ -19,7 +19,7 @@ export default function Hosting5({ onChange, resultChoice }) {
   //     return <GiBarbecue />;
   //   }
   // }
-  console.log('ddddd', resultChoice);
+  console.log('4', resultChoice);
 
   useEffect(() => {
     fetch('/data/dlwjdals/hosting.json', {

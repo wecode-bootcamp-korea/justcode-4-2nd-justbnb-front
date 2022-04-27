@@ -16,7 +16,7 @@ import { useState } from 'react';
 
 export default function Hosting({ onChange, resultChoice }) {
   // const [color, setColor] = useState('');
-
+  console.log('1', resultChoice);
   return (
     <Wrapper>
       <Container>
