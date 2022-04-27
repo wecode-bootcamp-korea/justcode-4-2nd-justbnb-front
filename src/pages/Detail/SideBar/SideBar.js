@@ -110,7 +110,9 @@ function InfoSideBar(props) {
       {isLoginModalOpen && <LoginModal loginModalHandler={loginModalHandler} />}
       <Wrapper>
         <Title>
-          {end ? `₩${charge} / 박` : `요금을 확인하려면 날짜를 입력하세요.`}
+          {end && charge
+            ? `₩${charge.toLocaleString()} / 박`
+            : `요금을 확인하려면 날짜를 입력하세요.`}
         </Title>
         <Text1>
           <div>
@@ -198,14 +200,12 @@ function InfoSideBar(props) {
         </Form>
         <div style={{ display: end ? 'block' : 'none' }}>
           <DetailPrice>
-            <div>
-              ₩{charge} x {dateDiff}박
-            </div>
-            <div>₩{charge * dateDiff}</div>
+            <div>{charge && `₩${charge.toLocaleString()} x ${dateDiff}박`}</div>
+            <div>{charge && `₩${(charge * dateDiff).toLocaleString()}`}</div>
           </DetailPrice>
           <AmountPrice>
             <div>총 합계</div>
-            <div>₩{charge * dateDiff}</div>
+            <div>{charge && `₩${(charge * dateDiff).toLocaleString()}`}</div>
           </AmountPrice>
         </div>
       </Wrapper>
@@ -233,6 +233,9 @@ const Wrapper = styled.section`
 `;
 
 const Title = styled.h2`
+  display: flex;
+  align-items: center;
+  height: 45px;
   font-size: 22px;
   margin-bottom: 8px;
 `;

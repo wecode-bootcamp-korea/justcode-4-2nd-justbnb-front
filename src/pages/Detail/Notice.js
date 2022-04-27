@@ -86,9 +86,10 @@ const Title = styled.h3`
 
 const List = styled.li`
   display: flex;
-  margin-bottom: 10px;
+  font-weight: 350;
+  margin-bottom: 15px;
   .icons {
-    margin-right: 10px;
+    margin-right: 13px;
   }
 `;
 export default Notice;

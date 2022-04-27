@@ -6,12 +6,17 @@ import { FaStar, FaRegHeart, FaHeart } from 'react-icons/fa';
 
 function Main(props) {
   const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
+  const [isImageModalOpen, setIsImageModalOpen] = useState(false);
   const [isSaved, setIsSaved] = useState(false);
   const [imageUrlArray, setImageUrlArray] = useState([]);
   const { name, district, neighborhood, login, token, location } = props;
 
   const loginModalHandler = () => {
     !isLoginModalOpen ? setIsLoginModalOpen(true) : setIsLoginModalOpen(false);
+  };
+
+  const imageModalHandler = () => {
+    !isImageModalOpen ? setIsImageModalOpen(true) : setIsImageModalOpen(false);
   };
 
   // 숙소 이미지 받아오기
@@ -79,7 +84,12 @@ function Main(props) {
 
   return (
     <Wrapper>
-      {/* <ImageModal /> */}
+      {isImageModalOpen && (
+        <ImageModal
+          imageUrlArray={imageUrlArray}
+          imageModalHandler={imageModalHandler}
+        />
+      )}
       {isLoginModalOpen && <LoginModal loginModalHandler={loginModalHandler} />}
       <div>
         <MainTitle>{name}</MainTitle>
@@ -114,28 +124,28 @@ function Main(props) {
         </InfoWrapper>
         <ImgWrapper>
           <FirstBox>
-            <MainImgBox>
+            <MainImgBox onClick={imageModalHandler}>
               <img alt="main" src={imageUrlArray[0]} />
             </MainImgBox>
           </FirstBox>
           <SecondBox>
             <div>
-              <MainImgBox>
+              <MainImgBox onClick={imageModalHandler}>
                 <img alt="main" src={imageUrlArray[1]} />
               </MainImgBox>
             </div>
             <div>
-              <MainImgBox>
+              <MainImgBox onClick={imageModalHandler}>
                 <img alt="main" src={imageUrlArray[2]} />
               </MainImgBox>
             </div>
             <div>
-              <MainImgBox>
+              <MainImgBox onClick={imageModalHandler}>
                 <img alt="main" src={imageUrlArray[3]} />
               </MainImgBox>
             </div>
             <div>
-              <MainImgBox>
+              <MainImgBox onClick={imageModalHandler}>
                 <img alt="main" src={imageUrlArray[4]} />
               </MainImgBox>
             </div>
