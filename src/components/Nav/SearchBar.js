@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
+import { useNavigate } from 'react-router-dom';
 import { BiSearch } from 'react-icons/bi';
 import SearchToggle from './SearchToggle';
 import MembersToggle from './MembersToggle';
@@ -18,25 +19,37 @@ function SearchBar({ scrollPosition, updateScroll, flag }) {
 
   const [isSearchToggleOpen, setIsSearchToggleOpen] = useState(false);
   const [isMembersToggleOpen, setIsMembersToggleOpen] = useState(false);
+  const navigate = useNavigate();
 
   const goToList = () => {
-    fetch(`http://localhost:8000/list/:${city}`, {
-      method: 'post',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
+    navigate(`/list/:${city}`, {
+      state: {
         city: city,
         startDate: startDate,
         endDate: endDate,
         count: count,
         haveAnimal: haveAnimal,
-      }),
-    })
-      .then(res => res.json())
-      .then(res => {
-        console.log('SUCCESS');
-      });
+      },
+    });
+
+    // 수정
+    // fetch(`http://localhost:8000/list/:${city}`, {
+    //   method: 'post',
+    //   headers: {
+    //     'Content-Type': 'application/json',
+    //   },
+    //   body: JSON.stringify({
+    //     city: city,
+    //     startDate: startDate,
+    //     endDate: endDate,
+    //     count: count,
+    //     haveAnimal: haveAnimal,
+    //   }),
+    // })
+    //   .then(res => res.json())
+    //   .then(res => {
+    //     console.log('SUCCESS');
+    //   });
   };
 
   useEffect(() => {
