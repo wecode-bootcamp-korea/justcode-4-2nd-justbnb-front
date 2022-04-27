@@ -7,9 +7,9 @@ import { Link } from 'react-router-dom';
 import LogoutToggle from './LogoutToggle';
 import LoginModal from '../Modal/LoginModal';
 import SignupModal from '../Modal/SignupModal';
-// import LoginToggle from '../Modal/LoginModal';
+import LoginToggle from './LoginToggle';
 
-function UserNav({ scrollPosition }) {
+function UserNav({ scrollPosition, token }) {
   const [openToggle, setOpenToggle] = useState({ display: 'none' });
   const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
   const [isSignupModalOpen, setIsSignupModalOpen] = useState(false);
@@ -39,7 +39,7 @@ function UserNav({ scrollPosition }) {
           <>
             <Link to="/layout" style={{ textDecoration: 'none' }}>
               <Buttons color="#ffffff" background="#262626">
-                호스트 되기
+                {!token ? '호스트 되기' : '호스트 모드로 전환'}
               </Buttons>
             </Link>
             <Buttons background="#262626">
@@ -60,9 +60,9 @@ function UserNav({ scrollPosition }) {
           </>
         ) : (
           <>
-            <Link to="/hosting" style={{ textDecoration: 'none' }}>
+            <Link to="/layout" style={{ textDecoration: 'none' }}>
               <Buttons color="black" background="#F7F7F7">
-                호스트 되기
+                {!token ? '호스트 되기' : '호스트 모드로 전환'}
               </Buttons>
             </Link>
             <Buttons color="black" background="#F7F7F7">
@@ -79,12 +79,16 @@ function UserNav({ scrollPosition }) {
           </>
         )}
       </Navbar>
-      <LogoutToggle
-        openToggle={openToggle}
-        loginModalHandler={loginModalHandler}
-        signupModalHandler={signupModalHandler}
-      />
-      {/* {token && <LoginToggle showToggle={showToggle} />} */}
+      {token && (
+        <LoginToggle openToggle={openToggle} toggleHandler={toggleHandler} />
+      )}
+      {!token && (
+        <LogoutToggle
+          openToggle={openToggle}
+          loginModalHandler={loginModalHandler}
+          signupModalHandler={signupModalHandler}
+        />
+      )}
       {isLoginModalOpen && <LoginModal loginModalHandler={loginModalHandler} />}
       {isSignupModalOpen && (
         <SignupModal signupModalHandler={signupModalHandler} />

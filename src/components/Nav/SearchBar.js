@@ -31,25 +31,6 @@ function SearchBar({ scrollPosition, updateScroll, flag }) {
         haveAnimal: haveAnimal,
       },
     });
-
-    // 수정
-    // fetch(`http://localhost:8000/list/:${city}`, {
-    //   method: 'post',
-    //   headers: {
-    //     'Content-Type': 'application/json',
-    //   },
-    //   body: JSON.stringify({
-    //     city: city,
-    //     startDate: startDate,
-    //     endDate: endDate,
-    //     count: count,
-    //     haveAnimal: haveAnimal,
-    //   }),
-    // })
-    //   .then(res => res.json())
-    //   .then(res => {
-    //     console.log('SUCCESS');
-    //   });
   };
 
   useEffect(() => {
@@ -182,6 +163,7 @@ const Container = styled.div`
   width: 100%;
   transition: top 0.3s;
   margin: 0 auto;
+  /* padding-bottom: 20px; */
   background: ${props => props.bgColor};
 `;
 

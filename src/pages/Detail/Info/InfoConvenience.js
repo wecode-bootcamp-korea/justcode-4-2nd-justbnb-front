@@ -4,13 +4,16 @@ import styled from 'styled-components';
 import { GiBarbecue } from 'react-icons/gi';
 import { FaSwimmingPool, FaWifi, FaTv, FaCar, FaBath } from 'react-icons/fa';
 
-function InfoConvenience() {
+function InfoConvenience({ location }) {
   const [convenienceArray, setConvenienceArray] = useState([]);
   // 숙소 편의시설 받아오기
   useEffect(() => {
-    fetch('data/minji/accommodationsConvenience.json', {
-      method: 'GET',
-    }).then(res =>
+    fetch(
+      `http://localhost:8000/accommodations/convenience?accommodationsId=${location.state}`,
+      {
+        method: 'GET',
+      }
+    ).then(res =>
       res.json().then(result => {
         setConvenienceArray(
           result.accommodationsConvenience[0].convenience_name

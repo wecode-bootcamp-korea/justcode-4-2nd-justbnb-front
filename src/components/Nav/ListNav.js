@@ -26,15 +26,6 @@ function ListNav() {
 
 export default React.memo(ListNav);
 
-const Button = styled.div`
-  position: fixed;
-  height: 120px;
-  background-color: white;
-  top: 0px;
-  width: 100%;
-  z-index: 40;
-`;
-
 const Wrap = styled.div`
   position: fixed;
   height: 120px;
