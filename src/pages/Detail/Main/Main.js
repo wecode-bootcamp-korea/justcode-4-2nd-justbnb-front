@@ -9,7 +9,7 @@ function Main(props) {
   const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
   const [isSaved, setIsSaved] = useState(false);
   const [imageUrlArray, setImageUrlArray] = useState([]);
-  const { name, district, neighborhood, login, token } = props;
+  const { name, district, neighborhood, login, token, location } = props;
 
   const loginModalHandler = () => {
     !isLoginModalOpen ? setIsLoginModalOpen(true) : setIsLoginModalOpen(false);
@@ -17,9 +17,12 @@ function Main(props) {
 
   // 숙소 이미지 받아오기
   useEffect(() => {
-    fetch('http://localhost:8000/accommodations/images?accommodationsId=21', {
-      method: 'GET',
-    })
+    fetch(
+      `http://localhost:8000/accommodations/images?accommodationsId=${location.state}`,
+      {
+        method: 'GET',
+      }
+    )
       .then(res => res.json())
       .then(result => {
         setImageUrlArray(result.accommodationsImages[0].image_url);
@@ -32,7 +35,7 @@ function Main(props) {
 
   // wishList 받아오기
   useEffect(() => {
-    fetch('http://localhost:8000/wish?accommodationsId=1', {
+    fetch(`http://localhost:8000/wish?accommodationsId=${location.state}`, {
       method: 'GET',
       headers: { accessToken: token },
     })
@@ -53,7 +56,7 @@ function Main(props) {
       },
       body: JSON.stringify({
         accessToken: 'token',
-        accommodationsId: 7,
+        accommodationsId: location.state,
       }),
     })
       .then(res => res.json())
@@ -65,7 +68,7 @@ function Main(props) {
 
   // wishList 삭제
   const deleteWishList = () => {
-    fetch('http://localhost:8000/wish?accommodationsId=7', {
+    fetch(`http://localhost:8000/wish?accommodationsId=${location.state}`, {
       method: 'DELETE',
       headers: { accessToken: token },
     })

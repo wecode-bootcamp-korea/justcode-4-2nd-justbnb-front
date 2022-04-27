@@ -75,14 +75,14 @@ function CalendarModal(props) {
   };
 
   const prevCheckOutValue = usePrevState(checkOutValue);
+  let temp = useRef(end);
+  // 변해도 렌더링이 되지 않음
 
   const handleClose = useEffect(() => {
-    if (checkOutValue && end) {
-      setCalendarModalOpen(false);
-    } else console.log('prevCheckOutValue', prevCheckOutValue);
-
-    console.log('checkoutValue', checkOutValue);
-    console.log('end', end);
+    temp.current !== end && end
+      ? setCalendarModalOpen(false)
+      : setCalendarModalOpen(true);
+    temp.current = end;
   }, [end]);
 
   return (
@@ -233,6 +233,7 @@ const Delete = styled.button`
   text-decoration: underline;
   cursor: pointer;
 `;
+
 const Close = styled.button`
   padding: 8px 15px;
   background-color: black;

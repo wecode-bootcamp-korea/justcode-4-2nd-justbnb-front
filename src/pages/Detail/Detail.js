@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from 'react';
+import { useLocation } from 'react-router-dom';
+
 import styled from 'styled-components';
 // 컴포넌트 불러오기
 import Main from './Main/Main.js';
@@ -57,9 +59,10 @@ function Detail() {
     }
   }, [endDate]);
 
+  const location = useLocation();
   // 숙소 데이터 받아오기
   useEffect(() => {
-    fetch('http://localhost:8000/accommodations/13', {
+    fetch(`http://localhost:8000/accommodations/${location.state}`, {
       method: 'GET',
     })
       .then(res => res.json())
@@ -96,6 +99,7 @@ function Detail() {
       {/* <Header /> */}
       <Wrapper>
         <Main
+          location={location}
           key={accommodation.id}
           name={accommodation.accommodations_name}
           district={accommodation.district}
@@ -112,7 +116,7 @@ function Detail() {
               description={accommodation.description}
               total_members={accommodation.total_members}
             />
-            <InfoConvenience />
+            <InfoConvenience location={location} />
             <InfoCalender
               // selected={selected}
               start={startDate}
