@@ -38,7 +38,7 @@ const Text1 = styled.div`
 
 const Container2 = styled.section`
   width: 50%;
-  min-height: 100vh;
+  min-height: 80vh;
   position: relative;
   /* border: 1px solid green; */
   display: flex;

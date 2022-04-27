@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import CounterValue3 from './Component/Counter3';
 
-export default function Hosting9() {
+export default function Hosting9({ onChange, resultChoice }) {
   return (
     <Wrapper>
       <Container>
@@ -48,16 +48,18 @@ const Text1 = styled.div`
   color: white;
   font-weight: 530;
   font-size: 48.5px;
-  margin-left: 20px;
+  margin-left: 55px;
 `;
 
 const Container2 = styled.section`
   width: 50%;
-  min-height: 100vh;
+  /* border: 5px solid green; */
+  height: 80vh;
   position: relative;
   display: flex;
   flex-wrap: wrap;
   flex-direction: column;
+  z-index: 999;
 `;
 
 const Header = styled.section`
@@ -66,24 +68,6 @@ const Header = styled.section`
   display: flex;
   justify-content: flex-end;
   margin-top: 10px;
-  .help-button {
-    font-size: 12px;
-    font-weight: 500;
-    padding: 7px 15px;
-    border-radius: 20px;
-    margin-right: 15px;
-    border: 1px solid rgba(155, 149, 167, 0);
-    background-color: rgba(155, 149, 167, 0.1);
-  }
-  .exit-button {
-    font-size: 12px;
-    font-weight: 500;
-    padding: 7px 20px;
-    border-radius: 20px;
-    margin-right: 30px;
-    border: 1px solid rgba(155, 149, 167, 0);
-    background-color: rgba(155, 149, 167, 0.1);
-  }
 `;
 
 const Body = styled.section`

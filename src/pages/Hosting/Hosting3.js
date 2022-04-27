@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { IoLocationSharp } from 'react-icons/io5';
 import styled from 'styled-components';
 
-export default function Hosting3() {
+export default function Hosting3({ onChange, resultChoice }) {
   const container = useRef(null);
 
   useEffect(() => {

@@ -63,13 +63,14 @@ const Text1 = styled.div`
 
 const Container2 = styled.section`
   width: 50%;
-  min-height: 100vh;
+  /* border: 5px solid green; */
+  height: 80vh;
   position: relative;
   display: flex;
   flex-wrap: wrap;
   flex-direction: column;
+  z-index: 999;
 `;
-
 const Header = styled.section`
   width: 100%;
   padding: 20px;

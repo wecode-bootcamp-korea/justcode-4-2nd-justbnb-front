@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 
-export default function Hosting8() {
+export default function Hosting8({ onChange, resultChoice }) {
   const [textlength, setTextLength] = useState(0);
 
   return (
@@ -26,10 +26,7 @@ export default function Hosting8() {
             <TextLength>{textlength} / 500</TextLength>
           </TextAndInput>
         </Body>
-        <Footer>
-          <p>뒤로</p>
-          <button className="next-button">다음</button>
-        </Footer>
+        <Footer />
       </Container2>
     </Wrapper>
   );
@@ -57,19 +54,20 @@ const Container = styled.section`
 
 const Text1 = styled.div`
   color: white;
-  font-weight: bold;
-  font-size: 50px;
+  font-weight: 530;
+  font-size: 48.5px;
   margin-left: 55px;
 `;
 
 const Container2 = styled.section`
   width: 50%;
-  min-height: 100vh;
+  /* border: 5px solid green; */
+  height: 80vh;
   position: relative;
-  /* border: 1px solid green; */
   display: flex;
   flex-wrap: wrap;
   flex-direction: column;
+  z-index: 999;
 `;
 
 const Header = styled.section`
@@ -118,23 +116,6 @@ const Footer = styled.section`
   justify-content: space-between;
   background-color: white;
   align-items: center;
-  border-top: 2px solid rgba(155, 149, 167, 0.2);
-  p {
-    text-decoration: underline;
-    font-size: 16px;
-    font-weight: 500;
-    margin-left: 30px;
-  }
-  .next-button {
-    font-size: 16px;
-    font-weight: 400;
-    color: white;
-    padding: 13px 23px;
-    margin-right: 30px;
-    border-radius: 8px;
-    border: 1px solid rgba(155, 149, 167, 0.1);
-    background-color: black;
-  }
 `;
 
 const TextAndInput = styled.div`
