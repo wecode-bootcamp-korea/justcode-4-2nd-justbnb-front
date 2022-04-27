@@ -1,12 +1,17 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import UserNav from './UserNav';
 import { BiSearch } from 'react-icons/bi';
+import SearchBar from './SearchBar';
 
 function PageNav() {
+  const [isTrue, setIsTrue] = useState(false);
   const token = localStorage.getItem('token');
   const goToTop = () => {
     window.scrollTo(0.0);
+  };
+  const onClickBtn = () => {
+    !isTrue ? setIsTrue(true) : setIsTrue(false);
   };
 
   return (
@@ -19,7 +24,7 @@ function PageNav() {
           style={{ cursor: 'pointer' }}
           onClick={goToTop}
         />
-        <SearchBtn>
+        <SearchBtn onClick={onClickBtn}>
           <Text>검색 시작하기</Text>
           <BtnBox>
             <BiSearch font-size={20} />
@@ -27,6 +32,7 @@ function PageNav() {
         </SearchBtn>
         <UserNav token={token} />
       </Container>
+      {isTrue && <SearchBar scrollPosition={0} flag="list" />}
     </Header>
   );
 }
@@ -36,7 +42,8 @@ const Header = styled.div`
   top: -header.height;
   width: 100%;
   transition: top 0.3s;
-  margin: 0 auto;
+  margin: auto;
+  z-index: 999;
 `;
 
 const Container = styled.div`
@@ -74,4 +81,5 @@ const BtnBox = styled.div`
   border-radius: 50%;
   background-color: #ff385c;
 `;
+
 export default PageNav;
