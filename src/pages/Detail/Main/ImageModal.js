@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import styled from 'styled-components';
 
 import { AiOutlineClose } from 'react-icons/ai';
@@ -5,36 +6,47 @@ import { AiOutlineClose } from 'react-icons/ai';
 import { FaRegHeart, FaAngleLeft, FaAngleRight } from 'react-icons/fa';
 import { FiShare } from 'react-icons/fi';
 
-function ImageModal() {
+function ImageModal(props) {
+  const { imageUrlArray, imageModalHandler } = props;
+  const [arrayIndex, setArrayIndex] = useState(0);
+
   return (
     <ModalBackground>
       <Wrapper>
-        <Header>
-          <CloseBtn>
-            <AiOutlineClose className="icons" />
-            <span>닫기</span>
-          </CloseBtn>
-          <ContentNumber>2/36</ContentNumber>
-          <IconsWrapper>
-            <FiShare className="icons" />
-            <FaRegHeart className="icons" />
-          </IconsWrapper>
-        </Header>
-        <Body>
-          <ButtonWrapper>
-            <PrevButton>
+        <ContentWrapper>
+          <Header>
+            <CloseBtn onClick={imageModalHandler}>
+              <AiOutlineClose className="icons" />
+              <span>닫기</span>
+            </CloseBtn>
+            <ContentNumber> {arrayIndex + 1}/ 5</ContentNumber>
+            <IconsWrapper>
+              {/* <FiShare className="icons" />
+              <FaRegHeart className="icons" /> */}
+            </IconsWrapper>
+          </Header>
+          <Body>
+            <PrevButton
+              onClick={() => {
+                setArrayIndex(arrayIndex - 1);
+              }}
+              disabled={arrayIndex === 0 ? 'disabled' : null}
+            >
               <FaAngleLeft />
             </PrevButton>
-          </ButtonWrapper>
-          <ImgWrapper>
-            <img alt="home" src="/images/thump/home1.jpg" />
-          </ImgWrapper>
-          <ButtonWrapper>
-            <NextButton>
+            <ImgWrapper>
+              <img alt="home" src={imageUrlArray[arrayIndex]} />
+            </ImgWrapper>
+            <NextButton
+              onClick={() => {
+                setArrayIndex(arrayIndex + 1);
+              }}
+              disabled={arrayIndex === 4 ? 'disabled' : null}
+            >
               <FaAngleRight />
             </NextButton>
-          </ButtonWrapper>
-        </Body>
+          </Body>
+        </ContentWrapper>
       </Wrapper>
     </ModalBackground>
   );
@@ -53,14 +65,22 @@ const ModalBackground = styled.div`
 const Wrapper = styled.section`
   height: 100%;
   color: white;
-  padding: 50px;
+`;
+
+const ContentWrapper = styled.div`
+  height: 100%;
 `;
 
 const Header = styled.header`
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 10px 0;
+  width: 100%;
+  padding: 50px;
 `;
 
 const CloseBtn = styled.button`
@@ -72,6 +92,7 @@ const CloseBtn = styled.button`
   border: none;
   border-radius: 10px;
   font-size: 15px;
+  cursor: pointer;
   &:hover {
     background-color: rgba(255, 255, 255, 0.5);
   }
@@ -81,19 +102,30 @@ const CloseBtn = styled.button`
 `;
 const ContentNumber = styled.div``;
 
+const Body = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 100%;
+  padding: 50px;
+`;
+
+const ImgWrapper = styled.div`
+  width: 100%;
+  height: 80%;
+  margin: 0 100px;
+  img {
+    object-fit: contain;
+    width: 100%;
+    height: 100%;
+  }
+`;
+
 const IconsWrapper = styled.div`
   .icons:first-child {
     margin-right: 15px;
   }
 `;
-
-const Body = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-`;
-
-const ButtonWrapper = styled.div``;
 
 const PrevButton = styled.button`
   display: flex;
@@ -103,15 +135,14 @@ const PrevButton = styled.button`
   height: 45px;
   border-radius: 50%;
   background-color: transparent;
-  border: 1px solid white;
+  border: 2px solid rgba(255, 255, 255, 0.5);
   color: white;
-`;
-
-const ImgWrapper = styled.div`
-  display: flex;
-  justify-content: center;
-  img {
-    width: 80%;
+  &:hover {
+    background-color: rgba(255, 255, 255, 0.3);
+    cursor: pointer;
+  }
+  &:disabled {
+    visibility: hidden;
   }
 `;
 
@@ -123,8 +154,15 @@ const NextButton = styled.button`
   height: 45px;
   border-radius: 50%;
   background-color: transparent;
-  border: 1px solid white;
+  border: 2px solid rgba(255, 255, 255, 0.5);
   color: white;
+  &:hover {
+    background-color: rgba(255, 255, 255, 0.3);
+    cursor: pointer;
+  }
+  &:disabled {
+    visibility: hidden;
+  }
 `;
 
 export default ImageModal;
