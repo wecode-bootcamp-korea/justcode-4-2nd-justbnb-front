@@ -36,8 +36,10 @@ function LoginModal({ loginModalHandler }) {
       return;
     }
   };
+
   const postLogin = () => {
     errHandler();
+    loginModalHandler('none');
     fetch('http://localhost:8000/user/signin', {
       method: 'POST',
       headers: {
@@ -48,21 +50,13 @@ function LoginModal({ loginModalHandler }) {
         password: password,
       }),
     })
+      .then(res => res.json())
       .then(res => {
-        if (res.status === 201) {
-          return res.json();
-        } else if (res.status === 400) {
-          alert('아이디와 비밀번호를 확인해주세요 :)');
-          return res.json();
-        } else if (res.status === 500) {
-          console.log('에러메세지: ', res.message);
-        } else return res.json();
-      })
-      .then(res => {
-        if (res.token) {
-          localStorage.setItem('token', res.token);
+        if (res.status === 200) {
+          alert('로그인 되었습니다 :)');
+          res.accessToken && localStorage.setItem('token', res.accessToken);
         } else {
-          console.log('에러발생 : ', res.message);
+          alert('아이디와 비밀번호를 확인해주세요 :)');
         }
       });
   };
