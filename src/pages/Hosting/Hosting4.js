@@ -32,7 +32,9 @@ export default function Hosting4({ onChange, resultChoice }) {
       <Container2>
         <Header>
           <button className="help-button">도움말</button>
-          <button className="exit-button">나가기</button>
+          <Link to="/">
+            <button className="exit-button">나가기</button>
+          </Link>
         </Header>
         <Body>
           <GuestCount>

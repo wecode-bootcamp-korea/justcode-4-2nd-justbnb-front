@@ -80,6 +80,24 @@ const Header = styled.section`
   display: flex;
   justify-content: flex-end;
   margin-top: 10px;
+  .help-button {
+    font-size: 12px;
+    font-weight: 500;
+    padding: 7px 15px;
+    border-radius: 20px;
+    margin-right: 15px;
+    border: 1px solid rgba(155, 149, 167, 0);
+    background-color: rgba(155, 149, 167, 0.1);
+  }
+  .exit-button {
+    font-size: 12px;
+    font-weight: 500;
+    padding: 7px 20px;
+    border-radius: 20px;
+    margin-right: 30px;
+    border: 1px solid rgba(155, 149, 167, 0);
+    background-color: rgba(155, 149, 167, 0.1);
+  }
 `;
 
 const Body = styled.section`

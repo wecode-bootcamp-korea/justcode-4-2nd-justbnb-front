@@ -24,15 +24,17 @@ export default function Hosting2({ onChange, resultChoice }) {
           </Link>
         </Header>
         <Body>
-          <Button id="2" onClick={e => onChange(e)} value="공간 전체">
-            <div className="but-name">공간 전체</div>
-          </Button>
-          <Button id="2" onClick={e => onChange(e)} value="개인실">
-            <div className="but-name">개인실</div>
-          </Button>
-          <Button id="2" onClick={e => onChange(e)} value="다인실">
-            <div className="but-name">다인실</div>
-          </Button>
+          <ButtonWrapper>
+            <Button id="2" onClick={e => onChange(e)} value="공간 전체">
+              <div className="but-name">공간 전체</div>
+            </Button>
+            <Button id="2" onClick={e => onChange(e)} value="개인실">
+              <div className="but-name">개인실</div>
+            </Button>
+            <Button id="2" onClick={e => onChange(e)} value="다인실">
+              <div className="but-name">다인실</div>
+            </Button>
+          </ButtonWrapper>
         </Body>
         <Footer />
       </Container2>
@@ -113,13 +115,14 @@ const Header = styled.section`
     }
   }
 `;
-
+//반응형 하려면 margin-top 없애야함..
 const Body = styled.section`
   width: 100%;
+  margin-top: 70px;
+`;
+const ButtonWrapper = styled.section`
   display: flex;
-  margin-top: 15px;
-  flex-direction: column;
-  align-items: center;
+  flex-wrap: wrap;
   justify-content: center;
 `;
 
@@ -131,10 +134,7 @@ const Button = styled.button`
   font-weight: 500;
   text-align: left;
   width: 65%;
-  margin: 8px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
+  margin: 7px;
   &:hover {
     outline: 1.5px solid black;
     cursor: pointer;
