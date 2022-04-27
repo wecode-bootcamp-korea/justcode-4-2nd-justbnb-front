@@ -14,13 +14,15 @@ export default function CounterValue2({ onChange, resultChoice }) {
   };
 
   const NumUp = e => {
+    upNum();
+    e.target.value = e.target.value === 'true' ? 'false' : 'true';
     onChange(e);
-    upNum(e);
   };
 
   const NumDown = e => {
+    downNum();
+    e.target.value = e.target.value === 'true' ? 'false' : 'true';
     onChange(e);
-    downNum(e);
   };
 
   return (
@@ -31,7 +33,7 @@ export default function CounterValue2({ onChange, resultChoice }) {
           onClick={e => NumDown(e)}
           value={num === 0 ? 'false' : 'true'}
         >
-          <FaMinus className="icons" />
+          -
         </button>
       </Button>
       <Num>
@@ -43,7 +45,7 @@ export default function CounterValue2({ onChange, resultChoice }) {
           onClick={e => NumUp(e)}
           value={num === 0 ? 'false' : 'true'}
         >
-          <FaPlus classBane="icons " />
+          +
         </button>
       </Button2>
     </CounterWrapper>
