@@ -22,11 +22,6 @@ function Nav() {
     };
   }, []);
 
-  // const onClickBtn = () => {
-  //   scrollPosition !== 0 ? setIsTrue(true) : setIsTrue(false);
-  //   return isTrue;
-  // };
-
   return (
     <Box>
       <Header>
@@ -70,7 +65,6 @@ function Nav() {
             <UserNav scrollPosition={scrollPosition} token={token} />
           </Container>
         )}
-        {/* {isTrue && <SearchBar scrollPosition={0} flag="list" />} */}
         <SearchBar
           scrollPosition={scrollPosition}
           updateScroll={updateScroll}
