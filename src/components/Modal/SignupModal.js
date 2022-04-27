@@ -46,7 +46,7 @@ function SignupModal({ signupModalHandler }) {
   };
 
   const signupPost = () => {
-    fetch('', {
+    fetch('http://localhost:8000/user/signup', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -68,6 +68,8 @@ function SignupModal({ signupModalHandler }) {
         console.log('에러메세지: ', res.message);
       });
   };
+
+  console.log(inputs);
 
   return (
     <div>
