@@ -3,6 +3,7 @@ import styled from 'styled-components';
 
 import DatePickerRangeController from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
+import { check } from 'prettier';
 // import Calendar from '../../../components/Calendar/Calendar';
 
 function CalendarModal(props) {
@@ -14,7 +15,9 @@ function CalendarModal(props) {
     dateDiff,
     dateDeleted,
     setCalendarModalOpen,
+    open,
   } = props;
+
   const [checkInValue, setCheckInValue] = useState('');
   const [checkOutValue, setCheckOutValue] = useState('');
   const [checkInDate, setCheckInDate] = useState(0);
@@ -61,6 +64,25 @@ function CalendarModal(props) {
       }.${end.getDate()}`;
       setCheckOutValue(newEndDate);
     }
+  }, [end]);
+
+  const usePrevState = state => {
+    const ref = useRef(state);
+    useEffect(() => {
+      ref.current = state;
+    }, [state]);
+    return ref.current;
+  };
+
+  const prevCheckOutValue = usePrevState(checkOutValue);
+
+  const handleClose = useEffect(() => {
+    if (checkOutValue && end) {
+      setCalendarModalOpen(false);
+    } else console.log('prevCheckOutValue', prevCheckOutValue);
+
+    console.log('checkoutValue', checkOutValue);
+    console.log('end', end);
   }, [end]);
 
   return (

@@ -45,6 +45,7 @@ function InfoSideBar(props) {
   }, [start]);
 
   // checkInValue 초기값 할당 시 state 값이 바뀌지 않는 오류
+
   useEffect(() => {
     const newDate = new Date();
     setCheckInValue(
@@ -63,6 +64,7 @@ function InfoSideBar(props) {
   }, [end]);
 
   // 인원 관리
+
   const [headCount, setHeadCount] = useState(1);
   const [petCount, setPetCount] = useState(0);
   const handleHeadCount = count => {
@@ -72,7 +74,6 @@ function InfoSideBar(props) {
     setPetCount(count);
   };
 
-  console.log('selectedSideBar', selected);
   return (
     <Section>
       <Wrapper>

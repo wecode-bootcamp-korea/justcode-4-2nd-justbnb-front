@@ -3,11 +3,17 @@ import styled from 'styled-components';
 import LoginModal from '../../../components/Modal/LoginModal';
 import ImageModal from './ImageModal';
 import { FaStar, FaRegHeart, FaHeart } from 'react-icons/fa';
+import { GiToken } from 'react-icons/gi';
 
 function Main(props) {
-  const [clickSaveBtn, setClickSaveBtn] = useState(false);
+  const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
+  const [isSaved, setIsSaved] = useState(false);
   const [imageUrlArray, setImageUrlArray] = useState([]);
-  const { name, location, district, neighborhood } = props;
+  const { name, district, neighborhood, login, token } = props;
+
+  const loginModalHandler = () => {
+    !isLoginModalOpen ? setIsLoginModalOpen(true) : setIsLoginModalOpen(false);
+  };
 
   // 숙소 이미지 받아오기
   useEffect(() => {
@@ -28,10 +34,13 @@ function Main(props) {
   useEffect(() => {
     fetch('http://localhost:8000/wish?accommodationsId=1', {
       method: 'GET',
+      headers: { accessToken: token },
     })
       .then(res => res.json())
       .then(result => {
-        console.log(result);
+        console.log('wishListGet:', result);
+        // "wish_yn": "Y"
+        // setIsSaved(true);
       });
   }, []);
 
@@ -43,7 +52,7 @@ function Main(props) {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        accessToken: '토큰값',
+        accessToken: 'token',
         accommodationsId: 7,
       }),
     })
@@ -58,6 +67,7 @@ function Main(props) {
   const deleteWishList = () => {
     fetch('http://localhost:8000/wish?accommodationsId=7', {
       method: 'DELETE',
+      headers: { accessToken: token },
     })
       .then(res => res.json())
       .then(result => {
@@ -69,8 +79,7 @@ function Main(props) {
   return (
     <Wrapper>
       {/* <ImageModal /> */}
-
-      {/* {clickSaveBtn ? <LoginModal /> : null} */}
+      {isLoginModalOpen && <LoginModal loginModalHandler={loginModalHandler} />}
       <div>
         <MainTitle>{name}</MainTitle>
         <InfoWrapper>
@@ -83,17 +92,23 @@ function Main(props) {
           </BnbInfo>
           <SaveBtn
             onClick={() => {
-              setClickSaveBtn(!clickSaveBtn);
-              clickSaveBtn ? deleteWishList() : postWishList();
+              if (!login) {
+                loginModalHandler();
+              } else {
+                if (isSaved) {
+                  deleteWishList();
+                } else {
+                  postWishList();
+                }
+              }
             }}
           >
-            {clickSaveBtn ? (
+            {isSaved ? (
               <FaHeart className="icons" style={{ color: 'red' }} />
             ) : (
               <FaRegHeart className="icons" />
             )}
-
-            <span>{clickSaveBtn ? '저장 목록' : '저장'}</span>
+            <span>{isSaved ? '저장 목록' : '저장'}</span>
           </SaveBtn>
         </InfoWrapper>
         <ImgWrapper>

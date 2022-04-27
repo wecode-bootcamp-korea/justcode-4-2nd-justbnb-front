@@ -11,6 +11,7 @@ import Review from './Review/Review.js';
 import MapInfo from './Map.js';
 import HostInfo from './HostInfo.js';
 import Notice from './Notice.js';
+import Header from '../../components/Nav/Nav';
 import Footer from '../../components/Footer.js';
 
 function Detail() {
@@ -63,7 +64,6 @@ function Detail() {
     })
       .then(res => res.json())
       .then(result => {
-        console.log(result);
         setAccommodation(result.accommodations[0]);
       });
   }, []);
@@ -83,14 +83,25 @@ function Detail() {
       });
   }, []);
 
+  // 로그인 유무 확인하기
+  const [login, setLogin] = useState(false);
+  const token = localStorage.getItem('token') || '';
+
+  const handleLogin = useEffect(() => {
+    token.length > 1 ? setLogin(true) : setLogin(false);
+  }, [token]);
+
   return (
     <div>
+      {/* <Header /> */}
       <Wrapper>
         <Main
           key={accommodation.id}
           name={accommodation.accommodations_name}
           district={accommodation.district}
           neighborhood={accommodation.neighborhood}
+          login={login}
+          token={token}
         />
         <InfoSection>
           <InfoWrapper>
