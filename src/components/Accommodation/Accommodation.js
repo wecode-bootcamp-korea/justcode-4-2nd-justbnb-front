@@ -40,19 +40,17 @@ const Accommodation = React.memo(function Accommodation({
     setlatlng({ lat: 0, lng: 0 });
   };
   return (
-    <div
-      onMouseOver={mouseUp}
-      onMouseLeave={mouseLeave}
-      onClick={() => {
-        gotoDetail(data.id);
-      }}
-    >
+    <div onMouseOver={mouseUp} onMouseLeave={mouseLeave}>
       <Wrap>
         <BasicSlider data={data} flag="list" />
         {/* <Img src={data.image} alt="accommodataion" /> */}
 
         <Wrapping>
-          <Inner>
+          <Inner
+            onClick={() => {
+              gotoDetail(data.id);
+            }}
+          >
             <GrayText>
               {localName}의 {data.build_type}
             </GrayText>
