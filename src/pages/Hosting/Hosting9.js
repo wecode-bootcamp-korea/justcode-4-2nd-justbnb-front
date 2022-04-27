@@ -1,11 +1,15 @@
 import React from 'react';
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 import CounterValue3 from './Component/Counter3';
 
 export default function Hosting9({ onChange, resultChoice }) {
   return (
     <Wrapper>
       <Container>
+        <Link to="/">
+          <img src="/images/로고화이트.png" />
+        </Link>
         <Text1>이제 요금을 설정하실 차례입니다</Text1>
       </Container>
 
@@ -42,6 +46,14 @@ const Container = styled.section`
   display: flex;
   align-items: center;
   line-height: 3.5em;
+  img {
+    width: 80px;
+    height: 70px;
+    position: absolute;
+    top: 0;
+    margin-top: 30px;
+    margin-left: 40px;
+  }
 `;
 
 const Text1 = styled.div`

@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 import { FaSwimmingPool } from 'react-icons/fa';
 import { GiBarbecue } from 'react-icons/gi';
 import { AiOutlineWifi } from 'react-icons/ai';
@@ -36,6 +37,9 @@ export default function Hosting5({ onChange, resultChoice }) {
   return (
     <Wrapper>
       <Container>
+        <Link to="/">
+          <img src="/images/로고화이트.png" />
+        </Link>
         <Text1>
           숙소 편의시설 정보를 추가해
           <br />
@@ -138,6 +142,14 @@ const Container = styled.section`
   display: flex;
   align-items: center;
   line-height: 3.5em;
+  img {
+    width: 80px;
+    height: 70px;
+    position: absolute;
+    top: 0;
+    margin-top: 30px;
+    margin-left: 40px;
+  }
 `;
 
 const Text1 = styled.div`

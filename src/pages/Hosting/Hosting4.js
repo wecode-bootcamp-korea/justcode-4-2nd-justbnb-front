@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import CounterValue from './Component/Counter';
 import CounterValue2 from './Component/Counter2';
 import {
@@ -18,6 +19,9 @@ export default function Hosting4({ onChange, resultChoice }) {
   return (
     <Wrapper>
       <Container>
+        <Link to="/">
+          <img src="/images/로고화이트.png" />
+        </Link>
         <Text1>
           숙소에서 맞이할 최대
           <br />
