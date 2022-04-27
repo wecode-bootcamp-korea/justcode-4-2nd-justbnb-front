@@ -36,10 +36,11 @@ function LogoutToggle({ openToggle, loginModalHandler, signupModalHandler }) {
 const ToggleBox = styled.div`
   position: absolute;
   width: 15rem;
-  background: #ffffff;
+  background-color: #ffffff;
   border-radius: 10px;
   list-style: none;
   box-shadow: 1px 1px 2px #dddddd;
+  z-index: 999;
 `;
 
 const ToggleList = styled.li`
