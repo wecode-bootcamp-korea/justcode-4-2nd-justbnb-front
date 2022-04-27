@@ -48,23 +48,24 @@ function LoginModal({ loginModalHandler }) {
         password: password,
       }),
     })
+      .then(res => res.json())
       .then(res => {
-        if (res.status === 201) {
-          return res.json();
-        } else if (res.status === 400) {
-          alert('아이디와 비밀번호를 확인해주세요 :)');
-          return res.json();
-        } else if (res.status === 500) {
-          console.log('에러메세지: ', res.message);
-        } else return res.json();
-      })
-      .then(res => {
-        if (res.token) {
-          localStorage.setItem('token', res.token);
+        if (res.accessToken) {
+          localStorage.setItem('token', res.accessToken);
         } else {
           console.log('에러발생 : ', res.message);
         }
       });
+    // .then(res => {
+    //   if (res.status === 200) {
+    //     return;
+    //   } else if (res.status === 409) {
+    //     alert('아이디와 비밀번호를 확인해주세요 :)');
+    //     return res.json();
+    //   }
+    //     console.log('에러메세지: ', res.message);
+    //   } else return res.json();
+    // })
   };
 
   return (
