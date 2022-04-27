@@ -13,7 +13,7 @@ import {
 } from './HostingLayoutStyled';
 import Hosting from '../../pages/Hosting/Hosting';
 import Hosting2 from '../../pages/Hosting/Hosting2';
-// import Hosting3 from '../../pages/Hosting/Hosting3';
+import Hosting3 from '../../pages/Hosting/Hosting3';
 import Hosting4 from '../../pages/Hosting/Hosting4';
 import Hosting5 from '../../pages/Hosting/Hosting5';
 import Hosting6 from '../../pages/Hosting/Hosting6';
@@ -40,9 +40,8 @@ function GotoStep({ step, onChange, resultChoice }) {
       return <Hosting onChange={onChange} resultChoice={resultChoice} />;
     case 2:
       return <Hosting2 onChange={onChange} resultChoice={resultChoice} />;
-    // case 3:
-    //   return <Hosting3 onChange={onChange} resultChoice={resultChoice} />;
-    //   break;
+    case 3:
+      return <Hosting3 onChange={onChange} resultChoice={resultChoice} />;
     case 3:
       return <Hosting4 onChange={onChange} resultChoice={resultChoice} />;
     case 4:

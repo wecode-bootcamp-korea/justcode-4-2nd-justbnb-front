@@ -264,7 +264,7 @@ const Label = styled.label`
 
 const LabelDescription = styled.div`
   /* position: absolute; */
-  margin: 1.5vw 1.3vw;
+  margin: 1.5vw 1.8vw;
   font-weight: bold;
 `;
 
