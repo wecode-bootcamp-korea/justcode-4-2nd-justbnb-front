@@ -224,7 +224,7 @@ const Section = styled.section`
 
 const Wrapper = styled.section`
   position: sticky;
-  top: 100px;
+  top: 120px;
   padding: 20px;
   width: 100%;
   border: 1px solid rgba(0, 0, 0, 0.2);
