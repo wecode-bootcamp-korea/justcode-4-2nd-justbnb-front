@@ -99,7 +99,7 @@ async function gotoDB(resultChoice) {
       long: resultChoice[3].Ma,
       buildType: resultChoice[1],
       roomType: resultChoice[2],
-      charge: resultChoice[6],
+      charge: resultChoice[7],
       animalYn: 'Y',
       totalMembers: 5,
       imageUrl: resultChoice[10],
