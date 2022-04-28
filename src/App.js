@@ -16,7 +16,6 @@ import Hosting8 from './pages/Hosting/Hosting8';
 import Management from './pages/Management/Management';
 import Reservation from './pages/Reservation/Reservation';
 import HostingLayout from './components/hostingLayout/HostingLayout';
-import HostingLayout2 from './components/hostingLayout/HostingLayout2';
 
 function App() {
   return (
@@ -30,7 +29,6 @@ function App() {
         <Route path="/hosting/3" element={<Hosting3 />} />
         <Route path="/hosting/4" element={<Hosting4 />} />
         <Route path="/layout" element={<HostingLayout />} />
-        <Route path="/layout2" element={<HostingLayout2 />} />
         <Route path="/hosting" element={<Hosting />} />
 
         <Route path="/hosting/5" element={<Hosting5 />} />
