@@ -7,9 +7,6 @@ import { BiSearch } from 'react-icons/bi';
 function Nav() {
   const [scrollPosition, setScrollPosition] = useState(0);
   const token = localStorage.getItem('token');
-  const goToTop = () => {
-    window.scrollTo(0.0);
-  };
 
   const updateScroll = () => {
     setScrollPosition(window.scrollY || document.documentElement.scrollTop);
@@ -37,7 +34,6 @@ function Nav() {
               src={`${process.env.PUBLIC_URL}/images/로고화이트.png`}
               width="150"
               style={{ cursor: 'pointer' }}
-              onClick={goToTop}
             />
 
             <Wrapper>
@@ -54,7 +50,6 @@ function Nav() {
               src={`${process.env.PUBLIC_URL}/images/로고핑크.png`}
               width="150"
               style={{ cursor: 'pointer' }}
-              onClick={goToTop}
             />
             <SearchBtn>
               <Text>검색 시작하기</Text>
@@ -120,6 +115,7 @@ const Header = styled.header`
 const Container = styled.div`
   display: flex;
   justify-content: space-between;
+  height: 100px;
   align-items: center;
   padding: 0 6rem;
   background-color: ${props => props.color};

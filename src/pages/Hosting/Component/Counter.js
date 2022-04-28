@@ -28,7 +28,7 @@ export default function CounterValue({ onChange, resultChoice }) {
   return (
     <CounterWrapper>
       <Button>
-        <button id="3" onClick={e => NumDown(e)} value={num}>
+        <button id="4" onClick={e => NumDown(e)} value={num}>
           {/* <button onClick={downNum}> */}-
         </button>
       </Button>
@@ -36,7 +36,7 @@ export default function CounterValue({ onChange, resultChoice }) {
         <h1>{num}</h1>
       </Num>
       <Button2>
-        <button id="3" onClick={e => NumUp(e)} value={num}>
+        <button id="4" onClick={e => NumUp(e)} value={num}>
           +
         </button>
       </Button2>

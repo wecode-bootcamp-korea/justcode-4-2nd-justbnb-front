@@ -7,7 +7,9 @@ export default function Hosting6({ onChange, resultChoice }) {
   const [files, setFiles] = useState([]);
 
   const Upload = e => {
+    console.log(e);
     const files = Array.from(e.target.files);
+    console.log(e.target.files);
     // const files = e.target.files;
     const newFiles = files.map(file => {
       return URL.createObjectURL(file);
@@ -48,11 +50,13 @@ export default function Hosting6({ onChange, resultChoice }) {
               <Text3>최대 5장까지 업로드하실 수 있습니다.</Text3>
               <Label>
                 <LabelDescription>사진 올리기</LabelDescription>
-                <UploadImage
+                {/* <UploadImage
+                  id="10"
+                  className="upload"
                   onChange={Upload}
                   type="file"
                   multiple="multiple"
-                />
+                /> */}
               </Label>
             </Line>
           ) : (
@@ -68,7 +72,13 @@ export default function Hosting6({ onChange, resultChoice }) {
               {/* <Empty onChange={UploadCancel}>사진 비우기</Empty> */}
             </Line2>
           )}
-
+          <UploadImage
+            id="10"
+            className="upload"
+            onChange={Upload}
+            type="file"
+            multiple="multiple"
+          />
           {/* -------------------------------------------------------------------- */}
           {/* <Line>
             <Pictures>
@@ -259,10 +269,11 @@ const Text4 = styled.div`
 
 const UploadImage = styled.input`
   /* border: 1px solid red; */
+  position: absolute;
   margin-top: 10px;
   width: 50%;
-  pointer-events: none;
-  opacity: 0;
+  /* pointer-events: none; */
+  opacity: 100;
 `;
 
 const Label = styled.label`
@@ -273,8 +284,8 @@ const Label = styled.label`
 `;
 
 const LabelDescription = styled.div`
-  position: absolute;
-  margin: 0.5vw 1.3vw;
+  /* position: absolute; */
+  margin: 1.5vw 1.8vw;
   font-weight: bold;
 `;
 

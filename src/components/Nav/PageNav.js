@@ -3,17 +3,21 @@ import styled from 'styled-components';
 import UserNav from './UserNav';
 import { BiSearch } from 'react-icons/bi';
 import SearchBar from './SearchBar';
+import { useNavigate } from 'react-router-dom';
 
 function PageNav() {
   const [isTrue, setIsTrue] = useState(false);
   const token = localStorage.getItem('token');
-  const goToTop = () => {
-    window.scrollTo(0.0);
-  };
+  const navigate = useNavigate();
+
   const onClickBtn = () => {
     !isTrue ? setIsTrue(true) : setIsTrue(false);
   };
 
+  const goToMain = () => {
+    navigate('/');
+    window.scrollTo(0.0);
+  };
   return (
     <Header>
       <Container color="#ffffff">
@@ -22,7 +26,7 @@ function PageNav() {
           src={`${process.env.PUBLIC_URL}/images/로고핑크.png`}
           width="150"
           style={{ cursor: 'pointer' }}
-          onClick={goToTop}
+          onClick={goToMain}
         />
         <SearchBtn onClick={onClickBtn}>
           <Text>검색 시작하기</Text>
@@ -49,6 +53,7 @@ const Header = styled.div`
 const Container = styled.div`
   display: flex;
   justify-content: space-between;
+  height: 100px;
   align-items: center;
   padding: 0 6rem;
   background-color: ${props => props.color};

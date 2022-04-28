@@ -35,9 +35,9 @@ function UserNav({ scrollPosition, token }) {
   return (
     <div>
       <Navbar>
-        {scrollPosition < 100 ? (
+        {scrollPosition < 50 ? (
           <>
-            <Link to="/layout" style={{ textDecoration: 'none' }}>
+            <Link to="/hosting" style={{ textDecoration: 'none' }}>
               <Buttons color="#ffffff" background="#262626">
                 {!token ? '호스트 되기' : '호스트 모드로 전환'}
               </Buttons>
@@ -60,7 +60,7 @@ function UserNav({ scrollPosition, token }) {
           </>
         ) : (
           <>
-            <Link to="/layout" style={{ textDecoration: 'none' }}>
+            <Link to="/hosting" style={{ textDecoration: 'none' }}>
               <Buttons color="black" background="#F7F7F7">
                 {!token ? '호스트 되기' : '호스트 모드로 전환'}
               </Buttons>
@@ -80,16 +80,27 @@ function UserNav({ scrollPosition, token }) {
         )}
       </Navbar>
       {token && (
-        <LoginToggle openToggle={openToggle} toggleHandler={toggleHandler} />
+        <LoginToggle
+          openToggle={openToggle}
+          toggleHandler={toggleHandler}
+          setOpenToggle={setOpenToggle}
+        />
       )}
       {!token && (
         <LogoutToggle
           openToggle={openToggle}
           loginModalHandler={loginModalHandler}
           signupModalHandler={signupModalHandler}
+          setOpenToggle={setOpenToggle}
         />
       )}
-      {isLoginModalOpen && <LoginModal loginModalHandler={loginModalHandler} />}
+      {isLoginModalOpen && (
+        <LoginModal
+          loginModalHandler={loginModalHandler}
+          isLoginModalOpen={isLoginModalOpen}
+          setIsLoginModalOpen={setIsLoginModalOpen}
+        />
+      )}
       {isSignupModalOpen && (
         <SignupModal signupModalHandler={signupModalHandler} />
       )}

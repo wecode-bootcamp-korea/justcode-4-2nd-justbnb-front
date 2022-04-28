@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { useRef, useEffect } from 'react';
 import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
 
-function LoginToggle({ openToggle, toggleHandler }) {
+function LoginToggle({ openToggle, toggleHandler, setOpenToggle }) {
+  const outSection = useRef();
   const navigate = useNavigate();
 
   const goToWishList = () => {
@@ -19,13 +20,29 @@ function LoginToggle({ openToggle, toggleHandler }) {
     window.location.reload();
   };
 
+  useEffect(() => {
+    window.addEventListener('mousedown', onClickOutSection);
+    return () => {
+      window.removeEventListener('mousedown', onClickOutSection);
+    };
+  });
+
+  const onClickOutSection = ({ target }) => {
+    if (openToggle.display === 'block' && !outSection.current.contains(target))
+      setOpenToggle({ display: 'none' });
+  };
+
   return (
-    <ToggleBox style={openToggle}>
-      <ToggleList onClick={goToWishList}>위시리스트</ToggleList>
-      <ToggleList onClick={goToManagingPage}>숙소관리</ToggleList>
-      <ToggleList onClick={logOut}>로그아웃</ToggleList>
-      <ToggleList>도움말</ToggleList>
-    </ToggleBox>
+    <div>
+      {openToggle.display === 'block' && (
+        <ToggleBox style={openToggle} ref={outSection}>
+          <ToggleList onClick={goToWishList}>위시리스트</ToggleList>
+          <ToggleList onClick={goToManagingPage}>숙소관리</ToggleList>
+          <ToggleList onClick={logOut}>로그아웃</ToggleList>
+          <ToggleList>도움말</ToggleList>
+        </ToggleBox>
+      )}
+    </div>
   );
 }
 

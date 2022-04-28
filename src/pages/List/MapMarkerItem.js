@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useState } from 'react';
 
-function MapMarkerItem({ position, latlng, map }) {
+function MapMarkerItem({ position, latlng, map, mapMarkers, city }) {
   return (
     <MapMarker
       position={position}
@@ -9,18 +9,23 @@ function MapMarkerItem({ position, latlng, map }) {
       map={map}
       latlng={latlng}
       key={position.id}
+      mapMarkers={mapMarkers}
+      city={city}
     />
   );
 }
 const MapMarker = React.memo(function MapMarker({
   position,
   title,
-  onClick,
   map,
   latlng,
+  mapMarkers,
+  city,
 }) {
   const { kakao } = window;
   const [open, setOpen] = useState(false);
+
+  console.log('rendering-----------------------');
   let image =
     latlng.lat === position.latlng.Ma
       ? '/images/thump/marker_yellow.png'
@@ -34,6 +39,24 @@ const MapMarker = React.memo(function MapMarker({
   });
   marker.setImage(markerImage);
 
+  if (!mapMarkers.current.hasOwnProperty(city)) {
+    mapMarkers.current[city] = [];
+  }
+
+  mapMarkers.current[city].push(marker);
+  /*
+  let local = ['서울시', '대전시', '대구시', '부산시', '제주시'];
+  for (let j = 0; j < local.length; j++) {
+    if (mapMarkers.current.hasOwnProperty(local[j])) {
+      for (let i = 0; i < mapMarkers.current[local[j]].length; i++) {
+        if (city !== local[j]) {
+          mapMarkers.current[local[j]][i].setMap(null);
+          mapMarkers.current[local[j]][i].setImage(null);
+        }
+      }
+    }
+  }*/
+  useEffect(() => {}, []);
   // 마커 위에 커스텀오버레이를 표시합니다
   let _content = `
     <div ref="el" style="width:250px; height:270px; border-radius: 5%; position: absolute; top: 0px; left:-120px; background-color: white;">

@@ -23,7 +23,7 @@ export default function Hosting7({ onChange, resultChoice }) {
           <TextAndInput>
             <Text2>숙소 이름 정하기</Text2>
             <Input
-              id="6"
+              id="8"
               onKeyUp={e => setTextLength(e.target.value.length)}
               maxLength={49}
               placeholder="숙소 이름을 적어주세요."
