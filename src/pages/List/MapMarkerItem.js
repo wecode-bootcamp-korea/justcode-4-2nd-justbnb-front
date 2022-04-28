@@ -85,5 +85,5 @@ function MapMarker({ position, title, map, latlng, mapMarkers, city }) {
   if (open) overlay.setMap(map);
 }
 
-export default MapMarkerItem;
+export default React.memo(MapMarkerItem);
 //export default React.memo(MapMarkerItem);
