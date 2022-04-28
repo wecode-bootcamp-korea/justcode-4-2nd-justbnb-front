@@ -1,9 +1,12 @@
 import { useState, useEffect, useRef } from 'react';
 import styled from 'styled-components';
+import PageNav from '../../components/Nav/PageNav';
+import Footer from '../../components/Footer';
+import { useNavigate } from 'react-router-dom';
 
 function Management() {
+  const [mockData, setMockData] = useState([]);
   const [data, setData] = useState([]);
-  const [data2, setData2] = useState([]);
   const [leftEndPoint, setLeftEndPoint] = useState('none'); // 왼쪽 버튼 활성화, 비활성화
   const [rightEndPoint, setRightEndPoint] = useState('auto'); // 오른쪽 버튼 활성화, 비활성화
   const [leftOpacity, setLeftOpacity] = useState('0.3'); // 왼쪽 버튼 투명도
@@ -11,8 +14,10 @@ function Management() {
 
   const [currentSlide, setCurrentSlide] = useState(0);
   const slideRef = useRef(null);
+  const navigate = useNavigate();
+  const token = localStorage.getItem('token');
 
-  const TOTAL_CARD = data2.length - 1;
+  const TOTAL_CARD = data.length - 1;
 
   // left 버튼 클릭 시
   const LeftSlide = () => {
@@ -53,10 +58,26 @@ function Management() {
   };
 
   useEffect(() => {
-    fetch('/data/hwseol/list.json', {
+    fetch('/mockData/hwseol/list.json', {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
+      },
+    })
+      .then(res => res.json())
+      .then(data => {
+        setMockData(data);
+      });
+  }, []);
+
+  console.log('data :', data);
+
+  useEffect(() => {
+    fetch('http://localhost:8000/reservation/host ', {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        accessToken: token,
       },
     })
       .then(res => res.json())
@@ -66,22 +87,9 @@ function Management() {
   }, []);
 
   useEffect(() => {
-    fetch('/data/dlwjdals/management.json', {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    })
-      .then(res => res.json())
-      .then(data => {
-        setData2(data);
-      });
-  }, []);
-
-  useEffect(() => {
     slideRef.current.style.transition = 'all 0.5s ease-in-out';
     slideRef.current.style.transform = `translateX(calc(${
-      (-150 / data2.length) * currentSlide
+      (-150 / data.length) * currentSlide
     }%))`;
   }, [currentSlide]);
 
@@ -117,81 +125,93 @@ function Management() {
     user-select: none;
   `;
 
+  const onClickBtn = () => {
+    navigate('/layout');
+  };
+
   return (
-    <Body>
-      <Banner>&nbsp;</Banner>
-      <GuestCardWide>
-        <BookingText>예약</BookingText>
-        <AllBooking>모든 예약(0건)</AllBooking>
-        <ManageButtons>
-          <Button>현재 호스팅 중(0건)</Button>
-          {/* <Button>체크인 예정(0건)</Button>
-          <Button>체크아웃 예정(0건)</Button> */}
-          <Button>예정(0건)</Button>
-        </ManageButtons>
-        <Accommodation>
-          <Wrapper>
-            <Slide ref={slideRef}>
-              {/* 여기서부터 슬라이드 */}
-              {data2.map((el, index) => {
-                return (
-                  <Card2 key={el.id}>
-                    <Img2 src={el.imageUrl} alt="test" />
-                    <CardDescription2>Guest : {el.guest}</CardDescription2>
-                    <CardDescription2>
-                      총 인원 : {el.total_members} 명
-                    </CardDescription2>
-                    <CardDescription2>
-                      Check-In : {el.check_in}
-                    </CardDescription2>
-                    <CardDescription2>
-                      Check-Out : {el.check_out}
-                    </CardDescription2>
-                    <CardDescription2>
-                      숙소 이름 : {el.accommodations_name}
-                    </CardDescription2>
-                  </Card2>
-                );
+    <>
+      <PageNav />
+      <Banner>
+        <Wrap>
+          <Text2>투데이</Text2>
+          <Btn onClick={onClickBtn}>숙소 등록하기 </Btn>
+        </Wrap>
+        <Desc>숙소를 등록해보세요! </Desc>
+      </Banner>
+      <Body>
+        <GuestCardWide>
+          <BookingText>예약</BookingText>
+          <AllBooking>모든 예약(0건)</AllBooking>
+          <ManageButtons>
+            <Button>현재 호스팅 중(0건)</Button>
+            <Button>체크인 예정(0건)</Button>
+            <Button>체크아웃 예정(0건)</Button>
+            <Button>예정(0건)</Button>
+          </ManageButtons>
+          <Accommodation>
+            <Wrapper>
+              <Slide ref={slideRef}>
+                {/* 여기서부터 슬라이드 */}
+                {data.reservationList.map(el => {
+                  return (
+                    <Card2 key={el.id}>
+                      <CardDescription2>
+                        Guest : {el.user_name}
+                      </CardDescription2>
+                      <CardDescription2>
+                        총 인원 : {el.total_members} 명
+                      </CardDescription2>
+                      <CardDescription2>
+                        Check-In : {el.check_in}
+                      </CardDescription2>
+                      <CardDescription2>
+                        Check-Out : {el.check_out}
+                      </CardDescription2>
+                      <CardDescription2>숙소 이름 : {el.name}</CardDescription2>
+                    </Card2>
+                  );
+                })}
+                {/* 여기까지 슬라이드 */}
+              </Slide>
+            </Wrapper>
+          </Accommodation>
+          <Buttons>
+            <ButtonLeft onClick={LeftSlide}>&lt;</ButtonLeft>
+            <ButtonRight onClick={RightSlide}>&gt;</ButtonRight>
+          </Buttons>
+        </GuestCardWide>
+        <ManagementFooter>
+          <TextAndTips>
+            <Text>호스팅 관련 팁과 업데이트</Text>
+            <Tips>
+              {mockData.map((el, index) => {
+                if (index <= 3) {
+                  return (
+                    <Card key={el.id}>
+                      <Img src={el.image} alt="test" />
+                      <CardDescription>{el.name}</CardDescription>
+                    </Card>
+                  );
+                }
               })}
-              {/* 여기까지 슬라이드 */}
-            </Slide>
-          </Wrapper>
-        </Accommodation>
-        <Buttons>
-          <ButtonLeft onClick={LeftSlide}>&lt;</ButtonLeft>
-          <ButtonRight onClick={RightSlide}>&gt;</ButtonRight>
-        </Buttons>
-      </GuestCardWide>
-      <ManagementFooter>
-        <TextAndTips>
-          <Text>호스팅 관련 팁과 업데이트</Text>
-          <Tips>
-            {data.map((el, index) => {
-              if (index <= 3) {
-                return (
-                  <Card key={el.id}>
-                    <Img src={el.image} alt="test" />
-                    <CardDescription>{el.name}</CardDescription>
-                  </Card>
-                );
-              }
-            })}
-          </Tips>
-        </TextAndTips>
-      </ManagementFooter>
-    </Body>
+            </Tips>
+          </TextAndTips>
+        </ManagementFooter>
+      </Body>
+      <Footer />
+    </>
   );
 }
 
 export default Management;
 
 const Body = styled.div`
-  /* display: flex; */
+  padding: 120px 80px 80px 80px;
 `;
 
 const Banner = styled.div`
-  height: 10em;
-  margin: 1em 0 2em 0;
+  padding: 7rem;
   background: rgb(27, 0, 209);
   background: linear-gradient(
     90deg,
@@ -319,15 +339,42 @@ const CardDescription2 = styled.div`
   font-size: 19px;
 `;
 
-const Img2 = styled.img`
-  object-fit: cover;
-  min-width: 340px;
-  height: 16em;
-`;
+// const Img2 = styled.img`
+//   object-fit: cover;
+//   min-width: 340px;
+//   height: 16em;
+// `;
 
 const Buttons = styled.div`
   display: flex;
   justify-content: space-around;
   margin: auto;
   margin-top: 30px;
+`;
+
+const Wrap = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 40px 150px;
+`;
+const Text2 = styled.div`
+  color: #ffffff;
+  font-size: 2.2em;
+`;
+const Btn = styled.button`
+  padding: 10px 20px;
+  border: 1px solid #ffffff;
+  border-radius: 10px;
+  background-color: #ffffff;
+
+  &:hover {
+    cursor: pointer;
+    opacity: 0.9;
+  }
+`;
+
+const Desc = styled.div`
+  padding-left: 150px;
+  color: #ffffff;
 `;
