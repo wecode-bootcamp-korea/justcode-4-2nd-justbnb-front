@@ -86,7 +86,7 @@ const Button = styled.div`
   background-color: white;
   position: absolute;
   left: ${props => props.left || '3%'};
-  top: 2%;
+  top: 3%;
   box-shadow: 0.5px 0.5px 0.5px 0.5px gray;
   border-radius: 8px;
   text-align: center;
