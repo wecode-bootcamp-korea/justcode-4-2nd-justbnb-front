@@ -29,11 +29,6 @@ export default function Hosting3({ onChange, resultChoice }) {
   //   },
   //   [wlqjs, dnlrud]
   // );
-
-  function Deliver(e) {
-    onChange(dnlrud);
-  }
-
   const Movelocation = {
     jeju: {
       latitude: 33.40981832937095,
@@ -68,14 +63,13 @@ export default function Hosting3({ onChange, resultChoice }) {
     marker.setMap(map);
 
     kakao.maps.event.addListener(map, 'click', function (mouseEvent) {
-      console.log(mouseEvent);
       // 클릭한 위도, 경도 정보를 가져옵니다
       let latlng = mouseEvent.latLng;
       // console.log(latlng); // 위도, 경도 정보
 
       setDnlrud((dnlrud.La = latlng.La), (dnlrud.Ma = latlng.Ma));
-      onChange(dnlrud);
-      console.log(dnlrud);
+      console.log('----------------------');
+      //onChange({ 3: dnlrud });
       // 마커 위치를 클릭한 위치로 옮깁니다
       marker.setPosition(latlng);
 
@@ -97,7 +91,6 @@ export default function Hosting3({ onChange, resultChoice }) {
 
     // 지도를 클릭했을 때 클릭 위치 좌표에 대한 주소정보를 표시하도록 이벤트를 등록합니다
     kakao.maps.event.addListener(map, 'click', function (mouseEvent) {
-      console.log(mouseEvent);
       searchDetailAddrFromCoords(mouseEvent.latLng, function (result, status) {
         if (status === kakao.maps.services.Status.OK) {
           let detailAddr = !!result[0].road_address
@@ -123,7 +116,8 @@ export default function Hosting3({ onChange, resultChoice }) {
 
           // console.log(result[0].address.address_name); // 지번주소 정보
           setWlqjs((wlqjs.address = String(result[0].address.address_name)));
-          console.log(wlqjs);
+          console.log('지번주소 :', wlqjs);
+          onChange({ 11: wlqjs.address, 3: dnlrud });
         }
       });
     });
@@ -205,16 +199,13 @@ export default function Hosting3({ onChange, resultChoice }) {
               >
                 Busan
               </Busan>
-              <Confirm
+              {/* <Confirm
                 onClick={e => {
                   // onChange(wlqjs);
-                  console.log(resultChoice);
-                  console.log(wlqjs);
-                  console.log(e.target);
                 }}
               >
                 확인
-              </Confirm>
+              </Confirm> */}
             </Buttons>
           </ButtonTextWrapper>
           <Map
