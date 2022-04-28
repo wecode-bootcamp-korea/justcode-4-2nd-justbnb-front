@@ -23,6 +23,8 @@ import Hosting9 from '../../pages/Hosting/Hosting9';
 
 let currentStep = 1;
 
+let imageURL = null;
+
 const ProgressBox = ({ progress }) => {
   if (!progress) progress = 0;
   return (
@@ -33,6 +35,81 @@ const ProgressBox = ({ progress }) => {
     </ProgressDiv>
   );
 };
+const uploadImage = async event => {
+  const formData = new FormData();
+  const { files } = event.target;
+  console.log(event.target.files);
+
+  Array.from(files).forEach(file => {
+    formData.append('image', file);
+  });
+  console.log(formData);
+
+  await fetch('http://localhost:8000/aws-s3', {
+    method: 'POST',
+    body: formData,
+  })
+    .then(response => response.json())
+    .then(result => {
+      console.log('성공:', result);
+      imageURL = result.filesLocation;
+      console.log('imageurl ', imageURL);
+      return result;
+
+      // setResultChoice({ ...resultChoice, 10: result });
+
+      // fetch('http://lo')
+      //result + 숙소 정보 -> fetch() -> 백엔드
+    });
+};
+
+// const gotoDB = async resultChoice => {
+//   await fetch(
+//     `http://localhost:8000/accommodations?city=${city}&buildType=${buildType}&roomType=${roomType}&animalYn=${haveAnimal}&totalMembers=${count}`,
+//     {
+//       method: 'GET',
+//       headers: {
+//         'Content-Type': 'application/json',
+//       },
+//     }
+//   )
+//     .then(res => res.json())
+//     .then(data => {
+//       let temp = [];
+//       for (let i = 0; i < data.accommodationsList.length; i++) {
+//         temp.push(data.accommodationsList[i]);
+//       }
+//       setData([...temp]);
+//     });
+// };
+
+async function gotoDB(resultChoice) {
+  await fetch('http://localhost:8000/accommodations', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      accessToken: localStorage.getItem('token'),
+      name: resultChoice[8],
+      description: resultChoice[9],
+      city: '서울시',
+      location: 'tjdfndksfjfla',
+      lat: resultChoice[3].La,
+      long: resultChoice[3].Ma,
+      buildType: resultChoice[1],
+      roomType: resultChoice[2],
+      charge: resultChoice[6],
+      animalYn: 'Y',
+      totalMembers: 5,
+      imageUrl: resultChoice[10],
+      convenienceId: [1, 2],
+    }),
+  });
+}
+
+// name, description, city, location, lat, long, buildType, roomType, charge, animalYn,
+//totalMembers, imageUrl, convenienceId
 
 function GotoStep({ step, onChange, resultChoice }) {
   switch (step) {
@@ -53,7 +130,17 @@ function GotoStep({ step, onChange, resultChoice }) {
     case 8:
       return <Hosting8 onChange={onChange} resultChoice={resultChoice} />;
     case 9:
-      return <Hosting6 onChange={onChange} resultChoice={resultChoice} />;
+      return (
+        <Hosting6
+          onChange={onChange}
+          resultChoice={resultChoice}
+          Upload={async e => {
+            let temp = await uploadImage(e);
+            console.log('ddd', imageURL);
+            onChange(imageURL);
+          }}
+        />
+      );
 
     default:
       console.log('invalid number');
@@ -65,6 +152,23 @@ function HostingLayout() {
   const [resultChoice, setResultChoice] = useState({});
   const [flag, setFlag] = useState(0);
   const arr = useRef([]);
+
+  // const uploadImage = () => {
+  //   const formData = new FormData();
+  //   const fileField = document.getElementsByClassName('upload');
+
+  //   formData.append('image', fileField.files[0]);
+
+  //   fetch('http://localhost:8000/aws-s3', {
+  //     method: 'POST',
+  //     body: formData,
+  //   })
+  //     .then(response => response.json())
+  //     .then(result => {
+  //       console.log('성공:', result);
+  //       //result + 숙소 정보 -> fetch() -> 백엔드
+  //     });
+  // };
 
   const onChange = e => {
     if (step === 3) {
@@ -85,10 +189,13 @@ function HostingLayout() {
         arr.current.push(value);
         setResultChoice({ ...resultChoice, [id]: arr.current });
       }
+    } else if (step === 9) {
+      console.log('-------------------------------');
+      console.log('eeee :', e);
+      setResultChoice({ ...resultChoice, 10: e });
     } else {
       const { value, id } = e.target;
-      console.log(e.target);
-      console.log(e.target.value);
+      console.log('aelse', e.target);
       console.log('why ?', id, value);
       setResultChoice({ ...resultChoice, [id]: value });
     }
@@ -118,7 +225,16 @@ function HostingLayout() {
         </BtnRight>
       );
     } else {
-      return <BtnRight type="button">완료</BtnRight>;
+      return (
+        <BtnRight
+          onClick={() => {
+            gotoDB(resultChoice);
+          }}
+          type="button"
+        >
+          완료
+        </BtnRight>
+      );
     }
   };
   const _prev = () => {
