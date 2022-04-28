@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
+import PageNav from '../../components/Nav/PageNav';
 
 function Reservation() {
   const [data2, setData2] = useState([]);
@@ -24,11 +25,13 @@ function Reservation() {
   }, []);
 
   return (
-    <Body>
-      <Travel>여행</Travel>
-      <Line />
-      {/* 여기서부터 예약된 여행 있는 경우 */}
-      {/* <ReservationList>
+    <>
+      <PageNav />
+      <Body>
+        <Travel>여행</Travel>
+        <Line />
+        {/* 여기서부터 예약된 여행 있는 경우 */}
+        {/* <ReservationList>
         {data2.map((el, index) => {
           return (
             <Card2 key={el.id}>
@@ -45,27 +48,28 @@ function Reservation() {
           );
         })}
       </ReservationList> */}
-      {/* 여기까지 예약된 여행 있는 경우 */}
-      {/* 여기서부터 예약된 여행 없는 경우 */}
-      <NoReservation>
-        <Text1>아직 예약된 여행이 없습니다!</Text1>
-        <Text2>
-          여행 가방에 쌓인 먼지를 털어내고 다음 여행 계획을 세워보세요.
-        </Text2>
-        <Text3 onClick={goToMain}>숙소 검색하기</Text3>
-      </NoReservation>
-      {/* 여기까지 예약된 여행 없는 경우 */}
-      <Line />
-      <Text4>예약 내역을 찾으실 수 없나요?&nbsp;</Text4>
-      <Text5>도움말 센터 방문하기</Text5>
-    </Body>
+        {/* 여기까지 예약된 여행 있는 경우 */}
+        {/* 여기서부터 예약된 여행 없는 경우 */}
+        <NoReservation>
+          <Text1>아직 예약된 여행이 없습니다!</Text1>
+          <Text2>
+            여행 가방에 쌓인 먼지를 털어내고 다음 여행 계획을 세워보세요.
+          </Text2>
+          <Text3 onClick={goToMain}>숙소 검색하기</Text3>
+        </NoReservation>
+        {/* 여기까지 예약된 여행 없는 경우 */}
+        <Line />
+        <Text4>예약 내역을 찾으실 수 없나요?&nbsp;</Text4>
+        <Text5>도움말 센터 방문하기</Text5>
+      </Body>
+    </>
   );
 }
 
 export default Reservation;
 
 const Body = styled.div`
-  margin: 70px 120px;
+  padding: 200px 120px;
 `;
 
 const Travel = styled.div`
