@@ -49,6 +49,7 @@ const Header = styled.div`
 const Container = styled.div`
   display: flex;
   justify-content: space-between;
+  height: 100px;
   align-items: center;
   padding: 0 6rem;
   background-color: ${props => props.color};
