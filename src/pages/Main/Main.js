@@ -10,7 +10,11 @@ function Main() {
   const [cities, setCities] = useState([]);
 
   const goToList = city => {
-    navigate(`/list/${city}`);
+    navigate(`/list/${city}`, {
+      state: {
+        city: city,
+      },
+    });
     window.scrollTo(0.0);
   };
 

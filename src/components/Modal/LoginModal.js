@@ -43,6 +43,10 @@ function LoginModal({ loginModalHandler }) {
     window.location.reload();
   };
 
+  const onKeyPress = e => {
+    e.key === 'Enter' && errHandler();
+  };
+
   const postLogin = () => {
     fetch('http://localhost:8000/user/signin', {
       method: 'POST',
@@ -94,6 +98,7 @@ function LoginModal({ loginModalHandler }) {
                 placeholder="비밀번호"
                 type="password"
                 onChange={passwordInput}
+                onKeyPress={onKeyPress}
               />
               {passwordErr && (
                 <>
