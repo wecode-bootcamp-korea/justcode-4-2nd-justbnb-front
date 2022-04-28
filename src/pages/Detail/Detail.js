@@ -102,7 +102,7 @@ function Detail() {
 
   return (
     <div>
-      {/* <Header /> */}
+      <Header />
       <Wrapper>
         <Main
           location={location}
@@ -182,7 +182,7 @@ function Detail() {
 const Wrapper = styled.div`
   width: 1120px;
   margin: 0 auto;
-  padding-top: 100px;
+  padding-top: 120px;
 `;
 const InfoSection = styled.section`
   margin: 50px 0px;
