@@ -76,7 +76,7 @@ function SearchBar({ scrollPosition, updateScroll, flag }) {
 
   return (
     <Container bgColor={flag === 'list' ? 'white' : 'black'}>
-      {scrollPosition < 100 && (
+      {scrollPosition < 50 && (
         <SearchWrapper bgColor={flag === 'list' ? '#EBEBEB' : '#ffffff'}>
           <div>
             <SearchInner
