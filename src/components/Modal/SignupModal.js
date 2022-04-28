@@ -70,6 +70,10 @@ function SignupModal({ signupModalHandler }) {
       });
   };
 
+  const onKeyPress = e => {
+    e.key === 'Enter' && successSignup();
+  };
+
   return (
     <div>
       <BackgroundModal>
@@ -113,6 +117,7 @@ function SignupModal({ signupModalHandler }) {
                   placeholder="비밀번호"
                   type="password"
                   onChange={passwordHandler}
+                  onKeyPress={onKeyPress}
                 />
                 {passwordErr && (
                   <>

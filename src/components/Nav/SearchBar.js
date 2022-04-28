@@ -22,6 +22,7 @@ function SearchBar({ scrollPosition, updateScroll, flag }) {
   const navigate = useNavigate();
 
   const goToList = () => {
+    if (!city || !startDate || !endDate || !count || !haveAnimal) return;
     navigate(`/list/${city}`, {
       state: {
         city: city,
@@ -89,7 +90,12 @@ function SearchBar({ scrollPosition, updateScroll, flag }) {
               {city && <Text2>{city}</Text2>}
             </SearchInner>
             {isSearchToggleOpen && (
-              <SearchToggle setCity={setCity} close={searchToggleHandler} />
+              <SearchToggle
+                setCity={setCity}
+                close={searchToggleHandler}
+                isSearchToggleOpen={isSearchToggleOpen}
+                setIsSearchToggleOpen={setIsSearchToggleOpen}
+              />
             )}
           </div>
           <SearchInner
@@ -135,6 +141,7 @@ function SearchBar({ scrollPosition, updateScroll, flag }) {
               <SearchKeyword>인원</SearchKeyword>
               {count === 0 && <Text>게스트 추가</Text>}
               {count > 0 && <Text2>{count} 명</Text2>}
+              {haveAnimal === 'y' && <Text2>반려동물 동반</Text2>}
             </SearchInner>
             {isMembersToggleOpen && (
               <MembersToggle
@@ -142,12 +149,14 @@ function SearchBar({ scrollPosition, updateScroll, flag }) {
                 setCount={setCount}
                 setHaveAnimal={setHaveAnimal}
                 close={membersToggleHandler}
+                isMembersToggleOpen={isMembersToggleOpen}
+                setIsMembersToggleOpen={setIsMembersToggleOpen}
               />
             )}
           </div>
-          <SearchBtns>
+          <SearchBtns onClick={goToList}>
             <BiSearch font-size={20} />
-            <SearchKeyword2 onClick={goToList}>검색</SearchKeyword2>
+            <SearchKeyword2>검색</SearchKeyword2>
           </SearchBtns>
         </SearchWrapper>
       )}

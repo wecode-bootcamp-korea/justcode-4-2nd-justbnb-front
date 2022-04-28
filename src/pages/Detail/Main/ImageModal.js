@@ -19,7 +19,7 @@ function ImageModal(props) {
               <AiOutlineClose className="icons" />
               <span>닫기</span>
             </CloseBtn>
-            <ContentNumber> {arrayIndex + 1}/ 5</ContentNumber>
+            <ContentNumber> {`${arrayIndex + 1} / 5`}</ContentNumber>
             <IconsWrapper>
               {/* <FiShare className="icons" />
               <FaRegHeart className="icons" /> */}
@@ -32,7 +32,7 @@ function ImageModal(props) {
               }}
               disabled={arrayIndex === 0 ? 'disabled' : null}
             >
-              <FaAngleLeft />
+              <FaAngleLeft className="icons" />
             </PrevButton>
             <ImgWrapper>
               <img alt="home" src={imageUrlArray[arrayIndex]} />
@@ -43,7 +43,7 @@ function ImageModal(props) {
               }}
               disabled={arrayIndex === 4 ? 'disabled' : null}
             >
-              <FaAngleRight />
+              <FaAngleRight className="icons" />
             </NextButton>
           </Body>
         </ContentWrapper>
@@ -133,6 +133,7 @@ const PrevButton = styled.button`
   align-items: center;
   width: 45px;
   height: 45px;
+  /* height: 45px; */
   border-radius: 50%;
   background-color: transparent;
   border: 2px solid rgba(255, 255, 255, 0.5);

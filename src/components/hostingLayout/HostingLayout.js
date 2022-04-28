@@ -136,8 +136,9 @@ function HostingLayout() {
     }
     return null;
   };
-  console.log('step :', step);
+  // console.log('step :', step);
   console.log('result :', resultChoice);
+  // console.log(resultChoice);
   return (
     <div>
       <Box>
