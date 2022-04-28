@@ -29,7 +29,7 @@ export default function CounterValue2({ onChange, resultChoice }) {
     <CounterWrapper>
       <Button>
         <button
-          id="4"
+          id="5"
           onClick={e => NumDown(e)}
           value={num === 0 ? 'false' : 'true'}
         >
@@ -41,7 +41,7 @@ export default function CounterValue2({ onChange, resultChoice }) {
       </Num>
       <Button2>
         <button
-          id="4"
+          id="5"
           onClick={e => NumUp(e)}
           value={num === 0 ? 'false' : 'true'}
         >

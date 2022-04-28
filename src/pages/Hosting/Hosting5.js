@@ -8,7 +8,6 @@ import { FaParking } from 'react-icons/fa';
 import { GiBathtub } from 'react-icons/gi';
 
 export default function Hosting5({ onChange, resultChoice }) {
-  console.log(resultChoice);
   const [convenience, setConvenience] = useState([]);
 
   // 조건문 사용 시 예시
@@ -19,7 +18,7 @@ export default function Hosting5({ onChange, resultChoice }) {
   //     return <GiBarbecue />;
   //   }
   // }
-  console.log('ddddd', resultChoice);
+  // console.log('resultChoice', resultChoice);
 
   useEffect(() => {
     fetch('/data/dlwjdals/hosting.json', {
@@ -70,7 +69,7 @@ export default function Hosting5({ onChange, resultChoice }) {
   );
 }
 function compareResult(resultChoice, el) {
-  console.log(resultChoice);
+  // console.log(resultChoice);
   if (!resultChoice.hasOwnProperty(5)) return false;
   for (let i = 0; i < resultChoice[5].length; i++) {
     if (resultChoice[5][i] === el.convenience) {
@@ -84,7 +83,7 @@ function ConvMap({ el, onChange, resultChoice }) {
       <TextAndIcon
         key={el.id}
         onClick={e => onChange(e)}
-        id="5"
+        id="7"
         value={el.convenience}
         type="checkbox"
         defaultChecked={compareResult(resultChoice, el)}
