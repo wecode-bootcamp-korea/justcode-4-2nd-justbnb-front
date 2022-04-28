@@ -6,8 +6,8 @@ function LoginToggle({ openToggle, toggleHandler, setOpenToggle }) {
   const outSection = useRef();
   const navigate = useNavigate();
 
-  const goToWishList = () => {
-    navigate('/wish');
+  const goToReservation = () => {
+    navigate('/reservation');
   };
 
   const goToManagingPage = () => {
@@ -36,7 +36,8 @@ function LoginToggle({ openToggle, toggleHandler, setOpenToggle }) {
     <div>
       {openToggle.display === 'block' && (
         <ToggleBox style={openToggle} ref={outSection}>
-          <ToggleList onClick={goToWishList}>위시리스트</ToggleList>
+          <ToggleList>위시리스트</ToggleList>
+          <ToggleList onClick={goToReservation}>예약관리</ToggleList>
           <ToggleList onClick={goToManagingPage}>숙소관리</ToggleList>
           <ToggleList onClick={logOut}>로그아웃</ToggleList>
           <ToggleList>도움말</ToggleList>
