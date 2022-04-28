@@ -37,22 +37,6 @@ const AccommodationList = () => {
   const location = useLocation();
   let mapMarkers = useRef([]);
 
-  /*
-  useEffect(() => {
-    let local = ['서울시', '대전시', '대구시', '부산시', '제주시'];
-    for (let j = 0; j < local.length; j++) {
-      if (mapMarkers.current.hasOwnProperty(local[j])) {
-        if (location.state.city !== local[j]) {
-          for (let i = 0; i < mapMarkers.current[local[j]].length; i++) {
-            mapMarkers.current[local[j]][i].setMap(null);
-            mapMarkers.current[local[j]][i].setImage(null);
-          }
-          mapMarkers.current[local[j]] = [];
-        }
-      }
-    }
-  }, [location.state.city]);
-*/
   let city = local;
   let startDate = '';
   let endDate = '';
@@ -92,6 +76,7 @@ const AccommodationList = () => {
         setData([...temp]);
       });
   };
+  console.log('city :', city);
   /* 하트 데이터리스트 가져오기 */
   let token = localStorage.getItem('token');
   const [hearts, setHearts] = useState([]);

@@ -2,7 +2,6 @@ import React from 'react';
 import styled from 'styled-components';
 
 export default function Hosting2({ onChange, resultChoice }) {
-  console.log('hosting2', resultChoice['2']);
   return (
     <Wrapper>
       <Container>

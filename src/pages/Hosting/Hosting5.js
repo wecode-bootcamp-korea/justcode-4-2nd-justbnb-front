@@ -71,23 +71,32 @@ export default function Hosting5({ onChange, resultChoice }) {
 }
 function compareResult(resultChoice, el) {
   // console.log(resultChoice);
-  if (!resultChoice.hasOwnProperty(5)) return false;
-  for (let i = 0; i < resultChoice[5].length; i++) {
+  if (!resultChoice.hasOwnProperty(6)) return false;
+  for (let i = 0; i < resultChoice[6].length; i++) {
     if (resultChoice[5][i] === el.convenience) {
       return 'on';
     }
   }
 }
 function ConvMap({ el, onChange, resultChoice }) {
+  const conv = {
+    수영장: 1,
+    '바베큐 그릴': 2,
+    WIFI: 3,
+    TV: 4,
+    주차공간: 5,
+    욕조: 6,
+  };
+  console.log(conv['수영장']);
   return (
     <Button>
       <div key={el.id}>
         <BoxWrapper>
           <TextAndIcon
             key={el.id}
-            onClick={e => onChange(e)}
+            onChange={e => onChange(e)}
             id="6"
-            value={el.convenience}
+            value={conv[el.convenience]}
             type="checkbox"
             defaultChecked={compareResult(resultChoice, el)}
           />

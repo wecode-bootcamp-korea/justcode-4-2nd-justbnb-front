@@ -37,7 +37,7 @@ export default function Hosting9({ onChange, resultChoice }) {
           <CounterValue3 onChange={onChange} />
           <Text2>/박</Text2>
         </Body>
-        <Comfirm onClick={() => test()}>확인</Comfirm>
+        {/* <Comfirm onClick={() => test()}>확인</Comfirm> */}
         <Footer />
       </Container2>
     </Wrapper>
@@ -143,6 +143,6 @@ const Footer = styled.section`
   align-items: center;
 `;
 
-const Comfirm = styled.button`
-  font-size: 10px;
-`;
+// const Comfirm = styled.button`
+//   font-size: 10px;
+// `;

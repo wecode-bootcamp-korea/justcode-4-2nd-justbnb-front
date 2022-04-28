@@ -93,17 +93,17 @@ async function gotoDB(resultChoice) {
       accessToken: localStorage.getItem('token'),
       name: resultChoice[8],
       description: resultChoice[9],
-      city: '서울시',
-      location: 'tjdfndksfjfla',
-      lat: resultChoice[3].La,
-      long: resultChoice[3].Ma,
+      city: resultChoice[11].slice(0, 2) + '시',
+      location: resultChoice[11],
+      lat: resultChoice[3].Ma,
+      long: resultChoice[3].La,
       buildType: resultChoice[1],
       roomType: resultChoice[2],
-      charge: resultChoice[7],
+      charge: Number(resultChoice[7]),
       animalYn: 'Y',
       totalMembers: 5,
       imageUrl: resultChoice[10],
-      convenienceId: [1, 2],
+      convenienceId: resultChoice[6],
     }),
   });
 }
@@ -172,12 +172,12 @@ function HostingLayout() {
 
   const onChange = e => {
     if (step === 3) {
-      setResultChoice({ ...resultChoice, 3: e });
-    } else if (step === 4) {
+      setResultChoice({ ...resultChoice, 3: e[3], 11: e[11] });
+    } else if (step === 5) {
       const { value, id } = e.target;
-      if (resultChoice.hasOwnProperty(5)) {
-        if (resultChoice[5].includes(value)) {
-          resultChoice[5] = resultChoice[5].filter(
+      if (resultChoice.hasOwnProperty(6)) {
+        if (resultChoice[6].includes(value)) {
+          resultChoice[6] = resultChoice[6].filter(
             element => element !== value
           );
           arr.current = arr.current.filter(element => element !== value);
@@ -190,13 +190,11 @@ function HostingLayout() {
         setResultChoice({ ...resultChoice, [id]: arr.current });
       }
     } else if (step === 9) {
-      console.log('-------------------------------');
-      console.log('eeee :', e);
       setResultChoice({ ...resultChoice, 10: e });
     } else {
       const { value, id } = e.target;
-      console.log('aelse', e.target);
-      console.log('why ?', id, value);
+      // console.log('aelse', e.target);
+      // console.log('why ?', id, value);
       setResultChoice({ ...resultChoice, [id]: value });
     }
     setFlag(0);
@@ -252,9 +250,9 @@ function HostingLayout() {
     }
     return null;
   };
-  // console.log('step :', step);
+  console.log('step :', step);
   console.log('result :', resultChoice);
-  // console.log(resultChoice);
+  console.log(resultChoice);
   return (
     <div>
       <Box>
