@@ -3,23 +3,40 @@ import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import { AiOutlinePicture } from 'react-icons/ai';
 
-export default function Hosting6({ onChange, resultChoice }) {
+export default function Hosting6({ onChange, resultChoice, Upload }) {
   const [files, setFiles] = useState([]);
 
-  const Upload = e => {
-    console.log(e);
-    const files = Array.from(e.target.files);
-    console.log(e.target.files);
-    // const files = e.target.files;
-    const newFiles = files.map(file => {
-      return URL.createObjectURL(file);
-    });
-    setFiles(newFiles);
-  };
+  // const Upload = e => {
+  //   console.log(e);
+  //   const files = Array.from(e.target.files);
+  //   console.log(e.target.files);
+  //   // const files = e.target.files;
+  //   const newFiles = files.map(file => {
+  //     return URL.createObjectURL(file);
+  //   });
+  //   setFiles(newFiles);
+  // };
 
   const UploadCancel = e => {
     return setFiles(null);
   };
+
+  // const upload = () => {
+  //   const formData = new FormData();
+  //   const fileField = document.getElementsByClassName('upload');
+
+  //   formData.append('image', fileField.files[0]);
+
+  //   fetch('http://localhost:8000/aws-s3', {
+  //     method: 'POST',
+  //     body: formData,
+  //   })
+  //     .then(response => response.json())
+  //     .then(result => {
+  //       console.log('성공:', result);
+  //       //result + 숙소 정보 -> fetch() -> 백엔드
+  //     });
+  // };
 
   return (
     <Wrapper>
@@ -41,44 +58,39 @@ export default function Hosting6({ onChange, resultChoice }) {
         </Header>
         <Body>
           {/* {console.log(files.length)} */}
-          {files.length === 0 ? (
-            <Line>
-              <PictureIcon>
-                <AiOutlinePicture />
-              </PictureIcon>
-              <Text2>멋진 숙소 사진을 올려주세요!</Text2>
-              <Text3>최대 5장까지 업로드하실 수 있습니다.</Text3>
-              <Label>
-                <LabelDescription>사진 올리기</LabelDescription>
-                {/* <UploadImage
-                  id="10"
-                  className="upload"
-                  onChange={Upload}
-                  type="file"
-                  multiple="multiple"
-                /> */}
-              </Label>
-            </Line>
-          ) : (
-            <Line2>
-              <Pictures>
-                {files.map((file, index) => {
-                  if (index < 5) {
-                    // 5장을 넘기지 않게 하기 위해
-                    return <Image key={null} src={file} />;
-                  }
-                })}
-              </Pictures>
-              {/* <Empty onChange={UploadCancel}>사진 비우기</Empty> */}
-            </Line2>
-          )}
-          <UploadImage
-            id="10"
-            className="upload"
-            onChange={Upload}
-            type="file"
-            multiple="multiple"
-          />
+          <Line>
+            <PictureIcon>
+              <AiOutlinePicture />
+            </PictureIcon>
+            <Text2>멋진 숙소 사진을 올려주세요!</Text2>
+            <Text3>최대 5장까지 업로드하실 수 있습니다.</Text3>
+            <UploadImage
+              id="10"
+              className="upload"
+              onChange={Upload}
+              type="file"
+              multiple="multiple"
+            />
+            <Label>
+              <LabelDescription>사진 올리기</LabelDescription>
+              {files.length !== 0 ? (
+                <Pictures>
+                  {files.map((file, index) => {
+                    if (index < 5) {
+                      // 5장을 넘기지 않게 하기 위해
+                      return <Image key={null} src={file} />;
+                    }
+                  })}
+                </Pictures>
+              ) : (
+                <null />
+              )}
+            </Label>
+          </Line>
+          {/* <Line2> */}
+
+          {/* <Empty onChange={UploadCancel}>사진 비우기</Empty> */}
+          {/* </Line2> */}
           {/* -------------------------------------------------------------------- */}
           {/* <Line>
             <Pictures>

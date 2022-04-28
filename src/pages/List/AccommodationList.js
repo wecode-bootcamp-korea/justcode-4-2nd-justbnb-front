@@ -37,6 +37,7 @@ const AccommodationList = () => {
   const location = useLocation();
   let mapMarkers = useRef([]);
 
+  /*
   useEffect(() => {
     let local = ['서울시', '대전시', '대구시', '부산시', '제주시'];
     for (let j = 0; j < local.length; j++) {
@@ -51,13 +52,13 @@ const AccommodationList = () => {
       }
     }
   }, [location.state.city]);
-
+*/
   let city = local;
   let startDate = '';
   let endDate = '';
   let count = '';
   let haveAnimal = '';
-  if (location.state) {
+  if (location.state.haveAnimal) {
     city = location.state.city;
     startDate = location.state.startDate;
     endDate = location.state.endDate;
