@@ -23,7 +23,6 @@ function MapMarker({ position, title, map, latlng, mapMarkers, city }) {
   const { kakao } = window;
   const [open, setOpen] = useState(false);
 
-  console.log('rendering-----------------------');
   let image =
     latlng.lat === position.latlng.Ma
       ? '/images/thump/marker_yellow.png'
