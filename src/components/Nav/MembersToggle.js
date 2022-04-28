@@ -3,57 +3,60 @@ import styled from 'styled-components';
 import { AiOutlinePlus, AiOutlineMinus } from 'react-icons/ai';
 
 function MembersToggle({ count, setCount, setHaveAnimal }) {
-  const [changeColor, setChangeColor] = useState({
-    changeYes: { backgroundColor: '#ffffff' },
-    changeNo: { backgroundColor: '#ffffff' },
-  });
-  const { changeYes, changeNo } = changeColor;
   const [disabled, setDisabled] = useState({
-    color: '#ebebeb',
-    borderColor: '#ebebeb',
+    left: { color: '#ebebeb', border: '1px solid #ebebeb' },
+    right: { color: 'black', border: '1px solid black' },
   });
+  const { left, right } = disabled;
+
+  const [isYes, setIsYes] = useState({
+    yes: { color: '#ebebeb', border: '1px solid #ebebeb' },
+    no: { color: '#ebebeb', border: '1px solid #ebebeb' },
+  });
+  const { yes, no } = isYes;
 
   const minus = () => {
     if (count === 0) return;
     if (count === 1) {
-      setDisabled({ color: '#ebebeb', borderColor: '#ebebeb' });
+      setDisabled({
+        ...disabled,
+        left: { color: '#ebebeb', border: '1px solid #ebebeb' },
+      });
     }
     setCount(prev => prev - 1);
   };
 
   const plus = () => {
-    setCount(prev => prev + 1);
-    setDisabled({ color: 'black', borderColor: 'black' });
+    if (count < 4) {
+      setCount(prev => prev + 1);
+      setDisabled({
+        ...disabled,
+        left: { color: 'black', border: '1px solid black' },
+      });
+    }
+    if (count === 3) {
+      setDisabled({
+        ...disabled,
+        right: { color: '#ebebeb', border: '1px solid #ebebeb' },
+      });
+    }
   };
 
   const onClickYesBtn = () => {
-    if (changeYes.backgroundColor === '#ffffff') {
-      setChangeColor({
-        changeYes: { backgroundColor: '#ebebeb' },
-        changeNo: { backgroundColor: '#ffffff' },
-      });
-      setHaveAnimal('y');
-    } else {
-      setChangeColor({
-        ...changeColor,
-        changeYes: { backgroundColor: '#ffffff' },
-      });
-    }
+    setHaveAnimal('y');
+    setIsYes({
+      yes: { color: 'black', border: '1px solid black' },
+      no: { color: '#ebebeb', border: '1px solid #ebebeb' },
+    });
   };
 
   const onClickNoBtn = () => {
-    if (changeNo.backgroundColor === '#ffffff') {
-      setChangeColor({
-        changeYes: { backgroundColor: '#ffffff' },
-        changeNo: { backgroundColor: '#ebebeb' },
-      });
-      setHaveAnimal('n');
-    } else {
-      setChangeColor({
-        ...changeColor,
-        changeNo: { backgroundColor: '#ffffff' },
-      });
-    }
+    setHaveAnimal('n');
+    setIsYes({
+      ...isYes,
+      yes: { color: '#ebebeb', border: '1px solid #ebebeb' },
+      no: { color: 'black', border: '1px solid black' },
+    });
   };
 
   return (
@@ -61,11 +64,11 @@ function MembersToggle({ count, setCount, setHaveAnimal }) {
       <Wrapper>
         <Tittle>인원 수</Tittle>
         <div>
-          <Buttons onClick={minus} style={disabled}>
+          <Buttons onClick={minus} style={left}>
             <AiOutlineMinus />
           </Buttons>
           {count}
-          <Buttons onClick={plus}>
+          <Buttons onClick={plus} style={right}>
             <AiOutlinePlus />
           </Buttons>
         </div>
@@ -73,10 +76,10 @@ function MembersToggle({ count, setCount, setHaveAnimal }) {
       <Wrapper>
         <Tittle>반려동물 동반</Tittle>
         <BtnWrapper>
-          <Buttons onClick={onClickYesBtn} style={changeYes}>
+          <Buttons onClick={onClickYesBtn} style={yes}>
             O
           </Buttons>
-          <Buttons onClick={onClickNoBtn} style={changeNo}>
+          <Buttons onClick={onClickNoBtn} style={no}>
             X
           </Buttons>
         </BtnWrapper>
