@@ -35,7 +35,7 @@ function UserNav({ scrollPosition, token }) {
   return (
     <div>
       <Navbar>
-        {scrollPosition < 100 ? (
+        {scrollPosition < 50 ? (
           <>
             <Link to="/hosting" style={{ textDecoration: 'none' }}>
               <Buttons color="#ffffff" background="#262626">
@@ -80,16 +80,27 @@ function UserNav({ scrollPosition, token }) {
         )}
       </Navbar>
       {token && (
-        <LoginToggle openToggle={openToggle} toggleHandler={toggleHandler} />
+        <LoginToggle
+          openToggle={openToggle}
+          toggleHandler={toggleHandler}
+          setOpenToggle={setOpenToggle}
+        />
       )}
       {!token && (
         <LogoutToggle
           openToggle={openToggle}
           loginModalHandler={loginModalHandler}
           signupModalHandler={signupModalHandler}
+          setOpenToggle={setOpenToggle}
         />
       )}
-      {isLoginModalOpen && <LoginModal loginModalHandler={loginModalHandler} />}
+      {isLoginModalOpen && (
+        <LoginModal
+          loginModalHandler={loginModalHandler}
+          isLoginModalOpen={isLoginModalOpen}
+          setIsLoginModalOpen={setIsLoginModalOpen}
+        />
+      )}
       {isSignupModalOpen && (
         <SignupModal signupModalHandler={signupModalHandler} />
       )}
