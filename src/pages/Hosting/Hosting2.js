@@ -99,7 +99,7 @@ const Header = styled.section`
 const Body = styled.section`
   width: 100%;
   display: flex;
-  margin-top: 15px;
+  margin-top: 70px;
   flex-direction: column;
   align-items: center;
   justify-content: center;
