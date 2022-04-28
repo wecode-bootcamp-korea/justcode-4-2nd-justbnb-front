@@ -118,7 +118,8 @@ const Body = styled.section`
 const CountWrapper = styled.section`
   display: flex;
   justify-content: space-between;
-  width: 50%;
+  align-items: center;
+  width: 70%;
   margin: 25px;
 `;
 

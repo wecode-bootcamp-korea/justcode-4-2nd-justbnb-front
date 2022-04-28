@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 
 export default function CounterValue({ onChange, resultChoice }) {
-  const [num, setNum] = useState(4);
+  const [num, setNum] = useState(1);
 
   //최대 16명, 최소 1명//
   const upNum = () => {
@@ -28,53 +28,71 @@ export default function CounterValue({ onChange, resultChoice }) {
   return (
     <CounterWrapper>
       <Button>
-        <button id="4" onClick={e => NumDown(e)} value={num}>
-          {/* <button onClick={downNum}> */}-
+        <button
+          className="minus"
+          id="4"
+          onClick={e => NumDown(e)}
+          value={num}
+          style={{ opacity: num === 1 ? '0.3' : '1' }}
+        >
+          <Bar></Bar>
         </button>
       </Button>
       <Num>
         <h1>{num}</h1>
       </Num>
-      <Button2>
-        <button id="4" onClick={e => NumUp(e)} value={num}>
+      <Button>
+        <button
+          id="4"
+          onClick={e => NumUp(e)}
+          value={num}
+          style={{ opacity: num === 16 ? '0.3' : '1' }}
+        >
           +
         </button>
-      </Button2>
+      </Button>
     </CounterWrapper>
   );
 }
 
 const CounterWrapper = styled.section`
   display: flex;
-  align-items: center;
   justify-content: space-between;
+  align-items: center;
+  width: 30%;
 `;
 
 const Button = styled.div`
-  display: flex;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 1px solid rgba(0, 0, 0, 0.4);
   button {
-    padding: 7px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
     background-color: white;
-    border: 1px solid rgba(155, 149, 167, 0.6);
     border-radius: 50%;
+    border: none;
+    font-size: 30px;
+    color: rgba(0, 0, 0, 0.7);
+    cursor: pointer;
   }
 `;
 
-const Button2 = styled.div`
-  display: flex;
-  button {
-    padding: 6px;
-    background-color: white;
-    border: 1px solid rgba(155, 149, 167, 0.6);
-    border-radius: 50%;
-  }
+const Bar = styled.div`
+  width: 50%;
+  height: 3px;
+  background-color: rgba(0, 0, 0, 0.7); ;
 `;
 
 const Num = styled.div`
   h1 {
-    font-weight: lighter;
     font-size: 17px;
     margin-left: 15px;
     margin-right: 18px;
+    color: rgba(0, 0, 0, 0.7);
   }
 `;
