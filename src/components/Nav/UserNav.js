@@ -37,7 +37,7 @@ function UserNav({ scrollPosition, token }) {
       <Navbar>
         {scrollPosition < 50 ? (
           <>
-            <Link to="/hosting" style={{ textDecoration: 'none' }}>
+            <Link to="/layout" style={{ textDecoration: 'none' }}>
               <Buttons color="#ffffff" background="#262626">
                 {!token ? '호스트 되기' : '호스트 모드로 전환'}
               </Buttons>
@@ -60,7 +60,7 @@ function UserNav({ scrollPosition, token }) {
           </>
         ) : (
           <>
-            <Link to="/hosting" style={{ textDecoration: 'none' }}>
+            <Link to="/layout" style={{ textDecoration: 'none' }}>
               <Buttons color="black" background="#F7F7F7">
                 {!token ? '호스트 되기' : '호스트 모드로 전환'}
               </Buttons>

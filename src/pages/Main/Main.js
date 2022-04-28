@@ -19,7 +19,7 @@ function Main() {
   };
 
   const goToHosting = () => {
-    navigate(`/hosting`);
+    navigate(`/layout`);
     window.scrollTo(0.0);
   };
 
