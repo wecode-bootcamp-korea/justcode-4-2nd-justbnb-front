@@ -79,6 +79,15 @@ function compareResult(resultChoice, el) {
   }
 }
 function ConvMap({ el, onChange, resultChoice }) {
+  const conv = {
+    수영장: 1,
+    '바베큐 그릴': 2,
+    WIFI: 3,
+    TV: 4,
+    주차공간: 5,
+    욕조: 6,
+  };
+  console.log(conv['수영장']);
   return (
     <Button>
       <div key={el.id}>
@@ -87,7 +96,7 @@ function ConvMap({ el, onChange, resultChoice }) {
             key={el.id}
             onChange={e => onChange(e)}
             id="6"
-            value={el.convenience}
+            value={conv[el.convenience]}
             type="checkbox"
             defaultChecked={compareResult(resultChoice, el)}
           />
