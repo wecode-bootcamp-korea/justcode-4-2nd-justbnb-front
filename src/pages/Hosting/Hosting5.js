@@ -20,7 +20,6 @@ export default function Hosting5({ onChange, resultChoice }) {
   //   }
   // }
 
-
   useEffect(() => {
     fetch('/data/dlwjdals/hosting.json', {
       method: 'GET',
@@ -81,20 +80,6 @@ function compareResult(resultChoice, el) {
 }
 function ConvMap({ el, onChange, resultChoice }) {
   return (
-<<<<<<< HEAD
-    <div key={el.id}>
-      <TextAndIcon
-        key={el.id}
-        onClick={e => onChange(e)}
-        id="7"
-        value={el.convenience}
-        type="checkbox"
-        defaultChecked={compareResult(resultChoice, el)}
-      />
-      <Icon>{selectIcon(el.icon)}</Icon>
-      <Text3>{el.convenience}</Text3>
-    </div>
-=======
     <Button>
       <div key={el.id}>
         <BoxWrapper>
@@ -111,7 +96,6 @@ function ConvMap({ el, onChange, resultChoice }) {
         </BoxWrapper>
       </div>
     </Button>
->>>>>>> develop
   );
 }
 function selectIcon(el) {
