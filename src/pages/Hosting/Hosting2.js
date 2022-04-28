@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 
 export default function Hosting2({ onChange, resultChoice }) {
+  console.log('hosting2', resultChoice['2']);
   return (
     <Wrapper>
       <Container>
@@ -18,13 +19,43 @@ export default function Hosting2({ onChange, resultChoice }) {
           <button className="exit-button">나가기</button>
         </Header>
         <Body>
-          <Button id="2" onClick={e => onChange(e)} value="공간 전체">
+          <Button
+            id="2"
+            onClick={e => onChange(e)}
+            value="공간 전체"
+            style={{
+              backgroundColor:
+                resultChoice['2'] === '공간 전체'
+                  ? 'rgba(155, 149, 167, 0.2)'
+                  : 'white',
+            }}
+          >
             <div className="but-name">공간 전체</div>
           </Button>
-          <Button id="2" onClick={e => onChange(e)} value="개인실">
+          <Button
+            id="2"
+            onClick={e => onChange(e)}
+            value="개인실"
+            style={{
+              backgroundColor:
+                resultChoice['2'] === '개인실'
+                  ? 'rgba(155, 149, 167, 0.2)'
+                  : 'white',
+            }}
+          >
             <div className="but-name">개인실</div>
           </Button>
-          <Button id="2" onClick={e => onChange(e)} value="다인실">
+          <Button
+            id="2"
+            onClick={e => onChange(e)}
+            value="다인실"
+            style={{
+              backgroundColor:
+                resultChoice['2'] === '다인실'
+                  ? 'rgba(155, 149, 167, 0.2)'
+                  : 'white',
+            }}
+          >
             <div className="but-name">다인실</div>
           </Button>
         </Body>
