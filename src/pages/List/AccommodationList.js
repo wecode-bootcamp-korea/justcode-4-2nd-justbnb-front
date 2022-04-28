@@ -58,8 +58,7 @@ const AccommodationList = () => {
   let endDate = '';
   let count = '';
   let haveAnimal = '';
-  if (location.state) {
-    console.log(location.state);
+  if (location.state.haveAnimal) {
     city = location.state.city;
     startDate = location.state.startDate;
     endDate = location.state.endDate;
