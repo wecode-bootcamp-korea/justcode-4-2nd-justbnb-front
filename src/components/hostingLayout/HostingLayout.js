@@ -66,13 +66,8 @@ function HostingLayout() {
   const arr = useRef([]);
 
   const onChange = e => {
-    const { value, id } = e.target;
-    if (step === 3) {
-      // setFlag(0);
-      console.log(e);
-    }
-
     if (step === 4) {
+      const { value, id } = e.target;
       if (resultChoice.hasOwnProperty(5)) {
         if (resultChoice[5].includes(value)) {
           resultChoice[5] = resultChoice[5].filter(
@@ -87,7 +82,10 @@ function HostingLayout() {
         arr.current.push(value);
         setResultChoice({ ...resultChoice, [id]: arr.current });
       }
+    } else if (step === 3) {
+      setResultChoice({ ...resultChoice, 3: e });
     } else {
+      const { value, id } = e.target;
       console.log(e.target);
       console.log(e.target.value);
       console.log('why ?', id, value);
