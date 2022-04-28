@@ -82,7 +82,9 @@ function Management() {
     })
       .then(res => res.json())
       .then(data => {
-        setData(data);
+        if (data.status === 200) {
+          setData(data.reservationList);
+        }
       });
   }, []);
 
@@ -153,7 +155,7 @@ function Management() {
             <Wrapper>
               <Slide ref={slideRef}>
                 {/* 여기서부터 슬라이드 */}
-                {data.reservationList.map(el => {
+                {data.map(el => {
                   return (
                     <Card2 key={el.id}>
                       <CardDescription2>

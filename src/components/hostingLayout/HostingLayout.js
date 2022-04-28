@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import {
   ProgressDiv,
@@ -24,7 +25,6 @@ import Hosting9 from '../../pages/Hosting/Hosting9';
 let currentStep = 1;
 
 let imageURL = null;
-
 const ProgressBox = ({ progress }) => {
   if (!progress) progress = 0;
   return (
@@ -152,6 +152,7 @@ function HostingLayout() {
   const [resultChoice, setResultChoice] = useState({});
   const [flag, setFlag] = useState(0);
   const arr = useRef([]);
+  const navigate = useNavigate();
 
   // const uploadImage = () => {
   //   const formData = new FormData();
@@ -206,6 +207,11 @@ function HostingLayout() {
     currentStep = 1;
   }, []);
 
+  const goToMain = () => {
+    navigate('/');
+    window.scrollTo(0.0);
+  };
+
   const _next = () => {
     return (() => {
       setFlag(0);
@@ -227,6 +233,7 @@ function HostingLayout() {
         <BtnRight
           onClick={() => {
             gotoDB(resultChoice);
+            goToMain();
           }}
           type="button"
         >
