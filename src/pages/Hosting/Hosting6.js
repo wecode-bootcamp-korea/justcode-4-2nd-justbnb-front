@@ -8,6 +8,7 @@ export default function Hosting6() {
 
   const Upload = e => {
     const files = Array.from(e.target.files);
+    console.log(e.target.files);
     // const files = e.target.files;
     const newFiles = files.map(file => {
       return URL.createObjectURL(file);
@@ -247,6 +248,7 @@ const Text4 = styled.div`
 
 const UploadImage = styled.input`
   /* border: 1px solid red; */
+  position: absolute;
   margin-top: 10px;
   width: 50%;
   pointer-events: none;
@@ -261,8 +263,8 @@ const Label = styled.label`
 `;
 
 const LabelDescription = styled.div`
-  position: absolute;
-  margin: 0.5vw 1.3vw;
+  /* position: absolute; */
+  margin: 1.5vw 1.8vw;
   font-weight: bold;
 `;
 

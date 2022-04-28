@@ -13,7 +13,7 @@ import {
 } from './HostingLayoutStyled';
 import Hosting from '../../pages/Hosting/Hosting';
 import Hosting2 from '../../pages/Hosting/Hosting2';
-// import Hosting3 from '../../pages/Hosting/Hosting3';
+import Hosting3 from '../../pages/Hosting/Hosting3';
 import Hosting4 from '../../pages/Hosting/Hosting4';
 import Hosting5 from '../../pages/Hosting/Hosting5';
 import Hosting6 from '../../pages/Hosting/Hosting6';
@@ -40,20 +40,19 @@ function GotoStep({ step, onChange, resultChoice }) {
       return <Hosting onChange={onChange} resultChoice={resultChoice} />;
     case 2:
       return <Hosting2 onChange={onChange} resultChoice={resultChoice} />;
-    // case 3:
-    //   return <Hosting3 onChange={onChange} resultChoice={resultChoice} />;
-    //   break;
     case 3:
-      return <Hosting4 onChange={onChange} resultChoice={resultChoice} />;
+      return <Hosting3 onChange={onChange} resultChoice={resultChoice} />;
     case 4:
-      return <Hosting5 onChange={onChange} resultChoice={resultChoice} />;
+      return <Hosting4 onChange={onChange} resultChoice={resultChoice} />;
     case 5:
-      return <Hosting6 onChange={onChange} resultChoice={resultChoice} />;
+      return <Hosting5 onChange={onChange} resultChoice={resultChoice} />;
     case 6:
-      return <Hosting7 onChange={onChange} resultChoice={resultChoice} />;
+      return <Hosting6 onChange={onChange} resultChoice={resultChoice} />;
     case 7:
-      return <Hosting8 onChange={onChange} resultChoice={resultChoice} />;
+      return <Hosting7 onChange={onChange} resultChoice={resultChoice} />;
     case 8:
+      return <Hosting8 onChange={onChange} resultChoice={resultChoice} />;
+    case 9:
       return <Hosting9 onChange={onChange} resultChoice={resultChoice} />;
     default:
       console.log('invalid number');
@@ -67,8 +66,8 @@ function HostingLayout() {
   const arr = useRef([]);
 
   const onChange = e => {
-    const { value, id } = e.target;
     if (step === 4) {
+      const { value, id } = e.target;
       if (resultChoice.hasOwnProperty(5)) {
         if (resultChoice[5].includes(value)) {
           resultChoice[5] = resultChoice[5].filter(
@@ -83,7 +82,10 @@ function HostingLayout() {
         arr.current.push(value);
         setResultChoice({ ...resultChoice, [id]: arr.current });
       }
+    } else if (step === 3) {
+      setResultChoice({ ...resultChoice, 3: e });
     } else {
+      const { value, id } = e.target;
       console.log(e.target);
       console.log(e.target.value);
       console.log('why ?', id, value);
