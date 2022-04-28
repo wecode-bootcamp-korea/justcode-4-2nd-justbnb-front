@@ -93,7 +93,7 @@ async function gotoDB(resultChoice) {
       accessToken: localStorage.getItem('token'),
       name: resultChoice[8],
       description: resultChoice[9],
-      city: '서울시',
+      city: resultChoice[11].slice(0, 2) + '시',
       location: resultChoice[11],
       lat: resultChoice[3].Ma,
       long: resultChoice[3].La,
