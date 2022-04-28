@@ -48,7 +48,10 @@ function MapContainer({
       _positions[i] = {
         id: datas[i].id,
         title: datas[i].name,
-        latlng: new kakao.maps.LatLng(datas[i].lat, datas[i].long),
+        latlng: new kakao.maps.LatLng(
+          Number(datas[i].lat),
+          Number(datas[i].long)
+        ),
         image: datas[i].image_url[0],
         buildType: datas[i].build_type,
         localName: datas[i].city,

@@ -28,7 +28,6 @@ export default function Hosting({ onChange, resultChoice }) {
   // const clikcedHandler = () => {
   //   !isClicked ? setIsClikced(true) : setIsClicked(false);
   // };
-  console.log(resultChoice['1']);
   return (
     <Wrapper>
       <Container>

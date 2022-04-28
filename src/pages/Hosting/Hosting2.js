@@ -3,7 +3,6 @@ import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 
 export default function Hosting2({ onChange, resultChoice }) {
-  console.log('hosting2', resultChoice['2']);
   return (
     <Wrapper>
       <Container>

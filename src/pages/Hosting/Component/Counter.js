@@ -47,7 +47,6 @@ export default function CounterValue({ onChange, resultChoice }) {
 const CounterWrapper = styled.section`
   display: flex;
   align-items: center;
-
   justify-content: space-between;
 `;
 
