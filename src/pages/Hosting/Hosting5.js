@@ -85,7 +85,7 @@ function ConvMap({ el, onChange, resultChoice }) {
         <BoxWrapper>
           <TextAndIcon
             key={el.id}
-            onClick={e => onChange(e)}
+            onChange={e => onChange(e)}
             id="6"
             value={el.convenience}
             type="checkbox"

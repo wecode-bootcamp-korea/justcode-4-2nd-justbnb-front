@@ -94,16 +94,16 @@ async function gotoDB(resultChoice) {
       name: resultChoice[8],
       description: resultChoice[9],
       city: '서울시',
-      location: 'tjdfndksfjfla',
-      lat: resultChoice[3].La,
-      long: resultChoice[3].Ma,
+      location: resultChoice[11],
+      lat: resultChoice[3].Ma,
+      long: resultChoice[3].La,
       buildType: resultChoice[1],
       roomType: resultChoice[2],
-      charge: resultChoice[7],
+      charge: Number(resultChoice[7]),
       animalYn: 'Y',
       totalMembers: 5,
       imageUrl: resultChoice[10],
-      convenienceId: [1, 2],
+      convenienceId: resultChoice[6],
     }),
   });
 }
@@ -172,7 +172,7 @@ function HostingLayout() {
 
   const onChange = e => {
     if (step === 3) {
-      setResultChoice({ ...resultChoice, 3: e });
+      setResultChoice({ ...resultChoice, 3: e[3], 11: e[11] });
     } else if (step === 5) {
       const { value, id } = e.target;
       if (resultChoice.hasOwnProperty(6)) {
@@ -190,8 +190,6 @@ function HostingLayout() {
         setResultChoice({ ...resultChoice, [id]: arr.current });
       }
     } else if (step === 9) {
-      // console.log('-------------------------------');
-      // console.log('eeee :', e);
       setResultChoice({ ...resultChoice, 10: e });
     } else {
       const { value, id } = e.target;
