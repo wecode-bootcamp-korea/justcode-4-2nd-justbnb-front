@@ -16,6 +16,7 @@ function Management() {
   const slideRef = useRef(null);
   const navigate = useNavigate();
   const token = localStorage.getItem('token');
+  const reservationList = data.reservationList;
 
   const TOTAL_CARD = data.length - 1;
 
@@ -58,7 +59,7 @@ function Management() {
   };
 
   useEffect(() => {
-    fetch('/mockData/hwseol/list.json', {
+    fetch('/data/jiho/hostingUpdate.json', {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
@@ -70,8 +71,6 @@ function Management() {
       });
   }, []);
 
-  console.log('data :', data);
-
   useEffect(() => {
     fetch('http://localhost:8000/reservation/host ', {
       method: 'GET',
@@ -82,9 +81,7 @@ function Management() {
     })
       .then(res => res.json())
       .then(data => {
-        if (data.status === 200) {
-          setData(data.reservationList);
-        }
+        if (data.status === 200) setData(data.reservationList);
       });
   }, []);
 
@@ -102,13 +99,20 @@ function Management() {
     width: fit-content;
     height: fit-content;
     margin: auto;
-    margin-right: 50px;
-    padding: 20px;
+    margin-right: 20px;
+    padding: 15px;
     border-radius: 100px;
+    border: 1px solid black;
+    background-color: #ffffff;
+
     -webkit-user-select: none;
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none;
+
+    &:hover {
+      cursor: pointer;
+    }
   `;
 
   const ButtonRight = styled.button`
@@ -118,13 +122,20 @@ function Management() {
     width: fit-content;
     height: fit-content;
     margin: auto;
-    margin-left: 50px;
-    padding: 20px;
+    margin-left: 20px;
+    padding: 15px;
     border-radius: 100px;
+    border: 1px solid black;
+    background-color: #ffffff;
+
     -webkit-user-select: none;
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none;
+
+    &:hover {
+      cursor: pointer;
+    }
   `;
 
   const onClickBtn = () => {
@@ -158,19 +169,20 @@ function Management() {
                 {data.map(el => {
                   return (
                     <Card2 key={el.id}>
+                      <Name>{el.user_name} 님</Name>
                       <CardDescription2>
-                        Guest : {el.user_name}
+                        <Tittle>총 인원 :</Tittle> {el.members} 명
                       </CardDescription2>
                       <CardDescription2>
-                        총 인원 : {el.total_members} 명
+                        <Tittle>Check-In :</Tittle> {el.check_in}
                       </CardDescription2>
                       <CardDescription2>
-                        Check-In : {el.check_in}
+                        <Tittle>Check-Out :</Tittle>
+                        {el.check_out}
                       </CardDescription2>
                       <CardDescription2>
-                        Check-Out : {el.check_out}
+                        <Tittle>숙소 이름 :</Tittle> {el.name}
                       </CardDescription2>
-                      <CardDescription2>숙소 이름 : {el.name}</CardDescription2>
                     </Card2>
                   );
                 })}
@@ -183,24 +195,22 @@ function Management() {
             <ButtonRight onClick={RightSlide}>&gt;</ButtonRight>
           </Buttons>
         </GuestCardWide>
-        <ManagementFooter>
-          <TextAndTips>
-            <Text>호스팅 관련 팁과 업데이트</Text>
-            <Tips>
-              {mockData.map((el, index) => {
-                if (index <= 3) {
-                  return (
-                    <Card key={el.id}>
-                      <Img src={el.image} alt="test" />
-                      <CardDescription>{el.name}</CardDescription>
-                    </Card>
-                  );
-                }
-              })}
-            </Tips>
-          </TextAndTips>
-        </ManagementFooter>
       </Body>
+      <ManagementFooter>
+        <TextAndTips>
+          <Text>호스팅 관련 팁과 업데이트</Text>
+          <Tips>
+            {mockData.map(el => {
+              return (
+                <Card key={el.id}>
+                  <Img src={el.imgUrl} alt="test" />
+                  <CardDescription>{el.desc}</CardDescription>
+                </Card>
+              );
+            })}
+          </Tips>
+        </TextAndTips>
+      </ManagementFooter>
       <Footer />
     </>
   );
@@ -257,32 +267,27 @@ const Button = styled.div`
 
 const ManagementFooter = styled.div`
   display: flex;
-  justify-content: center;
-  background-color: black;
   margin-top: 100px;
-  padding-bottom: 0px;
+  background-color: black;
 `;
 
 const TextAndTips = styled.div`
   display: flex;
-  margin: 0 7em;
-  justify-content: flex-start;
+  justify-content: center;
   flex-direction: column;
 `;
 
 const Text = styled.div`
   color: white;
   text-align: left;
-  font-size: 30px;
-  font-weight: bold;
-  margin-left: 3.7em;
-  padding: 60px 0 20px 0;
+  font-size: 1.5rem;
+  font-weight: 500;
+  padding: 60px 0 20px 120px;
 `;
 
 const Tips = styled.div`
   display: flex;
   justify-content: space-between;
-  width: fit-content;
   margin: 0 7em;
   padding: 20px 0px 60px 0px;
 `;
@@ -290,27 +295,28 @@ const Tips = styled.div`
 const Card = styled.div`
   display: flex;
   flex-direction: column;
-  border-radius: 20px;
   margin: 0 10px;
-  overflow: hidden;
 `;
 
 const CardDescription = styled.div`
   color: white;
   padding: 30px 0px 50px 10px;
-  background-color: rgba(100, 100, 100, 0.6);
-  font-size: 20px;
+  background-color: rgb(34, 34, 34);
+  border-radius: 0 0 10px 10px;
+  font-size: 16px;
+  font-weight: 400;
 `;
 
 const Img = styled.img`
-  min-width: 340px;
-  height: 17em;
+  width: 100%;
+  height: 100%;
+  border-radius: 10px 10px 0 0;
 `;
 
 const Accommodation = styled.div`
   position: relative;
-  background-color: rgba(0, 0, 0, 0.1);
-  border-radius: 30px;
+  background-color: #f7f7f7;
+  border-radius: 20px;
   display: flex;
   justify-content: space-between;
   padding: 30px 17px;
@@ -326,26 +332,36 @@ const Slide = styled.div`
 `;
 
 const Card2 = styled.div`
-  min-width: 300px;
-  border-radius: 20px;
+  width: 20rem;
   margin: 0 2.8%;
+  padding: 20px 30px;
   overflow: hidden;
-  background-color: rgba(100, 100, 100, 1);
-  padding-bottom: 10px;
+  border-radius: 10px;
+  background-color: #ffffff;
+  border: 1px solid #dddddd;
 `;
 
+const Tittle = styled.div`
+  padding-right: 30px;
+  font-weight: 600;
+`;
+
+const Name = styled.div`
+  padding-top: 10px;
+  padding-left: 10px;
+  padding-bottom: 25px;
+  font-size: 1.2rem;
+  font-weight: 600;
+`;
 const CardDescription2 = styled.div`
-  color: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: black;
   padding: 8px 0px 5px 10px;
-  background-color: rgba(100, 100, 100, 1);
-  font-size: 19px;
+  font-size: 0.9rem;
+  font-weight: 400;
 `;
-
-// const Img2 = styled.img`
-//   object-fit: cover;
-//   min-width: 340px;
-//   height: 16em;
-// `;
 
 const Buttons = styled.div`
   display: flex;

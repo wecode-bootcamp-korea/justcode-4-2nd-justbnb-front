@@ -25,6 +25,7 @@ import Hosting9 from '../../pages/Hosting/Hosting9';
 let currentStep = 1;
 
 let imageURL = null;
+
 const ProgressBox = ({ progress }) => {
   if (!progress) progress = 0;
   return (
@@ -171,6 +172,11 @@ function HostingLayout() {
   //     });
   // };
 
+  const goToMain = () => {
+    navigate(`/`);
+    window.scrollTo(0.0);
+  };
+
   const onChange = e => {
     if (step === 3) {
       setResultChoice({ ...resultChoice, 3: e[3], 11: e[11] });
@@ -206,11 +212,6 @@ function HostingLayout() {
     setResultChoice({});
     currentStep = 1;
   }, []);
-
-  const goToMain = () => {
-    navigate('/');
-    window.scrollTo(0.0);
-  };
 
   const _next = () => {
     return (() => {
