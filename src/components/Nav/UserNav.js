@@ -94,13 +94,7 @@ function UserNav({ scrollPosition, token }) {
           setOpenToggle={setOpenToggle}
         />
       )}
-      {isLoginModalOpen && (
-        <LoginModal
-          loginModalHandler={loginModalHandler}
-          isLoginModalOpen={isLoginModalOpen}
-          setIsLoginModalOpen={setIsLoginModalOpen}
-        />
-      )}
+      {isLoginModalOpen && <LoginModal loginModalHandler={loginModalHandler} />}
       {isSignupModalOpen && (
         <SignupModal signupModalHandler={signupModalHandler} />
       )}
