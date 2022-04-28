@@ -5,21 +5,28 @@ import { AiOutlinePicture } from 'react-icons/ai';
 
 export default function Hosting6({ onChange, resultChoice, Upload }) {
   const [files, setFiles] = useState([]);
+  const [opac, setOpac] = useState(100);
 
-  // const Upload = e => {
-  //   console.log(e);
-  //   const files = Array.from(e.target.files);
-  //   console.log(e.target.files);
-  //   // const files = e.target.files;
-  //   const newFiles = files.map(file => {
-  //     return URL.createObjectURL(file);
-  //   });
-  //   setFiles(newFiles);
+  const Preview = e => {
+    console.log(e);
+    const files = Array.from(e.target.files);
+    console.log(e.target.files);
+    // const files = e.target.files;
+    const newFiles = files.map(file => {
+      return URL.createObjectURL(file);
+    });
+    setFiles(newFiles);
+  };
+
+  // const UploadCancel = e => {
+  //   return setFiles(null);
   // };
 
-  const UploadCancel = e => {
-    return setFiles(null);
-  };
+  useEffect(() => {
+    if (files.length !== 0) {
+      setOpac(0);
+    }
+  }, [files]);
 
   // const upload = () => {
   //   const formData = new FormData();
@@ -38,6 +45,45 @@ export default function Hosting6({ onChange, resultChoice, Upload }) {
   //     });
   // };
 
+  const Text2 = styled.div`
+    font-size: 1.7vw;
+    font-weight: bold;
+    opacity: ${opac};
+  `;
+
+  const Text3 = styled.div`
+    font-size: 1.5vw;
+    margin: 12px;
+    opacity: ${opac};
+    /* visibility: none; */
+  `;
+  const LabelDescription = styled.div`
+    /* position: absolute; */
+    margin: 1vw;
+    font-weight: bold;
+    opacity: ${opac};
+    text-decoration: underline;
+  `;
+
+  const PictureIcon = styled.div`
+    font-size: 5vw;
+    opacity: ${opac};
+  `;
+  const Line = styled.div`
+    /* border: 1px dashed rgb(176, 176, 176) !important; */
+    /* outline: 1px dashed rgb(176, 176, 176) !important; */
+    /* outline: 1px dashed black; */
+    width: fit-content;
+    height: auto;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    /* padding: 350px 150px 0 150px; */
+    padding: 12vw 5vw 1vw 5vw;
+    margin: auto auto 7vw auto;
+    overflow-y: auto;
+    /* opacity: ${opac}; */
+  `;
   return (
     <Wrapper>
       <Container>
@@ -64,28 +110,28 @@ export default function Hosting6({ onChange, resultChoice, Upload }) {
             </PictureIcon>
             <Text2>멋진 숙소 사진을 올려주세요!</Text2>
             <Text3>최대 5장까지 업로드하실 수 있습니다.</Text3>
-            <UploadImage
-              id="10"
-              className="upload"
-              onChange={Upload}
-              type="file"
-              multiple="multiple"
-            />
+
             <Label>
               <LabelDescription>사진 올리기</LabelDescription>
-              {files.length !== 0 ? (
-                <Pictures>
-                  {files.map((file, index) => {
-                    if (index < 5) {
-                      // 5장을 넘기지 않게 하기 위해
-                      return <Image key={null} src={file} />;
-                    }
-                  })}
-                </Pictures>
-              ) : (
-                <null />
-              )}
+              <UploadImage
+                id="10"
+                className="upload"
+                onChange={e => {
+                  Upload(e);
+                  Preview(e);
+                }}
+                type="file"
+                multiple="multiple"
+              />
             </Label>
+            <Pictures>
+              {files.map((file, index) => {
+                if (index < 5) {
+                  // 5장을 넘기지 않게 하기 위해
+                  return <Image key={null} src={file} />;
+                }
+              })}
+            </Pictures>
           </Line>
           {/* <Line2> */}
 
@@ -210,21 +256,6 @@ const Next = styled(Link)`
   background-color: black;
 `;
 
-const Line = styled.div`
-  /* border: 1px dashed rgb(176, 176, 176) !important; */
-  outline: 1px dashed rgb(176, 176, 176) !important;
-  /* outline: 1px dashed black; */
-  width: fit-content;
-  height: auto;
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-  /* padding: 350px 150px 0 150px; */
-  padding: 12vw 5vw 1vw 5vw;
-  margin: auto auto 7vw auto;
-  overflow-y: auto;
-`;
-
 const Line2 = styled.div`
   /* outline: 1px dashed rgb(176, 176, 176) !important; */
   width: fit-content;
@@ -236,49 +267,23 @@ const Line2 = styled.div`
   /* overflow-y: auto; */
 `;
 
-const PictureIcon = styled.div`
-  font-size: 5vw;
-`;
-
-const Text2 = styled.div`
-  font-size: 1.7vw;
-  font-weight: bold;
-`;
-
-const Text3 = styled.div`
-  font-size: 1.5vw;
-  margin: 12px;
-`;
-
-const Text4 = styled.div`
-  font-size: 1vw;
-  font-weight: bold;
-  margin-top: 7vw;
-  margin-bottom: 3vw;
-  text-decoration: underline;
-  cursor: pointer;
-`;
-
 const UploadImage = styled.input`
   /* border: 1px solid red; */
   position: absolute;
-  margin-top: 10px;
-  width: 50%;
+  /* margin-top: 10px; */
+  /* width: 50%; */
   /* pointer-events: none; */
-  opacity: 100;
+  cursor: pointer;
+  opacity: 0;
 `;
 
 const Label = styled.label`
-  width: 30%;
-  border: 1px black solid;
+  width: 40%;
+  /* border: 1px black solid; */
+  display: flex;
+  justify-content: center;
   cursor: pointer;
   margin: 1vw 0 8vw 0;
-`;
-
-const LabelDescription = styled.div`
-  /* position: absolute; */
-  margin: 1.5vw 1.8vw;
-  font-weight: bold;
 `;
 
 const Image = styled.img`
@@ -291,6 +296,7 @@ const Image = styled.img`
 const Pictures = styled.div`
   display: grid;
   grid-template-columns: repeat(2, 1fr);
+  position: absolute;
 `;
 
 const Empty = styled.button`
