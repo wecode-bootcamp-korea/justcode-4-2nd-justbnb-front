@@ -21,7 +21,7 @@ export default function CounterValue3({ onChange }) {
   return (
     <CounterWrapper>
       <Button>
-        <button onClick={downNum} id="6" value={num}>
+        <button onClick={downNum} id="7" value={num}>
           -
         </button>
       </Button>
@@ -29,7 +29,7 @@ export default function CounterValue3({ onChange }) {
         <h1>₩{num}</h1>
       </NumContainer>
       <Button2>
-        <button onClick={upNum} id="6" value={num}>
+        <button onClick={upNum} id="7" value={num}>
           +
         </button>
       </Button2>
