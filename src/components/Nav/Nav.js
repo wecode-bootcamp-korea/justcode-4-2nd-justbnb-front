@@ -54,7 +54,7 @@ function Nav() {
             <SearchBtn>
               <Text>검색 시작하기</Text>
               <BtnBox>
-                <BiSearch font-size={20} />
+                <BiSearch fontSize={20} />
               </BtnBox>
             </SearchBtn>
             <UserNav scrollPosition={scrollPosition} token={token} />

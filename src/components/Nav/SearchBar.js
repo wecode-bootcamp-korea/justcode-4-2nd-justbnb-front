@@ -155,7 +155,7 @@ function SearchBar({ scrollPosition, updateScroll, flag }) {
             )}
           </div>
           <SearchBtns onClick={goToList}>
-            <BiSearch font-size={20} />
+            <BiSearch fontSize={20} />
             <SearchKeyword2>검색</SearchKeyword2>
           </SearchBtns>
         </SearchWrapper>
