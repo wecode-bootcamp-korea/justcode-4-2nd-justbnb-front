@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { FaPlus, FaMinus } from 'react-icons/fa';
 import styled from 'styled-components';
 
 export default function CounterValue({ onChange, resultChoice }) {
@@ -60,9 +59,6 @@ const Button = styled.div`
     border: 1px solid rgba(155, 149, 167, 0.6);
     border-radius: 50%;
   }
-  .icons {
-    display: flex;
-  }
 `;
 
 const Button2 = styled.div`
@@ -72,9 +68,6 @@ const Button2 = styled.div`
     background-color: white;
     border: 1px solid rgba(155, 149, 167, 0.6);
     border-radius: 50%;
-  }
-  .icons {
-    display: flex;
   }
 `;
 
