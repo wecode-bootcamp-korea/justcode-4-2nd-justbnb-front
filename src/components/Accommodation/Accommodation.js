@@ -3,6 +3,7 @@ import { BsHeart, BsFillHeartFill } from 'react-icons/bs';
 import BasicSlider from '../Slide/Slider';
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
+import LoginModal from '../Modal/LoginModal';
 import {
   WrapConv,
   BlankDiv,
@@ -18,6 +19,7 @@ const Accommodation = React.memo(function Accommodation({
   data,
   localName,
   setlatlng,
+  heart,
 }) {
   const convention = [
     '수영장',
@@ -27,7 +29,14 @@ const Accommodation = React.memo(function Accommodation({
     '주차공간',
     '욕조',
   ];
-  const [heart, setHeart] = useState(false);
+  const [heartBtn, setHeartBtn] = useState(heart);
+
+  //로그인 여부
+  const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
+  const loginModalHandler = () => {
+    !isLoginModalOpen ? setIsLoginModalOpen(true) : setIsLoginModalOpen(false);
+  };
+
   const navigate = useNavigate();
   const gotoDetail = id => {
     navigate('/detail', { state: id });
@@ -41,10 +50,9 @@ const Accommodation = React.memo(function Accommodation({
   };
 
   let token = localStorage.getItem('token');
-  console.log('token', token);
 
   const settingHeart = flag => {
-    setHeart(flag);
+    setHeartBtn(flag);
     fetch('http://localhost:8000/wish', {
       method: 'POST',
       headers: {
@@ -54,7 +62,7 @@ const Accommodation = React.memo(function Accommodation({
     }).then(res => res.json());
   };
   const deleteHeart = flag => {
-    setHeart(flag);
+    setHeartBtn(flag);
     fetch(`http://localhost:8000/wish?accommodationsId=${data.id}`, {
       method: 'DELETE',
       headers: {
@@ -66,6 +74,9 @@ const Accommodation = React.memo(function Accommodation({
   return (
     <div onMouseOver={mouseUp} onMouseLeave={mouseLeave}>
       <Wrap>
+        {isLoginModalOpen ? (
+          <LoginModal loginModalHandler={loginModalHandler} />
+        ) : null}
         <BasicSlider data={data} flag="list" />
         {/* <Img src={data.image} alt="accommodataion" /> */}
 
@@ -90,19 +101,21 @@ const Accommodation = React.memo(function Accommodation({
             </WrapConv>
           </Inner>
           <HeartWrap>
-            {heart ? (
+            {heartBtn === 'Y' ? (
               <BsFillHeartFill
                 size="25"
                 color="red"
                 onClick={() => {
-                  deleteHeart(false);
+                  deleteHeart('N');
                 }}
               />
             ) : (
               <BsHeart
                 size="25"
                 onClick={() => {
-                  settingHeart(true);
+                  if (!localStorage.getItem('token')) {
+                    setIsLoginModalOpen(true);
+                  } else settingHeart('Y');
                 }}
               />
             )}
