@@ -67,7 +67,6 @@ const Wrapper = styled.section`
 
 const MainTitle = styled.h2`
   margin-bottom: 30px;
-  margin-left: 10px;
   font-size: 22px;
   font-weight: 500;
 `;
@@ -78,9 +77,10 @@ const TextWrapper = styled.div`
 `;
 
 const Text = styled.ul`
-  padding: 10px;
-
   width: 33.333%;
+  &:nth-child(2) {
+    margin: 0 20px;
+  }
 `;
 
 const Title = styled.h3`
