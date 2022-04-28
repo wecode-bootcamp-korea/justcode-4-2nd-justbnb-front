@@ -41,7 +41,7 @@ const uploadImage = async event => {
   console.log(event.target.files);
 
   Array.from(files).forEach(file => {
-    formData.append('image', file);
+    formData.append('images', file);
   });
   console.log(formData);
 
