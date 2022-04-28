@@ -2,7 +2,6 @@ import React from 'react';
 import { useState, useEffect, useRef } from 'react';
 import MapMarkerItem from './MapMarkerItem';
 import { Button, Box, MapBox } from './AccommodationListStyled';
-
 function MapContainer({
   datas,
   setLocal,
@@ -14,6 +13,8 @@ function MapContainer({
   setlatlng,
   changeMap,
   setChangeMap,
+  city,
+  mapMarkers,
 }) {
   let _positions = [];
   const [positions, setPositions] = useState([]);
@@ -98,7 +99,6 @@ function MapContainer({
       setLevel(map.current.getLevel());
     });
   }
-
   //지도 크기 동적 변경
   const [mapStyle, setMapStyle] = useState({
     width: '50%',
@@ -110,7 +110,6 @@ function MapContainer({
   useEffect(() => {
     if (map.current) {
       map.current.relayout();
-      console.log('hello');
     }
   }, [map.current, changeMap]);
 
@@ -146,6 +145,8 @@ function MapContainer({
           latlng={latlng}
           key={position.id}
           map={map.current}
+          mapMarkers={mapMarkers}
+          city={city}
         />
       ))}
       {changeMap ? (

@@ -1,35 +1,58 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 
-function LogoutToggle({ openToggle, loginModalHandler, signupModalHandler }) {
+function LogoutToggle({
+  openToggle,
+  loginModalHandler,
+  signupModalHandler,
+  setOpenToggle,
+}) {
+  const outSection = useRef();
+
+  useEffect(() => {
+    window.addEventListener('mousedown', onClickOutSection);
+    return () => {
+      window.removeEventListener('mousedown', onClickOutSection);
+    };
+  });
+
+  const onClickOutSection = ({ target }) => {
+    if (openToggle.display === 'block' && !outSection.current.contains(target))
+      setOpenToggle({ display: 'none' });
+  };
+
   return (
-    <ToggleBox style={openToggle}>
-      <ToggleList
-        onClick={() => {
-          signupModalHandler('none');
-        }}
-      >
-        회원가입
-      </ToggleList>
-      <ToggleList
-        onClick={() => {
-          loginModalHandler('none');
-        }}
-      >
-        로그인
-      </ToggleList>
-      <Link
-        to="/hosting"
-        style={{
-          textDecoration: 'none',
-          color: 'black',
-        }}
-      >
-        <ToggleList>숙소호스트 되기</ToggleList>
-      </Link>
-      <ToggleList>도움말</ToggleList>
-    </ToggleBox>
+    <div>
+      {openToggle.display === 'block' && (
+        <ToggleBox style={openToggle} ref={outSection}>
+          <ToggleList
+            onClick={() => {
+              signupModalHandler('none');
+            }}
+          >
+            회원가입
+          </ToggleList>
+          <ToggleList
+            onClick={() => {
+              loginModalHandler('none');
+            }}
+          >
+            로그인
+          </ToggleList>
+          <Link
+            to="/hosting"
+            style={{
+              textDecoration: 'none',
+              color: 'black',
+            }}
+          >
+            <ToggleList>숙소호스트 되기</ToggleList>
+          </Link>
+          <ToggleList>도움말</ToggleList>
+        </ToggleBox>
+      )}
+    </div>
   );
 }
 

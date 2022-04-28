@@ -1,8 +1,13 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import styled from 'styled-components';
 import BtnCard from './BtnCard';
 
-function SearchToggle({ setCity, close }) {
+function SearchToggle({
+  setCity,
+  close,
+  isSearchToggleOpen,
+  setIsSearchToggleOpen,
+}) {
   const cities = [
     { id: 1, name: '서울시' },
     { id: 2, name: '대전시' },
@@ -11,20 +16,38 @@ function SearchToggle({ setCity, close }) {
     { id: 5, name: '제주시' },
   ];
 
-  return (
-    <Wrapper>
-      <div>언제 어디로든 떠나는 여행</div>
+  const outSection = useRef();
 
-      {cities.map(list => (
-        <BtnCard
-          list={list}
-          key={list.id}
-          name={list.name}
-          setCity={setCity}
-          close={close}
-        />
-      ))}
-    </Wrapper>
+  useEffect(() => {
+    window.addEventListener('mousedown', onClickOutSection);
+    return () => {
+      window.removeEventListener('mousedown', onClickOutSection);
+    };
+  }, []);
+
+  const onClickOutSection = ({ target }) => {
+    if (isSearchToggleOpen && !outSection.current.contains(target))
+      setIsSearchToggleOpen(false);
+  };
+
+  return (
+    <div>
+      {isSearchToggleOpen && (
+        <Wrapper ref={outSection}>
+          <div>언제 어디로든 떠나는 여행</div>
+
+          {cities.map(list => (
+            <BtnCard
+              list={list}
+              key={list.id}
+              name={list.name}
+              setCity={setCity}
+              close={close}
+            />
+          ))}
+        </Wrapper>
+      )}
+    </div>
   );
 }
 
