@@ -33,13 +33,17 @@ function LoginModal({ loginModalHandler }) {
     if (email === '' || password === '') {
       !email ? setEmailErr(true) : setEmailErr(false);
       !password ? setPasswordErr(true) : setPasswordErr(false);
-      return;
     }
+
+    postLogin();
+  };
+
+  const login = () => {
+    loginModalHandler('none');
+    window.location.reload();
   };
 
   const postLogin = () => {
-    errHandler();
-    loginModalHandler('none');
     fetch('http://localhost:8000/user/signin', {
       method: 'POST',
       headers: {
@@ -55,6 +59,7 @@ function LoginModal({ loginModalHandler }) {
         if (res.status === 200) {
           alert('로그인 되었습니다 :)');
           res.accessToken && localStorage.setItem('token', res.accessToken);
+          login();
         } else {
           alert('아이디와 비밀번호를 확인해주세요 :)');
         }
@@ -106,7 +111,7 @@ function LoginModal({ loginModalHandler }) {
                   </ErrBox>
                 </>
               )}
-              <CountinueBtn onClick={postLogin}>로그인</CountinueBtn>
+              <CountinueBtn onClick={errHandler}>로그인</CountinueBtn>
               <Text2>또는</Text2>
               <BtnWrapper>
                 <Btns>

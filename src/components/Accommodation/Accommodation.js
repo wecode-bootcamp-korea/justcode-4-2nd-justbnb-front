@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { BsHeart, BsFillHeartFill } from 'react-icons/bs';
 import BasicSlider from '../Slide/Slider';
 import React from 'react';
@@ -39,20 +39,42 @@ const Accommodation = React.memo(function Accommodation({
   const mouseLeave = () => {
     setlatlng({ lat: 0, lng: 0 });
   };
+
+  let token = localStorage.getItem('token');
+  console.log('token', token);
+
+  const settingHeart = flag => {
+    setHeart(flag);
+    fetch('http://localhost:8000/wish', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ accessToken: token, accommodationsId: data.id }),
+    }).then(res => res.json());
+  };
+  const deleteHeart = flag => {
+    setHeart(flag);
+    fetch(`http://localhost:8000/wish?accommodationsId=${data.id}`, {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json',
+        accessToken: token,
+      },
+    }).then(res => res.json());
+  };
   return (
-    <div
-      onMouseOver={mouseUp}
-      onMouseLeave={mouseLeave}
-      onClick={() => {
-        gotoDetail(data.id);
-      }}
-    >
+    <div onMouseOver={mouseUp} onMouseLeave={mouseLeave}>
       <Wrap>
         <BasicSlider data={data} flag="list" />
         {/* <Img src={data.image} alt="accommodataion" /> */}
 
         <Wrapping>
-          <Inner>
+          <Inner
+            onClick={() => {
+              gotoDetail(data.id);
+            }}
+          >
             <GrayText>
               {localName}의 {data.build_type}
             </GrayText>
@@ -73,14 +95,14 @@ const Accommodation = React.memo(function Accommodation({
                 size="25"
                 color="red"
                 onClick={() => {
-                  setHeart(false);
+                  deleteHeart(false);
                 }}
               />
             ) : (
               <BsHeart
                 size="25"
                 onClick={() => {
-                  setHeart(true);
+                  settingHeart(true);
                 }}
               />
             )}

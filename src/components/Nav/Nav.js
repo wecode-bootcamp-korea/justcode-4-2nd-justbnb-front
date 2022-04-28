@@ -6,8 +6,7 @@ import { BiSearch } from 'react-icons/bi';
 
 function Nav() {
   const [scrollPosition, setScrollPosition] = useState(0);
-  const [isTrue, setIsTrue] = useState(false);
-
+  const token = localStorage.getItem('token');
   const goToTop = () => {
     window.scrollTo(0.0);
   };
@@ -18,12 +17,10 @@ function Nav() {
 
   useEffect(() => {
     window.addEventListener('scroll', updateScroll);
+    return () => {
+      window.removeEventListener('scroll', updateScroll);
+    };
   }, []);
-
-  const onClickBtn = () => {
-    scrollPosition !== 0 ? setIsTrue(true) : setIsTrue(false);
-    return isTrue;
-  };
 
   return (
     <Box>
@@ -48,7 +45,7 @@ function Nav() {
               <DisableMenu>체험</DisableMenu>
               <DisableMenu>온라인 체험</DisableMenu>
             </Wrapper>
-            <UserNav scrollPosition={scrollPosition} />
+            <UserNav token={token} scrollPosition={scrollPosition} />
           </Container>
         ) : (
           <Container color="#ffffff">
@@ -59,21 +56,19 @@ function Nav() {
               style={{ cursor: 'pointer' }}
               onClick={goToTop}
             />
-            <SearchBtn onClick={onClickBtn}>
+            <SearchBtn>
               <Text>검색 시작하기</Text>
               <BtnBox>
                 <BiSearch font-size={20} />
               </BtnBox>
             </SearchBtn>
-            <UserNav scrollPosition={scrollPosition} />
+            <UserNav scrollPosition={scrollPosition} token={token} />
           </Container>
         )}
-        {isTrue && <SearchBar scrollPosition={0} flag="list" />}
         <SearchBar
           scrollPosition={scrollPosition}
           updateScroll={updateScroll}
         />
-        )}
       </Header>
     </Box>
   );
@@ -95,7 +90,7 @@ const Aside = styled.aside`
   font-size: 0.9rem;
   font-weight: 400;
 
-  &: hover {
+  &:hover {
     color: #dddddd;
     cursor: pointer;
   }
@@ -117,7 +112,7 @@ const Header = styled.header`
   width: 100%;
   transition: top 0.3s;
   margin: 0 auto;
-  background: black;
+  z-index: 999;
 
   animation: ${move} 0.3s linear forwards;
 `;
@@ -126,7 +121,7 @@ const Container = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0 10rem;
+  padding: 0 6rem;
   background-color: ${props => props.color};
 `;
 
@@ -191,4 +186,4 @@ const BtnBox = styled.div`
   background-color: #ff385c;
 `;
 
-export default Nav;
+export default React.memo(Nav);

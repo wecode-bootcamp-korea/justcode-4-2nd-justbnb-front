@@ -13,13 +13,15 @@ export default function CounterValue2({ onChange, resultChoice }) {
   };
 
   const NumUp = e => {
+    upNum();
+    e.target.value = e.target.value === 'true' ? 'false' : 'true';
     onChange(e);
-    upNum(e);
   };
 
   const NumDown = e => {
+    downNum();
+    e.target.value = e.target.value === 'true' ? 'false' : 'true';
     onChange(e);
-    downNum(e);
   };
 
   return (

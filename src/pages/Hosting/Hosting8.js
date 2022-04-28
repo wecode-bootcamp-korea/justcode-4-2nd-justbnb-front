@@ -23,9 +23,11 @@ export default function Hosting8({ onChange, resultChoice }) {
           <TextAndInput>
             <Text2>숙소 설명 작성하기</Text2>
             <Input
+              id="7"
               onKeyUp={e => setTextLength(e.target.value.length)}
               maxLength={499}
               placeholder="독특하면서도 가족이 머물기 적합한 이 곳에서 잊지 못할 추억을 만드세요."
+              onChange={onChange}
             />
             <TextLength>{textlength} / 500</TextLength>
           </TextAndInput>

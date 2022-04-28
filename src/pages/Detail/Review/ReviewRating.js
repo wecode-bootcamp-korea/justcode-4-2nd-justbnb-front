@@ -17,7 +17,7 @@ function ReviewRating() {
             <RatingBar>
               <RatingBarContent></RatingBarContent>
             </RatingBar>
-            <Text>4.5</Text>
+            <Text>4.4</Text>
           </RatingBox>
         </Rating>
         <Rating>
@@ -26,7 +26,7 @@ function ReviewRating() {
             <RatingBar>
               <RatingBarContent></RatingBarContent>
             </RatingBar>
-            <Text>4.5</Text>
+            <Text>4.6</Text>
           </RatingBox>
         </Rating>
         <Rating>
@@ -35,7 +35,7 @@ function ReviewRating() {
             <RatingBar>
               <RatingBarContent></RatingBarContent>
             </RatingBar>
-            <Text>4.5</Text>
+            <Text>4.6</Text>
           </RatingBox>
         </Rating>
         <Rating>
@@ -44,7 +44,7 @@ function ReviewRating() {
             <RatingBar>
               <RatingBarContent></RatingBarContent>
             </RatingBar>
-            <Text>4.5</Text>
+            <Text>4.6</Text>
           </RatingBox>
         </Rating>
         <Rating>
@@ -53,7 +53,7 @@ function ReviewRating() {
             <RatingBar>
               <RatingBarContent></RatingBarContent>
             </RatingBar>
-            <Text>4.5</Text>
+            <Text>4.7</Text>
           </RatingBox>
         </Rating>
         <Rating>
@@ -62,7 +62,7 @@ function ReviewRating() {
             <RatingBar>
               <RatingBarContent></RatingBarContent>
             </RatingBar>
-            <Text>4.5</Text>
+            <Text>4.7</Text>
           </RatingBox>
         </Rating>
       </RatingsWrapper>
@@ -108,12 +108,19 @@ const RatingBox = styled.div`
   display: flex;
   align-items: center;
 `;
+
 const RatingBar = styled.div`
   width: 100px;
   height: 5px;
-  background-color: black;
+  background-color: rgba(0, 0, 0, 0.1);
+  border-radius: 5px;
 `;
-const RatingBarContent = styled.div``;
+const RatingBarContent = styled.div`
+  width: 90%;
+  height: 100%;
+  background-color: black;
+  border-radius: 5px;
+`;
 const Text = styled.div`
   margin-left: 10px;
   font-size: 12px;

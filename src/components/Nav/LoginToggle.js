@@ -1,12 +1,29 @@
 import React from 'react';
 import styled from 'styled-components';
+import { useNavigate } from 'react-router-dom';
 
-function LoginToggle({ openToggle }) {
+function LoginToggle({ openToggle, toggleHandler }) {
+  const navigate = useNavigate();
+
+  const goToWishList = () => {
+    navigate('/wish');
+  };
+
+  const goToManagingPage = () => {
+    navigate('/management');
+  };
+
+  const logOut = () => {
+    localStorage.removeItem('token');
+    toggleHandler();
+    window.location.reload();
+  };
+
   return (
     <ToggleBox style={openToggle}>
-      <ToggleList>위시리스트</ToggleList>
-      <ToggleList>숙소관리</ToggleList>
-      <ToggleList>로그아웃</ToggleList>
+      <ToggleList onClick={goToWishList}>위시리스트</ToggleList>
+      <ToggleList onClick={goToManagingPage}>숙소관리</ToggleList>
+      <ToggleList onClick={logOut}>로그아웃</ToggleList>
       <ToggleList>도움말</ToggleList>
     </ToggleBox>
   );
@@ -14,11 +31,11 @@ function LoginToggle({ openToggle }) {
 
 const ToggleBox = styled.div`
   position: absolute;
-  width: 15em;
+  width: 18em;
   background: #ffffff;
   border-radius: 10px;
   list-style: none;
-  box-shadow: 2px 2px 10px #dddddd;
+  box-shadow: 1px 1px 2px #dddddd;
 `;
 
 const ToggleList = styled.li`

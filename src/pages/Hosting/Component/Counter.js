@@ -14,13 +14,15 @@ export default function CounterValue({ onChange, resultChoice }) {
   };
 
   const NumUp = e => {
-    onChange(e);
     upNum(e);
+    e.target.value = Number(e.target.value) + 1;
+    onChange(e);
   };
 
   const NumDown = e => {
-    onChange(e);
     downNum(e);
+    e.target.value = Number(e.target.value) - 1;
+    onChange(e);
   };
 
   return (

@@ -100,6 +100,7 @@ const Button = styled.button`
   border: 1px solid black;
   border-radius: 10px;
   font-size: 17px;
+  opacity: 0.3;
 `;
 
 const Text3 = styled.div`

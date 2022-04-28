@@ -22,7 +22,7 @@ function SearchBar({ scrollPosition, updateScroll, flag }) {
   const navigate = useNavigate();
 
   const goToList = () => {
-    navigate(`/list/:${city}`, {
+    navigate(`/list/${city}`, {
       state: {
         city: city,
         startDate: startDate,
@@ -163,6 +163,7 @@ const Container = styled.div`
   width: 100%;
   transition: top 0.3s;
   margin: 0 auto;
+  /* padding-bottom: 20px; */
   background: ${props => props.bgColor};
 `;
 

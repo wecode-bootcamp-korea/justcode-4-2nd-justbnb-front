@@ -38,31 +38,23 @@ function GotoStep({ step, onChange, resultChoice }) {
   switch (step) {
     case 1:
       return <Hosting onChange={onChange} resultChoice={resultChoice} />;
-      break;
     case 2:
       return <Hosting2 onChange={onChange} resultChoice={resultChoice} />;
-      break;
     // case 3:
     //   return <Hosting3 onChange={onChange} resultChoice={resultChoice} />;
     //   break;
     case 3:
       return <Hosting4 onChange={onChange} resultChoice={resultChoice} />;
-      break;
     case 4:
       return <Hosting5 onChange={onChange} resultChoice={resultChoice} />;
-      break;
     case 5:
       return <Hosting6 onChange={onChange} resultChoice={resultChoice} />;
-      break;
     case 6:
       return <Hosting7 onChange={onChange} resultChoice={resultChoice} />;
-      break;
     case 7:
       return <Hosting8 onChange={onChange} resultChoice={resultChoice} />;
-      break;
     case 8:
       return <Hosting9 onChange={onChange} resultChoice={resultChoice} />;
-      break;
     default:
       console.log('invalid number');
   }
@@ -91,7 +83,12 @@ function HostingLayout() {
         arr.current.push(value);
         setResultChoice({ ...resultChoice, [id]: arr.current });
       }
-    } else setResultChoice({ ...resultChoice, [id]: value });
+    } else {
+      console.log(e.target);
+      console.log(e.target.value);
+      console.log('why ?', id, value);
+      setResultChoice({ ...resultChoice, [id]: value });
+    }
     setFlag(0);
   };
 
@@ -137,6 +134,7 @@ function HostingLayout() {
     return null;
   };
   console.log('step :', step);
+  console.log('result :', resultChoice);
   return (
     <div>
       <Box>

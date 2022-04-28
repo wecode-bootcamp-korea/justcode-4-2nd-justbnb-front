@@ -4,11 +4,11 @@ import BtnCard from './BtnCard';
 
 function SearchToggle({ setCity, close }) {
   const cities = [
-    { id: 1, name: '서울' },
-    { id: 2, name: '대전' },
-    { id: 3, name: '대구' },
-    { id: 4, name: '부산' },
-    { id: 5, name: '제주도' },
+    { id: 1, name: '서울시' },
+    { id: 2, name: '대전시' },
+    { id: 3, name: '대구시' },
+    { id: 4, name: '부산시' },
+    { id: 5, name: '제주시' },
   ];
 
   return (

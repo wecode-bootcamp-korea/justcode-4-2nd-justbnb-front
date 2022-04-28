@@ -19,7 +19,7 @@ export default function Hosting9({ onChange, resultChoice }) {
           <button className="exit-button">나가기</button>
         </Header>
         <Body>
-          <CounterValue3 />
+          <CounterValue3 onChange={onChange} />
           <Text2>/박</Text2>
         </Body>
         <Footer />
