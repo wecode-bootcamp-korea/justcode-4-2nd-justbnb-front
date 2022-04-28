@@ -69,7 +69,21 @@ export default function Hosting6({ onChange, resultChoice, Upload }) {
     font-size: 5vw;
     opacity: ${opac};
   `;
-
+  const Line = styled.div`
+    /* border: 1px dashed rgb(176, 176, 176) !important; */
+    /* outline: 1px dashed rgb(176, 176, 176) !important; */
+    /* outline: 1px dashed black; */
+    width: fit-content;
+    height: auto;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    /* padding: 350px 150px 0 150px; */
+    padding: 12vw 5vw 1vw 5vw;
+    margin: auto auto 7vw auto;
+    overflow-y: auto;
+    /* opacity: ${opac}; */
+  `;
   return (
     <Wrapper>
       <Container>
@@ -260,21 +274,6 @@ const Next = styled(Link)`
   border-radius: 8px;
   border: 1px solid rgba(155, 149, 167, 0.1);
   background-color: black;
-`;
-
-const Line = styled.div`
-  /* border: 1px dashed rgb(176, 176, 176) !important; */
-  outline: 1px dashed rgb(176, 176, 176) !important;
-  /* outline: 1px dashed black; */
-  width: fit-content;
-  height: auto;
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-  /* padding: 350px 150px 0 150px; */
-  padding: 12vw 5vw 1vw 5vw;
-  margin: auto auto 7vw auto;
-  overflow-y: auto;
 `;
 
 const Line2 = styled.div`
