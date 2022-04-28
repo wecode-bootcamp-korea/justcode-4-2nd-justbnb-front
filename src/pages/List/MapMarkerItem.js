@@ -1,7 +1,10 @@
 import React, { useEffect } from 'react';
 import { useState } from 'react';
 
-function MapMarkerItem({ position, latlng, map, mapMarkers, city }) {
+function MapMarkerItem(position, latlng, map, mapMarkers, city) {
+  console.log('dddd :', position);
+  MapMarker(position, position.title, map, latlng, mapMarkers, city);
+  /*
   return (
     <MapMarker
       position={position}
@@ -13,15 +16,10 @@ function MapMarkerItem({ position, latlng, map, mapMarkers, city }) {
       city={city}
     />
   );
+  */
 }
-const MapMarker = React.memo(function MapMarker({
-  position,
-  title,
-  map,
-  latlng,
-  mapMarkers,
-  city,
-}) {
+
+function MapMarker({ position, title, map, latlng, mapMarkers, city }) {
   const { kakao } = window;
   const [open, setOpen] = useState(false);
 
@@ -85,6 +83,7 @@ const MapMarker = React.memo(function MapMarker({
     overlay.setMap(null);
   });
   if (open) overlay.setMap(map);
-});
+}
 
-export default React.memo(MapMarkerItem);
+export default MapMarkerItem;
+//export default React.memo(MapMarkerItem);
