@@ -95,9 +95,11 @@ const Accommodation = React.memo(function Accommodation({
             <hr width="30px" align="left" size="1" styles="color:gray" />
             <GrayText>최대인원 {data.total_members}명</GrayText>
             <WrapConv>
-              {data.convenience_name.map((conv, index) => (
-                <GrayText key={index}>{conv}</GrayText>
-              ))}
+              {data.convenience_name
+                ? data.convenience_name.map((conv, index) => (
+                    <GrayText key={index}>{conv}</GrayText>
+                  ))
+                : null}
             </WrapConv>
           </Inner>
           <HeartWrap>
