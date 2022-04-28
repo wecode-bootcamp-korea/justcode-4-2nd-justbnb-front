@@ -13,7 +13,7 @@ import Review from './Review/Review.js';
 import MapInfo from './Map.js';
 import HostInfo from './HostInfo.js';
 import Notice from './Notice.js';
-import Header from '../../components/Nav/ListNav';
+import Header from '../../components/Nav/PageNav';
 import Footer from '../../components/Footer.js';
 
 function Detail() {
@@ -93,13 +93,11 @@ function Detail() {
 
   useEffect(() => {
     token.length > 1 ? setLogin(true) : setLogin(false);
-    // console.log('token', token);
-    // console.log('login', login);
   }, [token]);
 
   return (
     <div>
-      <Header />
+      {/* <Header /> */}
       <Wrapper>
         <Main
           location={location}
@@ -179,7 +177,7 @@ function Detail() {
 const Wrapper = styled.div`
   width: 1120px;
   margin: 0 auto;
-  padding-top: 200px;
+  padding-top: 100px;
 `;
 const InfoSection = styled.section`
   margin: 50px 0px;

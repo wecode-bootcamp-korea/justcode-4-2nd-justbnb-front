@@ -1,12 +1,12 @@
 import React from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useLocation } from 'react-router-dom';
 import { AiFillTrophy } from 'react-icons/ai';
 import { useState, useEffect } from 'react';
 import Accommodation from '../../components/Accommodation/Accommodation';
 import Pagination from '../../components/paging/Pagination';
 import BigCategoryList from './BigCategoryList';
 import MapContainer from './AcommodationMap';
-import ListNav from '../../components/Nav/ListNav';
+import PageNav from '../../components/Nav/PageNav';
 import Footer from '../../components/Footer';
 import {
   ListContainer,
@@ -34,16 +34,29 @@ const AccommodationList = () => {
   const [latlng, setlatlng] = useState({ lat: 0, lng: 0 });
   const [changeMap, setChangeMap] = useState(false);
 
+  const location = useLocation();
+
+  let city = local;
+  let startDate = '';
+  let endDate = '';
+  let count = '';
+  let haveAnimal = '';
+  if (location.state) {
+    city = location.state.city;
+    startDate = location.state.startDate;
+    endDate = location.state.endDate;
+    count = location.state.count;
+    haveAnimal = location.state.haveAnimal.toUpperCase();
+  }
+  console.log(city, local, count, haveAnimal);
   const buildType = ''; //별채
   const roomType = ''; //개인실
-  const animalYn = ''; //Y
-  const totalMembers = ''; //3
 
   /*목데이터 가져오기 */
   const refreshData = async () => {
     //await fetch('/data/hwseol/list.json', {
     await fetch(
-      `http://localhost:8000/accommodations?city=${local}&buildType=${buildType}&roomType=${roomType}&animaYn=${animalYn}&totalMembers=${totalMembers}`,
+      `http://localhost:8000/accommodations?city=${city}&buildType=${buildType}&roomType=${roomType}&animalYn=${haveAnimal}&totalMembers=${count}`,
       {
         method: 'GET',
         headers: {
@@ -62,10 +75,10 @@ const AccommodationList = () => {
   };
   useEffect(() => {
     refreshData();
-    console.log('local ', local);
-  }, [local]);
+  }, [local, city, count, haveAnimal]);
+
   //rendering이 한박자 늦어서 어쩔수 없이 한번 더 리랜더링
-  useEffect(() => {}, [datas]);
+  useEffect(() => {}, [datas, city]);
 
   //반응형 웹
   const [width, setWidth] = useState(window.innerWidth);
@@ -82,7 +95,7 @@ const AccommodationList = () => {
 
   return (
     <WrapContainer>
-      <ListNav />
+      <PageNav />
       <Container>
         {/* {changeMap === false ? ( */}
         <ListContainer active={changeMap ? 'true' : 'false'}>

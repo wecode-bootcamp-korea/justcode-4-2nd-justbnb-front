@@ -1,5 +1,10 @@
 import styled from 'styled-components';
-import { FaPlus, FaMinus } from 'react-icons/fa';
+import {
+  IoMdClose,
+  IoMdRadioButtonOff,
+  IoMdAdd,
+  IoMdRemove,
+} from 'react-icons/io';
 import { useRef, useEffect } from 'react';
 
 function SideBarHeadCount(props) {
@@ -7,11 +12,11 @@ function SideBarHeadCount(props) {
     open,
     close,
     handleHeadCount,
-    handlePetCount,
     headCount,
-    petCount,
     total_members,
     setCountModalOpen,
+    petCount,
+    setPetCount,
   } = props;
 
   const wrapperRef = useRef();
@@ -43,7 +48,7 @@ function SideBarHeadCount(props) {
               type="button"
               disabled={headCount === 1 ? 'disabled' : null}
             >
-              <FaMinus className="icons" />
+              <IoMdRemove className="icons" />
             </Button>
             <Num>{headCount}</Num>
             <Button
@@ -53,7 +58,7 @@ function SideBarHeadCount(props) {
               type="button"
               disabled={headCount >= total_members ? 'disabled' : null}
             >
-              <FaPlus className="icons" />
+              <IoMdAdd className="icons" />
             </Button>
           </Count>
         </List>
@@ -63,25 +68,30 @@ function SideBarHeadCount(props) {
             <Button
               type="button"
               onClick={() => {
-                handlePetCount(petCount - 1);
+                setPetCount(true);
               }}
-              disabled={petCount === 0 ? 'disabled' : null}
+              style={{ opacity: petCount ? null : '0.3' }}
             >
-              <FaMinus className="icons" />
+              <IoMdRadioButtonOff className="icons" />
             </Button>
-            <Num>{petCount}</Num>
+            <Num></Num>
             <Button
               type="button"
               onClick={() => {
-                handlePetCount(petCount + 1);
+                setPetCount(false);
               }}
+              style={{ opacity: petCount ? '0.3' : null }}
             >
-              <FaPlus className="icons" />
+              <IoMdClose className="icons" />
             </Button>
           </Count>
         </List>
       </ListWrapper>
       <ButtonWrapper>
+        <p>
+          반려동물을 3마리 이상 동반하는 경우, <br />
+          반드시 호스트에게 알려주세요.
+        </p>
         <Close
           type="button"
           onClick={() => {
@@ -114,7 +124,10 @@ const List = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 20px 10px;
+  margin: 0px 10px;
+  padding: 20px 0px;
+
+  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
 `;
 
 const Text = styled.div``;
@@ -150,13 +163,19 @@ const Num = styled.div`
 
 const ButtonWrapper = styled.div`
   display: flex;
-  justify-content: flex-end;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 0;
+  p {
+    margin-left: 10px;
+    font-size: 13px;
+  }
 `;
 
 const Close = styled.button`
+  padding: 10px;
   background-color: white;
   border: none;
-  margin: 5px;
   font-weight: 600;
   text-decoration: underline;
   cursor: pointer;

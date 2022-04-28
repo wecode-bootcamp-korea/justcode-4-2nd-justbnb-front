@@ -22,7 +22,7 @@ function SearchBar({ scrollPosition, updateScroll, flag }) {
   const navigate = useNavigate();
 
   const goToList = () => {
-    navigate(`/list/:${city}`, {
+    navigate(`/list/${city}`, {
       state: {
         city: city,
         startDate: startDate,

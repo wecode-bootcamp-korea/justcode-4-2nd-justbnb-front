@@ -75,12 +75,10 @@ function InfoSideBar(props) {
   // 인원 관리
 
   const [headCount, setHeadCount] = useState(1);
-  const [petCount, setPetCount] = useState(0);
+  const [petCount, setPetCount] = useState(false);
+
   const handleHeadCount = count => {
     setHeadCount(count);
-  };
-  const handlePetCount = count => {
-    setPetCount(count);
   };
 
   // 예약 기능
@@ -112,7 +110,9 @@ function InfoSideBar(props) {
       {isLoginModalOpen && <LoginModal loginModalHandler={loginModalHandler} />}
       <Wrapper>
         <Title>
-          {end ? `₩${charge} / 박` : `요금을 확인하려면 날짜를 입력하세요.`}
+          {end && charge
+            ? `₩${charge.toLocaleString()} / 박`
+            : `요금을 확인하려면 날짜를 입력하세요.`}
         </Title>
         <Text1>
           <div>
@@ -169,7 +169,7 @@ function InfoSideBar(props) {
               <div>
                 <span>인원</span>
                 <span>{`게스트 ${headCount}명`}</span>
-                <span>{petCount > 0 ? `, 반려동물 ${petCount}마리` : ''}</span>
+                <span>{petCount ? `, 반려동물` : ''}</span>
               </div>
               <FaAngleDown />
             </Guest>
@@ -180,8 +180,8 @@ function InfoSideBar(props) {
             setCountModalOpen={setCountModalOpen}
             headCount={headCount}
             petCount={petCount}
+            setPetCount={setPetCount}
             handleHeadCount={handleHeadCount}
-            handlePetCount={handlePetCount}
             total_members={total_members}
           />
           <Button
@@ -200,14 +200,12 @@ function InfoSideBar(props) {
         </Form>
         <div style={{ display: end ? 'block' : 'none' }}>
           <DetailPrice>
-            <div>
-              ₩{charge} x {dateDiff}박
-            </div>
-            <div>₩{charge * dateDiff}</div>
+            <div>{charge && `₩${charge.toLocaleString()} x ${dateDiff}박`}</div>
+            <div>{charge && `₩${(charge * dateDiff).toLocaleString()}`}</div>
           </DetailPrice>
           <AmountPrice>
             <div>총 합계</div>
-            <div>₩{charge * dateDiff}</div>
+            <div>{charge && `₩${(charge * dateDiff).toLocaleString()}`}</div>
           </AmountPrice>
         </div>
       </Wrapper>
@@ -226,7 +224,7 @@ const Section = styled.section`
 
 const Wrapper = styled.section`
   position: sticky;
-  top: 0;
+  top: 100px;
   padding: 20px;
   width: 100%;
   border: 1px solid rgba(0, 0, 0, 0.2);
@@ -235,6 +233,9 @@ const Wrapper = styled.section`
 `;
 
 const Title = styled.h2`
+  display: flex;
+  align-items: center;
+  height: 45px;
   font-size: 22px;
   margin-bottom: 8px;
 `;
