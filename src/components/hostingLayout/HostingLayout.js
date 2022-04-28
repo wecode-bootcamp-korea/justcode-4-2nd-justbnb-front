@@ -55,33 +55,8 @@ const uploadImage = async event => {
       imageURL = result.filesLocation;
       console.log('imageurl ', imageURL);
       return result;
-
-      // setResultChoice({ ...resultChoice, 10: result });
-
-      // fetch('http://lo')
-      //result + 숙소 정보 -> fetch() -> 백엔드
     });
 };
-
-// const gotoDB = async resultChoice => {
-//   await fetch(
-//     `http://localhost:8000/accommodations?city=${city}&buildType=${buildType}&roomType=${roomType}&animalYn=${haveAnimal}&totalMembers=${count}`,
-//     {
-//       method: 'GET',
-//       headers: {
-//         'Content-Type': 'application/json',
-//       },
-//     }
-//   )
-//     .then(res => res.json())
-//     .then(data => {
-//       let temp = [];
-//       for (let i = 0; i < data.accommodationsList.length; i++) {
-//         temp.push(data.accommodationsList[i]);
-//       }
-//       setData([...temp]);
-//     });
-// };
 
 async function gotoDB(resultChoice) {
   await fetch('http://localhost:8000/accommodations', {
@@ -107,9 +82,6 @@ async function gotoDB(resultChoice) {
     }),
   });
 }
-
-// name, description, city, location, lat, long, buildType, roomType, charge, animalYn,
-//totalMembers, imageUrl, convenienceId
 
 function GotoStep({ step, onChange, resultChoice }) {
   switch (step) {
@@ -153,23 +125,6 @@ function HostingLayout() {
   const [flag, setFlag] = useState(0);
   const arr = useRef([]);
 
-  // const uploadImage = () => {
-  //   const formData = new FormData();
-  //   const fileField = document.getElementsByClassName('upload');
-
-  //   formData.append('image', fileField.files[0]);
-
-  //   fetch('http://localhost:8000/aws-s3', {
-  //     method: 'POST',
-  //     body: formData,
-  //   })
-  //     .then(response => response.json())
-  //     .then(result => {
-  //       console.log('성공:', result);
-  //       //result + 숙소 정보 -> fetch() -> 백엔드
-  //     });
-  // };
-
   const onChange = e => {
     if (step === 3) {
       setResultChoice({ ...resultChoice, 3: e });
@@ -190,13 +145,9 @@ function HostingLayout() {
         setResultChoice({ ...resultChoice, [id]: arr.current });
       }
     } else if (step === 9) {
-      console.log('-------------------------------');
-      console.log('eeee :', e);
       setResultChoice({ ...resultChoice, 10: e });
     } else {
       const { value, id } = e.target;
-      console.log('aelse', e.target);
-      console.log('why ?', id, value);
       setResultChoice({ ...resultChoice, [id]: value });
     }
     setFlag(0);
@@ -242,19 +193,6 @@ function HostingLayout() {
     setStep(currentStep);
   };
 
-  const PrevButton = () => {
-    if (currentStep > 1) {
-      return (
-        <BtnLeft type="button" onClick={_prev}>
-          뒤로
-        </BtnLeft>
-      );
-    }
-    return null;
-  };
-  // console.log('step :', step);
-  console.log('result :', resultChoice);
-  // console.log(resultChoice);
   return (
     <div>
       <Box>
@@ -262,7 +200,13 @@ function HostingLayout() {
         <ProgressWrap>
           <ProgressBox progress={parseInt(((step - 1) / 10) * 100)} />
           <BtnDiv>
-            <PrevButton />
+            <BtnLeft
+              type="button"
+              onClick={_prev}
+              style={{ visibility: currentStep > 1 ? 'visible' : 'hidden' }}
+            >
+              뒤로
+            </BtnLeft>
             {flag ? (
               <OptionSelect>옵션선택 해주세요.</OptionSelect>
             ) : (

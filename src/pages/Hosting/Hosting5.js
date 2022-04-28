@@ -48,8 +48,8 @@ export default function Hosting5({ onChange, resultChoice }) {
 
       <Container2>
         <Header>
-          <button className="help-button">도움말</button>
-          <button className="exit-button">나가기</button>
+          <HeaderButton className="help">도움말</HeaderButton>
+          <HeaderButton>나가기</HeaderButton>
         </Header>
         <Body>
           <Text2>특별히 내세울만한 편의시설이 있나요?</Text2>
@@ -64,11 +64,11 @@ export default function Hosting5({ onChange, resultChoice }) {
             ))}
           </Convenience>
         </Body>
-        <Footer />
       </Container2>
     </Wrapper>
   );
 }
+
 function compareResult(resultChoice, el) {
   // console.log(resultChoice);
   if (!resultChoice.hasOwnProperty(5)) return false;
@@ -78,19 +78,34 @@ function compareResult(resultChoice, el) {
     }
   }
 }
+
 function ConvMap({ el, onChange, resultChoice }) {
+  const [selected, setSelected] = useState(false);
+  const handleSelected = () => {
+    !selected ? setSelected(true) : setSelected(false);
+  };
   return (
-    <Button>
+    <Button
+      key={el.id}
+      onClick={e => {
+        onChange(e);
+        handleSelected();
+      }}
+      id="6"
+      value={el.convenience}
+      defaultChecked={compareResult(resultChoice, el)}
+      style={{ backgroundColor: selected ? 'rgba(155, 149, 167, 0.2)' : null }}
+    >
       <div key={el.id}>
         <BoxWrapper>
-          <TextAndIcon
+          {/* <TextAndIcon
             key={el.id}
             onClick={e => onChange(e)}
             id="6"
             value={el.convenience}
             type="checkbox"
             defaultChecked={compareResult(resultChoice, el)}
-          />
+          /> */}
           <Icon>{selectIcon(el.icon)}</Icon>
           <Text3>{el.convenience}</Text3>
         </BoxWrapper>
@@ -125,13 +140,16 @@ function selectIcon(el) {
   return result;
 }
 const Wrapper = styled.div`
-  width: 100%;
   display: flex;
+  width: 100%;
+  height: 100vh;
 `;
 
 const Container = styled.section`
+  display: flex;
+  justify-content: center;
+  align-items: center;
   width: 50%;
-  min-height: 100vh;
   background: rgb(217, 18, 100);
   background: linear-gradient(
     180deg,
@@ -139,68 +157,61 @@ const Container = styled.section`
     rgba(165, 4, 166, 1) 52%,
     rgba(55, 8, 159, 1) 100%
   );
-  display: flex;
-  align-items: center;
   line-height: 3.5em;
   img {
     width: 80px;
     height: 70px;
     position: absolute;
     top: 0;
+    left: 0;
     margin-top: 30px;
     margin-left: 40px;
   }
 `;
 
 const Text1 = styled.div`
+  width: 85%;
   color: white;
   font-weight: 530;
   font-size: 48.5px;
-  margin-left: 55px;
 `;
 
 const Container2 = styled.section`
   width: 50%;
-  min-height: 80vh;
-  position: relative;
+  height: 100%;
   display: flex;
-  flex-wrap: wrap;
   flex-direction: column;
+  align-items: center;
+  justify-content: center;
 `;
 
 const Header = styled.section`
-  /* position: absolute;
-  top: 0; */
-  /* border: 1px solid blue; */
-  width: 100%;
-  padding: 20px;
-  display: flex;
-  justify-content: flex-end;
-  margin-top: 10px;
-  .help-button {
-    font-size: 12px;
-    font-weight: 500;
-    padding: 7px 15px;
-    border-radius: 20px;
+  position: fixed;
+  top: 0;
+  right: 0;
+  padding: 30px 40px;
+  .help {
     margin-right: 15px;
-    border: 1px solid rgba(155, 149, 167, 0);
-    background-color: rgba(155, 149, 167, 0.1);
+    opacity: 0.3;
   }
-  .exit-button {
-    font-size: 12px;
-    font-weight: 500;
-    padding: 7px 20px;
-    border-radius: 20px;
-    margin-right: 30px;
-    border: 1px solid rgba(155, 149, 167, 0);
-    background-color: rgba(155, 149, 167, 0.1);
-  }
+`;
+
+const HeaderButton = styled.button`
+  padding: 7px 15px;
+  background-color: rgba(155, 149, 167, 0.1);
+  border: 1px solid rgba(155, 149, 167, 0);
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 500;
+  cursor: pointer;
 `;
 
 const Body = styled.section`
   width: 100%;
-  /* border: 1px solid blue; */
-  /* padding: 55px; */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 `;
 
 const Text2 = styled.div`
@@ -211,18 +222,15 @@ const Text2 = styled.div`
 `;
 
 const Convenience = styled.div`
-  /* border: 1px solid red; */
-  padding: 20px 40px;
   display: flex;
-  flex-wrap: wrap;
   justify-content: center;
   align-items: center;
-  /* grid-template-columns: repeat(3, 0fr); */
+  flex-wrap: wrap;
+  padding: 20px 40px;
   margin: 10px 0;
-  /* width: 100%; */
 `;
 
-const Button = styled.section`
+const Button = styled.button`
   background-color: white;
   border-radius: 10px;
   border: 1px solid rgba(155, 149, 167, 0.44);
@@ -230,30 +238,17 @@ const Button = styled.section`
   padding: 25px;
   width: 30%;
   margin: 8px;
-  /* display: flex; */
+  cursor: pointer;
+  &:hover {
+    outline: 2px solid black;
+  }
 `;
 
 const BoxWrapper = styled.div`
-  /* border: 1px solid green; */
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-`;
-
-const TextAndIcon = styled.input`
-  &:hover {
-    outline: 2px solid black;
-    border-radius: 30px;
-    /* outline-offset: -3px; */
-    /* box-shadow: 0 0 0 2px #333 inset;*/
-    cursor: pointer;
-  }
-  /* display: flex; */
-  /* padding: 40px; */
-  /* border: 1px solid rgba(0, 0, 0, 0.2); */
-  /* border-radius: 25px; */
-  margin: 15px;
 `;
 
 const Icon = styled.div`
@@ -265,15 +260,4 @@ const Icon = styled.div`
 
 const Text3 = styled.div`
   font-size: 15px;
-`;
-
-const Footer = styled.section`
-  padding: 15px;
-  width: 100%;
-  position: absolute;
-  bottom: 0;
-  display: flex;
-  justify-content: space-between;
-  background-color: white;
-  align-items: center;
 `;
