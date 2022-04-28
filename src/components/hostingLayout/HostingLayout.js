@@ -173,11 +173,11 @@ function HostingLayout() {
   const onChange = e => {
     if (step === 3) {
       setResultChoice({ ...resultChoice, 3: e });
-    } else if (step === 4) {
+    } else if (step === 5) {
       const { value, id } = e.target;
-      if (resultChoice.hasOwnProperty(5)) {
-        if (resultChoice[5].includes(value)) {
-          resultChoice[5] = resultChoice[5].filter(
+      if (resultChoice.hasOwnProperty(6)) {
+        if (resultChoice[6].includes(value)) {
+          resultChoice[6] = resultChoice[6].filter(
             element => element !== value
           );
           arr.current = arr.current.filter(element => element !== value);
@@ -190,13 +190,13 @@ function HostingLayout() {
         setResultChoice({ ...resultChoice, [id]: arr.current });
       }
     } else if (step === 9) {
-      console.log('-------------------------------');
-      console.log('eeee :', e);
+      // console.log('-------------------------------');
+      // console.log('eeee :', e);
       setResultChoice({ ...resultChoice, 10: e });
     } else {
       const { value, id } = e.target;
-      console.log('aelse', e.target);
-      console.log('why ?', id, value);
+      // console.log('aelse', e.target);
+      // console.log('why ?', id, value);
       setResultChoice({ ...resultChoice, [id]: value });
     }
     setFlag(0);
@@ -252,9 +252,9 @@ function HostingLayout() {
     }
     return null;
   };
-  // console.log('step :', step);
+  console.log('step :', step);
   console.log('result :', resultChoice);
-  // console.log(resultChoice);
+  console.log(resultChoice);
   return (
     <div>
       <Box>
