@@ -1,7 +1,6 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
-import { useState } from 'react';
 
 // const Say = () => {
 //   const [message, setMessage] = useState('');
@@ -14,9 +13,22 @@ import { useState } from 'react';
 //     const message = document.getElementById("message");
 // };
 
+// const loginModalHandler = display => {
+//   !isLoginModalOpen ? setIsLoginModalOpen(true) : setIsLoginModalOpen(false);
+//   setOpenToggle({ display: display });
+// };
+
+// function switchState() {
+//   swithChange(!switchOn);
+// }
+
 export default function Hosting({ onChange, resultChoice }) {
-  // const [color, setColor] = useState('');
-  console.log('1', resultChoice);
+  // const [isClicked, setIsClicked] = useState();
+
+  // const clikcedHandler = () => {
+  //   !isClicked ? setIsClikced(true) : setIsClicked(false);
+  // };
+  console.log(resultChoice['1']);
   return (
     <Wrapper>
       <Container>
@@ -39,25 +51,74 @@ export default function Hosting({ onChange, resultChoice }) {
         </Header>
         <Body>
           {/* <div onClickEnter={() => setIsClicking(true)} /> */}
-          <Button id="1" onClick={e => onChange(e)} value="아파트">
+          <Button
+            id="1"
+            onClick={e => {
+              onChange(e);
+            }}
+            value="아파트"
+            style={{
+              backgroundColor:
+                resultChoice['1'] === '아파트'
+                  ? 'rgba(155, 149, 167, 0.2)'
+                  : 'white',
+            }}
+          >
             <div className="but-name">아파트</div>
             <div className="img-wrapper">
               <img src="/images/thump/home10.jpg" />
             </div>
           </Button>
-          <Button id="1" onClick={e => onChange(e)} value="주택">
+          <Button
+            id="1"
+            onClick={e => {
+              onChange(e);
+            }}
+            style={{
+              backgroundColor:
+                resultChoice['1'] === '주택'
+                  ? 'rgba(155, 149, 167, 0.2)'
+                  : 'white',
+            }}
+            value="주택"
+          >
             <div className="but-name">주택</div>
             <div className="img-wrapper">
               <img src="/images/thump/home3.jpg" />
             </div>
           </Button>
-          <Button id="1" onClick={e => onChange(e)} value="별채">
+          <Button
+            id="1"
+            onClick={e => {
+              onChange(e);
+            }}
+            style={{
+              backgroundColor:
+                resultChoice['1'] === '별채'
+                  ? 'rgba(155, 149, 167, 0.2)'
+                  : 'white',
+            }}
+            value="별채"
+          >
             <div className="but-name">별채</div>
             <div className="img-wrapper">
               <img src="/images/thump/home14.jpg" />
             </div>
           </Button>
-          <Button id="1" onClick={e => onChange(e)} value="독특한 숙소">
+          <Button
+            id="1"
+            onClick={e => {
+              onChange(e);
+              // clikcedHandler();
+            }}
+            value="독특한 숙소"
+            style={{
+              backgroundColor:
+                resultChoice['1'] === '독특한 숙소'
+                  ? 'rgba(155, 149, 167, 0.2)'
+                  : 'white',
+            }}
+          >
             <div className="but-name">독특한 숙소</div>
             <div className="img-wrapper">
               <img src="/images/thump/home1.jpg" />
@@ -167,6 +228,7 @@ const Button = styled.button`
   display: flex;
   align-items: center;
   justify-content: space-between;
+
   &:hover {
     outline: 1.5px solid black;
     cursor: pointer;

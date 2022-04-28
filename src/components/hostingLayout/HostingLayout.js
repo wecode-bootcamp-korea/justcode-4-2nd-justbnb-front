@@ -84,9 +84,9 @@ function HostingLayout() {
         setResultChoice({ ...resultChoice, [id]: arr.current });
       }
     } else {
-      console.log(e.target);
-      console.log(e.target.value);
-      console.log('why ?', id, value);
+      // console.log(e.target);
+      // console.log(e.target.value);
+      // console.log('why ?', id, value);
       setResultChoice({ ...resultChoice, [id]: value });
     }
     setFlag(0);
@@ -133,8 +133,9 @@ function HostingLayout() {
     }
     return null;
   };
-  console.log('step :', step);
+  // console.log('step :', step);
   console.log('result :', resultChoice);
+  // console.log(resultChoice);
   return (
     <div>
       <Box>
