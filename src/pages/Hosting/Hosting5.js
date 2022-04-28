@@ -86,7 +86,7 @@ function ConvMap({ el, onChange, resultChoice }) {
           <TextAndIcon
             key={el.id}
             onClick={e => onChange(e)}
-            id="5"
+            id="6"
             value={el.convenience}
             type="checkbox"
             defaultChecked={compareResult(resultChoice, el)}
