@@ -26,17 +26,19 @@ function Notice() {
             <FaSmokingBan className="icons" />
             <div>흡연 금지</div>
           </List>
-          <List>
+          {/* <List>
             <FaPaw className="icons" />
             <div>반려동물 동반 가능</div>
-          </List>
+          </List> */}
         </Text>
         <Text>
           <Title>건강과 안전</Title>
           <List>
             <FaSprayCan className="icons" />
             <div>
-              저스트비앤비의 사회적 거리 두기 및 관련 가이드라인이 적용됩니다.
+              저스트비앤비의 사회적 거리 두기 및 관련
+              <br />
+              가이드라인이 적용됩니다.
             </div>
           </List>
           <List>
@@ -60,12 +62,12 @@ function Notice() {
 }
 
 const Wrapper = styled.section`
-  /* margin: 0 80px; */
   padding: 50px 0;
 `;
 
 const MainTitle = styled.h2`
   margin-bottom: 30px;
+  margin-left: 10px;
   font-size: 22px;
   font-weight: 500;
 `;
@@ -76,7 +78,9 @@ const TextWrapper = styled.div`
 `;
 
 const Text = styled.ul`
-  width: 30%;
+  padding: 10px;
+
+  width: 33.333%;
 `;
 
 const Title = styled.h3`

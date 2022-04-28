@@ -14,7 +14,7 @@ import MapInfo from './Map.js';
 import HostInfo from './HostInfo.js';
 import Notice from './Notice.js';
 import Header from '../../components/Nav/PageNav';
-import Footer from '../../components/Footer.js';
+import Footer from './Footer';
 
 function Detail() {
   const [accommodation, setAccommodation] = useState({});
@@ -94,6 +94,11 @@ function Detail() {
   useEffect(() => {
     token.length > 1 ? setLogin(true) : setLogin(false);
   }, [token]);
+
+  // 메인 페이지에서 넘어왔을 시에 스크롤 위치 제어
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   return (
     <div>
