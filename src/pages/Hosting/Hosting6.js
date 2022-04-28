@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
-import { AiOutlinePicture } from 'react-icons/ai';
 import { Link } from 'react-router-dom';
+import { AiOutlinePicture } from 'react-icons/ai';
 
-export default function Hosting6() {
+export default function Hosting6({ onChange, resultChoice }) {
   const [files, setFiles] = useState([]);
 
   const Upload = e => {
     const files = Array.from(e.target.files);
+    console.log(e.target.files);
     // const files = e.target.files;
     const newFiles = files.map(file => {
       return URL.createObjectURL(file);
@@ -22,6 +23,9 @@ export default function Hosting6() {
   return (
     <Wrapper>
       <Container>
+        <Link to="/">
+          <img src="/images/로고화이트.png" />
+        </Link>
         <Text1>
           이제 숙소 사진을 올릴
           <br />
@@ -112,23 +116,32 @@ const Container = styled.section`
   display: flex;
   align-items: center;
   line-height: 3.5em;
+  img {
+    width: 80px;
+    height: 70px;
+    position: absolute;
+    top: 0;
+    margin-top: 30px;
+    margin-left: 40px;
+  }
 `;
 
 const Text1 = styled.div`
   color: white;
-  font-weight: bold;
-  font-size: 50px;
+  font-weight: 530;
+  font-size: 48.5px;
   margin-left: 55px;
 `;
 
 const Container2 = styled.section`
   width: 50%;
-  min-height: 100vh;
+  /* border: 5px solid green; */
+  height: 80vh;
   position: relative;
-  /* border: 1px solid green; */
-  display: flex;
+
   flex-wrap: wrap;
   flex-direction: column;
+  z-index: 999;
 `;
 
 const Header = styled.section`
@@ -247,6 +260,7 @@ const Text4 = styled.div`
 
 const UploadImage = styled.input`
   /* border: 1px solid red; */
+  position: absolute;
   margin-top: 10px;
   width: 50%;
   pointer-events: none;
@@ -261,8 +275,8 @@ const Label = styled.label`
 `;
 
 const LabelDescription = styled.div`
-  position: absolute;
-  margin: 0.5vw 1.3vw;
+  /* position: absolute; */
+  margin: 1.5vw 1.8vw;
   font-weight: bold;
 `;
 
