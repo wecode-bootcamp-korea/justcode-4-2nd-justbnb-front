@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import { useParams, useLocation } from 'react-router-dom';
 import { AiFillTrophy } from 'react-icons/ai';
 import { useState, useEffect } from 'react';
@@ -19,6 +19,7 @@ import {
   WrapContainer,
   TextArea,
 } from './AccommodationListStyled';
+import MapMarkerItem from './MapMarkerItem';
 
 const AccommodationList = () => {
   const { localName } = useParams();
@@ -33,8 +34,23 @@ const AccommodationList = () => {
   const [_data, _setData] = useState([]);
   const [latlng, setlatlng] = useState({ lat: 0, lng: 0 });
   const [changeMap, setChangeMap] = useState(false);
-
   const location = useLocation();
+  let mapMarkers = useRef([]);
+
+  useEffect(() => {
+    let local = ['서울시', '대전시', '대구시', '부산시', '제주시'];
+    for (let j = 0; j < local.length; j++) {
+      if (mapMarkers.current.hasOwnProperty(local[j])) {
+        if (location.state.city !== local[j]) {
+          for (let i = 0; i < mapMarkers.current[local[j]].length; i++) {
+            mapMarkers.current[local[j]][i].setMap(null);
+            mapMarkers.current[local[j]][i].setImage(null);
+          }
+          mapMarkers.current[local[j]] = [];
+        }
+      }
+    }
+  }, [location.state.city]);
 
   let city = local;
   let startDate = '';
@@ -48,13 +64,12 @@ const AccommodationList = () => {
     count = location.state.count;
     haveAnimal = location.state.haveAnimal.toUpperCase();
   }
-  console.log(city, local, count, haveAnimal);
   const buildType = ''; //별채
   const roomType = ''; //개인실
-
   /*목데이터 가져오기 */
   const refreshData = async () => {
-    //await fetch('/data/hwseol/list.json', {
+    //  mapMarkers.current.forEach(marker => {marker.setMap(null)})
+    mapMarkers.current = [];
     await fetch(
       `http://localhost:8000/accommodations?city=${city}&buildType=${buildType}&roomType=${roomType}&animalYn=${haveAnimal}&totalMembers=${count}`,
       {
@@ -70,13 +85,32 @@ const AccommodationList = () => {
         for (let i = 0; i < data.accommodationsList.length; i++) {
           temp.push(data.accommodationsList[i]);
         }
+        // temp.forEach(data => {
+        //   MapMarkerItem();
+        // });
         setData([...temp]);
+      });
+  };
+  /* 하트 데이터리스트 가져오기 */
+  let token = localStorage.getItem('token');
+  const [hearts, setHearts] = useState([]);
+  const getHeartList = async () => {
+    await fetch(`http://localhost:8000/wish?city=${city}`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        accessToken: token,
+      },
+    })
+      .then(res => res.json())
+      .then(data => {
+        setHearts(data.wish);
       });
   };
   useEffect(() => {
     refreshData();
+    getHeartList();
   }, [local, city, count, haveAnimal]);
-
   //rendering이 한박자 늦어서 어쩔수 없이 한번 더 리랜더링
   useEffect(() => {}, [datas, city]);
 
@@ -121,14 +155,29 @@ const AccommodationList = () => {
           {level >= 13 ? <BigCategoryList data={datas} /> : null}
           {level >= 13 ? <H2>{_data.length}개 이상의 숙소 둘러보기</H2> : null}
           {width > 1308
-            ? _data.slice(offset, offset + limit).map((data, index) => (
-                <Accommodation
-                  data={data}
-                  key={data.id}
-                  localName={data.city}
-                  setlatlng={setlatlng} //{{ lat: datas[index].lat, lng: datas[index].long }}
-                />
-              ))
+            ? _data.slice(offset, offset + limit).map((data, index) =>
+                hearts !== undefined ? (
+                  hearts.map((heart, index) =>
+                    heart.id === data.id ? (
+                      <Accommodation
+                        data={data}
+                        key={data.id}
+                        localName={data.city}
+                        setlatlng={setlatlng} //{{ lat: datas[index].lat, lng: datas[index].long }}
+                        heart={heart.wish_yn}
+                      />
+                    ) : null
+                  )
+                ) : (
+                  <Accommodation
+                    data={data}
+                    key={data.id}
+                    localName={data.city}
+                    setlatlng={setlatlng} //{{ lat: datas[index].lat, lng: datas[index].long }}
+                    heart="N"
+                  />
+                )
+              )
             : datas.slice(offset, offset + limit).map((data, index) => (
                 <Accommodation
                   data={data}
@@ -156,6 +205,8 @@ const AccommodationList = () => {
             latlng={latlng}
             changeMap={changeMap}
             setChangeMap={setChangeMap}
+            city={city}
+            mapMarkers={mapMarkers}
           />
         ) : null}
       </Container>

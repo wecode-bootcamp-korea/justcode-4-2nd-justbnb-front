@@ -47,13 +47,14 @@ function GotoStep({ step, onChange, resultChoice }) {
     case 5:
       return <Hosting5 onChange={onChange} resultChoice={resultChoice} />;
     case 6:
-      return <Hosting6 onChange={onChange} resultChoice={resultChoice} />;
+      return <Hosting9 onChange={onChange} resultChoice={resultChoice} />;
     case 7:
       return <Hosting7 onChange={onChange} resultChoice={resultChoice} />;
     case 8:
       return <Hosting8 onChange={onChange} resultChoice={resultChoice} />;
     case 9:
-      return <Hosting9 onChange={onChange} resultChoice={resultChoice} />;
+      return <Hosting6 onChange={onChange} resultChoice={resultChoice} />;
+
     default:
       console.log('invalid number');
   }
@@ -66,7 +67,9 @@ function HostingLayout() {
   const arr = useRef([]);
 
   const onChange = e => {
-    if (step === 4) {
+    if (step === 3) {
+      setResultChoice({ ...resultChoice, 3: e });
+    } else if (step === 4) {
       const { value, id } = e.target;
       if (resultChoice.hasOwnProperty(5)) {
         if (resultChoice[5].includes(value)) {
@@ -82,8 +85,6 @@ function HostingLayout() {
         arr.current.push(value);
         setResultChoice({ ...resultChoice, [id]: arr.current });
       }
-    } else if (step === 3) {
-      setResultChoice({ ...resultChoice, 3: e });
     } else {
       const { value, id } = e.target;
       console.log(e.target);
@@ -110,7 +111,7 @@ function HostingLayout() {
     })();
   };
   const NextButton = () => {
-    if (currentStep < 10) {
+    if (currentStep < 9) {
       return (
         <BtnRight type="button" onClick={_next}>
           다음
