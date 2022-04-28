@@ -6,6 +6,7 @@ export default function CounterValue3({ onChange }) {
   const [num, setNum] = useState(20000);
 
   const upNum = e => {
+    console.log(e);
     setNum(num >= 100000 ? 100000 : num + 1000);
     e.target.value = Number(e.target.value) + 1000;
     onChange(e);
@@ -20,7 +21,7 @@ export default function CounterValue3({ onChange }) {
   return (
     <CounterWrapper>
       <Button>
-        <button onClick={downNum} id="8" value={num}>
+        <button onClick={downNum} id="6" value={num}>
           -
         </button>
       </Button>
@@ -28,7 +29,7 @@ export default function CounterValue3({ onChange }) {
         <h1>₩{num}</h1>
       </NumContainer>
       <Button2>
-        <button onClick={upNum} id="8" value={num}>
+        <button onClick={upNum} id="6" value={num}>
           +
         </button>
       </Button2>

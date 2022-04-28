@@ -4,6 +4,21 @@ import { Link } from 'react-router-dom';
 import CounterValue3 from './Component/Counter3';
 
 export default function Hosting9({ onChange, resultChoice }) {
+  const test = () => {
+    const formData = new FormData();
+    //const fileField = document.querySelector('input[type="file"]');
+    //formData.append('image', fileField.files[0]);
+    // fetch('http://localhost:8000/aws-s3', {
+    //   method: 'POST',
+    //   body: formData,
+    // })
+    //   .then(response => response.json())
+    //   .then(result => {
+    //     console.log('성공:', result);
+    //     //result + 숙소 정보 -> fetch() -> 백엔드
+    //   });
+  };
+
   return (
     <Wrapper>
       <Container>
@@ -22,6 +37,7 @@ export default function Hosting9({ onChange, resultChoice }) {
           <CounterValue3 onChange={onChange} />
           <Text2>/박</Text2>
         </Body>
+        <Comfirm onClick={() => test()}>확인</Comfirm>
         <Footer />
       </Container2>
     </Wrapper>
@@ -125,4 +141,8 @@ const Footer = styled.section`
   justify-content: space-between;
   background-color: white;
   align-items: center;
+`;
+
+const Comfirm = styled.button`
+  font-size: 10px;
 `;

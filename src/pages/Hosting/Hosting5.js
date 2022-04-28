@@ -9,7 +9,6 @@ import { FaParking } from 'react-icons/fa';
 import { GiBathtub } from 'react-icons/gi';
 
 export default function Hosting5({ onChange, resultChoice }) {
-  console.log(resultChoice);
   const [convenience, setConvenience] = useState([]);
 
   // 조건문 사용 시 예시
@@ -20,7 +19,7 @@ export default function Hosting5({ onChange, resultChoice }) {
   //     return <GiBarbecue />;
   //   }
   // }
-  console.log('4', resultChoice);
+
 
   useEffect(() => {
     fetch('/data/dlwjdals/hosting.json', {
@@ -72,7 +71,7 @@ export default function Hosting5({ onChange, resultChoice }) {
   );
 }
 function compareResult(resultChoice, el) {
-  console.log(resultChoice);
+  // console.log(resultChoice);
   if (!resultChoice.hasOwnProperty(5)) return false;
   for (let i = 0; i < resultChoice[5].length; i++) {
     if (resultChoice[5][i] === el.convenience) {
@@ -82,6 +81,20 @@ function compareResult(resultChoice, el) {
 }
 function ConvMap({ el, onChange, resultChoice }) {
   return (
+<<<<<<< HEAD
+    <div key={el.id}>
+      <TextAndIcon
+        key={el.id}
+        onClick={e => onChange(e)}
+        id="7"
+        value={el.convenience}
+        type="checkbox"
+        defaultChecked={compareResult(resultChoice, el)}
+      />
+      <Icon>{selectIcon(el.icon)}</Icon>
+      <Text3>{el.convenience}</Text3>
+    </div>
+=======
     <Button>
       <div key={el.id}>
         <BoxWrapper>
@@ -98,6 +111,7 @@ function ConvMap({ el, onChange, resultChoice }) {
         </BoxWrapper>
       </div>
     </Button>
+>>>>>>> develop
   );
 }
 function selectIcon(el) {
