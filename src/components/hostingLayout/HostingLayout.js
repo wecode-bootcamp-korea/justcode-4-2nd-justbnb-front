@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import {
   ProgressDiv,
@@ -124,6 +125,29 @@ function HostingLayout() {
   const [resultChoice, setResultChoice] = useState({});
   const [flag, setFlag] = useState(0);
   const arr = useRef([]);
+  const navigate = useNavigate();
+
+  // const uploadImage = () => {
+  //   const formData = new FormData();
+  //   const fileField = document.getElementsByClassName('upload');
+
+  //   formData.append('image', fileField.files[0]);
+
+  //   fetch('http://localhost:8000/aws-s3', {
+  //     method: 'POST',
+  //     body: formData,
+  //   })
+  //     .then(response => response.json())
+  //     .then(result => {
+  //       console.log('성공:', result);
+  //       //result + 숙소 정보 -> fetch() -> 백엔드
+  //     });
+  // };
+
+  const goToMain = () => {
+    navigate(`/`);
+    window.scrollTo(0.0);
+  };
 
   const onChange = e => {
     if (step === 3) {
@@ -182,6 +206,7 @@ function HostingLayout() {
         <BtnRight
           onClick={() => {
             gotoDB(resultChoice);
+            goToMain();
           }}
           type="button"
         >

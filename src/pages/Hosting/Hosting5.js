@@ -92,29 +92,22 @@ function ConvMap({ el, onChange, resultChoice }) {
     주차공간: 5,
     욕조: 6,
   };
-  console.log(conv['수영장']);
+  // console.log(conv['수영장']);
   return (
-    <Button
-      key={el.id}
-      onClick={e => {
-        onChange(e);
-        handleSelected();
-      }}
-      id="6"
-      value={el.convenience}
-      defaultChecked={compareResult(resultChoice, el)}
-      style={{ backgroundColor: selected ? 'rgba(155, 149, 167, 0.2)' : null }}
-    >
+    <Button>
       <div key={el.id}>
         <BoxWrapper>
-          {/* <TextAndIcon
+          <TextAndIcon
             key={el.id}
-            onChange={e => onChange(e)}
+            onChange={e => {
+              onChange(e);
+              console.log(e.target.value);
+            }}
             id="6"
             value={conv[el.convenience]}
             type="checkbox"
             defaultChecked={compareResult(resultChoice, el)}
-          /> */}
+          />
           <Icon>{selectIcon(el.icon)}</Icon>
           <Text3>{el.convenience}</Text3>
         </BoxWrapper>
@@ -270,3 +263,5 @@ const Icon = styled.div`
 const Text3 = styled.div`
   font-size: 15px;
 `;
+
+const TextAndIcon = styled.input``;
