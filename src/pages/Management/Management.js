@@ -146,11 +146,11 @@ function Management() {
     <>
       <PageNav />
       <Banner>
+        <Text2>투데이</Text2>
         <Wrap>
-          <Text2>투데이</Text2>
+          <Desc>숙소를 등록해보세요! </Desc>
           <Btn onClick={onClickBtn}>숙소 등록하기 </Btn>
         </Wrap>
-        <Desc>숙소를 등록해보세요! </Desc>
       </Banner>
       <Body>
         <GuestCardWide>
@@ -223,14 +223,64 @@ const Body = styled.div`
 `;
 
 const Banner = styled.div`
-  padding: 7rem;
-  background: rgb(27, 0, 209);
+  display: flex;
+  justify-content: space-between;
+  /* flex-direction: column; */
+  align-items: center;
+  width: 100%;
+  height: 300px;
+  /* padding-top: 100px; */
+  padding: 100px 80px 0px 80px;
+
+  /* background: rgb(27, 0, 209); */
   background: linear-gradient(
     90deg,
     rgba(27, 0, 209, 1) 0%,
     rgba(255, 0, 168, 1) 100%
   );
 `;
+
+const Desc = styled.div`
+  width: 100%;
+  font-size: 30px;
+  font-weight: 500;
+  color: #ffffff;
+  padding-left: 80px;
+`;
+
+const Wrap = styled.div`
+  display: flex;
+  justify-content: center;
+
+  flex-direction: column;
+  align-items: center;
+  width: fit-content;
+  height: 300px;
+  padding-top: 50px;
+  /* border: 1px solid red; */
+`;
+
+const Text2 = styled.div`
+  color: #ffffff;
+  font-size: 2.2em;
+  width: fit-content;
+  /* border: 1px solid red; */
+`;
+
+// const Banner = styled.div`
+//   padding: 7rem;
+//   background: rgb(27, 0, 209);
+//   background: linear-gradient(
+//     90deg,
+//     rgba(27, 0, 209, 1) 0%,
+//     rgba(255, 0, 168, 1) 100%
+//   );
+// `;
+
+// const Desc = styled.div`
+//   padding-left: 150px;
+//   color: #ffffff;
+// `;
 
 const GuestCardWide = styled.div`
   margin: auto;
@@ -370,17 +420,9 @@ const Buttons = styled.div`
   margin-top: 30px;
 `;
 
-const Wrap = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 40px 150px;
-`;
-const Text2 = styled.div`
-  color: #ffffff;
-  font-size: 2.2em;
-`;
 const Btn = styled.button`
+  margin-top: 20px;
+  margin-right: -60px;
   padding: 10px 20px;
   border: 1px solid #ffffff;
   border-radius: 10px;
@@ -390,9 +432,4 @@ const Btn = styled.button`
     cursor: pointer;
     opacity: 0.9;
   }
-`;
-
-const Desc = styled.div`
-  padding-left: 150px;
-  color: #ffffff;
 `;

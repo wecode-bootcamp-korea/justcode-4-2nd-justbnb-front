@@ -12,8 +12,6 @@ const ProgressWrap = styled.div`
   width: 100%;
   position: absolute;
   bottom: 0;
-  /* background-color: white; */
-  /* border: 3px solid orange; */
 `;
 
 // @keyframes loadEffect {
@@ -33,8 +31,6 @@ const ProgressWrap = styled.div`
 
 const ProgressDiv = styled.div`
   display: flex;
-  padding: 18px 0;
-  /* /* margin: 0px auto; */
 `;
 
 const ProgressBar = styled.div`
@@ -55,34 +51,32 @@ const Progress = styled.div`
 
 const BtnDiv = styled.div`
   width: 50%;
-  /* border: 1px solid blue; */
   margin-left: 50%;
-  /* border: 1px solid red; */
-  /* padding-top : 10%; */
   background-color: white;
   display: flex;
   justify-content: space-between;
+  align-items: center;
+  padding: 20px 30px;
 `;
+
 const OptionSelect = styled.div``;
 
 const BtnRight = styled.button`
+  padding: 13px 23px;
+  background-color: black;
+  color: white;
+  border: 1px solid rgba(155, 149, 167, 0.1);
+  border-radius: 8px;
   font-size: 16px;
   font-weight: 400;
-  color: white;
-  padding: 13px 23px;
-  margin-right: 6.5%;
-  border-radius: 8px;
-  margin-bottom: 15px;
-  border: 1px solid rgba(155, 149, 167, 0.1);
-  background-color: black;
+  cursor: pointer;
 `;
 
 const BtnLeft = styled.div`
   text-decoration: underline;
   font-size: 16x;
   font-weight: 500;
-  margin-left: 6.5%;
-  margin-top: 15px;
+  cursor: pointer;
 `;
 
 export {

@@ -99,8 +99,8 @@ export default function Hosting6({ onChange, resultChoice, Upload }) {
 
       <Container2>
         <Header>
-          <button className="help-button">도움말</button>
-          <button className="exit-button">나가기</button>
+          <HeaderButton className="help">도움말</HeaderButton>
+          <HeaderButton>나가기</HeaderButton>
         </Header>
         <Body>
           {/* {console.log(files.length)} */}
@@ -156,23 +156,22 @@ export default function Hosting6({ onChange, resultChoice, Upload }) {
           </Line> */}
           {/* -------------------------------------------------------------------- */}
         </Body>
-        {/* <Footer>
-          <Prev to="/hosting/5">뒤로</Prev>
-          <Next to="/hosting/7">다음</Next>
-        </Footer> */}
       </Container2>
     </Wrapper>
   );
 }
 
 const Wrapper = styled.div`
-  width: 100%;
   display: flex;
+  width: 100%;
+  height: 100vh;
 `;
 
 const Container = styled.section`
+  display: flex;
+  justify-content: center;
+  align-items: center;
   width: 50%;
-  min-height: 100vh;
   background: rgb(217, 18, 100);
   background: linear-gradient(
     180deg,
@@ -180,24 +179,23 @@ const Container = styled.section`
     rgba(165, 4, 166, 1) 52%,
     rgba(55, 8, 159, 1) 100%
   );
-  display: flex;
-  align-items: center;
   line-height: 3.5em;
   img {
     width: 80px;
     height: 70px;
     position: absolute;
     top: 0;
+    left: 0;
     margin-top: 30px;
     margin-left: 40px;
   }
 `;
 
 const Text1 = styled.div`
+  width: 85%;
   color: white;
   font-weight: 530;
   font-size: 48.5px;
-  margin-left: 55px;
 `;
 
 const Container2 = styled.section`
@@ -212,49 +210,31 @@ const Container2 = styled.section`
 `;
 
 const Header = styled.section`
-  /* position: absolute;
-  top: 0; */
-  /* border: 1px solid red; */
-  width: 100%;
-  padding: 20px;
-  display: flex;
-  justify-content: flex-end;
-  margin-top: 10px;
-  .help-button {
-    font-size: 12px;
-    font-weight: 500;
-    padding: 7px 15px;
-    border-radius: 20px;
+  position: fixed;
+  top: 0;
+  right: 0;
+  padding: 30px 40px;
+  .help {
     margin-right: 15px;
-    border: 1px solid rgba(155, 149, 167, 0);
-    background-color: rgba(155, 149, 167, 0.1);
+    opacity: 0.3;
   }
-  .exit-button {
-    font-size: 12px;
-    font-weight: 500;
-    padding: 7px 20px;
-    border-radius: 20px;
-    margin-right: 30px;
-    border: 1px solid rgba(155, 149, 167, 0);
-    background-color: rgba(155, 149, 167, 0.1);
-  }
+`;
+const HeaderButton = styled.button`
+  padding: 7px 15px;
+  background-color: rgba(155, 149, 167, 0.1);
+  border: 1px solid rgba(155, 149, 167, 0);
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 500;
+  cursor: pointer;
 `;
 
 const Body = styled.section`
   width: 100%;
-  margin: auto;
-`;
-
-const Footer = styled.section`
-  padding: 15px;
-  width: 100%;
-  position: absolute;
-  bottom: 0;
   display: flex;
-  justify-content: space-between;
-  background-color: white;
+  flex-direction: column;
+  justify-content: center;
   align-items: center;
-  border-top: 2px solid rgba(155, 149, 167, 0.2);
 `;
 
 const Prev = styled(Link)`
