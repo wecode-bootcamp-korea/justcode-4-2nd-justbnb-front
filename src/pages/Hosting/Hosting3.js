@@ -176,6 +176,7 @@ export default function Hosting3({ onChange, resultChoice }) {
             </Icon>
             <Buttons>
               <Seoul
+                className="button"
                 onClick={e => {
                   setLocal('seoul');
                   onChange(e);
@@ -184,6 +185,7 @@ export default function Hosting3({ onChange, resultChoice }) {
                 Seoul
               </Seoul>
               <Jeju
+                className="button"
                 onClick={e => {
                   setLocal('jeju');
                   onChange(e);
@@ -192,6 +194,7 @@ export default function Hosting3({ onChange, resultChoice }) {
                 Jeju
               </Jeju>
               <Busan
+                className="button"
                 onClick={e => {
                   setLocal('busan');
                   onChange(e);
@@ -218,6 +221,9 @@ export default function Hosting3({ onChange, resultChoice }) {
     </Wrapper>
   );
 }
+const Clicked = styled`
+background-color: black;
+color :white;`;
 
 const Wrapper = styled.div`
   display: flex;
@@ -342,7 +348,19 @@ const ButtonTextWrapper = styled.button`
 `;
 
 const Buttons = styled.div`
+  display: flex;
+  justify-content: center;
   width: 100%;
+  /* border: 1px solid red; */
+  .button {
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    box-shadow: 0px 0px 3px 1px rgba(0, 0, 0, 0.15);
+    border-radius: 5px;
+    padding: 5px 13px;
+    margin: 0 6px;
+    background-color: white;
+    cursor: pointer;
+  }
 `;
 
 const Jeju = styled.button`

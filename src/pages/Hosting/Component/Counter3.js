@@ -22,17 +22,17 @@ export default function CounterValue3({ onChange }) {
     <CounterWrapper>
       <Button>
         <button onClick={downNum} id="7" value={num}>
-          -
+          <Bar></Bar>
         </button>
       </Button>
       <NumContainer>
         <h1>₩{num}</h1>
       </NumContainer>
-      <Button2>
+      <Button>
         <button onClick={upNum} id="7" value={num}>
           +
         </button>
-      </Button2>
+      </Button>
     </CounterWrapper>
   );
 }
@@ -41,26 +41,33 @@ const CounterWrapper = styled.section`
   display: flex;
   justify-content: space-between;
   align-items: center;
-
-  /* width: 100%; */
   width: 70%;
-
-  /* position: relative; */
-  /* width: 90px; */
-  /* justify-content: space-evenly; */
 `;
 
 const Button = styled.div`
-  display: flex;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 1px solid rgba(0, 0, 0, 0.4);
   button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
     background-color: white;
-    border: 1px solid rgba(155, 149, 167, 0.6);
     border-radius: 50%;
-    padding: 15px;
-    .icons {
-      display: flex;
-    }
+    border: none;
+    font-size: 30px;
+    color: rgba(0, 0, 0, 0.7);
+    cursor: pointer;
   }
+`;
+
+const Bar = styled.div`
+  width: 50%;
+  height: 3px;
+  background-color: rgba(0, 0, 0, 0.7); ;
 `;
 
 const NumContainer = styled.div`
@@ -70,24 +77,9 @@ const NumContainer = styled.div`
   font-size: 47px;
   font-weight: 650;
   text-align: center;
-  /* padding: 32px; */
   width: 65%;
   padding: 30px 0 22px 0;
   h1 {
     text-align: center;
-  }
-`;
-
-const Button2 = styled.div`
-  display: flex;
-  button {
-    background-color: white;
-    border: 1px solid rgba(155, 149, 167, 0.6);
-    border-radius: 50%;
-    padding: 15px;
-    cursor: pointer;
-    .icons {
-      display: flex;
-    }
   }
 `;

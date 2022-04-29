@@ -39,11 +39,7 @@ export default function Hosting5({ onChange, resultChoice }) {
         <Link to="/">
           <img src="/images/로고화이트.png" />
         </Link>
-        <Text1>
-          숙소 편의시설 정보를 추가해
-          <br />
-          주세요.
-        </Text1>
+        <Text1>숙소 편의시설 정보를 추가해 주세요.</Text1>
       </Container>
 
       <Container2>
