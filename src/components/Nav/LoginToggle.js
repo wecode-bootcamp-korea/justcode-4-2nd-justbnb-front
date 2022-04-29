@@ -68,7 +68,6 @@ const ToggleList = styled.li`
   }
 
   &:first-child {
-    /* font-weight: 600; */
     opacity: 0.5;
     &:hover {
       cursor: default;
