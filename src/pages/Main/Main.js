@@ -15,12 +15,11 @@ function Main() {
         city: city,
       },
     });
-    window.scrollTo(0.0);
+    window.scrollTo(0, 0);
   };
 
   const goToHosting = () => {
     navigate(`/layout`);
-    window.scrollTo(0.0);
   };
 
   useEffect(() => {

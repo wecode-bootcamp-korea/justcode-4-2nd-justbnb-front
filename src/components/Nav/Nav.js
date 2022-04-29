@@ -22,12 +22,12 @@ function Nav() {
   return (
     <Box>
       <Header>
-        {scrollPosition < 100 && (
+        {scrollPosition < 50 && (
           <Aside>
             저스트비앤비의 코로나 19 대응 방안에 대한 최신 정보를 확인하세요.
           </Aside>
         )}
-        {scrollPosition < 100 ? (
+        {scrollPosition < 50 ? (
           <Container>
             <img
               alt="main-logo"

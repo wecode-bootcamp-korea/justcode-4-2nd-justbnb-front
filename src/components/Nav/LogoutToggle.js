@@ -1,6 +1,5 @@
 import React, { useEffect, useRef } from 'react';
 import styled from 'styled-components';
-import { Link } from 'react-router-dom';
 
 function LogoutToggle({
   openToggle,
@@ -40,15 +39,7 @@ function LogoutToggle({
           >
             로그인
           </ToggleList>
-          <Link
-            to="/hosting"
-            style={{
-              textDecoration: 'none',
-              color: 'black',
-            }}
-          >
-            <ToggleList>숙소호스트 되기</ToggleList>
-          </Link>
+          <ToggleList onClick={loginModalHandler}>숙소호스트 되기</ToggleList>
           <ToggleList>도움말</ToggleList>
         </ToggleBox>
       )}
