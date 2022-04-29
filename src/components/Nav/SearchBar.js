@@ -6,7 +6,6 @@ import SearchToggle from './SearchToggle';
 import MembersToggle from './MembersToggle';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
-import { faAllergies } from '@fortawesome/free-solid-svg-icons';
 
 function SearchBar({ scrollPosition, updateScroll, flag }) {
   const [startDate, setStartDate] = useState(new Date());
