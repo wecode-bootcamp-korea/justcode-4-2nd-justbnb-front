@@ -25,7 +25,7 @@ function Reservation() {
       .then(res => res.json())
       .then(data => {
         console.log('data', data);
-        setData2(data.reservation);
+        if (data.status === 200) setData2(data.reservation);
       });
   }, []);
 
