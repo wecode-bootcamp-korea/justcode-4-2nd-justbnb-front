@@ -172,6 +172,10 @@ function HostingLayout() {
   //     });
   // };
 
+  const alertPopUp = () => {
+    return alert('숙소등록이 완료되었습니다! :)');
+  };
+
   const goToMain = () => {
     navigate(`/`);
     window.scrollTo(0.0);
@@ -234,6 +238,7 @@ function HostingLayout() {
         <BtnRight
           onClick={() => {
             gotoDB(resultChoice);
+            alertPopUp();
             goToMain();
           }}
           type="button"
