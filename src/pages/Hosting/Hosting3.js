@@ -221,9 +221,6 @@ export default function Hosting3({ onChange, resultChoice }) {
     </Wrapper>
   );
 }
-const Clicked = styled`
-background-color: black;
-color :white;`;
 
 const Wrapper = styled.div`
   display: flex;
