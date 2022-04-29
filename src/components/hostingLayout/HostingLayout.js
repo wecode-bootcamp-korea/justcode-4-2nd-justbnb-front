@@ -56,33 +56,8 @@ const uploadImage = async event => {
       imageURL = result.filesLocation;
       console.log('imageurl ', imageURL);
       return result;
-
-      // setResultChoice({ ...resultChoice, 10: result });
-
-      // fetch('http://lo')
-      //result + 숙소 정보 -> fetch() -> 백엔드
     });
 };
-
-// const gotoDB = async resultChoice => {
-//   await fetch(
-//     `http://localhost:8000/accommodations?city=${city}&buildType=${buildType}&roomType=${roomType}&animalYn=${haveAnimal}&totalMembers=${count}`,
-//     {
-//       method: 'GET',
-//       headers: {
-//         'Content-Type': 'application/json',
-//       },
-//     }
-//   )
-//     .then(res => res.json())
-//     .then(data => {
-//       let temp = [];
-//       for (let i = 0; i < data.accommodationsList.length; i++) {
-//         temp.push(data.accommodationsList[i]);
-//       }
-//       setData([...temp]);
-//     });
-// };
 
 async function gotoDB(resultChoice) {
   await fetch('http://localhost:8000/accommodations', {
@@ -108,9 +83,6 @@ async function gotoDB(resultChoice) {
     }),
   });
 }
-
-// name, description, city, location, lat, long, buildType, roomType, charge, animalYn,
-//totalMembers, imageUrl, convenienceId
 
 function GotoStep({ step, onChange, resultChoice }) {
   switch (step) {
@@ -273,7 +245,13 @@ function HostingLayout() {
         <ProgressWrap>
           <ProgressBox progress={parseInt(((step - 1) / 10) * 100)} />
           <BtnDiv>
-            <PrevButton />
+            <BtnLeft
+              type="button"
+              onClick={_prev}
+              style={{ visibility: currentStep > 1 ? 'visible' : 'hidden' }}
+            >
+              뒤로
+            </BtnLeft>
             {flag ? (
               <OptionSelect>옵션선택 해주세요.</OptionSelect>
             ) : (
