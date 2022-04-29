@@ -19,6 +19,10 @@ function Nav() {
     };
   }, []);
 
+  const goToTop = () => {
+    window.scrollTo(0, 0);
+  };
+
   return (
     <Box>
       <Header>
@@ -50,6 +54,7 @@ function Nav() {
               src={`${process.env.PUBLIC_URL}/images/로고핑크.png`}
               width="150"
               style={{ cursor: 'pointer' }}
+              onClick={goToTop}
             />
             <SearchBtn>
               <Text>검색 시작하기</Text>

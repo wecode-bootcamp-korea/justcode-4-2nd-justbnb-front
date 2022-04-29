@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { GiHamburgerMenu } from 'react-icons/gi';
 import { RiUser3Line } from 'react-icons/ri';
 import { CgGlobeAlt } from 'react-icons/cg';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import LogoutToggle from './LogoutToggle';
 import LoginModal from '../Modal/LoginModal';
 import SignupModal from '../Modal/SignupModal';
@@ -13,6 +13,7 @@ function UserNav({ scrollPosition, token }) {
   const [openToggle, setOpenToggle] = useState({ display: 'none' });
   const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
   const [isSignupModalOpen, setIsSignupModalOpen] = useState(false);
+  const navigate = useNavigate();
 
   const toggleHandler = () => {
     openToggle.display === 'none'
@@ -32,16 +33,19 @@ function UserNav({ scrollPosition, token }) {
     setOpenToggle({ display: display });
   };
 
+  const action = () => {
+    token ? navigate('/management') : loginModalHandler();
+    window.scrollTo(0, 0);
+  };
+
   return (
     <div>
       <Navbar>
         {scrollPosition < 50 ? (
           <>
-            <Link to="/management" style={{ textDecoration: 'none' }}>
-              <Buttons color="#ffffff" background="#262626">
-                {!token ? '호스트 되기' : '호스트 모드로 전환'}
-              </Buttons>
-            </Link>
+            <Buttons color="#ffffff" background="#262626" onClick={action}>
+              {!token ? '호스트 되기' : '호스트 모드로 전환'}
+            </Buttons>
             <Buttons background="#262626">
               <CgGlobeAlt
                 fontSize={20}
@@ -60,11 +64,9 @@ function UserNav({ scrollPosition, token }) {
           </>
         ) : (
           <>
-            <Link to="/management" style={{ textDecoration: 'none' }}>
-              <Buttons color="black" background="#F7F7F7">
-                {!token ? '호스트 되기' : '호스트 모드로 전환'}
-              </Buttons>
-            </Link>
+            <Buttons color="black" background="#F7F7F7" onClick={action}>
+              {!token ? '호스트 되기' : '호스트 모드로 전환'}
+            </Buttons>
             <Buttons color="black" background="#F7F7F7">
               <CgGlobeAlt fontSize={20} style={{ opacity: '0.5' }} />
             </Buttons>
