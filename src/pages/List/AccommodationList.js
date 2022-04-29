@@ -43,7 +43,8 @@ const AccommodationList = () => {
   let count = '';
   let haveAnimal = '';
   if (location.state.haveAnimal) {
-    city = location.state.city === '전체 도시' ? 'all' : location.state.city;
+    // city = location.state.city === '전체 도시' ? 'all' : location.state.city;
+    city = location.state.city;
     startDate = location.state.startDate;
     endDate = location.state.endDate;
     count = location.state.count;

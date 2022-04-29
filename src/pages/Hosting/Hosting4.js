@@ -20,9 +20,9 @@ export default function Hosting4({ onChange, resultChoice }) {
 
       <Container2>
         <Header>
-          <HeaderButton className="help-button">도움말</HeaderButton>
+          <HeaderButton className="help">도움말</HeaderButton>
           <Link to="/">
-            <HeaderButton className="exit-button">나가기</HeaderButton>
+            <HeaderButton>나가기</HeaderButton>
           </Link>
         </Header>
         <Body>
