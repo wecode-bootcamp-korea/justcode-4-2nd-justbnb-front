@@ -317,6 +317,7 @@ const Pictures = styled.div`
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   position: absolute;
+  margin-top: -9vw;
 `;
 
 const Empty = styled.button`
