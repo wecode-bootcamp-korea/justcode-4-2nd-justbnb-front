@@ -2,8 +2,14 @@ import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import './Slider.css';
-import styled from 'styled-components';
-import { SliderStep } from './SliderStyled';
+import {
+  SliderStep,
+  Img,
+  SliderWrap,
+  OverlayImg,
+  LittleImg,
+  LittleSliderWrap,
+} from './SliderStyled';
 import React from 'react';
 
 function BasicSlider({ data, flag }) {
@@ -45,59 +51,41 @@ function BasicSlider({ data, flag }) {
       },
     ],
   };
-  let Img = styled.img`
-    width: 300px;
-    height: 200px;
-    border-radius: 5%;
-    @media only screen and (max-width: 744px) {
-      margin: 0px auto;
-      width: 90%;
-      height: 100%;
-      object-fit: cover;
-    }
-  `;
-  let SliderWrap = styled.div`
-    width: 300px;
-    @media only screen and (max-width: 744px) {
-      width: 100%;
-    }
-  `;
-  if (flag === 'overlay') {
-    Img = styled.img`
-      width: 250px;
-      border-top-left-radius: 5%;
-      border-top-right-radius: 5%;
-      height: 180px;
-    `;
-  } else if (flag === 'little') {
-    Img = styled.img`
-      width: 100%;
-      border-radius: 5%;
-      height: 150px;
-      @media only screen and (max-width: 1854px) {
-        height: 250px;
-      }
-    `;
-    SliderWrap = styled.div`
-      width: 240px;
-      @media only screen and (max-width: 1854px) {
-        width: 95%;
-      }
-    `;
-  }
-  return (
+  return flag !== 'little' ? (
     <SliderWrap>
       <Slider {...settings}>
         {data.image_url.map((img, index) => {
           return (
             <SliderStep key={index}>
-              <Img src={img} alt="accommodataion" />
+              <SelectImg img={img} flag={flag} />
             </SliderStep>
           );
         })}
       </Slider>
     </SliderWrap>
+  ) : (
+    <LittleSliderWrap>
+      <Slider {...settings}>
+        {data.image_url.map((img, index) => {
+          return (
+            <SliderStep key={index}>
+              <SelectImg img={img} flag={flag} />
+            </SliderStep>
+          );
+        })}
+      </Slider>
+    </LittleSliderWrap>
   );
+}
+
+function SelectImg({ img, flag }) {
+  if (flag === 'overlay') {
+    return <OverlayImg src={img} alt="accommodation" />;
+  } else if (flag === 'little') {
+    return <LittleImg src={img} alt="accommodation" />;
+  } else {
+    return <Img src={img} alt="accommodation" />;
+  }
 }
 
 export default React.memo(BasicSlider);
