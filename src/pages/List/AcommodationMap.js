@@ -1,81 +1,54 @@
 import React from 'react';
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import MapMarkerItem from './MapMarkerItem';
-import { Button, Box, MapBox } from './AccommodationListStyled';
+import { Map } from 'react-kakao-maps-sdk';
+import { Button, Box } from './AccommodationListStyled';
+
 function MapContainer({
   datas,
-  setLocal,
+  local,
   level,
   setLevel,
-  _data,
   _setData,
   latlng,
-  setlatlng,
   changeMap,
   setChangeMap,
   city,
-  mapMarkers,
+  isMove,
 }) {
-  let _positions = [];
-  const [positions, setPositions] = useState([]);
+  /*map*/
+  let positions = [];
   const [area, setArea] = useState();
-  const { kakao } = window;
-  let map = useRef(0);
-  let bounds = useRef(0);
-  let count = useRef(0);
-  let flag = useRef(0);
 
-  useEffect(() => {
-    let mapContainer = document.getElementById('kakaoMap'),
-      mapOption = {
-        center: new kakao.maps.LatLng(37.56610344059421, 126.97884488662002),
-        level: 3,
-      };
-    map.current = new kakao.maps.Map(mapContainer, mapOption);
-
-    const getMapInfo = () => {
-      bounds.current = map.current.getBounds();
-      setArea({
-        sw: bounds.current.getSouthWest(),
-        ne: bounds.current.getNorthEast(),
-      });
+  for (let i = 0; i < datas.length; i++) {
+    positions[i] = {
+      id: datas[i].id,
+      title: datas[i].name,
+      latlng: { lat: datas[i].lat, lng: datas[i].long },
+      image: datas[i].image_url[0],
+      buildType: datas[i].build_type,
+      localName: datas[i].city,
     };
-    kakao.maps.event.addListener(map.current, 'bounds_changed', getMapInfo);
-  }, []);
+  }
+  /*map marker 범위 설정*/
+  const [map, setMap] = useState();
+  const bounds = useMemo(() => {
+    const { kakao } = window;
+    const bounds = new kakao.maps.LatLngBounds();
 
-  useEffect(() => {
-    for (let i = 0; i < datas.length; i++) {
-      _positions[i] = {
-        id: datas[i].id,
-        title: datas[i].name,
-        latlng: new kakao.maps.LatLng(
-          Number(datas[i].lat),
-          Number(datas[i].long)
-        ),
-        image: datas[i].image_url[0],
-        buildType: datas[i].build_type,
-        localName: datas[i].city,
-      };
-    }
-    setPositions(_positions);
+    datas.forEach(data => {
+      bounds.extend(new kakao.maps.LatLng(data.lat, data.long));
+    });
+    return bounds;
   }, [datas]);
 
-  /*map marker 범위 설정*/
   useEffect(() => {
-    /*map marker 범위 설정*/
-    flag.current += 1;
-    if (flag.current >= 3) return;
-    if (map.current && positions.length !== 0) {
-      bounds.current = new kakao.maps.LatLngBounds();
-      for (let i = 0; i < positions.length; i++) {
-        bounds.current.extend(positions[i].latlng);
-      }
-      map.current.setBounds(bounds.current);
+    if (map) {
+      map.setBounds(bounds);
     }
-  }, [positions]);
+  }, [bounds, map]);
 
   /* 맵을 움직일때 보여지는 마커의 리스트만 가져오기 */
-  //map 정보 가져오기
   useEffect(() => {
     let markers = [];
     if (area !== undefined) {
@@ -87,74 +60,89 @@ function MapContainer({
         }
         markers.push(datas[i]);
       }
-      _setData(markers);
-    } else {
-      _setData(datas);
     }
+    _setData(markers);
 
-    count.current += 1;
-    if (count.current > 2) setLocal('all');
-  }, [area, datas]);
+    //움직엿을때 all로 찍히도록 변경
+    isMove.current += 1;
+    if (isMove.current > 2) {
+      local.current = 'all';
+    }
+  }, [area]);
 
-  //zoom level 변함에 따라 리스트 내용 변경
-  if (map.current) {
-    kakao.maps.event.addListener(map.current, 'zoom_changed', function () {
-      setLevel(map.current.getLevel());
-    });
-  }
-  //지도 크기 동적 변경
+  ////지도 크기 동적 변경
   const [mapStyle, setMapStyle] = useState({
     width: '50%',
-    height: '740px',
-    position: 'fixed',
+    height: '850px',
+    position: 'sticky',
+    top: '105px',
     left: '50%',
   });
-
   useEffect(() => {
-    if (map.current) {
-      map.current.relayout();
+    if (map) {
+      map.relayout();
     }
-  }, [map.current, changeMap]);
+  }, [map, mapStyle]);
 
   useEffect(() => {
     if (changeMap === false) {
       setMapStyle({
-        width: '100%',
-        height: '740px',
+        width: '50%',
+        height: '850px',
         position: 'sticky',
-        top: '250px',
+        top: '105px',
         left: '50%',
       });
     } else {
       setMapStyle({
         width: '100%',
-        height: '1250px',
+        height: '1650px',
+        top: '0px',
         position: 'none',
       });
     }
   }, [changeMap]);
 
+  //지도 레벨이 13이면 리스트 변화되도록 값 설정
+  if (map) {
+    setLevel(map.getLevel());
+  }
   let height = level >= 13 ? '1900px' : '1250px';
   if (changeMap && level >= 13) {
-    map.current.setLevel(10);
+    map.setLevel(10);
   }
+
   return (
-    <Box height={height} active={changeMap ? 'true' : 'false'}>
-      {/* <div id="kakaoMap" style={mapStyle} /> */}
-      <MapBox id="kakaoMap" changeMap={changeMap ? 'true' : 'false'} />
-      {positions.map(position => (
-        <MapMarkerItem
-          position={position}
-          latlng={latlng}
-          key={position.id}
-          map={map.current}
-          mapMarkers={mapMarkers}
-          city={city}
-        />
-      ))}
+    <>
+      <Box height={height} active={changeMap ? 'true' : 'false'}>
+        <Map // 지도를 표시할 Container
+          center={{
+            // 지도의 중심좌표
+            lat: 37.56610344059421,
+            lng: 126.97884488662002,
+          }}
+          style={mapStyle}
+          level={3} // 지도의 확대 레벨
+          onCreate={setMap}
+          onBoundsChanged={map =>
+            setArea({
+              sw: map.getBounds().getSouthWest(),
+              ne: map.getBounds().getNorthEast(),
+            })
+          }
+        >
+          {positions.map((position, index) => (
+            <MapMarkerItem
+              position={position}
+              latlng={latlng}
+              key={`${position.title}-${position.latlng}`}
+            />
+          ))}
+        </Map>
+      </Box>
       {changeMap ? (
         <Button
-          left="3%"
+          left="2%"
           onClick={() => {
             setChangeMap(!changeMap);
           }}
@@ -171,7 +159,7 @@ function MapContainer({
           &lt;
         </Button>
       )}
-    </Box>
+    </>
   );
 }
 

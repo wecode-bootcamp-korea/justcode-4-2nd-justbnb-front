@@ -82,11 +82,11 @@ const H2 = styled.h2`
 const Button = styled.div`
   width: ${props => props.width || '120px;'};
 
-  z-index: 10px;
+  z-index: 10;
   background-color: white;
   position: absolute;
-  left: ${props => props.left || '3%'};
-  top: 3%;
+  left: ${props => props.left || '52%'};
+  top: 13%;
   box-shadow: 0.5px 0.5px 0.5px 0.5px gray;
   border-radius: 8px;
   text-align: center;
@@ -101,10 +101,10 @@ const WrapContainer = styled.div``;
 const Map = styled.div``;
 
 const Box = styled.div`
-  width: ${props => (props.active === 'true' ? '100%' : '50%')};
+  width: ${props => (props.active === 'true' ? '100%' : '100%')};
   position: sticky;
   left: 50%;
-  height: ${props => props.height || '1250px'};
+  height: ${props => props.height || '1650px'};
 `;
 
 const TextArea = styled.div`
@@ -141,15 +141,18 @@ const reveal = keyframes`
     clip-path: inset(0 0 0 0);
   }
 `;
-const hide = keyframes`
-  from {
-    right:0%;
-    clip-path: inset(0 0 0 0);
-  }
-  to {
-    right:100%;
-    clip-path: inset(0 0 0 100%);
-  }
+
+const P = styled.p`
+  font-size: 2em;
+  margin-top: 300px;
+  text-align: center;
+`;
+const Blank = styled.div`
+  height: 500px;
+  width: 100%;
+  text-align: center;
+  padding-top: 250px;
+  font-size: 2em;
 `;
 
 export {
@@ -166,4 +169,6 @@ export {
   Box,
   TextArea,
   MapBox,
+  P,
+  Blank,
 };
