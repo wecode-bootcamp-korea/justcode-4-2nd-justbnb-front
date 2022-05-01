@@ -43,7 +43,7 @@ function MapContainer({
   }, [datas]);
 
   useEffect(() => {
-    if (map) {
+    if (map && isMove.current <= 1) {
       map.setBounds(bounds);
     }
   }, [bounds, map]);
@@ -65,7 +65,7 @@ function MapContainer({
 
     //움직엿을때 all로 찍히도록 변경
     isMove.current += 1;
-    if (isMove.current > 2) {
+    if (isMove.current > 1) {
       local.current = 'all';
     }
   }, [area]);
