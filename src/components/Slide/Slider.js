@@ -2,6 +2,7 @@ import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import './Slider.css';
+import { useNavigate } from 'react-router-dom';
 import {
   SliderStep,
   Img,
@@ -57,7 +58,7 @@ function BasicSlider({ data, flag }) {
         {data.image_url.map((img, index) => {
           return (
             <SliderStep key={index}>
-              <SelectImg img={img} flag={flag} />
+              <SelectImg data={data} img={img} flag={flag} />
             </SliderStep>
           );
         })}
@@ -69,7 +70,7 @@ function BasicSlider({ data, flag }) {
         {data.image_url.map((img, index) => {
           return (
             <SliderStep key={index}>
-              <SelectImg img={img} flag={flag} />
+              <SelectImg data={data} img={img} flag={flag} />
             </SliderStep>
           );
         })}
@@ -78,13 +79,41 @@ function BasicSlider({ data, flag }) {
   );
 }
 
-function SelectImg({ img, flag }) {
+function SelectImg({ data, img, flag }) {
+  const navigate = useNavigate();
+  const gotoDetail = id => {
+    navigate('/detail', { state: id });
+  };
   if (flag === 'overlay') {
-    return <OverlayImg src={img} alt="accommodation" />;
+    return (
+      <OverlayImg
+        src={img}
+        alt="accommodation"
+        onClick={() => {
+          gotoDetail(data.id);
+        }}
+      />
+    );
   } else if (flag === 'little') {
-    return <LittleImg src={img} alt="accommodation" />;
+    return (
+      <LittleImg
+        src={img}
+        alt="accommodation"
+        onClick={() => {
+          gotoDetail(data.id);
+        }}
+      />
+    );
   } else {
-    return <Img src={img} alt="accommodation" />;
+    return (
+      <Img
+        src={img}
+        alt="accommodation"
+        onClick={() => {
+          gotoDetail(data.id);
+        }}
+      />
+    );
   }
 }
 

@@ -78,7 +78,6 @@ const Accommodation = React.memo(function Accommodation({
           <LoginModal loginModalHandler={loginModalHandler} />
         ) : null}
         <BasicSlider data={data} flag="list" />
-        {/* <Img src={data.image} alt="accommodataion" /> */}
 
         <Wrapping>
           <Inner
