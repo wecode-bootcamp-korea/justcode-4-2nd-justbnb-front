@@ -45,7 +45,6 @@ const AccommodationList = () => {
   const roomType = ''; //개인실
 
   //local.current = city.current;
-
   if (isMove.current > 2) {
     city.current = 'all';
     local.current = '_all';
@@ -56,6 +55,7 @@ const AccommodationList = () => {
   } else {
     city.current =
       location.state.city === '전체 도시' ? 'all' : location.state.city;
+    local.current = location.state.city;
     startDate = location.state.startDate;
     endDate = location.state.endDate;
     count = location.state.count;
@@ -68,7 +68,8 @@ const AccommodationList = () => {
     isMove.current = 0;
     city.current =
       location.state.city === '전체 도시' ? 'all' : location.state.city;
-    local.current = 'all';
+    local.current =
+      location.state.city === '전체 도시' ? 'all' : location.state.city;
     startDate = location.state.startDate;
     endDate = location.state.endDate;
     count = location.state.count;
