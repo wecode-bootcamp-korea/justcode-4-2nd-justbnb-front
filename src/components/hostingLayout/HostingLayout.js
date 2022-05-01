@@ -39,12 +39,10 @@ const ProgressBox = ({ progress }) => {
 const uploadImage = async event => {
   const formData = new FormData();
   const { files } = event.target;
-  console.log(event.target.files);
 
   Array.from(files).forEach(file => {
     formData.append('images', file);
   });
-  console.log(formData);
 
   await fetch('http://localhost:8000/aws-s3', {
     method: 'POST',
@@ -52,9 +50,7 @@ const uploadImage = async event => {
   })
     .then(response => response.json())
     .then(result => {
-      console.log('성공:', result);
       imageURL = result.filesLocation;
-      console.log('imageurl ', imageURL);
       return result;
     });
 };
@@ -109,7 +105,6 @@ function GotoStep({ step, onChange, resultChoice }) {
           resultChoice={resultChoice}
           Upload={async e => {
             let temp = await uploadImage(e);
-            console.log('ddd', imageURL);
             onChange(imageURL);
           }}
         />
@@ -176,8 +171,6 @@ function HostingLayout() {
       setResultChoice({ ...resultChoice, 10: e });
     } else {
       const { value, id } = e.target;
-      // console.log('aelse', e.target);
-      // console.log('why ?', id, value);
       setResultChoice({ ...resultChoice, [id]: value });
     }
     setFlag(0);
@@ -235,9 +228,6 @@ function HostingLayout() {
     }
     return null;
   };
-  console.log('step :', step);
-  console.log('result :', resultChoice);
-  console.log(resultChoice);
   return (
     <div>
       <Box>

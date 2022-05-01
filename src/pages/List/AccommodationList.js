@@ -23,13 +23,10 @@ import {
 
 const AccommodationList = () => {
   const { localName } = useParams();
-  let local = useRef(localName);
   const [datas, setData] = useState([]);
-
   const [limit, setlimit] = useState(5);
   const [page, setPage] = useState(1);
   const offset = (page - 1) * limit;
-
   const [level, setLevel] = useState();
   const [_data, _setData] = useState([]);
   const [latlng, setlatlng] = useState({ lat: 0, lng: 0 });
@@ -37,7 +34,7 @@ const AccommodationList = () => {
   const location = useLocation();
   let mapMarkers = useRef([]);
   let isMove = useRef(0);
-
+  let local = useRef(localName);
   let city = useRef(local.current);
   let startDate = '';
   let endDate = '';
@@ -47,25 +44,27 @@ const AccommodationList = () => {
   const buildType = ''; //별채
   const roomType = ''; //개인실
 
-  city.current =
-    location.state.city === '전체 도시' ? 'all' : location.state.city;
-  startDate = location.state.startDate;
-  endDate = location.state.endDate;
-  count = location.state.count;
-  haveAnimal = location.state.hasOwnProperty('haveAnimal')
-    ? location.state.haveAnimal.toUpperCase()
-    : '';
+  local.current = city.current;
 
-  /*
-  console.log(city.current, local.current, isMove.current);
-  if (local.current === 'all' && isMove.current > 2 && city.current === 'all') {
-    console.log('this');
+  if (isMove.current > 1) {
     city.current = 'all';
+    local.current = '_all';
     startDate = '';
     endDate = '';
     count = '';
     haveAnimal = '';
-  }*/
+  }
+  useEffect(() => {
+    isMove.current = 0;
+    city.current =
+      location.state.city === '전체 도시' ? 'all' : location.state.city;
+    startDate = location.state.startDate;
+    endDate = location.state.endDate;
+    count = location.state.count;
+    haveAnimal = location.state.hasOwnProperty('haveAnimal')
+      ? location.state.haveAnimal.toUpperCase()
+      : '';
+  }, [location.state]);
 
   /*목데이터 가져오기 */
   const refreshData = async () => {
@@ -133,7 +132,9 @@ const AccommodationList = () => {
           <ListContainer active={changeMap ? 'true' : 'false'}>
             <TextArea>
               <Text>
-                {local.current === 'all' ? '지도에 표시된 지역' : local.current}
+                {local.current === 'all' || local.current === '_all'
+                  ? '지도에 표시된 지역'
+                  : local.current}
                 에 위치한 300개 이상의 숙소
               </Text>
               <Text>
