@@ -13,6 +13,7 @@ const Inner = styled.div`
   display: block;
   margin-left: 20px;
   width: 100%;
+  cursor: pointer;
   @media only screen and (max-width: 744px) {
     width: 100%;
   }

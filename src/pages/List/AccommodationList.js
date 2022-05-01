@@ -44,19 +44,31 @@ const AccommodationList = () => {
   const buildType = ''; //별채
   const roomType = ''; //개인실
 
-  local.current = city.current;
-
-  if (isMove.current > 1) {
+  //local.current = city.current;
+  if (isMove.current > 2) {
     city.current = 'all';
     local.current = '_all';
     startDate = '';
     endDate = '';
     count = '';
     haveAnimal = '';
+  } else {
+    city.current =
+      location.state.city === '전체 도시' ? 'all' : location.state.city;
+    local.current = location.state.city;
+    startDate = location.state.startDate;
+    endDate = location.state.endDate;
+    count = location.state.count;
+    haveAnimal = location.state.hasOwnProperty('haveAnimal')
+      ? location.state.haveAnimal.toUpperCase()
+      : '';
   }
+
   useEffect(() => {
     isMove.current = 0;
     city.current =
+      location.state.city === '전체 도시' ? 'all' : location.state.city;
+    local.current =
       location.state.city === '전체 도시' ? 'all' : location.state.city;
     startDate = location.state.startDate;
     endDate = location.state.endDate;
@@ -106,7 +118,7 @@ const AccommodationList = () => {
   useEffect(() => {
     refreshData();
     getHeartList();
-  }, [local.current, location.state]);
+  }, [local.current, location.state, city.current]);
   //rendering이 한박자 늦어서 어쩔수 없이 한번 더 리랜더링
   useEffect(() => {}, [datas, city.current]);
 
