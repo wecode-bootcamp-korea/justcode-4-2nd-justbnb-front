@@ -25,7 +25,7 @@ function LoginToggle({ openToggle, toggleHandler, setOpenToggle }) {
     return () => {
       window.removeEventListener('mousedown', onClickOutSection);
     };
-  });
+  }, []);
 
   const onClickOutSection = ({ target }) => {
     if (openToggle.display === 'block' && !outSection.current.contains(target))
@@ -74,7 +74,7 @@ const ToggleList = styled.li`
     }
   }
 
-  &: nth-child(2) {
+  &:nth-child(2) {
     border-bottom: 1px solid lightgray;
   }
 `;

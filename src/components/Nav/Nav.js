@@ -23,6 +23,47 @@ function Nav() {
     window.scrollTo(0, 0);
   };
 
+  function WhiteNav() {
+    return (
+      <Container color="#ffffff">
+        <img
+          alt="main-logo"
+          src={`${process.env.PUBLIC_URL}/images/로고핑크.png`}
+          width="150"
+          style={{ cursor: 'pointer' }}
+          onClick={goToTop}
+        />
+        <SearchBtn>
+          <Text>검색 시작하기</Text>
+          <BtnBox>
+            <BiSearch fontSize={20} />
+          </BtnBox>
+        </SearchBtn>
+        <UserNav scrollPosition={scrollPosition} token={token} />
+      </Container>
+    );
+  }
+
+  function BlackNav() {
+    return (
+      <Container>
+        <img
+          alt="main-logo"
+          src={`${process.env.PUBLIC_URL}/images/로고화이트.png`}
+          width="150"
+          style={{ cursor: 'pointer' }}
+        />
+
+        <Wrapper>
+          <Menu>숙소</Menu>
+          <DisableMenu>체험</DisableMenu>
+          <DisableMenu>온라인 체험</DisableMenu>
+        </Wrapper>
+        <UserNav token={token} scrollPosition={scrollPosition} />
+      </Container>
+    );
+  }
+
   return (
     <Box>
       <Header>
@@ -31,40 +72,7 @@ function Nav() {
             저스트비앤비의 코로나 19 대응 방안에 대한 최신 정보를 확인하세요.
           </Aside>
         )}
-        {scrollPosition < 50 ? (
-          <Container>
-            <img
-              alt="main-logo"
-              src={`${process.env.PUBLIC_URL}/images/로고화이트.png`}
-              width="150"
-              style={{ cursor: 'pointer' }}
-            />
-
-            <Wrapper>
-              <Menu>숙소</Menu>
-              <DisableMenu>체험</DisableMenu>
-              <DisableMenu>온라인 체험</DisableMenu>
-            </Wrapper>
-            <UserNav token={token} scrollPosition={scrollPosition} />
-          </Container>
-        ) : (
-          <Container color="#ffffff">
-            <img
-              alt="main-logo"
-              src={`${process.env.PUBLIC_URL}/images/로고핑크.png`}
-              width="150"
-              style={{ cursor: 'pointer' }}
-              onClick={goToTop}
-            />
-            <SearchBtn>
-              <Text>검색 시작하기</Text>
-              <BtnBox>
-                <BiSearch fontSize={20} />
-              </BtnBox>
-            </SearchBtn>
-            <UserNav scrollPosition={scrollPosition} token={token} />
-          </Container>
-        )}
+        {scrollPosition < 50 ? <BlackNav /> : <WhiteNav />}
         <SearchBar
           scrollPosition={scrollPosition}
           updateScroll={updateScroll}
@@ -187,4 +195,4 @@ const BtnBox = styled.div`
   background-color: #ff385c;
 `;
 
-export default React.memo(Nav);
+export default Nav;
