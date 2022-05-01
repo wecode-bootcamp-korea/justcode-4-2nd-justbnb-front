@@ -87,7 +87,11 @@ function LoginModal({ loginModalHandler }) {
             </HeadLine>
             <ContentsWrapper>
               <Text>저스트비앤비에 오신 것을 환영합니다.</Text>
-              <Input placeholder="이메일" onChange={idInput} />
+              <Input
+                placeholder="이메일"
+                onChange={idInput}
+                onKeyPress={onKeyPress}
+              />
               {emailErr && (
                 <ErrBox>
                   <RiErrorWarningFill fontSize={20} />

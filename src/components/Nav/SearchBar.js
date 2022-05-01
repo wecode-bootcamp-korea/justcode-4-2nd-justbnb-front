@@ -36,7 +36,10 @@ function SearchBar({ scrollPosition, updateScroll, flag }) {
 
   useEffect(() => {
     window.addEventListener('scroll', updateScroll);
-  });
+    return () => {
+      window.removeEventListener('scroll', updateScroll);
+    };
+  }, []);
 
   useEffect(() => {
     setEndDate(startDate);
