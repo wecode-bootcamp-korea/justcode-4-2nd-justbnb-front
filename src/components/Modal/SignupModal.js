@@ -45,8 +45,6 @@ function SignupModal({ signupModalHandler }) {
   };
 
   const signupPost = () => {
-    signupModalHandler('none');
-
     fetch('http://localhost:8000/user/signup', {
       method: 'POST',
       headers: {
@@ -57,17 +55,16 @@ function SignupModal({ signupModalHandler }) {
         email: email,
         password: password,
       }),
-    })
-      .then(res => {
-        if (res.status === 201) {
-          alert('회원가입이 완료되었습니다 :)');
-        } else if (res.status === 400 || res.status === 500) {
-          return res.json();
-        }
-      })
-      .then(res => {
-        console.log('에러메세지: ', res.message);
-      });
+    }).then(res => {
+      if (res.status === 201) {
+        alert('회원가입이 완료되었습니다 :)');
+        signupModalHandler('none');
+      } else if (res.status === 409) {
+        alert('존재하는 이메일입니다!');
+      } else if (res.status === 400 || res.status === 500) {
+        res.json();
+      }
+    });
   };
 
   const onKeyPress = e => {
@@ -103,7 +100,11 @@ function SignupModal({ signupModalHandler }) {
                 )}
               </Wrapper>
               <Wrapper>
-                <Input placeholder="이메일" onChange={emailHandler} />
+                <Input
+                  placeholder="이메일"
+                  onChange={emailHandler}
+                  onKeyPress={onKeyPress}
+                />
                 <Text>예약 확인과 영수증을 이메일로 보내드립니다.</Text>
                 {emailErr && (
                   <ErrBox>
@@ -148,7 +149,7 @@ function SignupModal({ signupModalHandler }) {
                 </Text>
               </Wrapper>
               <CountinueBtn onClick={successSignup}>
-                동의 및 계속하기
+                동의 및 가입완료
               </CountinueBtn>
             </ContentsWrapper>
           </ModalInner>
