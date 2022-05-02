@@ -25,7 +25,7 @@ function LoginToggle({ openToggle, toggleHandler, setOpenToggle }) {
     return () => {
       window.removeEventListener('mousedown', onClickOutSection);
     };
-  }, []);
+  });
 
   const onClickOutSection = ({ target }) => {
     if (openToggle.display === 'block' && !outSection.current.contains(target))
