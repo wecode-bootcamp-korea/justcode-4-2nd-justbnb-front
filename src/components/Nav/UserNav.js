@@ -3,10 +3,11 @@ import styled from 'styled-components';
 import { GiHamburgerMenu } from 'react-icons/gi';
 import { RiUser3Line } from 'react-icons/ri';
 import { CgGlobeAlt } from 'react-icons/cg';
-import { useNavigate } from 'react-router-dom';
-import UserToggle from './UserToggle';
+import { Link, useNavigate } from 'react-router-dom';
+import LogoutToggle from './LogoutToggle';
 import LoginModal from '../Modal/LoginModal';
 import SignupModal from '../Modal/SignupModal';
+import LoginToggle from './LoginToggle';
 
 function UserNav({ scrollPosition, token }) {
   const [openToggle, setOpenToggle] = useState({ display: 'none' });
@@ -37,62 +38,62 @@ function UserNav({ scrollPosition, token }) {
     window.scrollTo(0, 0);
   };
 
-  function BeforeLogin() {
-    return (
-      <>
-        <Buttons color="#ffffff" background="#262626" onClick={action}>
-          {!token ? '호스트 되기' : '호스트 모드로 전환'}
-        </Buttons>
-        <Buttons background="#262626">
-          <CgGlobeAlt
-            fontSize={20}
-            style={{ opacity: '0.5' }}
-            color="#ffffff"
-          />
-        </Buttons>
-        <UserBox onClick={toggleHandler} active={false}>
-          <StyledIcon>
-            <GiHamburgerMenu fontSize={16} />
-          </StyledIcon>
-          <User>
-            <RiUser3Line fontSize={18} />
-          </User>
-        </UserBox>
-      </>
-    );
-  }
-
-  function AfterLogin() {
-    return (
-      <>
-        <Buttons color="black" background="#F7F7F7" onClick={action}>
-          {!token ? '호스트 되기' : '호스트 모드로 전환'}
-        </Buttons>
-        <Buttons color="black" background="#F7F7F7">
-          <CgGlobeAlt fontSize={20} style={{ opacity: '0.5' }} />
-        </Buttons>
-        <UserBox onClick={toggleHandler} active={true}>
-          <StyledIcon>
-            <GiHamburgerMenu fontSize={16} />
-          </StyledIcon>
-          <User>
-            <RiUser3Line fontSize={18} />
-          </User>
-        </UserBox>
-      </>
-    );
-  }
-
   return (
     <div>
-      <Navbar>{scrollPosition < 50 ? <BeforeLogin /> : <AfterLogin />}</Navbar>
-      {openToggle && (
-        <UserToggle
+      <Navbar>
+        {scrollPosition < 50 ? (
+          <>
+            <Buttons color="#ffffff" background="#262626" onClick={action}>
+              {!token ? '호스트 되기' : '호스트 모드로 전환'}
+            </Buttons>
+            <Buttons background="#262626">
+              <CgGlobeAlt
+                fontSize={20}
+                style={{ opacity: '0.5' }}
+                color="#ffffff"
+              />
+            </Buttons>
+            <UserBox onClick={toggleHandler} active={false}>
+              <StyledIcon>
+                <GiHamburgerMenu fontSize={16} />
+              </StyledIcon>
+              <User>
+                <RiUser3Line fontSize={18} />
+              </User>
+            </UserBox>
+          </>
+        ) : (
+          <>
+            <Buttons color="black" background="#F7F7F7" onClick={action}>
+              {!token ? '호스트 되기' : '호스트 모드로 전환'}
+            </Buttons>
+            <Buttons color="black" background="#F7F7F7">
+              <CgGlobeAlt fontSize={20} style={{ opacity: '0.5' }} />
+            </Buttons>
+            <UserBox onClick={toggleHandler} active={true}>
+              <StyledIcon>
+                <GiHamburgerMenu fontSize={16} />
+              </StyledIcon>
+              <User>
+                <RiUser3Line fontSize={18} />
+              </User>
+            </UserBox>
+          </>
+        )}
+      </Navbar>
+      {token && (
+        <LoginToggle
+          openToggle={openToggle}
+          toggleHandler={toggleHandler}
+          setOpenToggle={setOpenToggle}
+        />
+      )}
+      {!token && (
+        <LogoutToggle
           openToggle={openToggle}
           loginModalHandler={loginModalHandler}
           signupModalHandler={signupModalHandler}
           setOpenToggle={setOpenToggle}
-          toggleHandler={toggleHandler}
         />
       )}
       {isLoginModalOpen && <LoginModal loginModalHandler={loginModalHandler} />}
@@ -148,7 +149,7 @@ const Buttons = styled.li`
   font-weight: 600;
   font-size: 14px;
 
-  &:hover {
+  &: hover {
     cursor: pointer;
     background: ${props => props.background};
   }
