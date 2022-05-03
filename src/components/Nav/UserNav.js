@@ -33,11 +33,15 @@ function UserNav({ scrollPosition, token }) {
   };
 
   const action = () => {
-    token ? navigate('/management') : loginModalHandler();
-    window.scrollTo(0, 0);
+    if (token) {
+      navigate('/management');
+      window.scrollTo(0, 0);
+    } else {
+      loginModalHandler('none');
+    }
   };
 
-  function BeforeLogin() {
+  function BeforeScroll() {
     return (
       <>
         <Buttons color="#ffffff" background="#262626" onClick={action}>
@@ -62,10 +66,10 @@ function UserNav({ scrollPosition, token }) {
     );
   }
 
-  function AfterLogin() {
+  function AfterSrcoll() {
     return (
       <>
-        <Buttons color="black" background="#F7F7F7" onClick={action}>
+        <Buttons color="black" background="#F7F7F7" style={{ opacity: '0.5' }}>
           {!token ? '호스트 되기' : '호스트 모드로 전환'}
         </Buttons>
         <Buttons color="black" background="#F7F7F7">
@@ -85,7 +89,9 @@ function UserNav({ scrollPosition, token }) {
 
   return (
     <div>
-      <Navbar>{scrollPosition < 50 ? <BeforeLogin /> : <AfterLogin />}</Navbar>
+      <Navbar>
+        {scrollPosition < 100 ? <BeforeScroll /> : <AfterSrcoll />}
+      </Navbar>
       {openToggle && (
         <UserToggle
           openToggle={openToggle}
@@ -95,7 +101,12 @@ function UserNav({ scrollPosition, token }) {
           toggleHandler={toggleHandler}
         />
       )}
-      {isLoginModalOpen && <LoginModal loginModalHandler={loginModalHandler} />}
+      {isLoginModalOpen && (
+        <LoginModal
+          loginModalHandler={loginModalHandler}
+          scrollPosition={scrollPosition}
+        />
+      )}
       {isSignupModalOpen && (
         <SignupModal signupModalHandler={signupModalHandler} />
       )}

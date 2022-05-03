@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled, { css, keyframes } from 'styled-components';
 import { RiErrorWarningFill } from 'react-icons/ri';
 import { AiFillCloseCircle } from 'react-icons/ai';
@@ -70,6 +70,20 @@ function SignupModal({ signupModalHandler }) {
   const onKeyPress = e => {
     e.key === 'Enter' && successSignup();
   };
+
+  useEffect(() => {
+    document.body.style.cssText = `
+    position: fixed;
+    top: -${window.scrollY}px;
+    overflow-y : scroll;
+    width: 100%;`;
+
+    return () => {
+      const scrollY = document.body.style.top;
+      document.body.style.cssText = ``;
+      window.scrollTo(0, parseInt(scrollY || '0', 10) * -1);
+    };
+  }, []);
 
   return (
     <div>
