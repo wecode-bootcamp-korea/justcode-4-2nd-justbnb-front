@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Footer from '../../components/Footer';
 import styled from 'styled-components';
@@ -6,8 +6,9 @@ import Nav from '../../components/Nav/Nav';
 import CityCard from './CityCard';
 
 function Main() {
-  const navigate = useNavigate();
   const [cities, setCities] = useState([]);
+  const navigate = useNavigate();
+  const sliderRef = useRef();
 
   const goToList = city => {
     navigate(`/list/${city}`, {
@@ -57,18 +58,18 @@ function Main() {
         </PictureBox>
         <CityContainer>
           <Text color="black">설레이는 다음 여행을 위한 아이디어</Text>
-          <Wrapper>
+          <SlideCard ref={sliderRef}>
             {cities.map(list => (
-              <div
+              <Wrapper
                 key={list.id}
                 onClick={() => {
                   goToList(list.name);
                 }}
               >
                 <CityCard key={list.id} list={list} />
-              </div>
+              </Wrapper>
             ))}
-          </Wrapper>
+          </SlideCard>
         </CityContainer>
       </div>
       <HostingBanner>
@@ -165,7 +166,7 @@ const PictureBox = styled.div`
 
   @media screen and (max-width: 1127px) {
     position: absolute;
-    top: 110vw;
+    top: 1050px;
     left: 1vw;
     right: 1vw;
     padding: 300px 0;
@@ -176,8 +177,22 @@ const CityContainer = styled.div`
   padding: 500px 50px 300px 50px;
 `;
 
+const SlideCard = styled.div`
+  @media screen and (min-width: 1127px) {
+    display: flex;
+  }
+  @media screen and (max-width: 1127px) {
+  }
+  position: relative;
+  width: 100%;
+  overflow-x: scroll;
+  overflow-y: hidden;
+  white-space: nowrap;
+`;
+
 const Wrapper = styled.div`
-  display: flex;
+  display: inline-block;
+  width: 35%;
 `;
 
 const HostingBanner = styled.div`
@@ -186,9 +201,6 @@ const HostingBanner = styled.div`
   padding: 50px;
   background-image: url('https://ifh.cc/g/B2bWvW.jpg');
   background-size: cover;
-
-  @media screen and (max-width: 1127px) {
-  }
 `;
 
 const Box = styled.div`
