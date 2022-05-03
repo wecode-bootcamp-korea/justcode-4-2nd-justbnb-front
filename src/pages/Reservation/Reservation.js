@@ -28,7 +28,6 @@ function Reservation() {
         if (data.status === 200) setData2(data.reservation);
       });
   }, []);
-
   return (
     <>
       <PageNav />
@@ -43,7 +42,7 @@ function Reservation() {
           {data2.map((el, index) => {
             return (
               <Card2 key={el.id}>
-                <Img2 src={el.image_url} alt="img" />
+                <Img2 src={el.image_url[0]} alt="img" />
                 <TextWrapper>
                   <Text>
                     <div>예약자 이름 :</div>
