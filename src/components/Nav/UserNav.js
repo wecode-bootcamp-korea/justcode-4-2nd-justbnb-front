@@ -33,8 +33,12 @@ function UserNav({ scrollPosition, token }) {
   };
 
   const action = () => {
-    token ? navigate('/management') : loginModalHandler();
-    window.scrollTo(0, 0);
+    if (token) {
+      navigate('/management');
+      window.scrollTo(0, 0);
+    } else {
+      loginModalHandler('none');
+    }
   };
 
   function BeforeLogin() {
@@ -85,7 +89,7 @@ function UserNav({ scrollPosition, token }) {
 
   return (
     <div>
-      <Navbar>{scrollPosition < 50 ? <BeforeLogin /> : <AfterLogin />}</Navbar>
+      <Navbar>{scrollPosition < 100 ? <BeforeLogin /> : <AfterLogin />}</Navbar>
       {openToggle && (
         <UserToggle
           openToggle={openToggle}

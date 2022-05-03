@@ -67,12 +67,12 @@ function Nav() {
   return (
     <Box>
       <Header>
-        {scrollPosition < 50 && (
+        {scrollPosition < 100 && (
           <Aside>
             저스트비앤비의 코로나 19 대응 방안에 대한 최신 정보를 확인하세요.
           </Aside>
         )}
-        {scrollPosition < 50 ? <BlackNav /> : <WhiteNav />}
+        {scrollPosition < 100 ? <BlackNav /> : <WhiteNav />}
         <SearchBar
           scrollPosition={scrollPosition}
           updateScroll={updateScroll}
