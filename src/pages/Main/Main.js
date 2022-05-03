@@ -94,6 +94,10 @@ const MainBanner = styled.div`
   margin: 10px 10vw;
   padding: 80px 0 400px 0px;
   background-color: black;
+
+  @media screen and (max-width: 1127px) {
+    margin: 10px 1vw;
+  }
 `;
 
 const PinkBox = styled.div`
@@ -102,7 +106,10 @@ const PinkBox = styled.div`
   align-items: center;
   padding: 100px 20px;
   border-radius: 10px;
-  background: #ff385c;
+  background-color: #ff385c;
+  @media screen and (max-width: 1127px) {
+    padding: 300px 0;
+  }
 `;
 
 const Text = styled.div`
@@ -155,6 +162,14 @@ const PictureBox = styled.div`
   border-radius: 10px;
   background-image: url('https://ifh.cc/g/qZM3wa.jpg');
   background-size: cover;
+
+  @media screen and (max-width: 1127px) {
+    position: absolute;
+    top: 110vw;
+    left: 1vw;
+    right: 1vw;
+    padding: 300px 0;
+  }
 `;
 
 const CityContainer = styled.div`
@@ -171,6 +186,9 @@ const HostingBanner = styled.div`
   padding: 50px;
   background-image: url('https://ifh.cc/g/B2bWvW.jpg');
   background-size: cover;
+
+  @media screen and (max-width: 1127px) {
+  }
 `;
 
 const Box = styled.div`
