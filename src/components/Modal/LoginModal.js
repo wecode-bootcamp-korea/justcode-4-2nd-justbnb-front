@@ -6,7 +6,7 @@ import { FaApple } from 'react-icons/fa';
 import { RiErrorWarningFill } from 'react-icons/ri';
 import { AiFillCloseCircle } from 'react-icons/ai';
 
-function LoginModal({ loginModalHandler }) {
+function LoginModal({ loginModalHandler, scrollPosition }) {
   const [inputs, setInputs] = useState({
     email: '',
     password: '',
@@ -73,7 +73,7 @@ function LoginModal({ loginModalHandler }) {
   useEffect(() => {
     document.body.style.cssText = `
     position: fixed;
-    top: -${window.scrollY}px;
+    top: -${scrollPosition}px;
     overflow-y : scroll;
     width: 100%;`;
 
