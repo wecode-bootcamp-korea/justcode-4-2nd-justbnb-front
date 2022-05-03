@@ -2,9 +2,9 @@
 
 <br />
 
-<!-- <img width="950" alt="스크린샷 2022-04-15 오전 9 51 37" src="https://user-images.githubusercontent.com/97730865/163500832-e1ca0931-8e6b-44d3-a3b3-631c2bbbd625.png">
+<img width="950" alt="스크린샷 2022-04-15 오전 9 51 37" src="https://ifh.cc/g/TrsYJL.jpg">
 
-🎬 [Wetcha PEDIA 구현영상 보러 가기](https://www.youtube.com/watch?v=HkkZfwLtfis) -->
+🎬 [JustBnB 구현영상 보러 가기](https://youtu.be/RI3BDl8vvxU)
 
 <br/>
 
@@ -17,7 +17,6 @@
 - 개발은 초기 세팅부터 전부 직접 구현했으며, 아래 데모 영상에서 보이는 부분은 모두 백엔드와 연결하여 실제 사용할 수 있는 서비스 수준으로 개발한 것입니다.
 - 진행 기간 : 2022.04.18 ~ 2022.04.29 (12일)
 - [Back-end GitHub 바로가기](https://github.com/wecode-bootcamp-korea/justcode-4-2nd-justbnb-back)
-- [시연영상 바로가기](https://youtu.be/RI3BDl8vvxU)
 
 <br/>
 
