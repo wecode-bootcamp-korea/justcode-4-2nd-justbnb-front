@@ -93,7 +93,7 @@ const Container = styled.div`
 const MainBanner = styled.div`
   position: relative;
   margin: 10px 10vw;
-  padding: 80px 0 400px 0px;
+  padding: 100px 0 400px 0px;
   background-color: black;
 
   @media screen and (max-width: 1127px) {
@@ -105,7 +105,7 @@ const PinkBox = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 100px 20px;
+  padding: 150px 20px;
   border-radius: 10px;
   background-color: #ff385c;
   @media screen and (max-width: 1127px) {
@@ -153,20 +153,20 @@ const Text2 = styled.div`
 
 const PictureBox = styled.div`
   position: absolute;
-  top: 750px;
+  top: 800px;
   left: 10vw;
   right: 10vw;
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 240px 200px;
+  padding: 340px 200px;
   border-radius: 10px;
   background-image: url('https://ifh.cc/g/qZM3wa.jpg');
   background-size: cover;
 
   @media screen and (max-width: 1127px) {
     position: absolute;
-    top: 1050px;
+    top: 1100px;
     left: 1vw;
     right: 1vw;
     padding: 300px 0;
@@ -174,6 +174,7 @@ const PictureBox = styled.div`
 `;
 
 const CityContainer = styled.div`
+  margin-top: 150px;
   padding: 500px 50px 300px 50px;
 `;
 
@@ -198,7 +199,7 @@ const Wrapper = styled.div`
 const HostingBanner = styled.div`
   display: flex;
   flex-direction: column;
-  padding: 50px;
+  padding: 150px 50px;
   background-image: url('https://ifh.cc/g/B2bWvW.jpg');
   background-size: cover;
 `;
