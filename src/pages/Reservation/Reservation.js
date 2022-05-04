@@ -4,6 +4,8 @@ import PageNav from '../../components/Nav/PageNav';
 import Footer from '../../components/Footer';
 import styled from 'styled-components';
 
+let PORT = process.env.REACT_APP_PORT;
+
 function Reservation() {
   const [data2, setData2] = useState([]);
   const navigate = useNavigate();
@@ -14,8 +16,8 @@ function Reservation() {
   };
 
   useEffect(() => {
-    fetch('http://localhost:8000/reservation/guest', {
-      // fetch('/data/dlwjdals/reservation.json', {
+    // fetch('http://localhost:8000/reservation/guest', {
+    fetch(`${PORT}/reservation/guest`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
