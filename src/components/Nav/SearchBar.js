@@ -36,7 +36,10 @@ function SearchBar({ scrollPosition, updateScroll, flag }) {
 
   useEffect(() => {
     window.addEventListener('scroll', updateScroll);
-  });
+    return () => {
+      window.removeEventListener('scroll', updateScroll);
+    };
+  }, []);
 
   useEffect(() => {
     setEndDate(startDate);
@@ -172,7 +175,6 @@ const Container = styled.div`
   width: 100%;
   transition: top 0.3s;
   margin: 0 auto;
-  /* padding-bottom: 20px; */
   background: ${props => props.bgColor};
 `;
 
@@ -209,6 +211,10 @@ const SearchBtns = styled.div`
   color: #ffffff;
   border-radius: 40px;
   cursor: pointer;
+`;
+
+const Input = styled.input`
+  border: 1px solid #ffffff;
 `;
 
 const Text = styled.div`

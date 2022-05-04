@@ -14,7 +14,7 @@ import {
   Wrapping,
   HeartWrap,
 } from './AccommodationStyled';
-
+let PORT = process.env.REACT_APP_PORT;
 const Accommodation = React.memo(function Accommodation({
   data,
   localName,
@@ -53,7 +53,7 @@ const Accommodation = React.memo(function Accommodation({
 
   const settingHeart = flag => {
     setHeartBtn(flag);
-    fetch('http://localhost:8000/wish', {
+    fetch(`${PORT}/wish`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -63,7 +63,7 @@ const Accommodation = React.memo(function Accommodation({
   };
   const deleteHeart = flag => {
     setHeartBtn(flag);
-    fetch(`http://localhost:8000/wish?accommodationsId=${data.id}`, {
+    fetch(`${PORT}/wish?accommodationsId=${data.id}`, {
       method: 'DELETE',
       headers: {
         'Content-Type': 'application/json',
@@ -78,7 +78,6 @@ const Accommodation = React.memo(function Accommodation({
           <LoginModal loginModalHandler={loginModalHandler} />
         ) : null}
         <BasicSlider data={data} flag="list" />
-        {/* <Img src={data.image} alt="accommodataion" /> */}
 
         <Wrapping>
           <Inner

@@ -4,26 +4,6 @@ import styled from 'styled-components';
 export default function CounterValue2({ onChange, resultChoice }) {
   const [count, setCount] = useState(false);
 
-  // const upNum = () => {
-  //   setNum(num >= 4 ? 4 : num + 1);
-  // };
-
-  // const downNum = () => {
-  //   setNum(num <= 0 ? 0 : num - 1);
-  // };
-
-  // const NumUp = e => {
-  //   upNum();
-  //   e.target.value = e.target.value === 'true' ? 'false' : 'true';
-  //   onChange(e);
-  // };
-
-  // const NumDown = e => {
-  //   downNum();
-  //   e.target.value = e.target.value === 'true' ? 'false' : 'true';
-  //   onChange(e);
-  // };
-
   return (
     <CounterWrapper>
       <Button>
@@ -36,10 +16,10 @@ export default function CounterValue2({ onChange, resultChoice }) {
           }}
           style={{ opacity: count ? null : '0.3' }}
         >
-          o
+          O
         </button>
       </Button>
-      <Button2>
+      <Button>
         <button
           id="5"
           value="false"
@@ -47,49 +27,42 @@ export default function CounterValue2({ onChange, resultChoice }) {
             setCount(false);
             onChange(e);
           }}
-          style={{ opacity: count ? null : '0.3' }}
+          style={{ opacity: count ? '0.3' : null }}
         >
-          x
+          X
         </button>
-      </Button2>
+      </Button>
     </CounterWrapper>
   );
 }
 
 const CounterWrapper = styled.section`
   display: flex;
-  /* align-items: center; */
-  /* justify-content: space-between; */
+  justify-content: space-between;
+  align-items: center;
+  width: 30%;
 `;
 
 const Button = styled.div`
-  /* display: flex; */
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 1px solid rgba(0, 0, 0, 0.4);
+  cursor: pointer;
   button {
-    padding: 7px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
     background-color: white;
-    border: 1px solid rgba(155, 149, 167, 0.6);
     border-radius: 50%;
-    font-size: 15px;
+    border: none;
+    font-size: 20px;
+    color: rgba(0, 0, 0, 0.7);
+    cursor: pointer;
+  }
+  &:first-child {
+    margin-right: 40px;
   }
 `;
-
-const Button2 = styled.div`
-  /* display: flex; */
-  margin-left: 40px;
-  button {
-    padding: 6px;
-    background-color: white;
-    border: 1px solid rgba(155, 149, 167, 0.6);
-    border-radius: 50%;
-    font-size: 15px;
-  }
-`;
-
-// const Num = styled.div`
-//   h1 {
-//     font-weight: lighter;
-//     font-size: 17px;
-//     margin-left: 15px;
-//     margin-right: 17px;
-//   }
-// `;

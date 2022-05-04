@@ -14,6 +14,7 @@ function SearchToggle({
     { id: 3, name: '대구시' },
     { id: 4, name: '부산시' },
     { id: 5, name: '제주시' },
+    { id: 6, name: '전체 도시' },
   ];
 
   const outSection = useRef();

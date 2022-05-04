@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Footer from '../../components/Footer';
 import styled from 'styled-components';
@@ -6,8 +6,9 @@ import Nav from '../../components/Nav/Nav';
 import CityCard from './CityCard';
 
 function Main() {
-  const navigate = useNavigate();
   const [cities, setCities] = useState([]);
+  const navigate = useNavigate();
+  const sliderRef = useRef();
 
   const goToList = city => {
     navigate(`/list/${city}`, {
@@ -15,12 +16,11 @@ function Main() {
         city: city,
       },
     });
-    window.scrollTo(0.0);
+    window.scrollTo(0, 0);
   };
 
   const goToHosting = () => {
     navigate(`/layout`);
-    window.scrollTo(0.0);
   };
 
   useEffect(() => {
@@ -58,18 +58,18 @@ function Main() {
         </PictureBox>
         <CityContainer>
           <Text color="black">설레이는 다음 여행을 위한 아이디어</Text>
-          <Wrapper>
+          <SlideCard ref={sliderRef}>
             {cities.map(list => (
-              <div
+              <Wrapper
                 key={list.id}
                 onClick={() => {
                   goToList(list.name);
                 }}
               >
                 <CityCard key={list.id} list={list} />
-              </div>
+              </Wrapper>
             ))}
-          </Wrapper>
+          </SlideCard>
         </CityContainer>
       </div>
       <HostingBanner>
@@ -93,17 +93,24 @@ const Container = styled.div`
 const MainBanner = styled.div`
   position: relative;
   margin: 10px 10vw;
-  padding: 80px 0 400px 0px;
+  padding: 100px 0 400px 0px;
   background-color: black;
+
+  @media screen and (max-width: 1127px) {
+    margin: 10px 1vw;
+  }
 `;
 
 const PinkBox = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 100px 20px;
+  padding: 150px 20px;
   border-radius: 10px;
-  background: #ff385c;
+  background-color: #ff385c;
+  @media screen and (max-width: 1127px) {
+    padding: 300px 0;
+  }
 `;
 
 const Text = styled.div`
@@ -146,30 +153,53 @@ const Text2 = styled.div`
 
 const PictureBox = styled.div`
   position: absolute;
-  top: 750px;
+  top: 800px;
   left: 10vw;
   right: 10vw;
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 240px 200px;
+  padding: 340px 200px;
   border-radius: 10px;
   background-image: url('https://ifh.cc/g/qZM3wa.jpg');
   background-size: cover;
+
+  @media screen and (max-width: 1127px) {
+    position: absolute;
+    top: 1100px;
+    left: 1vw;
+    right: 1vw;
+    padding: 300px 0;
+  }
 `;
 
 const CityContainer = styled.div`
+  margin-top: 150px;
   padding: 500px 50px 300px 50px;
 `;
 
+const SlideCard = styled.div`
+  @media screen and (min-width: 1127px) {
+    display: flex;
+  }
+  @media screen and (max-width: 1127px) {
+  }
+  position: relative;
+  width: 100%;
+  overflow-x: scroll;
+  overflow-y: hidden;
+  white-space: nowrap;
+`;
+
 const Wrapper = styled.div`
-  display: flex;
+  display: inline-block;
+  width: 35%;
 `;
 
 const HostingBanner = styled.div`
   display: flex;
   flex-direction: column;
-  padding: 50px;
+  padding: 150px 50px;
   background-image: url('https://ifh.cc/g/B2bWvW.jpg');
   background-size: cover;
 `;

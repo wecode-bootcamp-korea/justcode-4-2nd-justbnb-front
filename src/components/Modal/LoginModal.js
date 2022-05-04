@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled, { css, keyframes } from 'styled-components';
 import { BsFacebook } from 'react-icons/bs';
 import { FcGoogle } from 'react-icons/fc';
@@ -6,7 +6,7 @@ import { FaApple } from 'react-icons/fa';
 import { RiErrorWarningFill } from 'react-icons/ri';
 import { AiFillCloseCircle } from 'react-icons/ai';
 
-function LoginModal({ loginModalHandler }) {
+function LoginModal({ loginModalHandler, scrollPosition }) {
   const [inputs, setInputs] = useState({
     email: '',
     password: '',
@@ -14,6 +14,7 @@ function LoginModal({ loginModalHandler }) {
   const { email, password } = inputs;
   const [emailErr, setEmailErr] = useState(false);
   const [passwordErr, setPasswordErr] = useState(false);
+  let PORT = process.env.REACT_APP_PORT;
 
   const idInput = e => {
     setInputs({ ...inputs, email: e.target.value });
@@ -48,7 +49,7 @@ function LoginModal({ loginModalHandler }) {
   };
 
   const postLogin = () => {
-    fetch('http://localhost:8000/user/signin', {
+    fetch(PORT + '/user/signin', {
       method: 'POST',
       headers: {
         'content-Type': 'application/json',
@@ -70,6 +71,20 @@ function LoginModal({ loginModalHandler }) {
       });
   };
 
+  useEffect(() => {
+    document.body.style.cssText = `
+    position: fixed;
+    top: -${scrollPosition}px;
+    overflow-y : scroll;
+    width: 100%;`;
+
+    return () => {
+      const scrollY = document.body.style.top;
+      document.body.style.cssText = ``;
+      window.scrollTo(0, parseInt(scrollY || '0', 10) * -1);
+    };
+  }, []);
+
   return (
     <div>
       <BackgroundModal>
@@ -87,7 +102,11 @@ function LoginModal({ loginModalHandler }) {
             </HeadLine>
             <ContentsWrapper>
               <Text>저스트비앤비에 오신 것을 환영합니다.</Text>
-              <Input placeholder="이메일" onChange={idInput} />
+              <Input
+                placeholder="이메일"
+                onChange={idInput}
+                onKeyPress={onKeyPress}
+              />
               {emailErr && (
                 <ErrBox>
                   <RiErrorWarningFill fontSize={20} />

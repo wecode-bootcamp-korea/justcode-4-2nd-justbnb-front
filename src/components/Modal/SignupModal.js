@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled, { css, keyframes } from 'styled-components';
 import { RiErrorWarningFill } from 'react-icons/ri';
 import { AiFillCloseCircle } from 'react-icons/ai';
@@ -12,6 +12,7 @@ function SignupModal({ signupModalHandler }) {
   const [nameErr, setNameErr] = useState(false);
   const [emailErr, setEmailErr] = useState(false);
   const [passwordErr, setPasswordErr] = useState(false);
+  let PORT = process.env.REACT_APP_PORT;
 
   const usernameHandler = e => {
     setInputs({ ...inputs, name: e.target.value });
@@ -45,9 +46,7 @@ function SignupModal({ signupModalHandler }) {
   };
 
   const signupPost = () => {
-    signupModalHandler('none');
-
-    fetch('http://localhost:8000/user/signup', {
+    fetch(PORT + '/user/signup', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -57,22 +56,35 @@ function SignupModal({ signupModalHandler }) {
         email: email,
         password: password,
       }),
-    })
-      .then(res => {
-        if (res.status === 201) {
-          alert('회원가입이 완료되었습니다 :)');
-        } else if (res.status === 400 || res.status === 500) {
-          return res.json();
-        }
-      })
-      .then(res => {
-        console.log('에러메세지: ', res.message);
-      });
+    }).then(res => {
+      if (res.status === 201) {
+        alert('회원가입이 완료되었습니다 :)');
+        signupModalHandler('none');
+      } else if (res.status === 409) {
+        alert('존재하는 이메일입니다!');
+      } else if (res.status === 400 || res.status === 500) {
+        res.json();
+      }
+    });
   };
 
   const onKeyPress = e => {
     e.key === 'Enter' && successSignup();
   };
+
+  useEffect(() => {
+    document.body.style.cssText = `
+    position: fixed;
+    top: -${window.scrollY}px;
+    overflow-y : scroll;
+    width: 100%;`;
+
+    return () => {
+      const scrollY = document.body.style.top;
+      document.body.style.cssText = ``;
+      window.scrollTo(0, parseInt(scrollY || '0', 10) * -1);
+    };
+  }, []);
 
   return (
     <div>
@@ -103,7 +115,11 @@ function SignupModal({ signupModalHandler }) {
                 )}
               </Wrapper>
               <Wrapper>
-                <Input placeholder="이메일" onChange={emailHandler} />
+                <Input
+                  placeholder="이메일"
+                  onChange={emailHandler}
+                  onKeyPress={onKeyPress}
+                />
                 <Text>예약 확인과 영수증을 이메일로 보내드립니다.</Text>
                 {emailErr && (
                   <ErrBox>
@@ -148,7 +164,7 @@ function SignupModal({ signupModalHandler }) {
                 </Text>
               </Wrapper>
               <CountinueBtn onClick={successSignup}>
-                동의 및 계속하기
+                동의 및 가입완료
               </CountinueBtn>
             </ContentsWrapper>
           </ModalInner>
