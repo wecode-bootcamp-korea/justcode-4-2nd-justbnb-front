@@ -43,6 +43,7 @@ const AccommodationList = () => {
 
   const buildType = ''; //별채
   const roomType = ''; //개인실
+  let PORT = process.env.REACT_APP_PORT;
 
   //local.current = city.current;
   if (isMove.current > 2) {
@@ -82,7 +83,7 @@ const AccommodationList = () => {
   const refreshData = async () => {
     mapMarkers.current = [];
     await fetch(
-      `http://localhost:8000/accommodations?city=${city.current}&buildType=${buildType}&roomType=${roomType}&animalYn=${haveAnimal}&totalMembers=${count}`,
+      `${PORT}/accommodations?city=${city.current}&buildType=${buildType}&roomType=${roomType}&animalYn=${haveAnimal}&totalMembers=${count}`,
       {
         method: 'GET',
         headers: {
@@ -103,7 +104,7 @@ const AccommodationList = () => {
   let token = localStorage.getItem('token');
   const [hearts, setHearts] = useState([]);
   const getHeartList = async () => {
-    await fetch(`http://localhost:8000/wish?city=${city.current}`, {
+    await fetch(`${PORT}/wish?city=${city.current}`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
@@ -120,7 +121,7 @@ const AccommodationList = () => {
     getHeartList();
   }, [local.current, location.state, city.current]);
   //rendering이 한박자 늦어서 어쩔수 없이 한번 더 리랜더링
-  useEffect(() => {}, [datas, city.current]);
+  //useEffect(() => {}, [datas, city.current]);
 
   //반응형 웹
   const [width, setWidth] = useState(window.innerWidth);
