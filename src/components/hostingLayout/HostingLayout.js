@@ -26,6 +26,8 @@ let currentStep = 1;
 
 let imageURL = null;
 
+let PORT = process.env.REACT_APP_PORT;
+
 const ProgressBox = ({ progress }) => {
   if (!progress) progress = 0;
   return (
@@ -44,7 +46,8 @@ const uploadImage = async event => {
     formData.append('images', file);
   });
 
-  await fetch('http://localhost:8000/aws-s3', {
+  // await fetch('http://localhost:8000/aws-s3', {
+  await fetch(`${PORT}/aws-s3`, {
     method: 'POST',
     body: formData,
   })
@@ -56,7 +59,8 @@ const uploadImage = async event => {
 };
 
 async function gotoDB(resultChoice) {
-  await fetch('http://localhost:8000/accommodations', {
+  // await fetch('http://localhost:8000/accommodations', {
+  await fetch(`${PORT}/accommodations`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
