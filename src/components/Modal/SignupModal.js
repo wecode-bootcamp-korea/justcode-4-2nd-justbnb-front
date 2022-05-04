@@ -12,6 +12,7 @@ function SignupModal({ signupModalHandler }) {
   const [nameErr, setNameErr] = useState(false);
   const [emailErr, setEmailErr] = useState(false);
   const [passwordErr, setPasswordErr] = useState(false);
+  let PORT = process.env.REACT_APP_PORT;
 
   const usernameHandler = e => {
     setInputs({ ...inputs, name: e.target.value });
@@ -45,7 +46,7 @@ function SignupModal({ signupModalHandler }) {
   };
 
   const signupPost = () => {
-    fetch('http://localhost:8000/user/signup', {
+    fetch(PORT + '/user/signup', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
