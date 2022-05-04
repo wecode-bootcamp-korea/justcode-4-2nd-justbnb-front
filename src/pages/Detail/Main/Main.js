@@ -19,14 +19,13 @@ function Main(props) {
     !isImageModalOpen ? setIsImageModalOpen(true) : setIsImageModalOpen(false);
   };
 
+  let PORT = process.env.REACT_APP_PORT;
+
   // 숙소 이미지 받아오기
   useEffect(() => {
-    fetch(
-      `http://localhost:8000/accommodations/images?accommodationsId=${location.state}`,
-      {
-        method: 'GET',
-      }
-    )
+    fetch(`${PORT}/accommodations/images?accommodationsId=${location.state}`, {
+      method: 'GET',
+    })
       .then(res => res.json())
       .then(result => {
         setImageUrlArray(result.accommodationsImages[0].image_url);
@@ -39,7 +38,7 @@ function Main(props) {
 
   // wishList 받아오기
   useEffect(() => {
-    fetch(`http://localhost:8000/wish?accommodationsId=${location.state}`, {
+    fetch(`${PORT}/wish?accommodationsId=${location.state}`, {
       method: 'GET',
       headers: { accessToken: token },
     })
@@ -51,7 +50,7 @@ function Main(props) {
 
   // wishList 등록
   const postWishList = () => {
-    fetch('http://localhost:8000/wish', {
+    fetch(`${PORT}/wish`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -63,7 +62,6 @@ function Main(props) {
     })
       .then(res => res.json())
       .then(result => {
-        // console.log('token', token);
         console.log(result);
         setIsSaved(true);
       });
@@ -71,7 +69,7 @@ function Main(props) {
 
   // wishList 삭제
   const deleteWishList = () => {
-    fetch(`http://localhost:8000/wish?accommodationsId=${location.state}`, {
+    fetch(`${PORT}/wish?accommodationsId=${location.state}`, {
       method: 'DELETE',
       headers: { accessToken: token },
     })

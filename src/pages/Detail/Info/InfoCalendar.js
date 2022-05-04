@@ -1,7 +1,6 @@
 import { React, useEffect, useState } from 'react';
 import styled from 'styled-components';
 
-// import Calendar from '../../../components/Calendar/Calendar';
 //DatePicker
 import DatePickerRangeController from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';

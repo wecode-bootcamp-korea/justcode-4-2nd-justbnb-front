@@ -1,11 +1,6 @@
 import styled from 'styled-components';
 import { MdAccessTimeFilled } from 'react-icons/md';
-import {
-  FaSmokingBan,
-  FaPaw,
-  FaSprayCan,
-  FaQuestionCircle,
-} from 'react-icons/fa';
+import { FaSmokingBan, FaSprayCan, FaQuestionCircle } from 'react-icons/fa';
 
 function Notice() {
   return (
