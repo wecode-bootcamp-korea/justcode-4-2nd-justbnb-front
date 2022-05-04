@@ -4,6 +4,8 @@ import PageNav from '../../components/Nav/PageNav';
 import Footer from '../../components/Footer';
 import { useNavigate } from 'react-router-dom';
 
+let PORT = process.env.REACT_APP_PORT;
+
 function Management() {
   const [mockData, setMockData] = useState([]);
   const [data, setData] = useState([]);
@@ -72,7 +74,8 @@ function Management() {
   }, []);
 
   useEffect(() => {
-    fetch('http://localhost:8000/reservation/host ', {
+    // fetch('http://localhost:8000/reservation/host ', {
+    fetch(`${PORT}/reservation/host`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
