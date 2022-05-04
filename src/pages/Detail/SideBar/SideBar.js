@@ -81,9 +81,11 @@ function InfoSideBar(props) {
     setHeadCount(count);
   };
 
+  let PORT = process.env.REACT_APP_PORT;
+
   // 예약 기능
   const postReservation = () => {
-    fetch('http://localhost:8000/reservation', {
+    fetch(`${PORT}/reservation`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

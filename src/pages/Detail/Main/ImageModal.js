@@ -2,9 +2,7 @@ import { useState } from 'react';
 import styled from 'styled-components';
 
 import { AiOutlineClose } from 'react-icons/ai';
-// import { IoCloseSharp } from 'react-icons/io5';
-import { FaRegHeart, FaAngleLeft, FaAngleRight } from 'react-icons/fa';
-import { FiShare } from 'react-icons/fi';
+import { FaAngleLeft, FaAngleRight } from 'react-icons/fa';
 
 function ImageModal(props) {
   const { imageUrlArray, imageModalHandler } = props;
@@ -20,10 +18,7 @@ function ImageModal(props) {
               <span>닫기</span>
             </CloseBtn>
             <ContentNumber> {`${arrayIndex + 1} / 5`}</ContentNumber>
-            <IconsWrapper>
-              {/* <FiShare className="icons" />
-              <FaRegHeart className="icons" /> */}
-            </IconsWrapper>
+            <IconsWrapper></IconsWrapper>
           </Header>
           <Body>
             <PrevButton

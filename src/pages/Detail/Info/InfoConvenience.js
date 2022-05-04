@@ -6,10 +6,12 @@ import { FaSwimmingPool, FaWifi, FaTv, FaCar, FaBath } from 'react-icons/fa';
 
 function InfoConvenience({ location }) {
   const [convenienceArray, setConvenienceArray] = useState([]);
+
+  let PORT = process.env.REACT_APP_PORT;
   // 숙소 편의시설 받아오기
   useEffect(() => {
     fetch(
-      `http://localhost:8000/accommodations/convenience?accommodationsId=${location.state}`,
+      `${PORT}/accommodations/convenience?accommodationsId=${location.state}`,
       {
         method: 'GET',
       }

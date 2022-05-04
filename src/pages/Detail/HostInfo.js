@@ -41,7 +41,6 @@ function HostInfo(props) {
 }
 
 const Wrapper = styled.section`
-  /* margin: 0 80px; */
   padding: 40px 0;
   border-bottom: 1px solid rgba(0, 0, 0, 0.2);
 `;

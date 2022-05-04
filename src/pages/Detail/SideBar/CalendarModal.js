@@ -4,8 +4,6 @@ import styled from 'styled-components';
 import DatePickerRangeController from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import { check } from 'prettier';
-// import Calendar from '../../../components/Calendar/Calendar';
-
 function CalendarModal(props) {
   const {
     start,

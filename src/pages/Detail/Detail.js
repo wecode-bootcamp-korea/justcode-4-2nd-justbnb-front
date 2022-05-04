@@ -28,6 +28,8 @@ function Detail() {
   const [dateDeleted, setDateDeleted] = useState(false);
   const [dateDiff, setDateDiff] = useState(0);
 
+  let PORT = process.env.REACT_APP_PORT;
+
   useEffect(() => {
     setSelected(startDate);
   }, [startDate]);
@@ -61,7 +63,7 @@ function Detail() {
   const location = useLocation();
   // 숙소 데이터 받아오기
   useEffect(() => {
-    fetch(`http://localhost:8000/accommodations/${location.state}`, {
+    fetch(`${PORT}/accommodations/${location.state}`, {
       method: 'GET',
     })
       .then(res => res.json())
