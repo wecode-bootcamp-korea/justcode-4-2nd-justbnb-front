@@ -14,6 +14,7 @@ function LoginModal({ loginModalHandler, scrollPosition }) {
   const { email, password } = inputs;
   const [emailErr, setEmailErr] = useState(false);
   const [passwordErr, setPasswordErr] = useState(false);
+  let PORT = process.env.REACT_APP_PORT;
 
   const idInput = e => {
     setInputs({ ...inputs, email: e.target.value });
@@ -48,7 +49,7 @@ function LoginModal({ loginModalHandler, scrollPosition }) {
   };
 
   const postLogin = () => {
-    fetch('http://localhost:8000/user/signin', {
+    fetch(PORT + '/user/signin', {
       method: 'POST',
       headers: {
         'content-Type': 'application/json',
