@@ -1,0 +1,44 @@
+[
+  {
+    "id": 1,
+    "name": "민지",
+    "date": "2022년 4월",
+    "content": "조식이 멋있고 숙소가 맛있어요",
+    "imgUrl": "/images/thump/민지.png"
+  },
+  {
+    "id": 2,
+    "name": "정민",
+    "date": "2022년 4월",
+    "content": "하핫! 핫! 하핫! 하핫!",
+    "imgUrl": "/images/thump/정민.png"
+  },
+  {
+    "id": 3,
+    "name": "지호",
+    "date": "2022년 4월",
+    "content": "조식이 멋있고 숙소가 맛있어요",
+    "imgUrl": "/images/thump/지호.png"
+  },
+  {
+    "id": 4,
+    "name": "의택",
+    "date": "2022년 4월",
+    "content": "조식이 멋있고 숙소가 맛있어요",
+    "imgUrl": "/images/thump/의택.png"
+  },
+  {
+    "id": 5,
+    "name": "혜원",
+    "date": "2022년 4월",
+    "content": "조식이 멋있고 숙소가 맛있어요",
+    "imgUrl": "/images/thump/혜원.png"
+  },
+  {
+    "id": 6,
+    "name": "슬기",
+    "date": "2022년 4월",
+    "content": "조식이 멋있고 숙소가 맛있어요",
+    "imgUrl": "/images/thump/슬기.png"
+  }
+]

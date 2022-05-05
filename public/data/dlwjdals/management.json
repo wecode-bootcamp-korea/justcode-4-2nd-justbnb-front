@@ -1,0 +1,56 @@
+[
+  {
+    "id": 1,
+    "guest": "홍길동",
+    "total_members": 3,
+    "check_in": "1월 23일",
+    "check_out": "2월 1일",
+    "accommodations_name": "숙소이름1",
+    "imageUrl": "https://images.unsplash.com/photo-1517841905240-472988babdf9?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8cGVvcGxlfGVufDB8MXwwfHw%3D&auto=format&fit=crop&w=500&q=60"
+  },
+  {
+    "id": 2,
+    "guest": "김길동",
+    "total_members": 2,
+    "check_in": "1월 24일",
+    "check_out": "2월 2일",
+    "accommodations_name": "숙소이름2",
+    "imageUrl": "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8cGVvcGxlfGVufDB8MXwwfHw%3D&auto=format&fit=crop&w=500&q=60"
+  },
+  {
+    "id": 3,
+    "guest": "이길동",
+    "total_members": 1,
+    "check_in": "1월 25일",
+    "check_out": "2월 3일",
+    "accommodations_name": "숙소이름3",
+    "imageUrl": "https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NXx8cGVvcGxlfGVufDB8MXwwfHw%3D&auto=format&fit=crop&w=500&q=60"
+  },
+  {
+    "id": 4,
+    "guest": "박길동",
+    "total_members": 5,
+    "check_in": "1월 26일",
+    "check_out": "2월 4일",
+    "accommodations_name": "숙소이름4",
+    "imageUrl": "https://images.unsplash.com/photo-1534528741775-53994a69daeb?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8M3x8cGVvcGxlfGVufDB8MXwwfHw%3D&auto=format&fit=crop&w=500&q=60"
+  },
+  {
+    "id": 5,
+    "guest": "정길동",
+    "total_members": 12,
+    "check_in": "1월 27일",
+    "check_out": "2월 5일",
+    "accommodations_name": "숙소이름5",
+    "imageUrl": "https://images.unsplash.com/photo-1488161628813-04466f872be2?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Nnx8cGVvcGxlfGVufDB8MXwwfHw%3D&auto=format&fit=crop&w=500&q=60"
+  },
+  {
+    "id": 6,
+    "guest": "최길동",
+    "total_members": 8,
+    "check_in": "1월 28일",
+    "check_out": "2월 6일",
+    "accommodations_name": "숙소이름6",
+    "imageUrl": "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8OXx8cGVvcGxlfGVufDB8MXwwfHw%3D&auto=format&fit=crop&w=500&q=60"
+  }
+]

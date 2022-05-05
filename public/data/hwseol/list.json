@@ -1,0 +1,303 @@
+[
+  {
+    "id": 1,
+    "total_members": "5",
+    "convenience_name": ["수영장", "바비큐 그릴", "와이파이", "TV", "주차공간"],
+    "build_type": "아파트",
+    "image": [
+      "/images/thump/home1.jpg",
+      "/images/thump/home2.jpg",
+      "/images/thump/home3.jpg"
+    ],
+    "lat": 37.55538051135069,
+    "long": 126.97355140988027,
+    "name": "인사동에서 내가 제일 잘나가~핫피플이라면 무조건 여기다 여기!",
+    "local": "서울"
+  },
+  {
+    "id": 2,
+    "total_members": "2",
+    "convenience_name": ["수영장", "바비큐 그릴", "와이파이", "TV", "주차공간"],
+    "build_type": "주택",
+    "image": [
+      "/images/thump/home2.jpg",
+      "/images/thump/home1.jpg",
+      "/images/thump/home4.jpg"
+    ],
+    "lat": 37.50590348861693,
+    "long": 126.95019141078933,
+    "name": "빵빵하게 제대로 숙박해보고싶다면?! 바로 여기 빵빵 주택!!",
+    "local": "서울"
+  },
+  {
+    "id": 3,
+    "total_members": "6",
+    "convenience_name": ["수영장", "바비큐 그릴", "와이파이", "TV", "주차공간"],
+    "build_type": "독특한 숙소",
+    "image": [
+      "/images/thump/home3.jpg",
+      "/images/thump/home1.jpg",
+      "/images/thump/home4.jpg"
+    ],
+    "lat": 37.57293346799279,
+    "long": 127.01827044999308,
+    "name": "열쩡넘치는 숙소주인 민지님의 케어를 받고 싶다면 여기로 오세요!",
+    "local": "서울"
+  },
+  {
+    "id": 4,
+    "total_members": "6",
+    "convenience_name": ["수영장", "바비큐 그릴", "와이파이", "TV", "주차공간"],
+    "build_type": "아파트",
+    "image": [
+      "/images/thump/home4.jpg",
+      "/images/thump/home1.jpg",
+      "/images/thump/home5.jpg"
+    ],
+    "lat": 37.56638464352463,
+    "long": 126.99946800745194,
+    "name": "아파트의 세련됨을 느끼고싶다면 그곳은 바로 여기!!!",
+    "local": "서울"
+  },
+  {
+    "id": 5,
+    "total_members": "5",
+    "convenience_name": ["수영장", "바비큐 그릴", "와이파이", "TV", "주차공간"],
+    "build_type": "별채",
+    "image": [
+      "/images/thump/home5.jpg",
+      "/images/thump/home1.jpg",
+      "/images/thump/home4.jpg"
+    ],
+    "lat": 37.56431221305604,
+    "long": 127.00576120649784,
+    "name": "새로운 경험을 하고싶으신가요? 그렇다면 의택별채입니다.",
+    "local": "서울"
+  },
+  {
+    "id": 6,
+    "total_members": "5",
+    "convenience_name": ["수영장", "바비큐 그릴", "와이파이", "TV", "주차공간"],
+    "build_type": "아파트",
+    "image": [
+      "/images/thump/home6.jpg",
+      "/images/thump/home1.jpg",
+      "/images/thump/home4.jpg"
+    ],
+    "lat": 37.55364402861663,
+    "long": 127.01107374631505,
+    "name": "금싸라기 땅에 지어진 고급 아파트, 이곳에서 머물러볼 행운을 잡을 사람은 누구???!",
+    "local": "서울"
+  },
+  {
+    "id": 7,
+    "total_members": "4",
+    "convenience_name": ["수영장", "바비큐 그릴", "와이파이", "TV", "주차공간"],
+    "build_type": "주택",
+    "image": [
+      "/images/thump/home7.jpg",
+      "/images/thump/home1.jpg",
+      "/images/thump/home4.jpg"
+    ],
+    "lat": 37.55609289752076,
+    "long": 126.92333571125994,
+    "name": "의리의리한 저택에 의리의리한 저택주인 슬기님과의 만남을 원한다면 바로 여기!",
+    "local": "서울"
+  },
+  {
+    "id": 8,
+    "total_members": "3",
+    "convenience_name": ["수영장", "바비큐 그릴", "와이파이", "TV", "주차공간"],
+    "build_type": "독특한 숙소",
+    "image": [
+      "/images/thump/home8.jpg",
+      "/images/thump/home1.jpg",
+      "/images/thump/home4.jpg"
+    ],
+    "lat": 37.56950064949044,
+    "long": 126.96253258177477,
+    "name": "우리 가게 정상 영업 합니다!!!!",
+    "local": "서울"
+  },
+  {
+    "id": 9,
+    "total_members": "2",
+    "convenience_name": ["수영장", "바비큐 그릴", "와이파이", "TV", "주차공간"],
+    "build_type": "별채",
+    "image": [
+      "/images/thump/home9.jpg",
+      "/images/thump/home1.jpg",
+      "/images/thump/home4.jpg"
+    ],
+    "lat": 37.56440527759331,
+    "long": 126.98007910412308,
+    "name": "사진만 보고 판단하지 마세요 와이파이도 되는 최신시설이 갖춰진 휴양지입니다!",
+    "local": "서울"
+  },
+  {
+    "id": 10,
+    "total_members": "8",
+    "convenience_name": ["수영장", "바비큐 그릴", "와이파이", "TV", "주차공간"],
+    "build_type": "아파트",
+    "image": [
+      "/images/thump/home10.jpg",
+      "/images/thump/home1.jpg",
+      "/images/thump/home4.jpg"
+    ],
+    "lat": 37.5605319278269,
+    "long": 126.9867351810532,
+    "name": "호스텔하면 여기지~~~~~호텔 버금가는 호스텔, xxx호스텔로 오세요",
+    "local": "서울"
+  },
+  {
+    "id": 11,
+    "total_members": "5",
+    "convenience_name": ["수영장", "바비큐 그릴", "와이파이", "TV", "주차공간"],
+    "build_type": "별채",
+    "image": [
+      "/images/thump/home11.jpg",
+      "/images/thump/home1.jpg",
+      "/images/thump/home4.jpg"
+    ],
+    "lat": 37.56087490168228,
+    "long": 126.99404664952024,
+    "name": "길동이가 운영하는 홍길동 콘도로 오세요!",
+    "local": "서울"
+  },
+  {
+    "id": 12,
+    "total_members": "5",
+    "convenience_name": ["수영장", "바비큐 그릴", "와이파이", "TV", "주차공간"],
+    "build_type": "아파트",
+    "image": [
+      "/images/thump/home12.jpg",
+      "/images/thump/home1.jpg",
+      "/images/thump/home4.jpg"
+    ],
+    "lat": 37.5604243619444,
+    "long": 127.00672294465915,
+    "name": "50년전에 지어져 와르르 무너질것같은 멘션이지만 아직 무너지지 않았습니다.",
+    "local": "서울"
+  },
+  {
+    "id": 13,
+    "total_members": "1",
+    "convenience_name": ["수영장", "바비큐 그릴", "와이파이", "TV", "주차공간"],
+    "build_type": "별채",
+    "image": [
+      "/images/thump/home13.jpg",
+      "/images/thump/home1.jpg",
+      "/images/thump/home4.jpg"
+    ],
+    "lat": 37.55305395688476,
+    "long": 126.98983735739364,
+    "name": "일단 한번 묵어봐~~~후회없는 선택!",
+    "local": "서울"
+  },
+  {
+    "id": 14,
+    "total_members": "3",
+    "convenience_name": ["수영장", "바비큐 그릴", "와이파이", "TV", "주차공간"],
+    "build_type": "독특한 숙소",
+    "image": [
+      "/images/thump/home14.jpg",
+      "/images/thump/home1.jpg",
+      "/images/thump/home4.jpg"
+    ],
+    "lat": 37.54767102029982,
+    "long": 126.91382744919558,
+    "name": "거미도 소중한 생명체 입니다.",
+    "local": "서울"
+  },
+
+  {
+    "id": 15,
+    "total_members": "2",
+    "convenience_name": ["수영장", "바비큐 그릴", "와이파이", "TV", "주차공간"],
+    "build_type": "별채",
+    "image": [
+      "/images/thump/home9.jpg",
+      "/images/thump/home1.jpg",
+      "/images/thump/home4.jpg"
+    ],
+    "lat": 35.18020680110019,
+    "long": 129.07555173235392,
+    "name": "사진만 보고 판단하지 마세요 와이파이도 되는 최신시설이 갖춰진 휴양지입니다!",
+    "local": "부산"
+  },
+  {
+    "id": 16,
+    "total_members": "8",
+    "convenience_name": ["수영장", "바비큐 그릴", "와이파이", "TV", "주차공간"],
+    "build_type": "아파트",
+    "image": [
+      "/images/thump/home10.jpg",
+      "/images/thump/home1.jpg",
+      "/images/thump/home4.jpg"
+    ],
+    "lat": 35.18683786764674,
+    "long": 129.08193332167176,
+    "name": "호스텔하면 여기지~~~~~호텔 버금가는 호스텔, xxx호스텔로 오세요",
+    "local": "부산"
+  },
+  {
+    "id": 17,
+    "total_members": "5",
+    "convenience_name": ["수영장", "바비큐 그릴", "와이파이", "TV", "주차공간"],
+    "build_type": "별채",
+    "image": [
+      "/images/thump/home11.jpg",
+      "/images/thump/home1.jpg",
+      "/images/thump/home4.jpg"
+    ],
+    "lat": 35.18548234118603,
+    "long": 129.07795809734992,
+    "name": "길동이가 운영하는 홍길동 콘도로 오세요!",
+    "local": "부산"
+  },
+  {
+    "id": 18,
+    "total_members": "5",
+    "convenience_name": ["수영장", "바비큐 그릴", "와이파이", "TV", "주차공간"],
+    "build_type": "아파트",
+    "image": [
+      "/images/thump/home12.jpg",
+      "/images/thump/home1.jpg",
+      "/images/thump/home4.jpg"
+    ],
+    "lat": 35.19166291830593,
+    "long": 129.06803812575117,
+    "name": "50년전에 지어져 와르르 무너질것같은 멘션이지만 아직 무너지지 않았습니다.",
+    "local": "부산"
+  },
+  {
+    "id": 19,
+    "total_members": "1",
+    "convenience_name": ["수영장", "바비큐 그릴", "와이파이", "TV", "주차공간"],
+    "build_type": "별채",
+    "image": [
+      "/images/thump/home13.jpg",
+      "/images/thump/home1.jpg",
+      "/images/thump/home4.jpg"
+    ],
+    "lat": 35.177062858191285,
+    "long": 129.08597540084915,
+    "name": "일단 한번 묵어봐~~~후회없는 선택!",
+    "local": "부산"
+  },
+  {
+    "id": 20,
+    "total_members": "3",
+    "convenience_name": ["수영장", "바비큐 그릴", "와이파이", "TV", "주차공간"],
+    "build_type": "독특한 숙소",
+    "image": [
+      "/images/thump/home14.jpg",
+      "/images/thump/home1.jpg",
+      "/images/thump/home4.jpg"
+    ],
+    "lat": 35.17255394030103,
+    "long": 129.07146102320647,
+    "name": "거미도 소중한 생명체 입니다.",
+    "local": "부산"
+  }
+]

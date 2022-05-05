@@ -1,0 +1,21 @@
+.slick-dots li button:before {
+  color: white;
+  opacity: 0.5;
+}
+.slick-dots li button:after {
+  color: white;
+  opacity: 0.5;
+}
+.slick-dots li.slick-active button:before {
+  color: white !important;
+}
+/*
+@media (max-width: 744px) {
+  .slick-slide {
+    width: 100%;
+    border: 3px solid red;
+  }
+  .featured {
+    width: 100%;
+  }
+}*/
