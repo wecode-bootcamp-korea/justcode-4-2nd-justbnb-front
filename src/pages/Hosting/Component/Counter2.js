@@ -9,7 +9,7 @@ export default function CounterValue2({ onChange, resultChoice }) {
       <Button>
         <button
           id="5"
-          value="true"
+          value="Y"
           onClick={e => {
             setCount(true);
             onChange(e);
@@ -22,7 +22,7 @@ export default function CounterValue2({ onChange, resultChoice }) {
       <Button>
         <button
           id="5"
-          value="false"
+          value="N"
           onClick={e => {
             setCount(false);
             onChange(e);
